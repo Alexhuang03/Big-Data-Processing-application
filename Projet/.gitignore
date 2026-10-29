@@ -1,0 +1,10 @@
+# Local data (the Spark data lives in the "imdb_data" Docker volume)
+data/
+# Spark / Python artefacts
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+spark-warehouse/
+metastore_db/
+derby.log
+.env

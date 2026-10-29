@@ -1,0 +1,16 @@
+| metric | average_1980_2025 |
+| --- | --- |
+| top3_genres | 3.00 |
+| top3_movies | 4676.98 |
+| top3_votes | 29517868.13 |
+| top3_share_pct | 44.75 |
+| top3_votes_per_movie | 8173.79 |
+| top3_avg_rating | 5.91 |
+| rest_genres | 20.76 |
+| rest_movies | 7571.22 |
+| rest_votes | 37463184.91 |
+| rest_share_pct | 55.25 |
+| rest_votes_per_movie | 8148.06 |
+| rest_avg_rating | 6.15 |
+| votes_per_movie_ratio | 1.09 |
+| rating_gap | -0.24 |
