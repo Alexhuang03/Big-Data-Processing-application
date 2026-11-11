@@ -4,9 +4,19 @@ import os
 from pyspark.sql import SparkSession
 
 
-def get_spark(app_name):
-    """Create (or reuse) a local SparkSession configured from env variables."""
-    spark = (
+def kafka_package():
+    """Maven coordinates of the Kafka connector matching the Spark version."""
+    import pyspark
+    return f"org.apache.spark:spark-sql-kafka-0-10_2.13:{pyspark.__version__}"
+
+
+def get_spark(app_name, packages=None, conf=None):
+    """Create (or reuse) a local SparkSession configured from env variables.
+
+    packages: extra Maven packages (e.g. [kafka_package()]), downloaded once.
+    conf: extra Spark settings as a dict.
+    """
+    builder = (
         SparkSession.builder.appName(app_name)
         # A fixed number of cores keeps enough memory per task (about
         # driver memory / cores); local[*] on a 24-core machine ran out of heap.
@@ -19,7 +29,11 @@ def get_spark(app_name):
         .config("spark.sql.adaptive.enabled", "true")
         .config("spark.sql.session.timeZone", "UTC")
         .config("spark.ui.showConsoleProgress", "false")
-        .getOrCreate()
     )
+    if packages:
+        builder = builder.config("spark.jars.packages", ",".join(packages))
+    for key, value in (conf or {}).items():
+        builder = builder.config(key, value)
+    spark = builder.getOrCreate()
     spark.sparkContext.setLogLevel("WARN")
     return spark

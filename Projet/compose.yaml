@@ -20,8 +20,9 @@ services:
       - imdb-net
 
   spark:
-    # Pinned: the PYTHONPATH below depends on the py4j version of this image.
-    image: quay.io/jupyter/pyspark-notebook:spark-4.2.1
+    # Base image + project Python libraries (see Dockerfile).
+    build: .
+    image: imdb-spark:4.2.1
     container_name: imdb_spark
     user: root
     ports:

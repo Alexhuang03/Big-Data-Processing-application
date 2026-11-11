@@ -19,6 +19,7 @@
 
 ```text
 compose.yaml          Kafka + Spark (Jupyter PySpark image)
+Dockerfile            Spark image + Python libraries from requirements.txt
 scripts/              Helper scripts run from the host
 src/common/           Shared code: Spark session, schemas, paths, report helpers
 src/preparation/      Download, ingestion, null analysis, quality checks, cleaning
@@ -46,10 +47,10 @@ Data is stored in the `imdb_data` Docker volume, mounted at
    cd <repo>/Projet
    ```
 
-2. Start the containers.
+2. Build the Spark image and start the containers.
 
    ```bash
-   docker compose up -d
+   docker compose up -d --build
    ```
 
    Spark settings can be changed with environment variables, for example
@@ -144,24 +145,34 @@ Results are written to `output/enrichment/` and enriched Parquet tables to the
 
 ### 4. Streaming
 
-Start the Wikipedia SSE producer and the Spark Structured Streaming job:
+A producer reads English Wikipedia article edits from Wikimedia EventStreams
+and publishes them to the Kafka topic `wikipedia-edits`. A Spark Structured
+Streaming job matches each edited article with IMDb films (at least 1,000
+votes) and the people credited on them. Requires the silver layer (step 1).
+The first run downloads the Spark Kafka connector (internet needed).
 
 ```bash
-bash scripts/run_streaming.sh           # runs for 30 minutes by default
-bash scripts/run_streaming.sh 900       # run for 15 minutes
+bash scripts/run_streaming.sh           # 20-minute test window (default)
+bash scripts/run_streaming.sh 1800      # 30-minute test window
 ```
 
-Or manually:
+Or manually, in two terminals:
 
 ```bash
-# Start producer in background
-docker exec -d imdb_spark python -m streaming.producer
-# Start Spark Structured Streaming job (Ctrl-C to stop)
-docker exec imdb_spark python -m streaming.streaming_job
+docker exec imdb_spark python -m streaming.producer --duration 1320
+docker exec imdb_spark python -m streaming.streaming_job --duration 1200
 ```
 
-Streaming output (CSV micro-batches) is written to `output/streaming/`.
-Checkpoints are stored in the `imdb_data` volume under `streaming/checkpoints/`.
+Job options: `--window` (default `5 minutes`), `--watermark` (default
+`2 minutes`), `--trigger` (default `30 seconds`), `--min-votes` (default 1000).
+
+Outputs:
+
+- `output/streaming/`: streaming metrics, matches by type, top matched films
+  and people, window counts, delay summary (CSV and Markdown)
+- Docker volume, `streaming/`: Parquet sinks, checkpoints and the raw
+  progress reports of each query (`progress_*.json`). Each run starts from
+  an empty folder.
 
 ### 5. Open question
 
@@ -182,5 +193,5 @@ docker compose down -v     # also deletes the downloaded and processed data
 
 | Tool | Used by | Tasks |
 | --- | --- | --- |
-| Claude Code (Claude Opus 5.5) | Alex Huang | Docker Compose setup, shared code (`src/common`), data preparation code (`src/preparation`), exploration Q1 to Q3 code, initial guide |
+| Claude Code (Claude Opus 5.5) | Alex Huang | Docker Compose setup, shared code (`src/common`), data preparation code (`src/preparation`), exploration Q1 to Q3 code, rework of the data enrichment (`src/enrichment`) and streaming (`src/streaming`) code, initial guide |
 | Google DeepMind Antigravity (Gemini / Claude Sonnet 4.6) | Bryan Tachi | Exploration Q4, Q5, Q6, Q7, Q8 code (`src/exploration`), Open Question investigation (`src/open_question`), Data Enrichment pipeline (`src/enrichment`), Streaming producer and job (`src/streaming`), helper scripts, guide updates |

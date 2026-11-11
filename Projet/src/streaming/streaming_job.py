@@ -1,298 +1,325 @@
+"""Spark Structured Streaming: Wikipedia edits relevant to the IMDb dataset.
+
+Pipeline
+    Kafka topic (producer.py) -> parse JSON -> event time + watermark
+    -> match the article title against a static IMDb lookup (broadcast join)
+    -> drop duplicate events within the watermark -> sinks
+
+Matching (an article title can point to a film or a person):
+    "Heat (1995 film)"      -> film with that title and year   film_title_year
+    "Heat (film)"           -> film with that title            film_title
+    "Tom Hanks (actor)"     -> person with that name           person_disambiguated
+    "Heat" / "Tom Hanks"    -> exact title or name             exact_title / exact_name
+Matching is case-sensitive, like Wikipedia titles.
+The lookup holds films with at least --min-votes IMDb votes and the actors,
+directors and writers credited on them.
+
+Streaming queries (Parquet sinks in /home/jovyan/data/streaming/):
+    matched_events   every matched event                      append
+    matched_windows  matches per tumbling window and type     append (watermark)
+    all_windows      all events per window (match rate base)  append (watermark)
+
+Late data: event time is the edit time written by Wikipedia. A watermark of
+--watermark (default 2 minutes) bounds how late an event may arrive; older
+events are dropped by the stateful operators and counted in the metrics.
+
+After --duration seconds the queries are stopped and summary tables and
+streaming metrics are written to output/streaming/.
+
+Usage (inside the imdb_spark container, producer running):
+    python -m streaming.streaming_job [--duration 1200] [--window "5 minutes"]
+                                      [--watermark "2 minutes"] [--min-votes 1000]
 """
-IMDb Big Data Processing — Spark Structured Streaming Job
-==========================================================
-Consumes the ``wikipedia-edits`` Kafka topic produced by ``producer.py``
-and matches edit events against the IMDb feature-film catalogue loaded from
-the silver layer.
-
-Architecture
-------------
-1.  Load a broadcast copy of IMDb feature-film titles from the silver layer.
-2.  Read the Kafka stream and parse the JSON payload.
-3.  Enrich each event with the event timestamp and apply a 10-minute watermark
-    to handle late-arriving data.
-4.  Filter: keep only events whose ``title`` matches an IMDb film title.
-5.  Aggregate over a 5-minute sliding window (slide = 1 minute):
-      - edit_count          — number of edits in the window
-      - distinct_editors    — count of distinct Wikipedia users
-      - last_comment        — most recent edit comment
-6.  Write results in append mode to Parquet under ``OUTPUT_DIR``.
-7.  Checkpoint state to ``CHECKPOINT_DIR`` for fault tolerance and exactly-once
-    semantics.
-
-Late-arriving data strategy
------------------------------
-*  ``withWatermark("event_time", "10 minutes")`` tells Spark to wait up to
-   10 minutes past the window close before finalising the aggregate, so
-   events delayed by up to 10 minutes are still included.
-*  In append output mode Spark only emits a window row once it is considered
-   complete (i.e. event_time watermark has advanced past window_end).
-*  The checkpoint directory persists offsets and aggregation state across
-   restarts, so a container restart does not lose partially-accumulated
-   windows.
-
-Usage (inside the imdb_spark container):
-    python -m streaming.streaming_job
-
-Environment variables (with defaults):
-    KAFKA_BOOTSTRAP_SERVERS   kafka:19092
-    KAFKA_TOPIC               wikipedia-edits
-    SILVER_PATH               /home/jovyan/data/silver
-    OUTPUT_DIR                /home/jovyan/output/streaming
-    CHECKPOINT_DIR            /home/jovyan/data/streaming/checkpoints
-    TRIGGER_SECONDS           60      (micro-batch interval, 0 = as-fast-as-possible)
-"""
-
-import logging
+import argparse
+import json
 import os
+import shutil
+import time
 
-from pyspark.sql import SparkSession, functions as F
-from pyspark.sql.types import (
-    IntegerType,
-    LongType,
-    StringType,
-    StructField,
-    StructType,
-    TimestampType,
-)
+import pandas as pd
+from pyspark.sql import Window
+from pyspark.sql import functions as F
+from pyspark.sql.types import (BooleanType, LongType, StringType, StructField,
+                               StructType)
 
-from common.spark import get_spark
+from common.datasets import feature_films, load_silver
+from common.paths import DATA_DIR
+from common.report import save_table
+from common.spark import get_spark, kafka_package
 
-# ---------------------------------------------------------------------------
-# Configuration
-# ---------------------------------------------------------------------------
-BOOTSTRAP_SERVERS: str = os.environ.get("KAFKA_BOOTSTRAP_SERVERS", "kafka:19092")
-TOPIC: str = os.environ.get("KAFKA_TOPIC", "wikipedia-edits")
-SILVER_PATH: str = os.environ.get("SILVER_PATH", "/home/jovyan/data/silver")
-OUTPUT_DIR: str = os.environ.get("OUTPUT_DIR", "/home/jovyan/output/streaming")
-CHECKPOINT_DIR: str = os.environ.get(
-    "CHECKPOINT_DIR", "/home/jovyan/data/streaming/checkpoints"
-)
-TRIGGER_SECONDS: int = int(os.environ.get("TRIGGER_SECONDS", "60"))
+SECTION = "streaming"
+BOOTSTRAP_SERVERS = os.environ.get("KAFKA_BOOTSTRAP_SERVERS", "kafka:19092")
+TOPIC = os.environ.get("KAFKA_TOPIC", "wikipedia-edits")
+STREAMING_DIR = DATA_DIR / "streaming"
+PERSON_CATEGORIES = ["actor", "actress", "director", "writer"]
 
-# Window / watermark parameters
-WINDOW_DURATION = "5 minutes"
-SLIDE_DURATION = "1 minute"
-WATERMARK_DELAY = "10 minutes"
+EVENT_SCHEMA = StructType([
+    StructField("event_id", StringType()),
+    StructField("title", StringType()),
+    StructField("wiki", StringType()),
+    StructField("type", StringType()),
+    StructField("timestamp", LongType()),
+    StructField("user", StringType()),
+    StructField("bot", BooleanType()),
+    StructField("minor", BooleanType()),
+    StructField("comment", StringType()),
+    StructField("length_old", LongType()),
+    StructField("length_new", LongType()),
+])
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [streaming_job] %(levelname)s %(message)s",
-)
-log = logging.getLogger(__name__)
-
-
-# ---------------------------------------------------------------------------
-# Schema for the JSON payload produced by producer.py
-# ---------------------------------------------------------------------------
-EDIT_SCHEMA = StructType(
-    [
-        StructField("title", StringType(), nullable=False),
-        StructField("wiki", StringType(), nullable=True),
-        StructField("timestamp", LongType(), nullable=True),   # Unix epoch seconds
-        StructField("user", StringType(), nullable=True),
-        StructField("comment", StringType(), nullable=True),
-        StructField("server_name", StringType(), nullable=True),
-        StructField("namespace", IntegerType(), nullable=True),
-    ]
-)
+# "Title (1995 film)", "Title (film)", "Title (1995 American film)"
+FILM_TITLE = r"^(.+?) \((?:(\d{4}) )?(?:[A-Za-z.'\- ]+ )?film\)$"
+# "Name (actor)", "Name (American actress)", "Name (director)"
+PERSON_TITLE = (r"^(.+?) \((?:[A-Za-z.'\- ]+ )?"
+                r"(?:actor|actress|director|filmmaker|screenwriter|writer|producer)\)$")
 
 
 # ---------------------------------------------------------------------------
-# Helpers
+# Static lookup (batch, from the silver layer)
 # ---------------------------------------------------------------------------
 
-def _get_spark() -> SparkSession:
-    """
-    Return a SparkSession configured for the Kafka Structured Streaming job.
-    The spark-sql-kafka connector JAR must be on the class-path (provided by
-    the pyspark-notebook image or via --packages at submit time).
-    """
-    spark = get_spark("imdb-streaming-job")
-    spark.conf.set("spark.sql.shuffle.partitions", "8")
-    spark.conf.set("spark.streaming.stopGracefullyOnShutdown", "true")
-    return spark
-
-
-def _load_imdb_titles(spark: SparkSession) -> "pyspark.sql.DataFrame":
-    """
-    Load all feature-film primary titles from the silver layer and return a
-    DataFrame with a single column ``imdb_title`` (upper-cased for
-    case-insensitive matching).
-    """
-    title_basics = spark.read.parquet(f"{SILVER_PATH}/title_basics")
-    feature_films = (
-        title_basics.filter(F.col("titleType") == "movie")
-        .select(
-            F.upper(F.col("primaryTitle")).alias("imdb_title"),
-            F.col("tconst"),
-            F.col("startYear"),
-        )
-        .distinct()
+def build_lookup(spark, min_votes):
+    films = (feature_films(spark)
+             .filter(F.col("numVotes") >= min_votes)
+             .select("tconst", "primaryTitle", "startYear", "numVotes"))
+    film_keys = films.select(
+        F.col("primaryTitle").alias("key"),
+        F.col("startYear").alias("year"),
+        F.lit("film").alias("entity_type"),
+        F.col("tconst").alias("imdb_id"),
+        F.col("primaryTitle").alias("imdb_name"),
+        F.col("numVotes").alias("popularity"),
     )
-    count = feature_films.count()
-    log.info("Loaded %d distinct IMDb feature-film titles for broadcast.", count)
-    return feature_films
+    credits = (load_silver(spark, "title_principals")
+               .filter(F.col("category").isin(PERSON_CATEGORIES))
+               .join(films.select("tconst", "numVotes"), "tconst")
+               .groupBy("nconst").agg(F.sum("numVotes").alias("popularity")))
+    person_keys = (credits
+                   .join(load_silver(spark, "name_basics").select("nconst", "primaryName"),
+                         "nconst")
+                   .select(F.col("primaryName").alias("key"),
+                           F.lit(None).cast("int").alias("year"),
+                           F.lit("person").alias("entity_type"),
+                           F.col("nconst").alias("imdb_id"),
+                           F.col("primaryName").alias("imdb_name"),
+                           "popularity"))
+    # Several films/people can share a name: keep the most popular one.
+    best = Window.partitionBy("key", "entity_type", "year").orderBy(F.desc("popularity"))
+    return (film_keys.unionByName(person_keys)
+            .withColumn("rank", F.row_number().over(best))
+            .filter("rank = 1").drop("rank"))
 
 
-def _build_kafka_stream(spark: SparkSession):
-    """
-    Return a streaming DataFrame reading from the ``wikipedia-edits`` topic.
-    """
-    return (
-        spark.readStream.format("kafka")
-        .option("kafka.bootstrap.servers", BOOTSTRAP_SERVERS)
-        .option("subscribe", TOPIC)
-        .option("startingOffsets", "latest")
-        .option("failOnDataLoss", "false")
-        .option("kafka.session.timeout.ms", "30000")
-        .option("kafka.heartbeat.interval.ms", "10000")
-        .load()
-    )
+# ---------------------------------------------------------------------------
+# Streaming transformations
+# ---------------------------------------------------------------------------
+
+def read_events(spark, watermark, starting_offsets):
+    raw = (spark.readStream.format("kafka")
+           .option("kafka.bootstrap.servers", BOOTSTRAP_SERVERS)
+           .option("subscribe", TOPIC)
+           .option("startingOffsets", starting_offsets)
+           .option("failOnDataLoss", "false")
+           .load())
+    events = (raw.select(F.from_json(F.col("value").cast("string"), EVENT_SCHEMA).alias("e"),
+                         F.col("timestamp").alias("ingest_time"))
+              .select("e.*", "ingest_time")
+              .withColumn("event_time", F.col("timestamp").cast("timestamp"))
+              .withColumn("delay_seconds",
+                          F.col("ingest_time").cast("double") - F.col("timestamp"))
+              .filter(F.col("title").isNotNull() & F.col("event_time").isNotNull()))
+    return events.withWatermark("event_time", watermark)
 
 
-def _parse_stream(raw_df):
-    """
-    Cast the raw Kafka ``value`` bytes to a string, parse the JSON payload,
-    and derive a proper event-time column from the Unix-epoch ``timestamp``
-    field.
-    """
-    parsed = (
-        raw_df.select(
-            F.from_json(
-                F.col("value").cast(StringType()), EDIT_SCHEMA
-            ).alias("data")
-        )
-        .select("data.*")
-        .withColumn(
-            "event_time",
-            F.to_timestamp(F.col("timestamp").cast(TimestampType())),
-        )
-    )
-    return parsed
+def add_match_keys(events):
+    title = F.col("title")
+    is_film = title.rlike(FILM_TITLE)
+    is_person = title.rlike(PERSON_TITLE)
+    return (events
+            .withColumn("title_suffix", F.when(is_film, "film")
+                        .when(is_person, "person").otherwise("none"))
+            # Case-sensitive: Wikipedia titles are ("BEG" is not the film "Beg").
+            .withColumn("match_key",
+                        F.when(is_film, F.regexp_extract(title, FILM_TITLE, 1))
+                        .when(is_person, F.regexp_extract(title, PERSON_TITLE, 1))
+                        .otherwise(title))
+            .withColumn("title_year", F.when(is_film, F.regexp_extract(title, FILM_TITLE, 2))
+                        .try_cast("int")))
 
 
-def _filter_imdb_matches(parsed_df, imdb_df):
-    """
-    Keep only edit events whose title matches an IMDb feature-film title
-    (case-insensitive).  Uses a broadcast join so the full title list is
-    shipped to every executor only once.
-    """
-    imdb_broadcast = F.broadcast(imdb_df)
-    matched = parsed_df.join(
-        imdb_broadcast,
-        F.upper(F.col("title")) == F.col("imdb_title"),
-        how="inner",
-    )
-    return matched
+def match_events(events, lookup):
+    lk = F.broadcast(lookup.alias("lk"))
+    suffix = F.col("title_suffix")
+    condition = (F.col("match_key") == F.col("lk.key")) & (
+        ((suffix == "film") & (F.col("lk.entity_type") == "film")
+         & (F.col("title_year").isNull() | (F.col("title_year") == F.col("lk.year"))))
+        | ((suffix == "person") & (F.col("lk.entity_type") == "person"))
+        | (suffix == "none"))
+    match_type = (F.when(suffix == "film",
+                         F.when(F.col("title_year").isNotNull(), "film_title_year")
+                         .otherwise("film_title"))
+                  .when(suffix == "person", "person_disambiguated")
+                  .when(F.col("lk.entity_type") == "film", "exact_title")
+                  .otherwise("exact_name"))
+    return (events.join(lk, condition, "inner")
+            .withColumn("match_type", match_type)
+            # One row per Wikipedia event, even if it matched several entities
+            # or was delivered twice (dedup state is purged by the watermark).
+            .dropDuplicatesWithinWatermark(["event_id"])
+            .select("event_id", "event_time", "ingest_time", "delay_seconds", "title",
+                    "type", "user", "bot", "comment", "match_type",
+                    F.col("lk.entity_type").alias("entity_type"),
+                    F.col("lk.imdb_id").alias("imdb_id"),
+                    F.col("lk.imdb_name").alias("imdb_name"),
+                    F.col("lk.year").alias("imdb_year")))
 
 
-def _aggregate_windows(matched_df):
-    """
-    Sliding-window aggregation with watermark for late data tolerance.
-
-    Window:    5-minute duration, sliding every 1 minute.
-    Watermark: 10 minutes — events delayed up to 10 minutes are still counted.
-    Mode:      append — a window row is emitted only once it is finalised.
-    """
-    windowed = (
-        matched_df.withWatermark("event_time", WATERMARK_DELAY)
-        .groupBy(
-            F.window(F.col("event_time"), WINDOW_DURATION, SLIDE_DURATION).alias(
-                "window"
-            ),
-            F.col("title").alias("imdb_title"),
-            F.col("tconst"),
-        )
-        .agg(
-            F.count("*").alias("edit_count"),
-            F.countDistinct("user").alias("distinct_editors"),
-            F.last("comment", ignorenulls=True).alias("last_comment"),
-            F.first("startYear").alias("start_year"),
-        )
-        .select(
-            F.col("window.start").alias("window_start"),
-            F.col("window.end").alias("window_end"),
-            F.col("imdb_title"),
-            F.col("tconst"),
-            F.col("start_year"),
-            F.col("edit_count"),
-            F.col("distinct_editors"),
-            F.col("last_comment"),
-        )
-    )
-    return windowed
+def window_counts(df, window, *group_cols):
+    # countDistinct is not supported in streaming aggregations: approx_count_distinct is.
+    return (df.groupBy(F.window("event_time", window).alias("w"), *group_cols)
+            .agg(F.count("*").alias("events"),
+                 F.approx_count_distinct("user").alias("distinct_users"),
+                 F.approx_count_distinct("title").alias("distinct_pages"),
+                 F.avg("delay_seconds").alias("avg_delay_seconds"),
+                 F.max("delay_seconds").alias("max_delay_seconds"))
+            .select(F.col("w.start").alias("window_start"),
+                    F.col("w.end").alias("window_end"), *group_cols,
+                    "events", "distinct_users", "distinct_pages",
+                    "avg_delay_seconds", "max_delay_seconds"))
 
 
-def _write_stream(agg_df, output_dir: str, checkpoint_dir: str):
-    """
-    Write the aggregated streaming results in append mode to Parquet.
-    Partitioned by date derived from window_start for easy downstream reads.
-    """
-    trigger = (
-        {"processingTime": f"{TRIGGER_SECONDS} seconds"}
-        if TRIGGER_SECONDS > 0
-        else {"once": True}
-    )
+def start_sink(df, name, trigger):
+    return (df.writeStream.queryName(name).outputMode("append").format("parquet")
+            .option("path", str(STREAMING_DIR / name))
+            .option("checkpointLocation", str(STREAMING_DIR / "checkpoints" / name))
+            .trigger(processingTime=trigger)
+            .start())
 
-    return (
-        agg_df.withColumn(
-            "date_partition", F.to_date(F.col("window_start"))
-        )
-        .writeStream.outputMode("append")
-        .format("parquet")
-        .option("path", output_dir)
-        .option("checkpointLocation", checkpoint_dir)
-        .partitionBy("date_partition")
-        .trigger(**trigger)
-        .start()
-    )
+
+# ---------------------------------------------------------------------------
+# Metrics and summaries (batch, after the queries are stopped)
+# ---------------------------------------------------------------------------
+
+def progress_dicts(query):
+    return [p if isinstance(p, dict) else json.loads(p.json) for p in query.recentProgress]
+
+
+def metrics_table(queries):
+    rows = []
+    for query in queries:
+        progress = [p for p in progress_dicts(query) if p.get("numInputRows") is not None]
+        dropped = sum(op.get("numRowsDroppedByWatermark", 0)
+                      for p in progress for op in p.get("stateOperators", []))
+        non_empty = [p for p in progress if p["numInputRows"] > 0]
+        rows.append({
+            "query": query.name,
+            "micro_batches": len(progress),
+            "non_empty_batches": len(non_empty),
+            "input_rows": sum(p["numInputRows"] for p in progress),
+            "avg_input_rows_per_s": _mean(non_empty, "inputRowsPerSecond"),
+            "avg_processed_rows_per_s": _mean(non_empty, "processedRowsPerSecond"),
+            "avg_batch_ms": _mean([p["durationMs"] for p in non_empty], "triggerExecution"),
+            "rows_dropped_by_watermark": dropped,
+            "last_watermark": progress[-1].get("eventTime", {}).get("watermark") if progress else None,
+        })
+        path = STREAMING_DIR / f"progress_{query.name}.json"
+        path.write_text(json.dumps(progress, indent=1, default=str), encoding="utf-8")
+    return pd.DataFrame(rows)
+
+
+def _mean(items, key):
+    values = [item[key] for item in items if item.get(key) is not None]
+    return sum(values) / len(values) if values else None
+
+
+def write_summaries(spark):
+    matched = spark.read.parquet(str(STREAMING_DIR / "matched_events"))
+    by_type = (matched.groupBy("match_type", "entity_type")
+               .agg(F.count("*").alias("events"),
+                    F.countDistinct("imdb_id").alias("distinct_entities"))
+               .orderBy(F.desc("events")))
+    save_table(by_type.toPandas(), SECTION, "matches_by_type")
+
+    top = (matched.groupBy("entity_type", "imdb_id", "imdb_name")
+           .agg(F.count("*").alias("edits"), F.countDistinct("user").alias("editors"),
+                F.max("title").alias("wikipedia_title"))
+           .orderBy(F.desc("edits"), "imdb_name").limit(20))
+    save_table(top.toPandas(), SECTION, "top_matched_entities")
+
+    sample = (matched.orderBy(F.desc("event_time")).limit(15)
+              .select("event_time", "title", "match_type", "imdb_id", "imdb_name",
+                      "imdb_year", "user", "bot"))
+    save_table(sample.toPandas(), SECTION, "matched_events_sample")
+
+    delays = matched.agg(
+        F.count("*").alias("matched_events"),
+        F.min("event_time").alias("first_event"), F.max("event_time").alias("last_event"),
+        F.expr("percentile(delay_seconds, 0.5)").alias("median_delay_s"),
+        F.expr("percentile(delay_seconds, 0.99)").alias("p99_delay_s"),
+        F.max("delay_seconds").alias("max_delay_s"))
+    save_table(delays.toPandas(), SECTION, "matched_delay_summary")
+
+    for name in ("matched_windows", "all_windows"):
+        path = STREAMING_DIR / name
+        if any(path.glob("*.parquet")):
+            windows = spark.read.parquet(str(path)).orderBy(*(
+                ["window_start", "match_type"] if name == "matched_windows" else ["window_start"]))
+            save_table(windows.toPandas(), SECTION, name)
+        else:
+            print(f"{name}: no window closed yet (run longer than window + watermark)")
 
 
 # ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
 
-def main() -> None:
-    log.info(
-        "Starting streaming job | Kafka=%s | Topic=%s", BOOTSTRAP_SERVERS, TOPIC
-    )
-    spark = _get_spark()
+def main():
+    parser = argparse.ArgumentParser(description=__doc__,
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--duration", type=int, default=1200, help="seconds (default 1200)")
+    parser.add_argument("--window", default="5 minutes")
+    parser.add_argument("--watermark", default="2 minutes")
+    parser.add_argument("--trigger", default="30 seconds")
+    parser.add_argument("--min-votes", type=int, default=1000)
+    parser.add_argument("--starting-offsets", choices=["latest", "earliest"], default="latest",
+                        help="latest: only events produced during this run")
+    args = parser.parse_args()
 
-    # 1. Load IMDb titles (static, from silver layer)
-    imdb_df = _load_imdb_titles(spark)
+    shutil.rmtree(STREAMING_DIR, ignore_errors=True)  # each run starts from scratch
+    STREAMING_DIR.mkdir(parents=True)
+    spark = get_spark("imdb-streaming", packages=[kafka_package()], conf={
+        "spark.sql.shuffle.partitions": "8",
+        "spark.sql.streaming.numRecentProgressUpdates": "1000",
+    })
 
-    # 2. Read Kafka stream
-    raw_df = _build_kafka_stream(spark)
+    lookup = build_lookup(spark, args.min_votes).cache()
+    print(f"Lookup: {lookup.count():,} IMDb films and people")
 
-    # 3. Parse JSON payload + derive event_time
-    parsed_df = _parse_stream(raw_df)
+    events = add_match_keys(read_events(spark, args.watermark, args.starting_offsets))
+    matched = match_events(events, lookup)
+    queries = [
+        start_sink(matched, "matched_events", args.trigger),
+        start_sink(window_counts(matched, args.window, "match_type"),
+                   "matched_windows", args.trigger),
+        start_sink(window_counts(events, args.window), "all_windows", args.trigger),
+    ]
 
-    # 4. Filter: keep only edits matching an IMDb feature film
-    matched_df = _filter_imdb_matches(parsed_df, imdb_df)
+    deadline = time.time() + args.duration
+    while time.time() < deadline:
+        time.sleep(min(60, max(1, deadline - time.time())))
+        for query in queries:
+            if query.exception():
+                raise RuntimeError(f"{query.name} failed: {query.exception()}")
+        status = ", ".join(
+            f"{q.name}={sum(p.get('numInputRows', 0) for p in progress_dicts(q))}"
+            for q in queries)
+        print(f"[{int(deadline - time.time())}s left] input rows: {status}", flush=True)
 
-    # 5. Sliding-window aggregation with watermark
-    agg_df = _aggregate_windows(matched_df)
-
-    # 6. Write to Parquet (append mode) with checkpoint
-    query = _write_stream(agg_df, OUTPUT_DIR, CHECKPOINT_DIR)
-
-    log.info(
-        "Streaming query started (id=%s). Writing to %s", query.id, OUTPUT_DIR
-    )
-    log.info(
-        "Checkpoint at %s | Window=%s | Watermark=%s",
-        CHECKPOINT_DIR, WINDOW_DURATION, WATERMARK_DELAY,
-    )
-
-    try:
-        query.awaitTermination()
-    except KeyboardInterrupt:
-        log.info("Keyboard interrupt received — stopping query gracefully.")
+    for query in queries:
         query.stop()
-    finally:
-        spark.stop()
-        log.info("Streaming job stopped.")
+    save_table(metrics_table(queries), SECTION, "streaming_metrics")
+    write_summaries(spark)
+    spark.stop()
 
 
 if __name__ == "__main__":
