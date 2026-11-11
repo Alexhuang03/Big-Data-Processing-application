@@ -11,6 +11,7 @@ Usage:
 """
 import argparse
 
+from pyspark.sql import Window
 from pyspark.sql import functions as F
 
 from common.datasets import feature_films, load_silver
@@ -22,33 +23,30 @@ SECTION = "exploration"
 
 
 def get_movie_original_languages(spark, movies_df):
-    """Extract original language(s) per movie from title_akas.
+    """Extract one original language per movie from title_akas.
 
-    Matches title_akas entries where language is non-null and the title
-    corresponds to the film's originalTitle (or is marked as isOriginalTitle == 1).
-    Films without a known original language are excluded.
+    Matches title_akas entries where aka title matches the originalTitle,
+    keeping the entry with the lowest ordering (earliest release / primary entry).
     """
     akas = (
         load_silver(spark, "title_akas")
         .filter(F.col("language").isNotNull())
         .select(
             F.col("titleId").alias("tconst"),
+            F.col("ordering"),
             F.col("title").alias("aka_title"),
             F.lower(F.col("language")).alias("language"),
-            F.col("isOriginalTitle"),
         )
     )
 
-    # Match where aka title matches the originalTitle, or is explicitly flagged as original title
+    w = Window.partitionBy("tconst").orderBy("ordering")
     matched = (
         movies_df.select("tconst", "originalTitle")
         .join(akas, "tconst", "inner")
-        .filter(
-            (F.col("aka_title") == F.col("originalTitle"))
-            | (F.col("isOriginalTitle") == 1)
-        )
+        .filter(F.col("aka_title") == F.col("originalTitle"))
+        .withColumn("r", F.row_number().over(w))
+        .filter("r = 1")
         .select("tconst", "language")
-        .distinct()
     )
 
     return matched
