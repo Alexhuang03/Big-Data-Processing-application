@@ -1,0 +1,27 @@
+| nconst | actor_name | num_languages | languages_str | successful_films_count | avg_rating | total_votes |
+| --- | --- | --- | --- | --- | --- | --- |
+| nm0462407 | Sebastian Koch | 5 | de, en, fr, ja, yue | 6 | 7.57 | 585088 |
+| nm0080238 | Tanikella Bharani | 4 | en, fr, hi, qbn | 47 | 7.64 | 243793 |
+| nm0000706 | Michelle Yeoh | 4 | cmn, en, fr, yue | 11 | 7.26 | 2613577 |
+| nm0004486 | Bruno Ganz | 4 | de, en, fr, sv | 9 | 7.44 | 504972 |
+| nm2573928 | Kana Hanazawa | 4 | cmn, en, fr, ja | 7 | 7.41 | 87919 |
+| nm0000052 | Marcello Mastroianni | 4 | en, fr, ja, sr | 7 | 7.40 | 234055 |
+| nm0784038 | Şener Şen | 4 | en, fr, ja, tr | 6 | 7.81 | 176536 |
+| nm0319843 | Daniel Giménez Cacho | 4 | en, es, fr, sv | 6 | 7.38 | 240230 |
+| nm0504897 | Tony Leung Chiu-wai | 4 | bg, en, fr, yue | 5 | 7.72 | 1019014 |
+| nm0226699 | Bogdan Diklic | 4 | bs, en, hr, ja | 5 | 7.60 | 69537 |
+| nm0814280 | Song Kang-ho | 4 | en, es, fr, tr | 5 | 7.54 | 839831 |
+| nm1254805 | Manolo Solo | 4 | en, es, fr, hi | 5 | 7.42 | 871100 |
+| nm2569233 | Yûki Kaji | 4 | en, fr, hi, ja | 5 | 7.42 | 95322 |
+| nm1914298 | Pål Sverre Hagen | 4 | en, fr, ja, sv | 5 | 7.26 | 129162 |
+| nm0159507 | Stephen Chow | 4 | en, es, fr, yue | 5 | 7.23 | 287179 |
+| nm3426369 | Yui Ishikawa | 4 | en, fr, hi, ja | 4 | 8.10 | 182076 |
+| nm0342458 | Nikolay Grinko | 4 | az, bg, en, uk | 4 | 7.95 | 274368 |
+| nm0151654 | Chang Chen | 4 | bg, cmn, en, fr | 4 | 7.45 | 367858 |
+| nm0458460 | Burghart Klaußner | 4 | de, en, fr, sv | 4 | 7.23 | 184784 |
+| nm0785842 | Toni Servillo | 4 | ca, en, fr, it | 4 | 7.15 | 131910 |
+| nm0000821 | Amitabh Bachchan | 3 | en, es, fr | 50 | 7.45 | 1572274 |
+| nm2496992 | Ajay | 3 | en, hi, qbn | 30 | 7.47 | 260955 |
+| nm0000026 | Cary Grant | 3 | en, fr, qbn | 30 | 7.41 | 1279508 |
+| nm0000158 | Tom Hanks | 3 | en, fr, nl | 29 | 7.64 | 16641245 |
+| nm0000020 | Henry Fonda | 3 | en, es, fr | 26 | 7.47 | 1548775 |

@@ -1,0 +1,2514 @@
+nconst,actor_name,num_languages,languages_str,successful_films_count,avg_rating,total_votes
+nm0462407,Sebastian Koch,5,"de, en, fr, ja, yue",6,7.57,585088
+nm0080238,Tanikella Bharani,4,"en, fr, hi, qbn",47,7.64,243793
+nm0000706,Michelle Yeoh,4,"cmn, en, fr, yue",11,7.26,2613577
+nm0004486,Bruno Ganz,4,"de, en, fr, sv",9,7.44,504972
+nm2573928,Kana Hanazawa,4,"cmn, en, fr, ja",7,7.41,87919
+nm0000052,Marcello Mastroianni,4,"en, fr, ja, sr",7,7.4,234055
+nm0784038,Şener Şen,4,"en, fr, ja, tr",6,7.81,176536
+nm0319843,Daniel Giménez Cacho,4,"en, es, fr, sv",6,7.38,240230
+nm0504897,Tony Leung Chiu-wai,4,"bg, en, fr, yue",5,7.72,1019014
+nm0226699,Bogdan Diklic,4,"bs, en, hr, ja",5,7.6,69537
+nm0814280,Song Kang-ho,4,"en, es, fr, tr",5,7.54,839831
+nm1254805,Manolo Solo,4,"en, es, fr, hi",5,7.42,871100
+nm2569233,Yûki Kaji,4,"en, fr, hi, ja",5,7.42,95322
+nm1914298,Pål Sverre Hagen,4,"en, fr, ja, sv",5,7.26,129162
+nm0159507,Stephen Chow,4,"en, es, fr, yue",5,7.23,287179
+nm3426369,Yui Ishikawa,4,"en, fr, hi, ja",4,8.1,182076
+nm0342458,Nikolay Grinko,4,"az, bg, en, uk",4,7.95,274368
+nm0151654,Chang Chen,4,"bg, cmn, en, fr",4,7.45,367858
+nm0458460,Burghart Klaußner,4,"de, en, fr, sv",4,7.23,184784
+nm0785842,Toni Servillo,4,"ca, en, fr, it",4,7.15,131910
+nm0000821,Amitabh Bachchan,3,"en, es, fr",50,7.45,1572274
+nm2496992,Ajay,3,"en, hi, qbn",30,7.47,260955
+nm0000026,Cary Grant,3,"en, fr, qbn",30,7.41,1279508
+nm0000158,Tom Hanks,3,"en, fr, nl",29,7.64,16641245
+nm0000020,Henry Fonda,3,"en, es, fr",26,7.47,1548775
+nm0692586,Krishna Murali Posani,3,"en, fr, hi",22,7.55,137709
+nm0799777,J.K. Simmons,3,"bg, en, fr",22,7.45,7722419
+nm0000367,Gérard Depardieu,3,"en, es, fr",21,7.31,354260
+nm0000604,John C. Reilly,3,"de, en, fr",18,7.35,4827487
+nm0151526,Chandramohan,3,"en, hi, ml",13,7.98,59168
+nm1297015,Emma Stone,3,"bg, bs, en",13,7.47,7064301
+nm0785227,Andy Serkis,3,"en, hi, qbn",12,7.6,9759420
+nm5781594,Aishwarya Rajesh,3,"en, hi, ta",12,7.55,76024
+nm1727304,Domhnall Gleeson,3,"en, hi, hr",12,7.53,5249502
+nm1384413,Saswata Chatterjee,3,"en, es, fr",12,7.49,303989
+nm0000006,Ingrid Bergman,3,"en, fr, sv",12,7.41,995665
+nm0167388,François Cluzet,3,"en, fr, ja",12,7.35,1186764
+nm0002050,Irene Dunne,3,"en, fr, qbn",12,7.22,84430
+nm1209966,Oscar Isaac,3,"en, hi, hr",11,7.52,5024140
+nm0001036,Geraldine Chaplin,3,"en, es, fr",11,7.34,686389
+nm0394588,Michael Hordern,3,"en, fr, ja",11,7.3,188315
+nm0846616,Sharmila Tagore,3,"en, fr, hi",10,7.95,61079
+nm0144045,Jean-Pierre Cassel,3,"en, fr, ja",10,7.41,320472
+nm0591877,Miou-Miou,3,"en, fr, ja",10,7.23,73185
+nm0043875,Felix Aylmer,3,"en, fr, ja",10,7.16,58597
+nm3828984,Ranveer Singh,3,"en, fr, hi",9,7.68,740162
+nm0876300,Ulrich Tukur,3,"de, en, fr",9,7.42,526966
+nm0000104,Antonio Banderas,3,"en, es, fr",9,7.34,1740726
+nm0028674,Harry Andrews,3,"en, fr, ja",9,7.29,121236
+nm0007814,Hiam Abbass,3,"en, fr, ja",9,7.27,78685
+nm0201669,Jean-Pierre Darroussin,3,"en, fr, ja",9,7.24,135124
+nm0000804,Stéphane Audran,3,"en, fr, ja",9,7.2,98432
+nm1197689,Sandra Hüller,3,"de, en, fr",8,7.48,1145435
+nm0674742,Jacques Perrin,3,"en, fr, ja",8,7.43,145455
+nm0290556,James Franco,3,"en, fr, qbn",8,7.43,3541423
+nm0891998,Conrad Veidt,3,"en, fr, ja",8,7.38,715019
+nm0000322,Emmanuelle Béart,3,"en, fr, ja",8,7.32,623722
+nm2138653,Deepika Padukone,3,"en, es, fr",8,7.3,358306
+nm0863968,Charles 'Bud' Tingwell,3,"en, es, fr",8,7.29,71370
+nm0271658,Verna Felton,3,"en, fr, qbn",8,7.28,1721881
+nm2539953,Alicia Vikander,3,"en, hr, sv",8,7.26,1331026
+nm0201857,Ricardo Darín,3,"en, es, ja",7,7.59,400537
+nm0470981,Thomas Kretschmann,3,"en, he, tr",7,7.56,1949086
+nm0178509,Robert Coote,3,"en, fr, ja",7,7.4,96938
+nm0002106,Ruth Gordon,3,"en, fr, qbn",7,7.39,373376
+nm0782561,Emmanuelle Seigner,3,"en, fr, ja",7,7.37,364462
+nm0509263,Nikolaj Lie Kaas,3,"da, en, ja",7,7.36,597228
+nm0001311,Philip Baker Hall,3,"bg, en, fr",7,7.31,953263
+nm0001359,Sterling Holloway,3,"en, fr, qbn",7,7.31,832542
+nm0763928,Rodrigo Santoro,3,"bg, en, fr",7,7.29,1047801
+nm0798328,Henry Silva,3,"en, fr, ja",7,7.29,212725
+nm0500976,Gilles Lellouche,3,"en, fr, ja",7,7.29,191701
+nm0099677,Michel Bouquet,3,"en, fr, ja",7,7.29,41197
+nm0560962,Carmen Maura,3,"ca, en, fr",7,7.21,154946
+nm0512071,Vincent Lindon,3,"en, fr, ja",7,7.13,52063
+nm0138405,Jean Carmet,3,"en, fr, ja",7,7.09,38988
+nm18485038,Lichan Ahamed,3,"en, fr, hi",6,7.67,51609
+nm0885098,Alida Valli,3,"en, fr, ja",6,7.42,370742
+nm0241121,Jean Dujardin,3,"en, fr, ja",6,7.42,2180123
+nm0316284,Giancarlo Giannini,3,"en, ja, sv",6,7.4,1209001
+nm0004462,Jean-Louis Trintignant,3,"en, fr, ja",6,7.39,170749
+nm0922035,Dominic West,3,"bg, en, fr",6,7.37,1385682
+nm0001953,Moritz Bleibtreu,3,"de, en, hi",6,7.37,351831
+nm0000728,Mario Adorf,3,"en, fr, ja",6,7.28,50953
+nm0273464,Eduard Fernández,3,"en, es, fr",6,7.28,346791
+nm0687914,Denis Podalydès,3,"en, fr, qbn",6,7.25,128450
+nm0524839,Ludacris,3,"en, es, fr",6,7.18,1658903
+nm1818216,Payman Maadi,3,"en, fa, fr",5,7.74,287913
+nm0543547,Miki Manojlović,3,"bs, en, ja",5,7.72,157806
+nm0352967,Emir Hadžihafizbegović,3,"en, hr, ja",5,7.6,61400
+nm0001128,Alain Delon,3,"en, fr, ja",5,7.44,119633
+nm0530365,Sergi López,3,"en, es, fr",5,7.42,832590
+nm0001207,José Ferrer,3,"en, es, fr",5,7.38,407102
+nm0001641,Vincent Perez,3,"en, fr, ja",5,7.38,66708
+nm0245988,Trine Dyrholm,3,"en, fr, ja",5,7.38,157898
+nm0002072,Mel Ferrer,3,"en, fr, sv",5,7.37,91810
+nm0273178,Fernando Fernán Gómez,3,"en, es, fr",5,7.34,137948
+nm0001041,Maggie Cheung,3,"bg, en, yue",5,7.32,298902
+nm0396924,Carice van Houten,3,"en, fr, yue",5,7.27,550397
+nm0865575,Ugo Tognazzi,3,"en, fr, ja",5,7.26,22229
+nm0086924,Dominique Blanc,3,"en, fr, qbn",5,7.24,44145
+nm0905676,Ana Wagener,3,"en, fr, ja",5,7.24,243499
+nm0407030,Hisashi Igawa,3,"en, fr, ja",4,7.7,255851
+nm8777468,Indra Jegel,3,"bn, en, ja",4,7.7,9883
+nm10174507,Angga Yunanda,3,"en, hi, id",4,7.68,11528
+nm7609213,Boris Bokir,3,"bn, en, ja",4,7.65,9602
+nm0081449,Dragan Bjelogrlic,3,"bs, en, ja",4,7.63,28509
+nm0334882,Darío Grandinetti,3,"en, es, tr",4,7.6,404283
+nm0350884,Ernesto Gómez Cruz,3,"ca, en, ja",4,7.53,29650
+nm0001917,Pedro Armendáriz Jr.,3,"ca, fr, ja",4,7.5,42081
+nm0264770,Franco Fabrizi,3,"en, fr, ja",4,7.5,38825
+nm5572673,Omara N. Esteghlal,3,"fr, id, ja",4,7.48,8478
+nm0579844,Vladimír Menšík,3,"en, fr, ja",4,7.48,15780
+nm1036659,Bárbara Lennie,3,"es, fr, ja",4,7.45,443597
+nm0355024,Tony Hale,3,"en, fr, nl",4,7.43,735158
+nm2308578,Alexandru Potocean,3,"en, fr, ja",4,7.43,175158
+nm4374524,Noémie Merlant,3,"en, fr, tr",4,7.38,257042
+nm0817748,Bruce Spence,3,"en, fr, hi",4,7.38,449605
+nm0046277,Bae Doona,3,"en, es, yue",4,7.35,1259616
+nm0111003,Vlastimil Brodský,3,"cs, fr, ja",4,7.35,20755
+nm0299924,Sasson Gabay,3,"en, fr, he",4,7.35,26917
+nm0786614,Andrzej Seweryn,3,"en, es, ja",4,7.35,22350
+nm0181305,Valentina Cortese,3,"en, fr, ja",4,7.34,157378
+nm0092900,John Boles,3,"en, fr, qbn",4,7.33,99251
+nm0001472,Jet Li,3,"cmn, en, fr",4,7.3,164794
+nm0872729,Sergej Trifunovic,3,"en, hr, sv",4,7.3,54465
+nm0893638,Natalia Verbeke,3,"en, fr, ja",4,7.28,43776
+nm0535166,Teresa Madruga,3,"en, fr, ja",4,7.23,16012
+nm0102765,Jacek Braciak,3,"en, ja, yue",4,7.23,18865
+nm0473166,Joachim Król,3,"de, en, fr",4,7.18,235507
+nm1204652,Okan Yalabık,3,"en, ja, th",4,7.16,71605
+nm1682799,Tomasz Kot,3,"en, fr, yue",4,7.14,31155
+nm1204465,César Troncoso,3,"de, en, ja",4,7.1,35548
+nm0831262,Danilo Stojković,3,"en, fr, ja",3,8.37,85197
+nm0957372,Velimir 'Bata' Živojinović,3,"fr, hr, ja",3,8.2,19487
+nm0468729,Takehito Koyasu,3,"en, fr, ja",3,7.97,127821
+nm0951304,İhsan Yüce,3,"en, fr, tr",3,7.83,24815
+nm0109785,Brent Briscoe,3,"en, fr, hi",3,7.8,627186
+nm0893941,Maribel Verdú,3,"en, es, sv",3,7.8,911916
+nm1267552,Taraneh Alidoosti,3,"en, fa, fr",3,7.8,88527
+nm0289856,Guillermo Francella,3,"es, fr, ja",3,7.8,260450
+nm2682638,Dwi Sasono,3,"en, hi, id",3,7.8,5997
+nm0027683,Harriet Andersson,3,"en, fr, sv",3,7.77,218100
+nm0714287,Victor Rebengiuc,3,"en, ja, tr",3,7.73,20427
+nm0959184,Stella Zázvorková,3,"en, fr, ja",3,7.7,11253
+nm0631877,Dragan Nikolić,3,"en, fr, ja",3,7.67,7830
+nm0111610,Claudio Brook,3,"en, es, fr",3,7.67,38279
+nm0344346,Ayşen Gruda,3,"fr, ja, th",3,7.67,61023
+nm3641180,Kim Hee-won,3,"en, fr, ja",3,7.63,85739
+nm0307628,Sergey Garmash,3,"bg, en, ja",3,7.6,22717
+nm6281424,Alexis Manenti,3,"en, fr, ja",3,7.6,38386
+nm2946712,Kristyan Ferrer,3,"en, fr, tr",3,7.57,52677
+nm1493839,Tika Panggabean,3,"bn, id, ja",3,7.53,6385
+nm0000446,Mariel Hemingway,3,"en, fr, qbn",3,7.53,160511
+nm1195722,Arswendy Bening Swara,3,"en, hi, ja",3,7.53,6379
+nm0490489,Andy Lau,3,"en, ja, yue",3,7.53,149288
+nm0914455,Leonor Watling,3,"en, es, fr",3,7.5,224977
+nm1127373,Nicholas Saputra,3,"en, id, ja",3,7.5,5412
+nm0890495,Razvan Vasilescu,3,"en, fr, tr",3,7.5,14680
+nm4134328,Kasumi Arimura,3,"en, fr, ja",3,7.5,74850
+nm0955471,Ziyi Zhang,3,"bg, cmn, en",3,7.5,538270
+nm1488529,Ahmet Mümtaz Taylan,3,"en, fr, th",3,7.47,100588
+nm0023339,Ángel Álvarez,3,"en, fr, ja",3,7.47,44980
+nm0596807,Ángela Molina,3,"en, fr, sv",3,7.47,40871
+nm0007023,José Luis López Vázquez,3,"en, fr, ja",3,7.43,12468
+nm1328076,Miyuki Sawashiro,3,"en, fr, ja",3,7.43,32635
+nm3024307,Reza Rahadian,3,"en, id, ja",3,7.43,5041
+nm0187337,Bruno Cremer,3,"en, fr, ja",3,7.43,89255
+nm0411581,Maia Morgenstern,3,"en, fr, tr",3,7.43,287139
+nm0087324,Rita Blanco,3,"en, fr, ja",3,7.43,124828
+nm0644521,Issey Ogata,3,"en, fr, tr",3,7.43,312406
+nm0596297,Karen Mok,3,"es, fr, yue",3,7.4,295636
+nm0814162,Josef Somr,3,"en, fr, ja",3,7.4,19126
+nm0019338,Zafer Algöz,3,"en, ja, tr",3,7.4,94525
+nm0951958,Luis Zahera,3,"fr, hi, ja",3,7.4,112109
+nm2597451,Pongsatorn Jongwilas,3,"en, fr, th",3,7.4,33661
+nm0320760,Annie Girardot,3,"en, fr, ja",3,7.37,176028
+nm0761212,Dominique Sanda,3,"en, es, fr",3,7.37,34744
+nm2240777,Osman Alkas,3,"fr, ja, tr",3,7.37,45954
+nm0557159,Lea Massari,3,"en, fr, ja",3,7.37,44072
+nm0623127,Goran Navojec,3,"bs, ja, sv",3,7.37,35511
+nm0213766,Antonio Dechent,3,"en, es, fr",3,7.33,12288
+nm1041999,Yoo Hai Jin,3,"en, hi, tr",3,7.33,50767
+nm3725226,Um Tae-goo,3,"en, fr, tr",3,7.33,58805
+nm0902083,Johann von Bülow,3,"de, en, sv",3,7.33,31315
+nm0009629,Stefano Accorsi,3,"fr, hi, nl",3,7.3,18284
+nm0059971,Antoine Basler,3,"en, fr, ja",3,7.3,141532
+nm0000334,Yun-Fat Chow,3,"cmn, en, yue",3,7.3,314248
+nm0240318,Lola Dueñas,3,"en, fr, ja",3,7.3,127956
+nm0472391,Maren Kroymann,3,"de, en, fr",3,7.3,32136
+nm0869088,Luis Tosar,3,"en, es, hi",3,7.27,85543
+nm0628806,Man-Tat Ng,3,"es, fr, ja",3,7.27,112619
+nm0548686,Karl Markovics,3,"de, en, ja",3,7.27,38031
+nm1443814,Clara Segura,3,"ca, en, fr",3,7.27,83290
+nm2146564,Godehard Giese,3,"de, en, ja",3,7.27,13720
+nm0079341,Laura Betti,3,"es, fr, qbn",3,7.27,47330
+nm0057422,Edgar Barrier,3,"en, es, fr",3,7.27,15034
+nm0968541,Oksana Akinshina,3,"en, fr, ja",3,7.27,67429
+nm0622384,Khalifa Natour,3,"en, fr, he",3,7.23,20383
+nm0608210,Manuel Morón,3,"en, hi, ja",3,7.23,85617
+nm4533391,Luise Heyer,3,"de, en, fr",3,7.17,14274
+nm0021835,Joaquim de Almeida,3,"en, fr, ja",3,7.17,224125
+nm2764483,Ailín Salas,3,"en, es, fr",3,7.13,22856
+nm0620267,Yûko Nakamura,3,"en, fr, ja",3,7.13,75686
+nm1367681,Oh Dal-su,3,"en, fr, hi",3,7.13,34326
+nm6551384,Ali Seçkiner Alici,3,"en, fr, ja",3,7.13,20096
+nm0927240,Robert Więckiewicz,3,"en, ja, yue",3,7.13,11130
+nm4538137,Iqbaal Dhiafakhri Ramadhan,3,"en, id, ja",3,7.13,10207
+nm1687610,Grégory Gadebois,3,"en, fr, qbn",3,7.1,33674
+nm0553036,Sandy Martin,3,"bg, en, fr",3,7.07,287224
+nm0621937,Nassar,2,"en, qbn",67,7.76,1023004
+nm0695177,Prakash Raj,2,"en, ta",62,7.65,1025551
+nm0482320,Mohanlal,2,"en, hi",61,7.93,447810
+nm0103977,Brahmanandam,2,"en, hi",47,7.72,279036
+nm0352032,Kamal Haasan,2,"en, es",43,7.98,776437
+nm0787462,Naseeruddin Shah,2,"en, hi",41,7.6,566463
+nm0451600,Anupam Kher,2,"en, fr",36,7.52,2029528
+nm0000007,Humphrey Bogart,2,"en, fr",35,7.45,1657258
+nm0000134,Robert De Niro,2,"en, es",33,7.65,14057950
+nm0359880,Cochin Hanifa,2,"en, hi",30,7.8,160214
+nm4043111,Vijay Sethupathi,2,"en, fr",30,7.76,571670
+nm0000168,Samuel L. Jackson,2,"en, fr",30,7.61,15958040
+nm1335704,Fahadh Faasil,2,"en, hi",28,7.68,449366
+nm0000044,Burt Lancaster,2,"en, fr",28,7.42,668048
+nm1960306,Rajeev Kanakala,2,"en, qbn",27,7.52,113108
+nm0000078,John Wayne,2,"en, fr",27,7.37,862848
+nm0019382,Mohammad Ali,2,"en, hi",26,7.58,125283
+nm0700869,Amrish Puri,2,"en, hi",25,7.74,822687
+nm6489058,Yogi Babu,2,"en, ta",25,7.69,269936
+nm0415538,Jagadish,2,"en, fr",25,7.65,117169
+nm0000380,Robert Duvall,2,"en, fr",25,7.5,6372375
+nm5724719,Achyuth Kumar,2,"en, ja",24,7.98,628505
+nm0451148,Aamir Khan,2,"en, fr",24,7.7,2676602
+nm0451425,Kulbhushan Kharbanda,2,"en, fr",24,7.6,513041
+nm0000450,Philip Seymour Hoffman,2,"en, fr",24,7.39,5587862
+nm0000060,Gregory Peck,2,"en, fr",24,7.39,1296972
+nm0424060,Scarlett Johansson,2,"de, en",23,7.67,20810785
+nm0451234,Irrfan Khan,2,"bn, en",23,7.61,3053057
+nm0000075,Spencer Tracy,2,"en, fr",23,7.39,413986
+nm0002118,Alan Hale,2,"en, fr",23,7.27,287167
+nm0000199,Al Pacino,2,"en, qbn",22,7.7,9347729
+nm0222426,Ajay Devgn,2,"en, fr",22,7.63,599293
+nm0000974,Walter Brennan,2,"en, fr",22,7.37,332105
+nm3822770,Rajkummar Rao,2,"en, fr",21,7.59,520969
+nm0000243,Denzel Washington,2,"en, fr",21,7.45,4731022
+nm0000114,Steve Buscemi,2,"en, fr",21,7.43,5709595
+nm0000063,Anthony Quinn,2,"en, fr",21,7.41,685453
+nm0000010,James Cagney,2,"en, fr",21,7.35,227562
+nm0001766,Barbara Stanwyck,2,"en, fr",21,7.35,360048
+nm0534856,Madhavan,2,"en, hi",20,7.91,1126581
+nm0103976,Brahmaji,2,"en, hi",20,7.64,112024
+nm3606487,Samantha Ruth Prabhu,2,"en, fr",20,7.61,332845
+nm0451321,Shah Rukh Khan,2,"en, fr",20,7.56,1279785
+nm4921260,Dulquer Salmaan,2,"en, ta",20,7.55,429211
+nm0000056,Paul Newman,2,"en, fr",20,7.51,2204385
+nm1224082,Boman Irani,2,"en, fr",20,7.48,1306378
+nm0000438,Ed Harris,2,"en, fr",20,7.42,6115443
+nm0000313,Jeff Bridges,2,"en, fr",20,7.4,4188600
+nm0001745,Stellan Skarsgård,2,"en, sv",20,7.38,6261060
+nm0369696,Ilavarasu,2,"en, fr",19,7.72,140547
+nm0043199,Avinash,2,"en, ja",19,7.59,80917
+nm0000128,Russell Crowe,2,"en, fr",19,7.52,7704547
+nm1596350,Nawazuddin Siddiqui,2,"en, hi",19,7.52,875952
+nm0000955,Ward Bond,2,"en, fr",19,7.48,1143114
+nm0000422,John Goodman,2,"en, hr",19,7.43,5568184
+nm0545298,Fredric March,2,"en, qbn",19,7.37,285752
+nm0447913,Arthur Kennedy,2,"en, fr",19,7.34,491030
+nm0001651,Basil Rathbone,2,"en, qbn",19,7.34,205254
+nm0795661,Saurabh Shukla,2,"en, fr",18,7.78,1556944
+nm0048075,Manoj Bajpayee,2,"en, fr",18,7.71,357444
+nm3761004,Nani,2,"en, fr",18,7.63,241340
+nm0883014,Vadivelu,2,"en, hi",18,7.6,158877
+nm1375534,Trisha Krishnan,2,"en, hi",18,7.59,299685
+nm1962272,Santhanam,2,"en, hi",18,7.47,152253
+nm0000658,Meryl Streep,2,"en, qbn",18,7.41,3523816
+nm0000621,Kurt Russell,2,"en, fr",18,7.29,3783086
+nm0842770,Tilda Swinton,2,"en, it",18,7.25,4506243
+nm0001637,Vincent Price,2,"en, ja",18,7.2,268554
+nm2690647,Pankaj Tripathi,2,"en, fr",17,7.74,599875
+nm0707425,Rajinikanth,2,"en, hi",17,7.73,283250
+nm0756533,Saikumar,2,"en, hi",17,7.71,135009
+nm0482309,Lal,2,"en, hi",17,7.66,97524
+nm0001647,Claude Rains,2,"en, fr",17,7.61,1466872
+nm0000493,Jack Lemmon,2,"en, fr",17,7.54,1505674
+nm0611552,Rani Mukerji,2,"en, fr",17,7.48,568987
+nm0000095,Woody Allen,2,"en, qbn",17,7.44,1074989
+nm0000661,Donald Sutherland,2,"en, fr",17,7.36,1894205
+nm0000148,Harrison Ford,2,"en, hi",16,7.91,11369466
+nm0882219,Urvashi,2,"en, fr",16,7.85,185500
+nm1099597,Radha Ravi,2,"en, hi",16,7.69,164188
+nm0004569,Sanjay Dutt,2,"en, fr",16,7.64,950675
+nm0706499,Raghuvaran,2,"en, hi",16,7.61,100282
+nm0728262,Mukesh Rishi,2,"en, hi",16,7.58,163716
+nm0000190,Matthew McConaughey,2,"de, en",16,7.53,7459902
+nm0000080,Orson Welles,2,"en, fr",16,7.51,1072057
+nm0331516,Ryan Gosling,2,"bg, en",16,7.51,6797547
+nm0706787,Aishwarya Rai Bachchan,2,"bn, en",16,7.5,409662
+nm0330687,Joseph Gordon-Levitt,2,"bg, en",16,7.49,8223667
+nm0000031,Katharine Hepburn,2,"en, qbn",16,7.49,496134
+nm0000125,Sean Connery,2,"en, fr",16,7.46,3108285
+nm0000206,Keanu Reeves,2,"en, nl",16,7.43,7764330
+nm0001677,Ginger Rogers,2,"en, fr",16,7.32,131554
+nm0154164,Soumitra Chatterjee,2,"bn, en",15,7.93,71901
+nm0542478,Manivannan,2,"en, hi",15,7.75,79001
+nm0451561,Sachin Khedekar,2,"en, hi",15,7.63,274320
+nm0897206,Vijayakumar,2,"en, ml",15,7.61,76704
+nm0000982,Josh Brolin,2,"en, fr",15,7.6,7119260
+nm3559559,Rao Ramesh,2,"en, fr",15,7.59,601430
+nm4886752,Ajay Ghosh,2,"en, hi",15,7.54,164211
+nm3383930,Nithya Menen,2,"en, ta",15,7.53,186704
+nm0001072,Joseph Cotten,2,"en, fr",15,7.5,1535652
+nm0001635,William Powell,2,"en, fr",15,7.48,165938
+nm0704694,Vijay Raaz,2,"en, fr",15,7.44,340666
+nm0000454,Dennis Hopper,2,"en, fr",15,7.43,2249173
+nm0300064,Jean Gabin,2,"en, fr",15,7.43,117256
+nm0654239,Reginald Owen,2,"en, qbn",15,7.38,115649
+nm0516876,Gene Lockhart,2,"en, fr",15,7.37,222687
+nm0452128,Guy Kibbee,2,"en, fr",15,7.33,214803
+nm0000951,Joan Blondell,2,"en, fr",15,7.33,132118
+nm0835016,Mark Strong,2,"bs, en",15,7.32,4949050
+nm0002034,Jane Darwell,2,"en, qbn",15,7.31,196149
+nm0000001,Fred Astaire,2,"en, fr",15,7.23,228898
+nm0707399,Rajendra Prasad,2,"en, fr",14,8.04,88584
+nm1055413,Michael Fassbender,2,"bg, en",14,7.56,6583376
+nm0199787,Henry Daniell,2,"en, qbn",14,7.5,607327
+nm0370144,Jack Hawkins,2,"en, ja",14,7.46,987916
+nm0002143,Edward Everett Horton,2,"en, qbn",14,7.44,213574
+nm1046097,Rachel McAdams,2,"en, fr",14,7.44,5924783
+nm0001691,Geoffrey Rush,2,"en, fr",14,7.43,3975986
+nm0000102,Kevin Bacon,2,"en, fr",14,7.42,3015945
+nm0000017,Marlene Dietrich,2,"en, fr",14,7.41,383225
+nm0001076,Joan Crawford,2,"en, fr",14,7.41,212319
+nm0001602,Guy Pearce,2,"en, fr",14,7.4,5513249
+nm0000668,Emma Thompson,2,"bs, en",14,7.39,2580247
+nm0000273,Alan Arkin,2,"en, hr",14,7.38,1949420
+nm0000366,Catherine Deneuve,2,"en, fr",14,7.36,596138
+nm0000458,William Hurt,2,"en, fr",14,7.3,1978755
+nm0332709,Olivier Gourmet,2,"en, fr",14,7.29,174590
+nm0002092,John Garfield,2,"en, fr",14,7.23,99295
+nm0570451,Frank McHugh,2,"en, fr",14,7.21,84489
+nm0025627,Tinnu Anand,2,"en, hi",13,7.98,206382
+nm4028885,Nivin Pauly,2,"en, hi",13,7.78,159156
+nm0576169,Meena,2,"en, hi",13,7.76,134416
+nm5654687,Ramesh Thilak,2,"en, ta",13,7.75,188719
+nm0944834,Raghubir Yadav,2,"en, hi",13,7.73,297621
+nm0716851,Waheeda Rehman,2,"en, fr",13,7.68,184926
+nm0792116,Jimmy Shergill,2,"en, fr",13,7.63,465776
+nm0154122,Dhritiman Chatterjee,2,"bn, en",13,7.63,250834
+nm0182839,Marion Cotillard,2,"en, fr",13,7.58,6164857
+nm0694893,Prabhu,2,"en, hi",13,7.57,129803
+nm1334389,Jayasurya,2,"en, hi",13,7.55,39121
+nm7855374,Darbha Appaji Ambarisha,2,"en, hi",13,7.53,117752
+nm1249116,Ranvir Shorey,2,"en, fr",13,7.44,137626
+nm0001125,Benicio Del Toro,2,"en, fr",13,7.41,3651078
+nm0124930,Gerard Butler,2,"bg, en",13,7.41,3802791
+nm0915208,Naomi Watts,2,"en, hi",13,7.39,3701190
+nm0000983,Albert Brooks,2,"en, fr",13,7.38,4030576
+nm0001811,Peter Ustinov,2,"en, ja",13,7.34,626648
+nm0000022,Clark Gable,2,"en, fr",13,7.32,587285
+nm0000154,Mel Gibson,2,"en, hi",13,7.32,3045822
+nm0000809,Daniel Auteuil,2,"en, fr",13,7.32,244905
+nm0001376,Isabelle Huppert,2,"en, fr",13,7.31,388994
+nm0000218,Kristin Scott Thomas,2,"en, fr",13,7.28,1563280
+nm0864869,George Tobias,2,"en, fr",13,7.27,99850
+nm0001522,Roddy McDowall,2,"en, fr",13,7.23,488642
+nm0310221,Gautami,2,"en, hi",12,8.07,50045
+nm1748588,Pavitra Lokesh,2,"en, ja",12,7.76,68426
+nm0000473,Diane Keaton,2,"en, qbn",12,7.72,5262322
+nm0000124,Jennifer Connelly,2,"en, fr",12,7.63,4876447
+nm0252230,Chiwetel Ejiofor,2,"en, fr",12,7.6,4769298
+nm0420091,Jeeva,2,"en, hi",12,7.57,36689
+nm0001050,Montgomery Clift,2,"ca, en",12,7.56,335274
+nm0451307,Saif Ali Khan,2,"en, fr",12,7.56,472976
+nm0000255,Ben Affleck,2,"en, hr",12,7.55,6055342
+nm0001475,John Lithgow,2,"en, qbn",12,7.51,5411646
+nm1799038,Vidya Balan,2,"en, fr",12,7.43,284870
+nm0001201,Mia Farrow,2,"en, qbn",12,7.42,687244
+nm0529543,Jean-Pierre Léaud,2,"en, fr",12,7.41,391380
+nm0000554,Sam Neill,2,"en, ja",12,7.4,1891759
+nm0404158,Walter Huston,2,"en, ja",12,7.35,220187
+nm1299510,Genelia Deshmukh,2,"en, qbn",12,7.34,91359
+nm0736622,Seth Rogen,2,"bg, en",12,7.33,3837461
+nm0000491,John Leguizamo,2,"bs, en",12,7.32,3228064
+nm0088396,Bernard Blier,2,"en, fr",12,7.31,68560
+nm0000618,Isabella Rossellini,2,"en, fr",12,7.27,858981
+nm0350324,Edmund Gwenn,2,"en, fr",12,7.27,197029
+nm0002046,Brian Donlevy,2,"en, fr",12,7.24,82010
+nm0001648,Charlotte Rampling,2,"en, fr",12,7.21,676660
+nm0621002,Alan Napier,2,"en, fr",12,7.18,263920
+nm0000122,Charles Chaplin,2,"en, fr",11,7.93,1416150
+nm0592789,Leela Mishra,2,"en, fr",11,7.89,93059
+nm1912683,Karthi,2,"en, hi",11,7.87,195728
+nm0001557,Viggo Mortensen,2,"en, fr",11,7.85,6479078
+nm1386816,Azhagam Perumal,2,"en, hi",11,7.77,146122
+nm4262344,Soori,2,"en, fr",11,7.62,61862
+nm0000200,Bill Paxton,2,"en, fr",11,7.61,4876560
+nm0244890,Divya Dutta,2,"en, fr",11,7.61,332589
+nm3792384,Karamjit Anmol,2,"en, fr",11,7.61,21961
+nm2068971,Vineeth Sreenivasan,2,"en, hi",11,7.55,62108
+nm0154653,Bhoomika Chawla,2,"en, hi",11,7.55,224362
+nm1479650,Vipin Sharma,2,"en, fr",11,7.54,423778
+nm3202701,Kalki Koechlin,2,"en, fr",11,7.53,363527
+nm0006795,Salman Khan,2,"en, hi",11,7.52,527308
+nm0000149,Jodie Foster,2,"en, fr",11,7.5,4015189
+nm5584853,Chemban Vinod Jose,2,"en, hi",11,7.5,166172
+nm0603402,Jeanne Moreau,2,"en, fr",11,7.44,176144
+nm0218131,William Demarest,2,"en, fr",11,7.43,101326
+nm0003909,Michael Lonsdale,2,"en, fr",11,7.42,746614
+nm0000865,Richard Basehart,2,"en, fr",11,7.4,227528
+nm1001625,Renji Panicker,2,"en, hi",11,7.38,43894
+nm0000579,Ron Perlman,2,"en, fr",11,7.35,3169191
+nm0001577,Maureen O'Sullivan,2,"en, qbn",11,7.35,184278
+nm0557339,Raymond Massey,2,"en, fr",11,7.33,205470
+nm0219939,Danny Denzongpa,2,"en, hi",11,7.32,303645
+nm0000964,Charles Boyer,2,"en, fr",11,7.3,126894
+nm0112395,Edward Brophy,2,"en, fr",11,7.3,363267
+nm0085312,Jack Black,2,"en, hi",11,7.24,3989895
+nm0000300,Juliette Binoche,2,"en, fr",11,7.2,720534
+nm5465692,Sreenath Bhasi,2,"en, hi",10,7.88,127664
+nm8819004,Suhas,2,"en, fr",10,7.63,85451
+nm0800302,Michel Simon,2,"en, fr",10,7.6,140677
+nm0000849,Javier Bardem,2,"en, fr",10,7.59,4910960
+nm0001884,Max von Sydow,2,"en, fr",10,7.59,3249138
+nm0598971,Yves Montand,2,"en, fr",10,7.58,201278
+nm0000048,Peter Lorre,2,"en, fr",10,7.56,1165958
+nm0457410,Ravi Kishan,2,"en, hi",10,7.55,166672
+nm0728812,Thelma Ritter,2,"en, fr",10,7.55,831047
+nm0001993,Vincent Cassel,2,"en, fr",10,7.53,3198410
+nm6678966,Vinodhini Vaidynathan,2,"en, ta",10,7.53,94206
+nm0004874,Vin Diesel,2,"en, fr",10,7.5,5519808
+nm0197950,Marcel Dalio,2,"en, fr",10,7.48,286224
+nm0004564,Hema Malini,2,"en, fr",10,7.48,180027
+nm1300009,Adil Hussain,2,"en, hi",10,7.46,843792
+nm0370821,Richard Haydn,2,"en, qbn",10,7.45,713755
+nm0176879,Elisha Cook Jr.,2,"en, qbn",10,7.44,631864
+nm0186505,Bryan Cranston,2,"en, hr",10,7.43,2651426
+nm0023832,Mathieu Amalric,2,"en, fr",10,7.4,1555121
+nm0681566,Michel Piccoli,2,"en, fr",10,7.38,238362
+nm0496866,Bernard Lee,2,"en, fr",10,7.37,920234
+nm2035937,Vinayakan,2,"en, hi",10,7.37,77983
+nm3485845,Adam Driver,2,"en, hi",10,7.36,2553187
+nm0001378,Anjelica Huston,2,"bg, en",10,7.35,1846134
+nm0533692,Barton MacLane,2,"en, fr",10,7.35,377443
+nm1964139,Manav Kaul,2,"en, fr",10,7.33,178976
+nm0000569,Gwyneth Paltrow,2,"en, fr",10,7.31,4306133
+nm0001644,Aidan Quinn,2,"en, fr",10,7.3,528525
+nm0430870,Allyn Joslyn,2,"en, fr",10,7.19,65640
+nm0734000,Jean Rochefort,2,"en, fr",10,7.17,136368
+nm0000068,Randolph Scott,2,"en, fr",10,7.15,73245
+nm0693092,Prathap Pothen,2,"en, hi",9,7.9,33774
+nm0000434,Mark Hamill,2,"en, hi",9,7.84,5765944
+nm0001330,Sterling Hayden,2,"en, es",9,7.8,3117908
+nm1411548,Irshad,2,"en, hi",9,7.78,48335
+nm0000619,Tim Roth,2,"en, tr",9,7.74,5754262
+nm1566068,Satyendra Kapoor,2,"en, fr",9,7.7,105273
+nm1942975,Andrea Jeremiah,2,"en, hi",9,7.7,203870
+nm3760302,Amrinder Gill,2,"en, fr",9,7.67,20212
+nm3594367,Binnu Dhillon,2,"en, fr",9,7.66,17377
+nm0154146,Prosenjit Chatterjee,2,"bn, en",9,7.65,35975
+nm1659221,Sebastian Stan,2,"bn, en",9,7.62,7570496
+nm1004887,Pradeep Singh Rawat,2,"en, qbn",9,7.61,247556
+nm1883318,Jiiva,2,"en, fr",9,7.58,83994
+nm4428541,Jaya Ahsan,2,"en, fr",9,7.57,22900
+nm0794818,Tillotama Shome,2,"bn, en",9,7.57,101454
+nm0586568,Mads Mikkelsen,2,"da, en",9,7.56,2905063
+nm0117709,Daniel Brühl,2,"de, en",9,7.54,3131735
+nm0451174,Arshad Warsi,2,"en, fr",9,7.54,259176
+nm6073955,Florence Pugh,2,"bn, en",9,7.51,3080626
+nm0000147,Colin Firth,2,"bg, en",9,7.51,4316809
+nm4936620,Praveen,2,"en, hi",9,7.5,51955
+nm0001023,John Cassavetes,2,"en, qbn",9,7.43,406194
+nm6697575,Darshana Rajendran,2,"en, fr",9,7.42,58643
+nm0082848,Bindu Desai,2,"en, fr",9,7.41,87117
+nm0239267,Lillete Dubey,2,"en, fr",9,7.41,243541
+nm6845061,Jim Sarbh,2,"en, fr",9,7.41,233921
+nm0002113,Sydney Greenstreet,2,"en, fr",9,7.41,881585
+nm0000897,Ralph Bellamy,2,"en, qbn",9,7.39,1016337
+nm0614526,Michael Murphy,2,"en, qbn",9,7.39,661459
+nm0638824,Michael Nyqvist,2,"en, sv",9,7.39,2014873
+nm1865947,Ravi Mohan,2,"en, hi",9,7.37,99812
+nm0000578,Anthony Perkins,2,"en, fr",9,7.34,970304
+nm0236866,Charles Drake,2,"en, fr",9,7.34,136981
+nm1208167,Diane Kruger,2,"en, fr",9,7.34,2278406
+nm0000702,Reese Witherspoon,2,"de, en",9,7.33,1989818
+nm0196247,Howard Da Silva,2,"en, fr",9,7.32,93295
+nm0799237,Alastair Sim,2,"en, fr",9,7.31,79065
+nm0035866,R.G. Armstrong,2,"en, es",9,7.3,656299
+nm0000086,Louis de Funès,2,"en, fr",9,7.29,102627
+nm0000654,Terence Stamp,2,"en, qbn",9,7.29,398417
+nm0138885,Morris Carnovsky,2,"en, es",9,7.29,65696
+nm0469103,Jeroen Krabbé,2,"en, ja",9,7.28,514243
+nm0537685,Marjorie Main,2,"en, fr",9,7.27,100021
+nm0433150,James Robertson Justice,2,"en, fr",9,7.24,233667
+nm0634313,Lloyd Nolan,2,"en, fr",9,7.24,118716
+nm0848667,Akim Tamiroff,2,"en, fr",9,7.2,164052
+nm0725891,John Ridgely,2,"en, fr",9,7.19,125850
+nm5756214,Rakshit Shetty,2,"en, ja",8,8.21,101090
+nm4413266,Chanchal Chowdhury,2,"en, hi",8,8.11,72362
+nm0311677,Geetha,2,"en, hi",8,8.05,51505
+nm0244884,Utpal Dutt,2,"bn, en",8,8.0,40582
+nm0015459,Nagarjuna Akkineni,2,"en, ml",8,7.96,54168
+nm0764871,Sarath Babu,2,"en, hi",8,7.95,60063
+nm0712439,T.G. Ravi,2,"en, hi",8,7.75,20981
+nm0000235,Uma Thurman,2,"en, nl",8,7.73,5263416
+nm1367730,Pasupathy,2,"en, es",8,7.71,153994
+nm3414188,Adivi Sesh,2,"en, fr",8,7.7,272273
+nm0436302,Pawan Kalyan,2,"en, hi",8,7.65,57518
+nm0219971,Sunny Deol,2,"en, hi",8,7.6,109737
+nm0784025,Raima Sen,2,"bn, en",8,7.56,70202
+nm0006689,Preity G Zinta,2,"en, fr",8,7.56,388041
+nm0593612,Millard Mitchell,2,"en, fr",8,7.55,375023
+nm0893454,Venu Madhav,2,"en, qbn",8,7.54,29636
+nm0797531,Simone Signoret,2,"en, fr",8,7.54,137855
+nm2560181,Ravi Babu,2,"en, hi",8,7.51,33985
+nm0001725,Omar Sharif,2,"en, fr",8,7.48,577494
+nm0000837,Bob Balaban,2,"en, fr",8,7.45,999340
+nm0384908,Wendy Hiller,2,"en, fr",8,7.45,438359
+nm0335048,Farley Granger,2,"en, fr",8,7.44,375684
+nm0684500,Dominique Pinon,2,"en, fr",8,7.44,1232669
+nm1527905,Toby Kebbell,2,"en, sv",8,7.43,1543529
+nm0000662,Kiefer Sutherland,2,"en, fr",8,7.41,2095540
+nm0491259,Mélanie Laurent,2,"en, fr",8,7.41,2783590
+nm0000552,Eddie Murphy,2,"bn, en",8,7.4,2998449
+nm0045784,Irving Bacon,2,"en, fr",8,7.4,153924
+nm0437781,Ramesh Khanna,2,"en, hi",8,7.39,25138
+nm0201638,Danielle Darrieux,2,"en, fr",8,7.38,165321
+nm0004487,Juhi Chawla,2,"en, fr",8,7.37,78684
+nm0001588,Jack Palance,2,"en, fr",8,7.36,576236
+nm0000054,Marilyn Monroe,2,"en, fr",8,7.36,612943
+nm0000606,Jean Reno,2,"en, fr",8,7.35,2253632
+nm0001256,Greta Garbo,2,"en, qbn",8,7.35,82110
+nm0000671,Billy Bob Thornton,2,"en, fr",8,7.34,892130
+nm0948772,Susannah York,2,"ca, en",8,7.34,94841
+nm0990547,Daniel Mays,2,"bg, en",8,7.34,1664875
+nm0000329,Jackie Chan,2,"en, yue",8,7.34,1737211
+nm0000687,J.T. Walsh,2,"en, fr",8,7.33,925588
+nm0539942,Miles Malleson,2,"en, fr",8,7.33,142927
+nm0570192,Dorothy McGuire,2,"en, fr",8,7.31,93685
+nm0000302,Jacqueline Bisset,2,"en, fr",8,7.31,271416
+nm0949574,Gig Young,2,"en, fr",8,7.31,90513
+nm0707771,Jessie Ralph,2,"en, fr",8,7.3,60959
+nm0000112,Pierce Brosnan,2,"en, fr",8,7.29,961011
+nm0957193,Hanns Zischler,2,"en, fr",8,7.29,330500
+nm0001366,Leslie Howard,2,"en, fr",8,7.29,57746
+nm0001721,Chloë Sevigny,2,"en, fr",8,7.28,1857206
+nm0916067,Clifton Webb,2,"en, fr",8,7.28,95564
+nm0572142,Victor McLaglen,2,"en, fr",8,7.26,137151
+nm0424318,Glynis Johns,2,"en, fr",8,7.26,234050
+nm0034079,Pierre Arditi,2,"en, fr",8,7.26,58148
+nm0029456,Heather Angel,2,"en, qbn",8,7.26,443210
+nm0267042,Golshifteh Farahani,2,"en, fr",8,7.23,683979
+nm0515967,Doris Lloyd,2,"en, qbn",8,7.23,80130
+nm1925239,Jack O'Connell,2,"bg, en",8,7.21,1110747
+nm0751983,Margaret Rutherford,2,"en, fr",8,7.16,54960
+nm0146905,Paul Cavanagh,2,"en, fr",8,7.13,61814
+nm3818286,Sushant Singh Rajput,2,"en, fr",7,8.04,738106
+nm0315917,Rabi Ghosh,2,"bn, en",7,8.04,19981
+nm0052329,Haradhan Bannerjee,2,"en, hi",7,7.97,112336
+nm0000402,Carrie Fisher,2,"en, hi",7,7.97,5755070
+nm0482285,Lakshmi,2,"en, fr",7,7.78,55689
+nm4572244,Abhinaya,2,"en, hi",7,7.71,112598
+nm0000741,Tim Allen,2,"en, nl",7,7.7,3525425
+nm3826010,Lakshmy Ramakrishnan,2,"en, hi",7,7.7,24463
+nm1017633,Alia Bhatt,2,"en, fr",7,7.69,304557
+nm1659141,Prabhas,2,"en, es",7,7.67,697461
+nm0762557,Erskine Sanford,2,"en, fr",7,7.61,1102652
+nm0004435,Rajesh Khanna,2,"en, fr",7,7.61,56404
+nm0000852,Jean-Marc Barr,2,"en, fr",7,7.6,499476
+nm0000882,Nathalie Baye,2,"en, fr",7,7.6,1399363
+nm1167656,Silambarasan TR,2,"en, ta",7,7.59,70720
+nm0415488,Sam Jaffe,2,"en, fr",7,7.57,479398
+nm1027293,Aishwariyaa Bhaskaran,2,"en, fr",7,7.54,33810
+nm1260157,Seema Pahwa,2,"en, fr",7,7.53,168575
+nm0080349,Dibyendu Bhattacharya,2,"en, hi",7,7.53,122609
+nm0001255,Victor Garber,2,"en, hr",7,7.51,3004661
+nm0784521,Senthil,2,"en, hi",7,7.5,18356
+nm0000021,Joan Fontaine,2,"en, fr",7,7.47,265750
+nm0189887,Marie-Josée Croze,2,"en, fr",7,7.44,540366
+nm0004851,Penélope Cruz,2,"en, es",7,7.44,715502
+nm0898546,Pruitt Taylor Vince,2,"en, tr",7,7.42,1424726
+nm0001722,Rufus Sewell,2,"en, fr",7,7.39,1532904
+nm0002311,Montagu Love,2,"en, fr",7,7.39,44779
+nm0005458,Jason Statham,2,"en, fr",7,7.39,3224489
+nm3761132,Gulshan Devaiah,2,"en, fr",7,7.38,108923
+nm0282530,Suzanne Flon,2,"en, fr",7,7.37,87954
+nm0370035,John Hawkes,2,"en, fr",7,7.36,1449117
+nm0860233,Jack Thompson,2,"en, es",7,7.36,139320
+nm0532277,Niall MacGinnis,2,"en, ja",7,7.36,100775
+nm0686032,Zasu Pitts,2,"en, qbn",7,7.36,31957
+nm0447695,Anna Kendrick,2,"bg, en",7,7.36,2402041
+nm0820643,Howard St. John,2,"en, fr",7,7.34,209316
+nm0123553,Corey Burton,2,"en, fr",7,7.34,2786904
+nm0085782,Sidney Blackmer,2,"en, qbn",7,7.33,302256
+nm5473782,Taron Egerton,2,"de, en",7,7.33,1575455
+nm0239816,Michel Duchaussoy,2,"en, fr",7,7.31,84859
+nm0040545,Féodor Atkine,2,"en, fr",7,7.3,102015
+nm0002769,Romy Schneider,2,"en, fr",7,7.3,44725
+nm0546816,Miriam Margolyes,2,"bn, en",7,7.27,437131
+nm0094789,Sandrine Bonnaire,2,"en, fr",7,7.27,53976
+nm0464137,Henry Kolker,2,"en, qbn",7,7.26,48758
+nm0085407,Lucas Black,2,"en, fr",7,7.26,993110
+nm0000899,Monica Bellucci,2,"en, fr",7,7.26,976608
+nm0000250,Renée Zellweger,2,"en, fr",7,7.26,1028475
+nm0921459,Oskar Werner,2,"en, fr",7,7.24,139223
+nm0000254,Isabelle Adjani,2,"en, fr",7,7.24,202437
+nm0001424,Udo Kier,2,"en, sv",7,7.24,546833
+nm0636426,Noomi Rapace,2,"en, sv",7,7.23,1807119
+nm1910274,John Magaro,2,"de, en",7,7.23,605169
+nm0062667,Alan Baxter,2,"en, fr",7,7.21,67163
+nm0619798,J. Carrol Naish,2,"en, fr",7,7.21,58279
+nm0733480,May Robson,2,"en, qbn",7,7.21,104791
+nm0593192,Cameron Mitchell,2,"en, fr",7,7.21,30644
+nm0001195,Douglas Fairbanks Jr.,2,"en, fr",7,7.21,43147
+nm0605923,Robert Morley,2,"en, ja",7,7.21,142519
+nm0914808,Minor Watson,2,"en, fr",7,7.2,31473
+nm0634159,Philippe Noiret,2,"en, fr",7,7.2,28999
+nm0000272,Fanny Ardant,2,"en, fr",7,7.19,149888
+nm0505157,Oscar Levant,2,"en, fr",7,7.17,71585
+nm0922818,Helen Westley,2,"en, fr",7,7.16,25025
+nm0001505,Joe Mantegna,2,"en, fr",7,7.16,555396
+nm0452161,Sandrine Kiberlain,2,"fr, ja",7,7.16,47575
+nm0301556,Michel Galabru,2,"en, fr",7,7.13,98241
+nm0154110,Anil Chatterjee,2,"en, fr",6,7.98,18141
+nm0080180,Bhagyaraj,2,"en, hi",6,7.85,16660
+nm6293193,Sargun Mehta,2,"en, fr",6,7.85,13812
+nm1242068,Dilip Prabhawalkar,2,"en, fr",6,7.83,63686
+nm0889024,Charles Vanel,2,"en, fr",6,7.83,246500
+nm0660327,Irene Papas,2,"en, fr",6,7.83,181599
+nm9109380,Gopalkrishna Deshpande,2,"en, ja",6,7.82,40861
+nm1219922,Jhansi,2,"en, hi",6,7.82,10558
+nm0695170,Om Prakash,2,"en, fr",6,7.78,36541
+nm8488982,Satyadev Kancharana,2,"en, hi",6,7.77,34482
+nm1184326,Babu Antony,2,"en, ta",6,7.75,31360
+nm0001012,Claudia Cardinale,2,"en, ja",6,7.73,224328
+nm0756378,Parikshit Sahni,2,"en, fr",6,7.7,839819
+nm10899733,Naslen,2,"en, hi",6,7.68,65457
+nm0294382,Pierre Fresnay,2,"en, fr",6,7.65,61833
+nm0424819,Corey Johnson,2,"en, hr",6,7.65,2415295
+nm0305558,Gael García Bernal,2,"en, sv",6,7.64,1708989
+nm0000365,Julie Delpy,2,"en, fr",6,7.63,1036377
+nm0149846,Lily Chakravarty,2,"bn, en",6,7.63,21966
+nm0673749,François Périer,2,"en, fr",6,7.62,125166
+nm1227718,H.G. Dattatreya,2,"en, hi",6,7.62,18258
+nm0392529,Tim Holt,2,"en, fr",6,7.62,274109
+nm0893341,Lino Ventura,2,"en, fr",6,7.62,60733
+nm0002134,Paul Henreid,2,"en, fr",6,7.6,710898
+nm0291289,Paul Frankeur,2,"en, fr",6,7.6,108661
+nm0051856,Victor Banerjee,2,"en, fr",6,7.58,76870
+nm0002076,Jason Flemyng,2,"en, fr",6,7.57,773616
+nm0000442,Rutger Hauer,2,"en, fr",6,7.57,2761236
+nm2573453,Sreejith Ravi,2,"en, hi",6,7.57,32330
+nm0891092,Peter Vaughan,2,"en, tr",6,7.55,470685
+nm0757064,S.Z. Sakall,2,"en, fr",6,7.55,707129
+nm3440031,Dinesh Prabhakar,2,"en, hi",6,7.55,56617
+nm0451601,Kirron Kher,2,"en, fr",6,7.54,180411
+nm1032614,Reema Sen,2,"en, hi",6,7.53,143738
+nm3749108,P. Ravi Shankar,2,"en, hi",6,7.52,31258
+nm0906932,Anton Walbrook,2,"en, fr",6,7.52,85310
+nm5447706,Vikrant Massey,2,"en, hi",6,7.52,262038
+nm0332221,Lloyd Gough,2,"en, fr",6,7.52,291391
+nm0034390,Niels Arestrup,2,"en, fr",6,7.5,434626
+nm0303826,Jacques Gamblin,2,"en, fr",6,7.5,49725
+nm0947447,Donnie Yen,2,"en, fr",6,7.48,1662195
+nm0000152,Richard Gere,2,"en, fr",6,7.48,1461826
+nm0365692,Kathleen Harrison,2,"en, fr",6,7.47,55147
+nm0716577,Serge Reggiani,2,"en, fr",6,7.47,56690
+nm0757087,Maaya Sakamoto,2,"en, fr",6,7.47,83551
+nm0197592,Robert Dalban,2,"en, fr",6,7.47,99646
+nm0108400,Jean-Claude Brialy,2,"fr, ja",6,7.44,82835
+nm4173131,Neeraj Kabi,2,"en, fr",6,7.43,120664
+nm0785664,Michel Serrault,2,"en, fr",6,7.42,106284
+nm0393222,James Hong,2,"bn, en",6,7.42,2193867
+nm0851582,Audrey Tautou,2,"en, fr",6,7.4,1072989
+nm1069850,Dia Mirza,2,"en, fr",6,7.4,182996
+nm0175931,Anne Consigny,2,"en, fr",6,7.4,229614
+nm0256216,Hope Emerson,2,"en, fr",6,7.38,45977
+nm0464945,Marek Kondrat,2,"en, ja",6,7.38,20276
+nm0000096,Gillian Anderson,2,"en, fr",6,7.37,351242
+nm0912487,Jack Warner,2,"en, fr",6,7.37,72438
+nm0000262,Nancy Allen,2,"en, fr",6,7.35,720739
+nm3329873,Pitobash,2,"en, hi",6,7.35,87469
+nm0800386,Simone Simon,2,"en, fr",6,7.35,58787
+nm0087926,Charles Blavette,2,"en, fr",6,7.34,57725
+nm0717709,Kelly Reilly,2,"en, fr",6,7.32,1752814
+nm0587061,Bernard Miles,2,"en, fr",6,7.32,142872
+nm0078109,Roland Bertin,2,"en, fr",6,7.32,71788
+nm0218942,Denden,2,"en, hi",6,7.3,78684
+nm0365317,Sean Harris,2,"bg, en",6,7.3,1932693
+nm0836343,Jim Sturgess,2,"en, fr",6,7.3,1739442
+nm0512267,Margaret Lindsay,2,"en, fr",6,7.28,56685
+nm0000945,Jane Birkin,2,"en, fr",6,7.27,164876
+nm0705005,Olivier Rabourdin,2,"en, fr",6,7.27,738608
+nm0011244,Nick Adams,2,"en, fr",6,7.27,66941
+nm0308039,Louis Garrel,2,"en, fr",6,7.27,483817
+nm0933727,Lambert Wilson,2,"en, fr",6,7.27,108666
+nm0075650,Charles Berling,2,"en, fr",6,7.25,181315
+nm0001965,Élodie Bouchez,2,"fr, ja",6,7.25,36929
+nm0001141,Angie Dickinson,2,"en, fr",6,7.23,314119
+nm0219666,Reginald Denny,2,"en, qbn",6,7.22,198181
+nm0836681,Jean-François Stévenin,2,"en, fr",6,7.22,36513
+nm0190194,Rosalie Crutchley,2,"ca, en",6,7.22,69553
+nm0000506,Julia Louis-Dreyfus,2,"bn, en",6,7.22,1089966
+nm0231098,Dora Doll,2,"en, fr",6,7.2,46304
+nm0778568,Edith Scob,2,"en, fr",6,7.18,120421
+nm0113769,James Brown,2,"en, fr",6,7.18,73232
+nm0908094,Paul Walker,2,"en, fr",6,7.18,1648039
+nm0803889,Bill Skarsgård,2,"en, fr",6,7.18,1883630
+nm0774386,Matthias Schoenaerts,2,"en, fr",6,7.18,365681
+nm0200455,Royal Dano,2,"en, fr",6,7.15,91097
+nm0524528,Fabrice Luchini,2,"en, fr",6,7.15,70801
+nm0038988,Lior Ashkenazi,2,"en, he",6,7.15,30691
+nm0001822,Robert Wagner,2,"en, fr",6,7.02,384916
+nm10447857,Ramesh Indira,2,"en, ja",5,8.08,21764
+nm3252571,Vibhawari Deshpande,2,"en, hi",5,8.02,38626
+nm10182951,Chaithra J. Achar,2,"en, ja",5,7.96,26925
+nm4820944,Krishnamoorthy,2,"en, ta",5,7.84,17580
+nm1728792,Padmapriya,2,"en, hi",5,7.84,15178
+nm0582890,Paul Meurisse,2,"en, fr",5,7.84,118964
+nm0505971,Ted Levine,2,"en, fr",5,7.82,4036421
+nm0451864,Viju Khote,2,"en, hi",5,7.76,73790
+nm10464357,Mathew Thomas,2,"en, hi",5,7.74,61261
+nm1263093,Neeru Bajwa,2,"en, fr",5,7.72,9677
+nm0001633,Annie Potts,2,"en, nl",5,7.72,2963125
+nm6916923,Jeeva Ravi,2,"en, hi",5,7.72,14248
+nm0839634,Sanjay Suri,2,"en, fr",5,7.7,21770
+nm0721073,Fernando Rey,2,"en, fr",5,7.7,274258
+nm0008787,Simon Abkarian,2,"en, fr",5,7.7,879415
+nm0071913,Marjorie Bennett,2,"en, fr",5,7.68,139476
+nm3054665,Swastika Mukherjee,2,"en, fr",5,7.68,180208
+nm0534501,Madan Puri,2,"en, fr",5,7.66,20569
+nm0595321,Gaston Modot,2,"en, fr",5,7.66,91184
+nm0952232,Arif Zakaria,2,"en, hi",5,7.66,72174
+nm0001916,Arletty,2,"en, fr",5,7.66,102080
+nm2143282,Lupita Nyong'o,2,"en, hi",5,7.65,2781322
+nm0000817,Lew Ayres,2,"en, qbn",5,7.64,114054
+nm0547462,Jacques Marin,2,"en, fr",5,7.64,166217
+nm1548005,P. Balachandran,2,"en, hi",5,7.64,46464
+nm0000420,Valeria Golino,2,"en, fr",5,7.64,1001241
+nm0153457,Fernand Charpin,2,"en, fr",5,7.64,18687
+nm0907888,Johnny Walker,2,"en, fr",5,7.64,31132
+nm1065229,America Ferrera,2,"en, fr",5,7.64,1811875
+nm0045968,Hermione Baddeley,2,"en, fr",5,7.62,296353
+nm7337648,Harsha Chemudu,2,"en, hi",5,7.62,89493
+nm0641966,Barbara O'Neil,2,"en, fr",5,7.6,390098
+nm7146337,Keerthy Suresh,2,"en, es",5,7.6,112245
+nm4737131,Jinu Joseph,2,"en, hi",5,7.58,37436
+nm0625724,Ruth Nelson,2,"en, fr",5,7.58,215987
+nm0306786,Reginald Gardiner,2,"en, hi",5,7.58,305108
+nm4112854,Kirti Kulhari,2,"en, fr",5,7.58,165227
+nm0001213,Harvey Fierstein,2,"bn, en",5,7.56,1346263
+nm0690448,Ponnambalam,2,"en, hi",5,7.56,22408
+nm3602118,Naga Chaitanya Akkineni,2,"en, fr",5,7.55,44280
+nm7945684,James Eliya,2,"en, fr",5,7.54,23395
+nm0167501,Suzanne Clément,2,"en, fr",5,7.54,126483
+nm0255695,Isobel Elsom,2,"en, fr",5,7.52,158417
+nm0349777,Ozan Güven,2,"en, ja",5,7.52,167738
+nm0487884,Alexandra Maria Lara,2,"de, en",5,7.52,702298
+nm0836136,Jerzy Stuhr,2,"en, ja",5,7.52,39704
+nm0948000,Cem Yılmaz,2,"en, ja",5,7.52,566574
+nm1538116,Tisca Chopra,2,"en, fr",5,7.52,250337
+nm0320721,Rémy Girard,2,"en, fr",5,7.52,312228
+nm1318578,Tannishtha Chatterjee,2,"bn, en",5,7.5,282400
+nm0015391,Claude Akins,2,"en, fr",5,7.5,147124
+nm0217612,Édouard Delmont,2,"en, fr",5,7.5,21173
+nm0202120,Jean Dasté,2,"en, fr",5,7.48,77243
+nm0886870,Peter van Eyck,2,"en, fr",5,7.48,120454
+nm0091035,Kim Bodnia,2,"en, ja",5,7.46,533953
+nm0812453,Vladimir Sokoloff,2,"en, fr",5,7.46,148221
+nm0001077,Richard Crenna,2,"en, fr",5,7.46,420230
+nm0390458,Ticky Holgado,2,"en, fr",5,7.46,243914
+nm2244205,Léa Seydoux,2,"en, fr",5,7.44,2049191
+nm0846548,Saïd Taghmaoui,2,"en, fr",5,7.44,1658754
+nm1421628,Tota Roy Chowdhury,2,"bn, en",5,7.44,53511
+nm0220807,Anang Desai,2,"en, hi",5,7.44,63576
+nm0002503,Harry Carey,2,"en, fr",5,7.44,180988
+nm0641397,Dan O'Herlihy,2,"en, fr",5,7.44,359110
+nm5201771,Baljinder Kaur,2,"en, fr",5,7.44,51972
+nm0004244,Jacques Tati,2,"en, fr",5,7.42,124399
+nm0239513,Paulette Dubost,2,"en, fr",5,7.42,65105
+nm0238475,Léa Drucker,2,"en, fr",5,7.42,85966
+nm0001075,Peter Coyote,2,"bn, en",5,7.4,804725
+nm0424345,Mervyn Johns,2,"en, fr",5,7.4,72369
+nm0194572,Javier Cámara,2,"en, es",5,7.4,257656
+nm0388038,Aldis Hodge,2,"en, hi",5,7.4,872506
+nm0001794,Henry Thomas,2,"bn, en",5,7.4,1262833
+nm0001998,Cyd Charisse,2,"en, fr",5,7.4,313417
+nm0440913,Mathieu Kassovitz,2,"en, fr",5,7.4,1128244
+nm0000989,Yul Brynner,2,"en, fr",5,7.4,243515
+nm0202405,Claude Dauphin,2,"en, fr",5,7.4,43129
+nm0766837,Jennifer Saunders,2,"de, en",5,7.4,1541893
+nm0415191,Yves Jacques,2,"en, fr",5,7.38,73484
+nm0001069,Bud Cort,2,"en, fr",5,7.38,656430
+nm8801016,Antony Varghese,2,"en, hi",5,7.38,26055
+nm0220240,Eugenio Derbez,2,"en, fr",5,7.38,87236
+nm1327322,Purab Kohli,2,"en, fr",5,7.38,43072
+nm0869429,Audrey Totter,2,"en, fr",5,7.36,46937
+nm2257218,Shahana Goswami,2,"en, fr",5,7.36,34009
+nm0682692,Frédéric Pierrot,2,"en, fr",5,7.34,69751
+nm0041509,Michel Auclair,2,"en, fr",5,7.34,123449
+nm0641729,J. Pat O'Malley,2,"en, qbn",5,7.34,1560306
+nm0003508,Michel Blanc,2,"en, fr",5,7.32,123769
+nm0609944,Wagner Moura,2,"en, fr",5,7.32,566854
+nm0640614,Denis O'Dea,2,"en, fr",5,7.32,66260
+nm0000106,Drew Barrymore,2,"bn, en",5,7.32,1188241
+nm0151285,Barun Chanda,2,"en, hi",5,7.32,86802
+nm0408586,Frieda Inescort,2,"en, ja",5,7.32,56632
+nm0895759,Karin Viard,2,"en, fr",5,7.32,154848
+nm0082884,Herman Bing,2,"en, fr",5,7.32,372071
+nm0220183,Émilie Dequenne,2,"en, fr",5,7.32,159122
+nm1269088,David Kross,2,"en, he",5,7.32,367427
+nm0371824,Chris Haywood,2,"en, es",5,7.32,89705
+nm0740090,Fabrizio Rongione,2,"en, fr",5,7.32,129493
+nm0001868,Michael York,2,"en, fr",5,7.3,401696
+nm0858247,Raymond Thiry,2,"en, nl",5,7.3,78211
+nm0001876,Catherine Zeta-Jones,2,"en, fr",5,7.3,1445282
+nm0002016,William Conrad,2,"en, fr",5,7.3,29017
+nm0835836,Randy Stuart,2,"en, fr",5,7.3,40368
+nm0114982,Coral Browne,2,"en, ja",5,7.28,48056
+nm0137023,Philip Carey,2,"en, fr",5,7.28,48499
+nm0035128,Swann Arlaud,2,"en, fr",5,7.28,273071
+nm0340973,Jon Gries,2,"bg, en",5,7.28,1632042
+nm0908063,Nella Walker,2,"en, fr",5,7.28,94113
+nm0237835,Jean-Claude Dreyfus,2,"en, fr",5,7.28,199501
+nm1157048,Zachary Levi,2,"en, hi",5,7.26,1020972
+nm0001667,Jonathan Rhys Meyers,2,"en, fr",5,7.26,422196
+nm0075321,Christian Berkel,2,"en, yue",5,7.26,821173
+nm0245304,Ann Dvorak,2,"en, fr",5,7.26,47875
+nm0480850,Laurent Lafitte,2,"en, fr",5,7.26,168761
+nm0529645,Philippe Léotard,2,"en, fr",5,7.25,19063
+nm0794700,Ann Shoemaker,2,"en, fr",5,7.24,39319
+nm0898653,Hélène Vincent,2,"en, fr",5,7.24,38843
+nm0676492,Jean Peters,2,"en, fr",5,7.24,59542
+nm0932870,André Wilms,2,"en, fr",5,7.24,63807
+nm1665537,Ronald Zehrfeld,2,"de, en",5,7.22,50951
+nm0868881,Philippe Torreton,2,"en, fr",5,7.22,12068
+nm2847812,Pio Marmaï,2,"en, fr",5,7.22,40028
+nm0161862,Eduardo Ciannelli,2,"en, fr",5,7.22,55189
+nm0243355,Albert Dupontel,2,"en, fr",5,7.2,190447
+nm0425005,Dwayne Johnson,2,"en, fr",5,7.2,1879808
+nm0448012,Edgar Kennedy,2,"en, fr",5,7.2,36623
+nm1295721,Alice de Lencquesaing,2,"en, fr",5,7.2,42372
+nm0356159,Thurston Hall,2,"en, fr",5,7.2,20756
+nm0494204,Bernard Le Coq,2,"en, fr",5,7.2,103833
+nm0589641,James Millican,2,"en, fr",5,7.2,26193
+nm0531776,Jeanette MacDonald,2,"en, fr",5,7.18,20188
+nm0697733,William Prince,2,"en, es",5,7.18,34393
+nm0202994,Mario David,2,"en, fr",5,7.18,27150
+nm0892891,Venantino Venantini,2,"en, fr",5,7.18,42863
+nm0230859,Xavier Dolan,2,"en, fr",5,7.18,377280
+nm0394477,Russell Hopton,2,"en, fr",5,7.18,13919
+nm0878354,Lurene Tuttle,2,"en, fr",5,7.16,54760
+nm0496614,Fernand Ledoux,2,"ca, fr",5,7.16,25174
+nm0490734,Philippe Laudenbach,2,"en, fr",5,7.16,32830
+nm0547339,Jean-Pierre Marielle,2,"en, fr",5,7.16,21064
+nm0000872,Patrick Bauchau,2,"en, fr",5,7.14,24955
+nm0756203,Ludivine Sagnier,2,"en, fr",5,7.14,217223
+nm0507212,Geoffrey Lewis,2,"en, es",5,7.13,395453
+nm0000731,Brian Aherne,2,"en, fr",5,7.12,42530
+nm0001671,Diana Rigg,2,"en, ja",5,7.08,269178
+nm0820283,Anjan Srivastav,2,"en, hi",4,8.2,29737
+nm0619938,Tatsuya Nakadai,2,"en, fr",4,8.2,408155
+nm0038269,Raisul Islam Asad,2,"en, hi",4,8.03,7859
+nm0051830,Ajit Banerjee,2,"bn, en",4,8.0,9363
+nm9813269,Rukmini Vasanth,2,"en, ja",4,8.0,78535
+nm0523597,Margarita Lozano,2,"en, fr",4,7.98,88102
+nm0880521,Liv Ullmann,2,"en, fr",4,7.95,197350
+nm1276263,Sandeep Kulkarni,2,"en, hi",4,7.85,9908
+nm6836449,Pavel Navageethan,2,"en, hi",4,7.85,28352
+nm1011887,Radhakrishnan Parthiban,2,"en, hi",4,7.84,47565
+nm3844346,Wamiqa Gabbi,2,"en, fr",4,7.83,18571
+nm0430746,Erland Josephson,2,"en, fr",4,7.83,126164
+nm5561908,Suchendra Prasad,2,"en, hi",4,7.82,4756
+nm0084435,Chhabi Biswas,2,"bn, en",4,7.8,14516
+nm0080337,Abhi Bhattacharya,2,"en, fr",4,7.8,9605
+nm0444955,Jack Kehoe,2,"en, qbn",4,7.8,921391
+nm0637649,Magali Noël,2,"en, fr",4,7.8,181587
+nm11765433,Ankith Koyya,2,"en, hi",4,7.78,8498
+nm0438905,Mirjana Karanović,2,"en, tr",4,7.78,81460
+nm9952282,Karthik Rathnam,2,"en, hi",4,7.78,18564
+nm3492981,Shalini Vatsa,2,"en, hi",4,7.77,96789
+nm1126657,George MacKay,2,"bg, en",4,7.77,1120251
+nm0000641,Gary Sinise,2,"en, fr",4,7.75,2956576
+nm0839017,Kemal Sunal,2,"en, tr",4,7.75,33788
+nm0766225,Kei Satō,2,"en, fr",4,7.75,127313
+nm2977461,Saori Hayami,2,"en, fr",4,7.73,174753
+nm0000733,Anouk Aimée,2,"en, fr",4,7.73,243714
+nm0638056,Bill Nunn,2,"en, tr",4,7.73,2016796
+nm0376716,Christina Hendricks,2,"en, nl",4,7.7,1226582
+nm1082477,Omar Sy,2,"en, fr",4,7.7,1100234
+nm0542623,Manmohan,2,"en, fr",4,7.7,8257
+nm0880126,Özkan Uğur,2,"en, ja",4,7.7,236899
+nm2085856,Aamir Bashir,2,"en, hi",4,7.68,167955
+nm0072578,Martin Benson,2,"en, fr",4,7.68,454155
+nm10431504,Anna Ben,2,"en, es",4,7.68,108821
+nm9503553,Anaswara Rajan,2,"en, hi",4,7.68,41540
+nm0002233,Erich von Stroheim,2,"en, fr",4,7.66,318158
+nm0102566,Marcel Bozzuffi,2,"en, fr",4,7.65,204197
+nm0706926,Raimu,2,"en, fr",4,7.65,9832
+nm0634282,Jeanette Nolan,2,"en, fr",4,7.65,244358
+nm0004376,Franka Potente,2,"de, en",4,7.65,1652275
+nm6836472,Shashank,2,"en, qbn",4,7.65,8284
+nm0885137,Robert Vattier,2,"en, fr",4,7.65,9832
+nm0001162,Griffin Dunne,2,"en, fr",4,7.63,853134
+nm0001016,David Carradine,2,"en, fr",4,7.63,2223599
+nm0904371,Milena Vukotic,2,"fr, ja",4,7.63,114501
+nm5457207,Navid Mohammadzadeh,2,"fa, fr",4,7.63,56087
+nm5701208,Sharath Lohitashwa,2,"en, ja",4,7.62,14339
+nm0299353,Jeanne Fusier-Gir,2,"en, fr",4,7.6,22683
+nm0731634,Tony Roberts,2,"en, qbn",4,7.6,498222
+nm0484439,David Landau,2,"en, fr",4,7.6,34087
+nm3453549,Geetanjali Kulkarni,2,"en, hi",4,7.6,19509
+nm0239447,Marie Dubois,2,"en, fr",4,7.58,98452
+nm0792866,Meenakshi Sheshadri,2,"en, hi",4,7.58,16948
+nm0001020,Katrin Cartlidge,2,"en, fr",4,7.58,150280
+nm1832249,Ufuk Bayraktar,2,"fr, ja",4,7.58,176364
+nm0754906,Hind Sabri,2,"en, fr",4,7.57,24053
+nm0897845,Soledad Villamil,2,"es, ja",4,7.55,267364
+nm0618057,Ulrich Mühe,2,"de, en",4,7.55,586063
+nm0397171,Bryce Dallas Howard,2,"bg, en",4,7.55,1131830
+nm0263052,Maurice Evans,2,"en, qbn",4,7.55,545436
+nm1069587,Darshan Kumaar,2,"en, hi",4,7.55,624241
+nm3809372,Nayyar Ejaz,2,"en, hi",4,7.55,20447
+nm0846192,Fumihiko Tachiki,2,"en, fr",4,7.53,125525
+nm0832375,Paolo Stoppa,2,"en, fr",4,7.53,25944
+nm0527002,Federico Luppi,2,"en, ja",4,7.52,86456
+nm11424386,Bhavani Sre,2,"en, fr",4,7.5,42561
+nm0000303,Honor Blackman,2,"en, fr",4,7.5,279397
+nm0133882,Natalie Canerday,2,"en, fr",4,7.5,248021
+nm0751245,John Russell,2,"en, fr",4,7.5,156515
+nm0517919,Marie Lohr,2,"en, fr",4,7.5,19964
+nm0753716,Albert Rémy,2,"en, fr",4,7.5,161664
+nm0001922,Jean-Pierre Aumont,2,"en, fr",4,7.5,37181
+nm5730649,Lewis Pullman,2,"bn, en",4,7.5,1459429
+nm0432601,Jung Woo-sung,2,"en, fr",4,7.5,45478
+nm3795810,Tahir Raj Bhasin,2,"en, fr",4,7.5,155500
+nm4742589,Chetan,2,"en, fr",4,7.5,23350
+nm0887769,Geert Van Rampelberg,2,"en, fr",4,7.48,70800
+nm0857620,Justin Theroux,2,"en, hi",4,7.48,1674492
+nm0120431,Marie Bunel,2,"en, fr",4,7.48,90158
+nm0537922,François Maistre,2,"en, fr",4,7.48,50899
+nm0960033,Akio Otsuka,2,"en, fr",4,7.48,286105
+nm0229943,Vernon Dobtcheff,2,"en, fr",4,7.48,419198
+nm4937378,Mohamed Mamdouh,2,"ar, en",4,7.48,42756
+nm0059941,Cezmi Baskın,2,"en, th",4,7.48,92066
+nm1794460,Asif Basra,2,"en, fr",4,7.48,56839
+nm0427964,Doug Jones,2,"en, es",4,7.47,3112652
+nm1024953,Terry Notary,2,"en, qbn",4,7.46,2155134
+nm0350764,René Génin,2,"en, fr",4,7.45,27278
+nm3236159,Paul Walter Hauser,2,"bs, en",4,7.45,795191
+nm3024530,Reda Kateb,2,"en, fr",4,7.45,476797
+nm4331023,Rajesh Sharma,2,"en, hi",4,7.45,20704
+nm2887354,Girija Oak,2,"en, fr",4,7.45,275947
+nm0162948,Franco Citti,2,"en, sr",4,7.45,38995
+nm0025523,Amédée,2,"en, fr",4,7.45,19530
+nm0709907,John Randolph,2,"en, qbn",4,7.45,428191
+nm0874139,Ernest Truex,2,"en, fr",4,7.45,80755
+nm0016422,Luis Alberni,2,"en, fr",4,7.45,28520
+nm0872689,Leopoldo Trieste,2,"en, fr",4,7.45,102309
+nm0007183,Ian Richardson,2,"en, fr",4,7.45,525276
+nm0495950,Françoise Lebrun,2,"en, fr",4,7.44,35438
+nm0001233,Robert Forster,2,"en, hi",4,7.43,854967
+nm0522884,Arthur Lowe,2,"en, ja",4,7.43,57344
+nm0398446,Arthur Hoyt,2,"en, fr",4,7.43,135376
+nm0376915,Ian Hendry,2,"en, ja",4,7.43,132227
+nm0245240,Pierre Dux,2,"en, fr",4,7.43,41299
+nm1277066,Pragathi,2,"en, fr",4,7.43,13340
+nm0565569,Stephen McHattie,2,"en, fr",4,7.42,1162275
+nm0245112,Clea DuVall,2,"en, hr",4,7.4,1227400
+nm0794297,Anne Shirley,2,"en, fr",4,7.4,29550
+nm3715867,Stephanie Beatriz,2,"bs, en",4,7.4,484975
+nm0402558,Martita Hunt,2,"en, fr",4,7.4,58848
+nm0148041,Adolfo Celi,2,"en, fr",4,7.38,62178
+nm0714698,Lance Reddick,2,"en, hi",4,7.38,1530523
+nm0760796,Hiroyuki Sanada,2,"en, fr",4,7.38,873103
+nm0723623,Claude Rich,2,"en, fr",4,7.38,20968
+nm0163515,Mary Clare,2,"en, fr",4,7.38,87702
+nm0665370,Harish Patel,2,"en, hi",4,7.38,39444
+nm0803890,Gustaf Skarsgård,2,"en, ja",4,7.38,429101
+nm0168262,Rory Cochrane,2,"en, hr",4,7.38,1127583
+nm0000275,Rosanna Arquette,2,"en, fr",4,7.38,230731
+nm0740067,Maurice Ronet,2,"en, fr",4,7.38,41077
+nm0000861,Freddie Bartholomew,2,"en, qbn",4,7.38,26576
+nm0359331,Thierry Hancisse,2,"en, fr",4,7.38,488319
+nm0782564,Louis Seigner,2,"en, fr",4,7.37,30069
+nm0635330,Eduardo Noriega,2,"en, es",4,7.37,214008
+nm0195235,Tom D'Andrea,2,"en, fr",4,7.35,35970
+nm0461739,Peggy Knudsen,2,"en, fr",4,7.35,107142
+nm0583395,Torben Meyer,2,"en, fr",4,7.35,29937
+nm4453291,Franz Rogowski,2,"en, tr",4,7.35,123584
+nm1058940,Scoot McNairy,2,"en, hr",4,7.35,1058523
+nm0320762,Hippolyte Girardot,2,"en, fr",4,7.35,42736
+nm2582755,Pierre Niney,2,"en, fr",4,7.35,95065
+nm0000767,Jean-Hugues Anglade,2,"en, fr",4,7.33,73938
+nm0789931,Reta Shaw,2,"en, fr",4,7.33,222439
+nm0413946,Philip Jackson,2,"en, fr",4,7.33,186169
+nm0117885,Flavio Bucci,2,"en, it",4,7.33,144042
+nm0253813,Ronit Elkabetz,2,"en, he",4,7.33,27411
+nm0001509,Dean Martin,2,"en, fr",4,7.33,112878
+nm0170552,George Cole,2,"en, fr",4,7.32,76515
+nm0005412,Jane Seymour,2,"en, ja",4,7.32,446904
+nm0000784,Pedro Armendáriz,2,"en, fr",4,7.32,196296
+nm0087141,Roland Blanche,2,"en, fr",4,7.32,27266
+nm1011070,Marta Etura,2,"en, hi",4,7.32,355139
+nm0786033,Parmeet Sethi,2,"en, he",4,7.32,132259
+nm0042104,Michel Aumont,2,"en, fr",4,7.32,41051
+nm0209409,Antonio de la Torre,2,"en, ja",4,7.32,145348
+nm0004883,Tate Donovan,2,"en, hr",4,7.32,1412413
+nm2759746,Saleh Bakri,2,"en, he",4,7.32,21620
+nm1978402,Ha Jung-woo,2,"en, fr",4,7.3,50934
+nm0040933,Henri Attal,2,"en, fr",4,7.3,83461
+nm0307255,Allen Garfield,2,"en, fr",4,7.3,170716
+nm0339621,Pascal Greggory,2,"en, fr",4,7.3,135145
+nm0837784,Barbara Sukowa,2,"en, fr",4,7.3,49552
+nm0000986,Bryan Brown,2,"en, es",4,7.3,65021
+nm0735442,Michelle Rodriguez,2,"en, fr",4,7.3,2692431
+nm0126870,Maurice Bénichou,2,"en, fr",4,7.3,106431
+nm0312890,Leo Genn,2,"en, fr",4,7.3,58038
+nm4853066,Josh O'Connor,2,"en, fr",4,7.3,516505
+nm0950757,Wah Yuen,2,"en, yue",4,7.3,706625
+nm0814309,Song Young-chang,2,"fr, hi",4,7.28,108825
+nm0000599,Kathleen Quinlan,2,"en, fr",4,7.28,490599
+nm2815326,Amit Sadh,2,"en, fr",4,7.28,106737
+nm0095013,Maria Bonnevie,2,"en, fr",4,7.28,266793
+nm0020568,Harry Allen,2,"en, qbn",4,7.28,36090
+nm0149260,Alain Chabat,2,"en, fr",4,7.27,49171
+nm0000565,Lena Olin,2,"en, sv",4,7.27,254536
+nm1092086,David Harbour,2,"bn, en",4,7.27,1223463
+nm0859892,Bill Thompson,2,"en, qbn",4,7.26,1342713
+nm0498876,Jean Lefebvre,2,"en, fr",4,7.25,31646
+nm2251846,Joanna Kulig,2,"en, fr",4,7.25,115003
+nm3848064,Sonakshi Sinha,2,"en, hi",4,7.25,71657
+nm0296594,Catherine Frot,2,"en, fr",4,7.25,63225
+nm0035877,Robert Armstrong,2,"en, fr",4,7.25,123781
+nm0890632,Andi Vasluianu,2,"en, fr",4,7.25,16531
+nm0089937,Lothaire Bluteau,2,"en, fr",4,7.25,27495
+nm0109877,Virginia Brissac,2,"en, fr",4,7.25,25440
+nm0399346,Harold Huber,2,"en, fr",4,7.25,47042
+nm0638762,Andy Nyman,2,"bn, en",4,7.25,439155
+nm0942926,Will Wright,2,"en, fr",4,7.25,51225
+nm0499315,Alison Leggatt,2,"en, ja",4,7.23,17559
+nm0001960,Romane Bohringer,2,"en, fr",4,7.23,85506
+nm0656180,Geneviève Page,2,"en, fr",4,7.23,90803
+nm2161624,Neil Bhoopalam,2,"en, fr",4,7.23,83549
+nm0175700,Michael Conrad,2,"en, fr",4,7.23,61788
+nm0001989,Leslie Caron,2,"en, fr",4,7.23,66495
+nm0001250,Charlotte Gainsbourg,2,"en, fr",4,7.2,471734
+nm0146613,Jean-Roger Caussimon,2,"en, fr",4,7.2,11335
+nm0215487,Kate del Castillo,2,"en, fr",4,7.2,120458
+nm1078422,Hirofumi Arai,2,"en, fr",4,7.2,9926
+nm3319078,Bastien Bouillon,2,"en, fr",4,7.2,75444
+nm0158856,Choi Min-sik,2,"en, fr",4,7.2,36615
+nm0372176,Lena Headey,2,"bg, en",4,7.2,1338117
+nm0709951,Salvo Randone,2,"en, ja",4,7.2,12833
+nm0165429,Olivier Claverie,2,"en, fr",4,7.2,46117
+nm0834754,Woody Strode,2,"en, fr",4,7.2,36977
+nm2130040,Alba Rohrwacher,2,"fr, it",4,7.2,86939
+nm0247720,Jayne Eastwood,2,"en, fr",4,7.2,555661
+nm0856500,Sylvie Testud,2,"en, fr",4,7.2,115952
+nm0330388,Leo Gordon,2,"en, es",4,7.2,53325
+nm0488477,Michèle Laroque,2,"en, fr",4,7.2,35782
+nm0004875,Taye Diggs,2,"en, fr",4,7.18,718451
+nm0771035,Péter Scherer,2,"en, hi",4,7.18,35873
+nm0226109,John Dierkes,2,"en, fr",4,7.18,24733
+nm6625833,Gustav Lindh,2,"en, fr",4,7.18,424425
+nm0604331,Michèle Moretti,2,"en, fr",4,7.18,23163
+nm0700740,Noel Purcell,2,"en, fr",4,7.18,45859
+nm1405398,Dan Stevens,2,"de, en",4,7.15,431541
+nm0959113,Elsa Zylberstein,2,"en, fr",4,7.15,25188
+nm0060780,Laurent Bateau,2,"fr, qbn",4,7.15,54990
+nm0205518,Stringer Davis,2,"en, fr",4,7.15,31303
+nm0084107,Kevin Bishop,2,"en, fr",4,7.13,84393
+nm0815668,Zinedine Soualem,2,"en, fr",4,7.13,55852
+nm0879085,Tyrese Gibson,2,"en, fr",4,7.13,2061975
+nm0245974,François Dyrek,2,"en, fr",4,7.13,11488
+nm0576120,George Meeker,2,"en, qbn",4,7.13,6703
+nm1385871,Olga Kurylenko,2,"bn, en",4,7.1,1115201
+nm0761576,Hugh Sanders,2,"en, fr",4,7.1,12077
+nm0136482,Lorne Cardinal,2,"en, ja",4,7.1,362703
+nm0220976,Alex Descas,2,"en, fr",4,7.07,27653
+nm0946179,Jean Yanne,2,"en, fr",4,7.07,22201
+nm0435726,Jean-Pierre Kalfon,2,"en, fr",4,7.07,150489
+nm0417309,Dubbing Janaki,2,"en, ml",3,8.5,11065
+nm0154170,Tapan Chatterjee,2,"bn, en",3,8.4,10635
+nm0051831,Ajoy Banerjee,2,"en, hi",3,8.23,10899
+nm6674416,Bipin Karki,2,"en, ja",3,8.2,5786
+nm0417310,Sowcar Janaki,2,"en, ml",3,8.2,10959
+nm8008780,Prakash Ghimire,2,"en, ja",3,8.13,5380
+nm0244904,Santosh Dutta,2,"bn, en",3,8.13,11592
+nm0244870,Guru Dutt,2,"en, fr",3,8.07,13753
+nm0495495,Madeleine Lebeau,2,"en, fr",3,8.0,802353
+nm0716839,Rehman Khan,2,"en, fr",3,8.0,12252
+nm1576284,Amruta Subhash,2,"en, hi",3,7.97,52088
+nm0654863,Rasim Öztekin,2,"en, ja",3,7.97,124043
+nm0793585,Sumi Shimamoto,2,"fr, ja",3,7.93,766827
+nm8346572,Viswant Duddumpudi,2,"en, hi",3,7.93,35063
+nm1748460,Ashwini Giri,2,"en, hi",3,7.93,8933
+nm3237775,Mackenzie Foy,2,"en, fr",3,7.93,3336782
+nm0584879,Marc Michel,2,"en, fr",3,7.9,68930
+nm0830371,Slavko Stimac,2,"en, ja",3,7.9,75196
+nm4751364,Megumi Han,2,"en, fr",3,7.9,167927
+nm0436778,Hiroshi Kamiya,2,"en, fr",3,7.87,10989
+nm0394679,Yui Horie,2,"en, fr",3,7.87,10989
+nm0503095,Evgeniy Leonov,2,"en, lt",3,7.83,29613
+nm8682290,Bala Hasan,2,"en, fr",3,7.83,49645
+nm0056761,Jean-Louis Barrault,2,"en, fr",3,7.8,93262
+nm2594301,Darsheel Safary,2,"en, fr",3,7.8,246788
+nm1162030,Son Ye-jin,2,"fr, tr",3,7.8,58495
+nm0048081,Izudin Bajrovic,2,"en, ja",3,7.77,47759
+nm2951768,Freida Pinto,2,"en, qbn",3,7.77,1561090
+nm9783252,Jaya Naidu,2,"en, hi",3,7.77,11421
+nm0728938,Emmanuelle Riva,2,"en, fr",3,7.73,158045
+nm0849028,Mayumi Tanaka,2,"en, fr",3,7.73,220060
+nm0041828,Albert Augier,2,"en, fr",3,7.73,82526
+nm0511458,Gunnel Lindblom,2,"en, fr",3,7.73,35144
+nm0212541,Dipankar Dey,2,"bn, en",3,7.73,12126
+nm0370677,Megumi Hayashibara,2,"en, fr",3,7.73,490558
+nm5631806,Crane Manohar,2,"en, hi",3,7.73,16047
+nm0269419,Pierfrancesco Favino,2,"en, fr",3,7.7,643856
+nm0218225,Orane Demazis,2,"en, fr",3,7.7,7037
+nm0410756,José Isbert,2,"fr, ja",3,7.7,15554
+nm0564724,David McCallum,2,"ca, en",3,7.7,290602
+nm0474895,Sujit Kumar,2,"en, fr",3,7.7,5861
+nm0814773,Alberto Sordi,2,"en, fr",3,7.7,35673
+nm0900143,Monica Vitti,2,"en, fr",3,7.68,100004
+nm0745600,Alida Rouffe,2,"en, fr",3,7.67,7931
+nm0167467,Aurore Clément,2,"en, fr",3,7.67,157355
+nm0405977,Paul Hörbiger,2,"en, fr",3,7.67,201613
+nm0000703,BD Wong,2,"bn, en",3,7.67,1728211
+nm0294401,Bernard Fresson,2,"en, fr",3,7.67,80938
+nm0017343,Damián Alcázar,2,"en, ja",3,7.63,25293
+nm7118554,Leela Samson,2,"en, ta",3,7.63,27821
+nm0728476,Lazar Ristovski,2,"en, tr",3,7.63,132957
+nm0933330,Dooley Wilson,2,"en, fr",3,7.63,668647
+nm1019748,Saurabh Dubey,2,"en, hi",3,7.6,42834
+nm0304747,Lola Gaos,2,"en, ja",3,7.6,43762
+nm0228863,Jean Dixon,2,"en, qbn",3,7.6,58045
+nm0001536,Toshirō Mifune,2,"en, fr",3,7.6,96677
+nm0029217,Marcel André,2,"en, fr",3,7.6,36054
+nm0560944,Marcel Maupi,2,"en, fr",3,7.6,6887
+nm0001297,Joel Grey,2,"en, fr",3,7.57,193079
+nm0013037,Shohreh Aghdashloo,2,"en, fr",3,7.57,102473
+nm0757327,Takahiro Sakurai,2,"en, fr",3,7.57,69326
+nm5598795,Anisha Ambrose,2,"en, hi",3,7.57,7398
+nm0437580,Takeshi Kaneshiro,2,"fr, yue",3,7.57,177792
+nm0753687,Charles Regnier,2,"en, fr",3,7.57,14951
+nm5397459,Daisy Ridley,2,"en, hi",3,7.57,1063557
+nm0004650,Marisa Paredes,2,"en, es",3,7.57,370623
+nm0465269,Karin Konoval,2,"en, qbn",3,7.55,2071288
+nm0415926,Walter Jakob,2,"en, ja",3,7.53,40519
+nm0619185,Masatoshi Nagase,2,"en, he",3,7.53,50504
+nm0834479,Devid Striesow,2,"de, en",3,7.53,354461
+nm0343082,Marc-André Grondin,2,"en, fr",3,7.53,55092
+nm0652592,Ren Ōsugi,2,"en, fr",3,7.53,95940
+nm1735332,Özge Özberk,2,"bg, en",3,7.53,130020
+nm0110334,Nicolas Bro,2,"da, en",3,7.53,161487
+nm0379587,Gérard Hernandez,2,"en, fr",3,7.53,67910
+nm0862026,Ingrid Thulin,2,"en, fr",3,7.53,64892
+nm0001208,Miguel Ferrer,2,"bn, en",3,7.53,787108
+nm0340926,Helmut Griem,2,"en, fr",3,7.53,74121
+nm0521443,Susanne Lothar,2,"en, fr",3,7.53,460046
+nm2893431,Yoshimasa Hosoya,2,"en, fr",3,7.53,17070
+nm0217817,Albert Delpy,2,"en, fr",3,7.5,340906
+nm0358996,James Hampton,2,"en, fr",3,7.5,165193
+nm0008506,Lionel Abelanski,2,"fr, ja",3,7.5,25903
+nm0133899,Guillaume Canet,2,"en, fr",3,7.5,131614
+nm0446763,Patsy Kelly,2,"en, qbn",3,7.5,275119
+nm0771713,Tom Schilling,2,"de, en",3,7.5,48698
+nm0913880,Tetsu Watanabe,2,"en, fr",3,7.5,573144
+nm1892960,Cengiz Bozkurt,2,"ja, tr",3,7.5,64988
+nm0193411,Ken Curtis,2,"en, fr",3,7.5,137588
+nm0417370,Krystyna Janda,2,"en, es",3,7.5,20935
+nm0555093,Fele Martínez,2,"en, es",3,7.5,190914
+nm0605080,Trevor Morgan,2,"bg, en",3,7.5,1217646
+nm0867694,Topol,2,"en, he",3,7.5,57388
+nm1326000,Teja Sajja,2,"en, fr",3,7.5,36571
+nm1414203,Lynn Xiong,2,"en, fr",3,7.5,429668
+nm0192490,Alain Cuny,2,"en, fr",3,7.5,98267
+nm2588665,Tahar Rahim,2,"en, fr",3,7.5,186775
+nm7628415,Teeradon Supapunpinyo,2,"en, fr",3,7.5,109623
+nm0006807,Michèle Morgan,2,"en, fr",3,7.5,23839
+nm0180580,Jose Coronado,2,"es, fr",3,7.5,310105
+nm0001931,Binnie Barnes,2,"en, qbn",3,7.5,31215
+nm0001970,Klaus Maria Brandauer,2,"en, ja",3,7.5,109618
+nm0586482,Nikita Mikhalkov,2,"bg, ja",3,7.5,22087
+nm0091081,Frédéric Bodson,2,"en, fr",3,7.5,46799
+nm0570161,Biff McGuire,2,"en, qbn",3,7.5,158384
+nm1502434,Leslie Odom Jr.,2,"en, hi",3,7.5,716552
+nm1585543,Farrukh Jaffar,2,"en, hi",3,7.5,66205
+nm0000084,Gong Li,2,"bg, en",3,7.48,86483
+nm3158813,Adnan Shah Tipu,2,"en, hi",3,7.47,6347
+nm0271408,Mohamed Fellag,2,"en, fr",3,7.47,30824
+nm0693799,Melvil Poupaud,2,"en, fr",3,7.47,44811
+nm9025636,Hyun Bong-sik,2,"en, fr",3,7.47,33614
+nm0033843,John Arcilla,2,"en, fr",3,7.47,14670
+nm0099366,Jean Bouise,2,"en, fr",3,7.47,76821
+nm0074470,René Bergeron,2,"en, fr",3,7.47,19729
+nm0232627,Bernard-Pierre Donnadieu,2,"en, fr",3,7.47,81926
+nm0234237,Anne Dorval,2,"en, fr",3,7.47,130535
+nm0279209,Patrick Fischler,2,"en, hi",3,7.47,619418
+nm1221047,Keegan-Michael Key,2,"en, nl",3,7.47,471846
+nm0219342,Charles Denner,2,"en, fr",3,7.47,44265
+nm0474492,Agata Kulesza,2,"en, fr",3,7.47,77634
+nm1918588,Jin Goo,2,"en, ja",3,7.47,97649
+nm4191651,Nisha Sarangh,2,"en, hi",3,7.47,12899
+nm0000615,John Ritter,2,"en, fr",3,7.45,302109
+nm0873005,Marie Trintignant,2,"en, fr",3,7.45,22247
+nm3109407,Shiv Panditt,2,"en, fr",3,7.45,179524
+nm0809793,Roger Guenveur Smith,2,"en, fr",3,7.43,538781
+nm1655668,Jasna Đuričić,2,"en, tr",3,7.43,46110
+nm0001513,Tim Matheson,2,"en, fr",3,7.43,309383
+nm0213354,Jamel Debbouze,2,"en, fr",3,7.43,902976
+nm0706953,K.K. Raina,2,"en, hi",3,7.43,36245
+nm0897808,José Luis de Vilallonga,2,"en, fr",3,7.43,248521
+nm1432852,Ahmed Ezz,2,"ar, en",3,7.43,15253
+nm0386335,Ingvar Hirdwall,2,"en, sv",3,7.43,240619
+nm0514263,Moira Lister,2,"en, fr",3,7.43,47794
+nm0579823,Oleg Menshikov,2,"fr, ja",3,7.43,13851
+nm0890388,Luiz Carlos Vasconcelos,2,"en, fr",3,7.43,81844
+nm0891485,Yul Vazquez,2,"en, fr",3,7.43,513903
+nm0959916,Pierre Étaix,2,"en, fr",3,7.43,33198
+nm0335738,Charles Granval,2,"en, fr",3,7.43,17248
+nm0000971,Nicoletta Braschi,2,"en, fr",3,7.43,95608
+nm0197589,Max Dalban,2,"en, fr",3,7.43,12105
+nm0001552,Pat Morita,2,"bn, en",3,7.43,630798
+nm0311476,Martina Gedeck,2,"de, en",3,7.43,498826
+nm0001044,Rae Dawn Chong,2,"en, fr",3,7.4,135170
+nm0096501,Nelly Borgeaud,2,"en, fr",3,7.4,20405
+nm0620964,Isabelle Nanty,2,"en, fr",3,7.4,895229
+nm0953412,Dominique Zardi,2,"en, fr",3,7.4,65095
+nm3559009,Paula Beer,2,"de, en",3,7.4,59333
+nm0077598,Jules Berry,2,"en, fr",3,7.4,12964
+nm0635262,Ola Rapace,2,"en, sv",3,7.4,811870
+nm0002085,Gert Fröbe,2,"en, fr",3,7.4,283367
+nm0290420,Carole Franck,2,"en, fr",3,7.4,122240
+nm0880167,Nadja Uhl,2,"de, en",3,7.4,56102
+nm0087794,Caio Blat,2,"en, ja",3,7.4,29745
+nm0646037,Daniel Olbrychski,2,"bg, en",3,7.4,73195
+nm1902766,Donny Alamsyah,2,"en, fr",3,7.4,236352
+nm2914059,Leonie Benesch,2,"de, en",3,7.4,83322
+nm0249893,Cliff Edwards,2,"en, fr",3,7.4,723816
+nm0256890,Lena Endre,2,"en, sv",3,7.4,414178
+nm4207146,Jason Mitchell,2,"en, ja",3,7.4,296704
+nm0001594,Anne Parillaud,2,"en, fr",3,7.4,178610
+nm0753526,RZA,2,"en, fr",3,7.4,975602
+nm0837959,Barry Sullivan,2,"en, fr",3,7.4,45768
+nm1494245,Omar Shargawi,2,"en, fr",3,7.4,232871
+nm0027800,Peter Andersson,2,"en, sv",3,7.4,389199
+nm0067367,Bérénice Bejo,2,"en, fr",3,7.4,482831
+nm0875244,Kanji Tsuda,2,"en, tr",3,7.4,28312
+nm4551978,Saskia Rosendahl,2,"de, en",3,7.4,48047
+nm0344894,Sofie Gråbøl,2,"en, fr",3,7.38,131422
+nm0480942,Bernadette Lafont,2,"en, fr",3,7.38,23507
+nm0201462,Gérard Darmon,2,"en, fr",3,7.38,75190
+nm0046033,Diedrich Bader,2,"bg, en",3,7.37,1148196
+nm0071502,Heinz Bennent,2,"en, fr",3,7.37,80591
+nm0905691,Yorick van Wageningen,2,"en, nl",3,7.37,588880
+nm0871928,Johanne-Marie Tremblay,2,"en, fr",3,7.37,60772
+nm0071585,Andrew Bennett,2,"en, fr",3,7.37,58204
+nm0201635,Gérard Darrieu,2,"en, fr",3,7.37,29061
+nm0296596,Dominique Frot,2,"en, fr",3,7.37,35802
+nm0001367,C. Thomas Howell,2,"bn, en",3,7.37,651287
+nm0540311,Birger Malmsten,2,"en, fr",3,7.37,46188
+nm2717241,Ellen Dorrit Petersen,2,"en, ja",3,7.37,42992
+nm0001409,Tchéky Karyo,2,"en, fr",3,7.37,628116
+nm0260722,Carl Esmond,2,"en, fr",3,7.37,15261
+nm0434596,Teruyuki Kagawa,2,"en, fr",3,7.37,76237
+nm0658133,Betsy Palmer,2,"en, fr",3,7.37,31435
+nm0213912,Jan Decleir,2,"en, tr",3,7.37,23431
+nm0945189,Simon Yam,2,"en, yue",3,7.37,257234
+nm0454120,Takuya Kimura,2,"bg, en",3,7.35,154322
+nm0012078,Scott Adkins,2,"en, fr",3,7.33,1895921
+nm0187754,Bernard Cribbins,2,"en, sv",3,7.33,64731
+nm0392447,Jany Holt,2,"en, fr",3,7.33,7852
+nm0495920,Julie Le Breton,2,"en, fr",3,7.33,25273
+nm0755652,Isabelle Sadoyan,2,"en, fr",3,7.33,17901
+nm1753862,Sung Dong-il,2,"en, ja",3,7.33,21590
+nm0310622,Uri Gavriel,2,"en, he",3,7.33,23144
+nm0676729,Werner Peters,2,"en, ja",3,7.33,10819
+nm0784884,Rade Šerbedžija,2,"en, fr",3,7.33,428780
+nm1241910,Prashant Narayanan,2,"bn, en",3,7.33,8234
+nm1775551,Park Hee-soon,2,"en, fr",3,7.33,43903
+nm0065645,Betty Beckers,2,"en, fr",3,7.33,14332
+nm1690618,Isha Sharvani,2,"en, hi",3,7.33,27287
+nm0104183,Wilfrid Brambell,2,"en, sv",3,7.33,57741
+nm0383603,Freddie Highmore,2,"en, fr",3,7.33,350683
+nm0422566,Preeti Jhangiani,2,"en, hi",3,7.33,43108
+nm0432428,Jun Ji-hyun,2,"en, fr",3,7.33,26268
+nm0866627,Joseph Tomelty,2,"en, fr",3,7.33,35613
+nm0172660,Russell Collins,2,"en, fr",3,7.33,63806
+nm0401264,Michiel Huisman,2,"en, yue",3,7.33,465547
+nm0755364,José Sacristán,2,"en, ja",3,7.33,12376
+nm0040341,Hooper Atchley,2,"en, fr",3,7.33,23285
+nm0233065,Terence Donovan,2,"en, es",3,7.33,27939
+nm0696353,Jo Prestia,2,"en, fr",3,7.33,193112
+nm4669841,Saqib Saleem,2,"en, fr",3,7.33,49156
+nm0483942,Chus Lampreave,2,"en, fr",3,7.33,128260
+nm0792996,Vladek Sheybal,2,"bs, en",3,7.33,20478
+nm3901368,Rajeev Khandelwal,2,"en, fr",3,7.33,37653
+nm4110963,Jack Lowden,2,"bg, en",3,7.33,991542
+nm0350372,Michael Gwynn,2,"en, ja",3,7.32,96093
+nm0092184,Richard Bohringer,2,"en, fr",3,7.3,63208
+nm0463435,Susan Kohner,2,"ca, en",3,7.3,28261
+nm0951456,Zabou Breitman,2,"en, fr",3,7.3,19117
+nm4303311,Yoshitsugu Matsuoka,2,"en, fr",3,7.3,29712
+nm1094012,Nithiin,2,"en, qbn",3,7.3,7720
+nm0275138,Andréa Ferréol,2,"en, fr",3,7.3,53640
+nm0364203,William Harrigan,2,"en, fr",3,7.3,53248
+nm0948636,Wladimir Yordanoff,2,"en, fr",3,7.3,31757
+nm1569162,Ruba Blal,2,"en, he",3,7.3,9349
+nm0200702,Dany Boon,2,"en, fr",3,7.3,87165
+nm0252640,Ahmad El-Fishawi,2,"ar, en",3,7.3,14479
+nm0908685,Jack Wallace,2,"en, fr",3,7.3,51462
+nm0959897,Jean-Philippe Écoffey,2,"en, fr",3,7.3,27721
+nm2761321,Tarik Kopty,2,"en, he",3,7.3,19344
+nm0320988,Massimo Girotti,2,"en, qbn",3,7.3,38281
+nm0351133,José Luis Gómez,2,"en, es",3,7.3,216151
+nm0194662,Clémentine Célarié,2,"en, fr",3,7.3,59083
+nm0563740,Aïssa Maïga,2,"en, fr",3,7.3,78205
+nm0004625,Daniel Gélin,2,"en, fr",3,7.3,84906
+nm0216610,Germaine Delbat,2,"en, fr",3,7.3,14923
+nm0349522,Javier Gutiérrez,2,"en, fr",3,7.3,101610
+nm0000045,Bruce Lee,2,"en, fr",3,7.3,204523
+nm0148516,Aleksey Serebryakov,2,"en, ja",3,7.3,478145
+nm0921496,Ursula Werner,2,"fr, ja",3,7.3,11358
+nm0049055,William Bakewell,2,"en, qbn",3,7.28,77523
+nm0191412,Rory Culkin,2,"bg, en",3,7.27,94039
+nm0867338,Laura Tonke,2,"de, en",3,7.27,13277
+nm1167277,Patrice Robitaille,2,"en, fr",3,7.27,9018
+nm0350350,Michael Gwisdek,2,"en, fr",3,7.27,171425
+nm1920131,Belçim Bilgin,2,"en, ja",3,7.27,32648
+nm0001308,Alan Hale Jr.,2,"en, fr",3,7.27,58662
+nm0219151,Jacques Denis,2,"en, fr",3,7.27,9829
+nm0778335,Jörg Schüttauf,2,"de, ja",3,7.27,36261
+nm0024580,Claudio Amendola,2,"en, fr",3,7.27,50826
+nm1871951,Leïla Bekhti,2,"fr, ja",3,7.27,84517
+nm0312985,Claude Gensac,2,"en, fr",3,7.27,26927
+nm1213364,Pierre-François Legendre,2,"en, fr",3,7.27,9018
+nm1617685,Jennifer Hudson,2,"de, en",3,7.27,254649
+nm0140025,Ada Carrasco,2,"en, es",3,7.27,61253
+nm0291979,Jacques François,2,"en, fr",3,7.27,22924
+nm1458971,Arkadiusz Jakubik,2,"en, tr",3,7.27,16557
+nm0632385,Najwa Nimri,2,"en, es",3,7.27,130791
+nm0778348,Katharina Schüttler,2,"en, sv",3,7.27,54031
+nm0851731,Nils Tavernier,2,"en, fr",3,7.27,9950
+nm0001461,Virginie Ledoyen,2,"en, fr",3,7.27,53235
+nm0559652,Nanako Matsushima,2,"en, fr",3,7.27,146280
+nm0816950,John Sparkes,2,"bn, en",3,7.26,143494
+nm0796316,Clément Sibony,2,"en, fr",3,7.23,255181
+nm0558976,Jacques Mathou,2,"en, fr",3,7.23,44189
+nm0936315,Bill Wise,2,"en, hi",3,7.23,74188
+nm1251770,Zo In-sung,2,"en, fr",3,7.23,26914
+nm1707712,Zachary Baharov,2,"en, tr",3,7.23,138447
+nm0002231,Gian Maria Volontè,2,"en, sr",3,7.23,4393
+nm0080077,Zoltán Bezerédi,2,"en, ja",3,7.23,3987
+nm2899175,Alessandro Borghi,2,"en, fr",3,7.23,48353
+nm0430629,Karole Rocher,2,"en, fr",3,7.23,22533
+nm0531195,Vincent Macaigne,2,"en, fr",3,7.23,27270
+nm0590440,Jean-Roger Milo,2,"en, fr",3,7.23,12180
+nm0664243,Christine Pascal,2,"en, fr",3,7.23,10524
+nm0712208,Julie-Anne Roth,2,"en, fr",3,7.23,9295
+nm2185928,Danny Kwok-Kwan Chan,2,"en, fr",3,7.23,274764
+nm0132064,Bernard Campan,2,"en, fr",3,7.2,17612
+nm0295506,Colin Friels,2,"en, fr",3,7.2,233779
+nm0347453,Julien Guiomar,2,"en, fr",3,7.2,23312
+nm0937557,Johanna Wokalek,2,"de, en",3,7.2,61083
+nm1998692,Cyril Couton,2,"en, fr",3,7.2,9013
+nm2021640,Jehnny Beth,2,"fr, tr",3,7.2,255040
+nm0501256,Valérie Lemercier,2,"en, fr",3,7.2,97655
+nm2873161,Monia Chokri,2,"en, fr",3,7.2,58855
+nm0213581,Jean Debucourt,2,"en, fr",3,7.2,8370
+nm0002094,Vittorio Gassman,2,"en, ja",3,7.2,266548
+nm0086116,Gérard Blain,2,"en, fr",3,7.2,41947
+nm0199047,Audrey Dana,2,"en, fr",3,7.2,13036
+nm0548440,Kika Markham,2,"en, fr",3,7.2,22335
+nm0643885,Joe Odagiri,2,"fr, ja",3,7.2,8748
+nm0714534,Aurélien Recoing,2,"en, fr",3,7.2,72186
+nm0874661,Lhakpa Tsamchoe,2,"en, tr",3,7.2,183958
+nm3595334,Anil Rastogi,2,"en, hi",3,7.2,18985
+nm0332259,Benoît Gouin,2,"en, fr",3,7.2,36676
+nm0410303,Margaret Irving,2,"en, fr",3,7.2,25630
+nm0587401,Tomas Milian,2,"en, ja",3,7.2,241748
+nm0871676,Dorothy Tree,2,"en, fr",3,7.2,9217
+nm7765541,Jolly Chirayath,2,"en, fr",3,7.2,8269
+nm0344734,Karolina Gruszka,2,"en, fr",3,7.18,21784
+nm0844371,Borys Szyc,2,"en, fr",3,7.18,21784
+nm0208756,Xavier de Guillebon,2,"en, fr",3,7.17,191543
+nm0527852,Noémie Lvovsky,2,"en, fr",3,7.17,12818
+nm0691586,Paul Popplewell,2,"bg, en",3,7.17,111729
+nm0001849,Kathleen Wilhoite,2,"en, es",3,7.17,114426
+nm0012239,Sarah Adler,2,"en, he",3,7.17,16903
+nm0200848,Ingeborga Dapkunaite,2,"en, ja",3,7.17,701346
+nm0695309,Eric Prat,2,"en, fr",3,7.17,41477
+nm3649689,Park Byeong-eun,2,"en, fr",3,7.17,41660
+nm3861562,Antonia De Michelis,2,"en, fr",3,7.17,16558
+nm0744384,Christophe Rossignon,2,"fr, ja",3,7.17,19100
+nm4393560,Alice Isaaz,2,"en, fr",3,7.17,81430
+nm0392442,Jack Holt,2,"en, fr",3,7.17,46353
+nm0070159,Jafar Panahi,2,"en, fa",3,7.17,29962
+nm0118345,Detlev Buck,2,"en, fr",3,7.17,20514
+nm0581674,William Mervyn,2,"en, fr",3,7.17,20428
+nm0845867,Oleg Tabakov,2,"en, ja",3,7.17,8169
+nm1579244,Raymond Mearns,2,"en, fr",3,7.17,52208
+nm0033501,Gabriel Arcand,2,"en, fr",3,7.17,12643
+nm0699659,Wojciech Pszoniak,2,"en, fr",3,7.17,15279
+nm0856187,Laurent Terzieff,2,"en, fr",3,7.17,17233
+nm0229084,Omid Djalili,2,"bn, en",3,7.13,93061
+nm3483072,Kwak Do-won,2,"en, fr",3,7.13,41076
+nm0255362,Gad Elmaleh,2,"en, fr",3,7.13,302794
+nm2852870,Enno Trebs,2,"de, en",3,7.13,17587
+nm2523085,Ario Bayu,2,"en, ja",3,7.13,4660
+nm0012734,Yves Afonso,2,"en, fr",3,7.13,24236
+nm0112533,Claude Brosset,2,"en, fr",3,7.13,30756
+nm0385019,Jacques Hilling,2,"en, fr",3,7.13,6953
+nm0603586,François Morel,2,"en, fr",3,7.13,9638
+nm0002168,Willeke van Ammelrooy,2,"en, ja",3,7.13,16325
+nm0495947,Danièle Lebrun,2,"en, fr",3,7.13,13365
+nm0049975,Peter Baldwin,2,"en, ja",3,7.13,15299
+nm0108287,Jordana Brewster,2,"en, fr",3,7.13,1332602
+nm3228320,Vincent Lacoste,2,"en, fr",3,7.13,21209
+nm0259506,Jacques Herlin,2,"en, fr",3,7.13,22243
+nm0524394,Micheline Luccioni,2,"en, fr",3,7.13,8022
+nm0210218,Maria de Medeiros,2,"en, fr",3,7.13,43893
+nm0759705,Branko Samarovski,2,"de, ja",3,7.13,8650
+nm1992631,David Verdaguer,2,"ca, en",3,7.13,16932
+nm4789912,Hannah John-Kamen,2,"bn, en",3,7.13,1885972
+nm0004931,June Foray,2,"bn, en",3,7.12,365968
+nm0559647,Yutaka Matsushige,2,"en, fr",3,7.1,92835
+nm1982843,Robin Das,2,"en, fr",3,7.1,109251
+nm3207271,Marc Zinga,2,"en, fr",3,7.1,34282
+nm0320812,Sara Giraudeau,2,"en, fr",3,7.1,10986
+nm0910979,Lung-Wei Wang,2,"cmn, fr",3,7.1,14964
+nm3660766,Carolina Yuste,2,"ca, es",3,7.1,12700
+nm6593670,Tarik Rmili,2,"en, fr",3,7.1,53440
+nm0001429,Takeshi Kitano,2,"en, fr",3,7.1,51301
+nm0175403,Edric Connor,2,"en, fr",3,7.1,42402
+nm0372384,Ted Healy,2,"en, fr",3,7.1,16862
+nm0424167,Gottfried John,2,"en, sv",3,7.1,296866
+nm0461324,Ohad Knoller,2,"en, he",3,7.1,17248
+nm0470886,Magnus Krepper,2,"en, fr",3,7.1,27310
+nm2437361,Cho Jin-woong,2,"en, fr",3,7.1,31364
+nm4752229,Thomas Schubert,2,"de, ja",3,7.1,16547
+nm0001517,Catherine McCormack,2,"en, fr",3,7.1,204601
+nm0198241,Audrey Dalton,2,"en, fr",3,7.1,22251
+nm0719232,Line Renaud,2,"en, fr",3,7.1,55249
+nm0952498,Zbigniew Zamachowski,2,"en, ja",3,7.1,11245
+nm0466776,Fritz Kortner,2,"en, ja",3,7.1,15557
+nm0477231,Phillip Chung-Fung Kwok,2,"cmn, fr",3,7.08,38083
+nm0491777,Denis Lavant,2,"en, fr",3,7.08,184674
+nm0178041,Garry Cooper,2,"en, fr",3,7.07,27331
+nm3362169,Jeong Man-sik,2,"en, hi",3,7.07,25898
+nm3011350,Ma Dong-seok,2,"es, fr",3,7.07,61119
+nm0216209,Lise Delamare,2,"en, fr",3,7.07,9568
+nm7629969,Raphaël Quenard,2,"en, fr",3,7.07,14833
+nm0071114,Jean Benguigui,2,"fr, he",3,7.04,26285
+nm0530581,Elina Löwensohn,2,"en, fr",3,7.03,12264
+nm0420383,Lionel Jeffries,2,"en, fr",3,7.03,63708
+nm0155264,Jing Chen,2,"fr, ja",3,7.03,20826
+nm0957178,August Zirner,2,"de, en",3,7.0,66061
+nm0052031,Mira Banjac,2,"fr, ja",2,8.55,20475
+nm8328893,Dipanwit Dashmohapatra,2,"en, fr",2,8.55,15813
+nm10680471,Kesava Karri,2,"en, hi",2,8.55,13348
+nm5667822,Inori Minase,2,"en, fr",2,8.5,6335
+nm0157136,Susumu Chiba,2,"en, hi",2,8.5,17474
+nm3492347,Mounir Maasri,2,"en, ja",2,8.45,13619
+nm0611536,Kamu Mukherjee,2,"bn, en",2,8.45,11644
+nm1257062,Dilhani Ekanayake,2,"en, ja",2,8.4,7985
+nm0865392,Bora Todorovic,2,"en, fr",2,8.35,78360
+nm0793766,Takashi Shimura,2,"en, fr",2,8.35,178798
+nm6083333,Rabindra Singh Baniya,2,"en, ja",2,8.3,3914
+nm1306410,Sahil Vaid,2,"en, fr",2,8.3,415891
+nm1550913,Arun Nalawade,2,"en, hi",2,8.25,13624
+nm0576454,Mehmood,2,"en, fr",2,8.2,18955
+nm2387498,Ahsanul Haq Minu,2,"en, hi",2,8.2,11212
+nm9808565,Mohan Bhagat,2,"en, hi",2,8.2,12394
+nm0176039,Michel Constantin,2,"en, fr",2,8.2,32001
+nm1657936,Praveena Paruchuri,2,"en, hi",2,8.2,13159
+nm0411146,Kenjirō Ishiyama,2,"en, fr",2,8.15,97875
+nm0654805,Münir Özkul,2,"fr, tr",2,8.15,21511
+nm2095800,Marina Inoue,2,"en, hi",2,8.15,14851
+nm0224441,Mircea Diaconu,2,"en, ja",2,8.15,16928
+nm0594646,Kaori Mizuhashi,2,"en, ja",2,8.15,17176
+nm0000761,Bibi Andersson,2,"en, fr",2,8.15,153499
+nm0246570,Enrique Diaz,2,"en, fr",2,8.1,47719
+nm7311942,J. Vignesh,2,"en, ta",2,8.1,10958
+nm0631994,Yuriy Nikulin,2,"az, ja",2,8.1,76893
+nm11939838,Ananth Babu,2,"en, hi",2,8.1,5860
+nm5269876,Bholaraj Sapkota,2,"en, ja",2,8.1,96440
+nm0621870,Adile Naşit,2,"en, fr",2,8.1,17564
+nm2682356,Ringgo Agus Rahman,2,"id, ms",2,8.1,5621
+nm0006430,Girija Shettar,2,"en, ml",2,8.1,4787
+nm0594796,Frunzik Mkrtchyan,2,"ja, lt",2,8.1,23494
+nm0040366,Bahri Ates,2,"en, tr",2,8.05,20543
+nm0474975,Kumkum,2,"en, fr",2,8.05,19013
+nm4880714,Sanjana Sanghi,2,"en, fr",2,8.05,195603
+nm0229263,Paraskeva Djukelova,2,"bg, en",2,8.05,7773
+nm8826119,Praween Khatiwada,2,"en, ja",2,8.05,3019
+nm3534300,Babushan Mohanty,2,"en, fr",2,8.05,16225
+nm0578080,Selton Mello,2,"fr, ja",2,8.05,24566
+nm0849100,Yûko Tanaka,2,"fr, ja",2,8.05,537700
+nm18587337,Safwan Ahmed,2,"en, hi",2,8.05,33668
+nm0083777,Taner Birsel,2,"en, fr",2,8.0,104997
+nm0122168,Nikolay Burlyaev,2,"az, bg",2,8.0,105688
+nm0348483,Pinaki Sengupta,2,"bn, en",2,8.0,27985
+nm0813463,Anatoliy Solonitsyn,2,"az, en",2,8.0,220228
+nm7861812,Masuma Rahman Nabila,2,"en, hi",2,8.0,40441
+nm0817135,Neda Spasojevic,2,"fr, hr",2,8.0,4986
+nm5859418,B. Suresha,2,"en, hi",2,8.0,11559
+nm0712173,Irma Tarkovskaya,2,"az, bg",2,8.0,105688
+nm1385304,İsmail Hacıoğlu,2,"fr, ja",2,8.0,75820
+nm0016646,Guido Alberti,2,"en, ja",2,7.95,142537
+nm0729977,Joaquín Roa,2,"en, ja",2,7.95,33998
+nm3779025,Deniz Celiloglu,2,"fr, tr",2,7.95,85267
+nm4566406,Fazlul Haque,2,"en, ja",2,7.95,3563
+nm1113670,Amirul Haque Chowdhury,2,"en, hi",2,7.95,2220
+nm0001943,Marisa Berenson,2,"en, fr",2,7.95,274376
+nm0605786,Henning Moritzen,2,"en, fr",2,7.95,141606
+nm7789721,Praneeta Patnaik,2,"en, hi",2,7.95,14174
+nm0759685,Ljubiša Samardžić,2,"hr, ja",2,7.95,5849
+nm0834663,Milan Strljic,2,"en, fr",2,7.95,16385
+nm0586227,Tatsuya Mihashi,2,"en, fr",2,7.95,114664
+nm2337862,Damla Sönmez,2,"en, fr",2,7.95,50538
+nm0016039,Mario Alarcón,2,"es, ja",2,7.95,249611
+nm0739287,Derby Romero,2,"en, id",2,7.9,2634
+nm0232375,Manuel Dondé,2,"en, fr",2,7.9,144349
+nm0690691,Erich Ponto,2,"de, en",2,7.9,205126
+nm1024390,Javier Godino,2,"en, es",2,7.9,386843
+nm0345073,Gustaf Gründgens,2,"en, fr",2,7.9,186734
+nm2376908,Shatabdi Wadud,2,"en, fr",2,7.9,11535
+nm0871143,Raivo Trass,2,"en, ja",2,7.9,53968
+nm0432429,Jeon Mi-seon,2,"en, fr",2,7.9,360032
+nm6793636,Yuma Uchida,2,"en, fr",2,7.9,40426
+nm0408475,Miguel Inclán,2,"es, fr",2,7.9,25219
+nm0462006,Kaoru Kobayashi,2,"fr, ja",2,7.9,498752
+nm0618768,Mustafa Nadarević,2,"en, ja",2,7.9,53672
+nm0791502,Paul Shenar,2,"en, fr",2,7.9,1099960
+nm0683831,Silvia Pinal,2,"en, es",2,7.87,52770
+nm0824785,Paprika Steen,2,"da, en",2,7.85,161478
+nm0848533,Tetsurō Tanba,2,"en, fr",2,7.85,96210
+nm0125909,Rolan Bykov,2,"az, ja",2,7.85,63178
+nm0451387,Padma Khanna,2,"en, ml",2,7.85,4333
+nm5605460,Nivas Adithan,2,"en, ta",2,7.85,11390
+nm8054627,Ashwin Kkumar,2,"en, hi",2,7.85,22723
+nm0055135,György Barkó,2,"fr, tr",2,7.85,15957
+nm0450185,Mohamad Ali Keshavarz,2,"fa, fr",2,7.85,8065
+nm1525639,Joséphine de Meaux,2,"en, fr",2,7.85,1065381
+nm2958957,Jun Fukushima,2,"en, fr",2,7.85,41663
+nm0202441,Kote Daushvili,2,"en, lt",2,7.85,9598
+nm0247929,Masashi Ebara,2,"en, fr",2,7.85,133292
+nm0520164,Perry Lopez,2,"en, fr",2,7.85,401558
+nm0512502,Jörgen Lindström,2,"en, fr",2,7.85,165730
+nm1500819,Ariyo Wahab,2,"bn, en",2,7.85,2964
+nm0339573,Everley Gregg,2,"en, fr",2,7.85,60137
+nm0611525,Gyanesh Mukherjee,2,"en, fr",2,7.85,5248
+nm1257474,Muni Jha,2,"en, fr",2,7.85,41582
+nm0514904,Chia-Hui Liu,2,"cmn, en",2,7.85,1333848
+nm0663077,Dita Parlo,2,"en, fr",2,7.85,60387
+nm0860947,Ulrich Thomsen,2,"da, en",2,7.85,161478
+nm1625249,Olivier Barthélémy,2,"fr, ja",2,7.85,9634
+nm1256891,Donny Damara,2,"en, ja",2,7.83,9950
+nm0874232,Raoul Max Trujillo,2,"en, fr",2,7.8,919550
+nm1217394,Shidô Nakamura,2,"en, ja",2,7.8,222799
+nm13998154,Amar Kumar Dang,2,"en, fr",2,7.8,45532
+nm0233109,Miroslav Donutil,2,"en, ja",2,7.8,11049
+nm0594074,Kotono Mitsuishi,2,"en, fr",2,7.8,112343
+nm7969682,Azmeri Haque Badhon,2,"en, fr",2,7.8,5332
+nm0174457,Dan Condurache,2,"ja, tr",2,7.8,11797
+nm0000076,François Truffaut,2,"en, fr",2,7.8,266452
+nm0297450,Miguel Ángel Fuentes,2,"en, ja",2,7.8,52008
+nm0410907,Akira Ishida,2,"en, fr",2,7.8,112343
+nm0244612,Jaroslav Dusek,2,"en, ja",2,7.8,11049
+nm0945372,Yuriko Yamaguchi,2,"en, fr",2,7.8,112343
+nm0457952,Motomu Kiyokawa,2,"en, fr",2,7.8,112343
+nm0644527,Megumi Ogata,2,"en, fr",2,7.8,112343
+nm2775648,Nihal G. Koldas,2,"en, hi",2,7.8,66934
+nm0437141,Hiroshi Kanbe,2,"en, fr",2,7.8,28972
+nm0632761,Masahiko Nishimura,2,"en, fr",2,7.8,494818
+nm1002038,Çetin Tekindor,2,"fr, ja",2,7.8,89533
+nm2761958,Rashid Farooqi,2,"en, hi",2,7.8,8910
+nm2955927,Haruka Tomatsu,2,"fr, ja",2,7.8,25845
+nm7609216,Ghita Bhebhita,2,"bn, ja",2,7.8,4482
+nm1178312,Carlos Chahine,2,"en, fr",2,7.8,32920
+nm0009735,Luis Aceves Castañeda,2,"en, es",2,7.77,31191
+nm0031844,Takeshi Aono,2,"en, fr",2,7.75,32543
+nm0879314,Konstantinos Tzoumas,2,"ja, tr",2,7.75,5274
+nm3841713,Calvin Ka-Sing Cheng,2,"en, fr",2,7.75,363944
+nm6405548,Joe Malloori,2,"en, ta",2,7.75,11300
+nm9212366,Sajin Cherukayil,2,"en, hi",2,7.75,6890
+nm0019996,Patrick Allen,2,"en, ja",2,7.75,210351
+nm0273090,Plinio Fernando,2,"en, ja",2,7.75,13297
+nm8826563,Kamal Mani Nepal,2,"en, ja",2,7.75,2395
+nm0556399,Giulietta Masina,2,"en, fr",2,7.75,78628
+nm0340854,Lucas Gridoux,2,"en, fr",2,7.75,11879
+nm0869718,Paco Tous,2,"en, fr",2,7.75,222755
+nm2540053,Tanay Chheda,2,"en, fr",2,7.75,282543
+nm0025734,Giuseppe Anatrelli,2,"en, ja",2,7.75,13297
+nm0417837,Emil Jannings,2,"en, fr",2,7.75,23096
+nm0477449,Hisako Kyôda,2,"en, fr",2,7.75,226801
+nm0897715,Paolo Villaggio,2,"en, ja",2,7.75,13297
+nm0009900,Dejan Acimovic,2,"en, ja",2,7.75,3794
+nm0494504,Anne Le Ny,2,"en, fr",2,7.75,1050756
+nm0563481,Anna Mazzamauro,2,"en, ja",2,7.75,13297
+nm3253626,Yu-Hang To,2,"en, fr",2,7.75,363944
+nm0005386,Cecilia Roth,2,"es, ja",2,7.75,114106
+nm0660080,Paolo Paoloni,2,"en, ja",2,7.75,13297
+nm1234078,Ratna Riantiarno,2,"en, id",2,7.75,5091
+nm0037625,Antonin Artaud,2,"en, fr",2,7.75,70904
+nm0333191,Nikolay Grabbe,2,"az, ja",2,7.75,63773
+nm0714805,Gigi Reder,2,"en, ja",2,7.75,13297
+nm1314762,Gandhimathi,2,"en, hi",2,7.75,5616
+nm0001840,Ming-Na Wen,2,"bn, en",2,7.7,372434
+nm0297873,Keiji Fujiwara,2,"fr, hi",2,7.7,73188
+nm0447515,Josef Kemr,2,"en, ja",2,7.7,8626
+nm0477082,Lee-Na Kwan,2,"fr, yue",2,7.7,176598
+nm0946160,Oleg Yankovskiy,2,"fr, ja",2,7.7,35397
+nm10711768,Maganti Srinath,2,"en, fr",2,7.7,13236
+nm13266900,YaswanthPendyala,2,"en, te",2,7.7,2708
+nm1679669,Rosemarie DeWitt,2,"bg, en",2,7.7,786762
+nm4407117,Devrim Yakut,2,"en, tr",2,7.7,14057
+nm4566169,Shimu Reekita Nondine,2,"en, ja",2,7.7,3599
+nm0461615,Doris Nolan,2,"en, qbn",2,7.7,36646
+nm0582019,Hannes Messemer,2,"en, ja",2,7.7,282985
+nm1322404,Byun Hee-Bong,2,"en, fr",2,7.7,421611
+nm0082764,Alexandru Bindea,2,"en, ja",2,7.7,16070
+nm0212470,Francis De Wolff,2,"en, fr",2,7.7,191004
+nm0265761,Eduardo Fajardo,2,"en, fr",2,7.7,14475
+nm0590854,Min Kyung-jin,2,"en, tr",2,7.7,27998
+nm0756332,Yildiray Sahinler,2,"en, fr",2,7.7,69726
+nm1047193,Won Bin,2,"en, fr",2,7.7,164103
+nm0315640,Luminita Gheorghiu,2,"en, ja",2,7.7,16070
+nm0770788,Mary Kate Schellhardt,2,"en, fr",2,7.7,616667
+nm0788164,Mamata Shankar,2,"bn, en",2,7.7,6321
+nm13920211,Harpreet Bhoora,2,"en, fr",2,7.7,3239
+nm2561347,Farhan Ali Agha,2,"en, hi",2,7.7,5728
+nm6346171,Parinaz Izadyar,2,"fa, fr",2,7.7,28705
+nm0085038,Gunnar Björnstrand,2,"en, sv",2,7.7,150943
+nm0858048,Mélanie Thierry,2,"fr, tr",2,7.7,86895
+nm0993242,Clémence Poésy,2,"en, fr",2,7.7,1098415
+nm1480656,Filip Berg,2,"ja, sv",2,7.7,121216
+nm18345543,Tu Tontawan Tantivejakul,2,"en, fr",2,7.7,24860
+nm3067749,Park Hyuk-kwon,2,"ja, tr",2,7.7,41194
+nm5643878,Andrey Mostrenko,2,"en, fr",2,7.7,2604
+nm6916719,Ryu Jun-yeol,2,"en, tr",2,7.7,41000
+nm0590452,Sandra Milo,2,"en, fr",2,7.7,139405
+nm0597192,Tibor Molnár,2,"en, ja",2,7.7,6047
+nm0864779,Chapman To,2,"en, yue",2,7.7,143874
+nm0388517,Heinz Hoenig,2,"de, en",2,7.7,292702
+nm0596097,Kikue Mōri,2,"en, fr",2,7.7,21985
+nm0557956,Richard Masur,2,"en, fr",2,7.7,542327
+nm0776914,Maurice Schutz,2,"en, fr",2,7.7,92917
+nm1039369,Christel Baras,2,"en, fr",2,7.7,154594
+nm1046521,Lars Ranthe,2,"da, en",2,7.7,292587
+nm2594314,Aya Endô,2,"en, ja",2,7.7,17597
+nm0039967,Adriana Asti,2,"en, fr",2,7.67,48895
+nm0774883,Christine Schorn,2,"en, ja",2,7.65,163124
+nm0865411,Srdjan 'Zika' Todorovic,2,"bs, en",2,7.65,70943
+nm0890046,Natalya Varley,2,"en, ja",2,7.65,27757
+nm1727096,Ashwin Chitale,2,"en, hi",2,7.65,3131
+nm2028276,Subbalakshmi,2,"en, fr",2,7.65,145338
+nm2257436,Irma Vitovska,2,"en, ja",2,7.65,6008
+nm3888054,Rajat Barmecha,2,"en, fr",2,7.65,59858
+nm0472234,Margaretha Krook,2,"en, sv",2,7.65,147045
+nm0696761,Alma Prica,2,"en, ja",2,7.65,4294
+nm0955521,Zhaoji Jia,2,"cmn, en",2,7.65,13394
+nm0138479,Tullio Carminati,2,"en, fr",2,7.65,161476
+nm0409049,Ciccio Ingrassia,2,"en, sr",2,7.65,54080
+nm0558936,Milly Mathis,2,"en, fr",2,7.65,4092
+nm0634120,Jean Pierre Noher,2,"ca, tr",2,7.65,15259
+nm1090070,Kenan Imirzalioglu,2,"ja, tr",2,7.65,32877
+nm4973460,Victoire Du Bois,2,"en, fr",2,7.65,405377
+nm0399471,Lucien Hubert,2,"en, fr",2,7.65,16257
+nm0702270,Marco Pérez,2,"en, sv",2,7.65,292918
+nm0740696,Noël Roquevert,2,"en, fr",2,7.65,13704
+nm0904700,Emília Vášáryová,2,"fr, ja",2,7.65,9585
+nm1295765,Alex Abbad,2,"en, id",2,7.65,4861
+nm1735048,Tuba Büyüküstün,2,"en, tr",2,7.65,11687
+nm0252244,Anders Ek,2,"fr, sv",2,7.65,48611
+nm0387218,Josef Hlinomaz,2,"en, ja",2,7.65,2906
+nm0427379,Kristoffer Joner,2,"en, fr",2,7.65,971283
+nm0594488,Kohei Miyauchi,2,"en, fr",2,7.65,213776
+nm0706567,Pablo Rago,2,"es, fr",2,7.65,259222
+nm8850247,Sinoj Varghese,2,"en, hi",2,7.65,8902
+nm0346903,Jean-Claude Guilbert,2,"en, fr",2,7.65,39631
+nm0617846,Carl Möhner,2,"en, fr",2,7.65,49191
+nm0725256,Hans Richter,2,"de, fr",2,7.65,9029
+nm0837503,Haruko Sugimura,2,"fr, hi",2,7.65,14114
+nm0873190,Vesna Trivalić,2,"bs, en",2,7.65,17462
+nm1486911,Shahab Hosseini,2,"en, fa",2,7.65,68396
+nm7012164,Sekar Sari,2,"en, id",2,7.65,3310
+nm9762527,Mawar Eva de Jongh,2,"en, id",2,7.65,2479
+nm0046528,Spartak Bagashvili,2,"fr, uk",2,7.65,27150
+nm0940919,Edward Woodward,2,"en, es",2,7.65,123472
+nm4785118,Ayane Sakura,2,"en, fr",2,7.65,7006
+nm7956813,Robert Gulaczyk,2,"en, ja",2,7.65,78847
+nm0317725,Ariadna Gil,2,"en, es",2,7.65,768456
+nm0948267,Dwight Yoakam,2,"en, fr",2,7.65,148688
+nm1778124,Ali Atay,2,"fr, tr",2,7.65,56410
+nm8850246,Kichu Tellus,2,"en, hi",2,7.65,8902
+nm0005009,Laura Harring,2,"en, hi",2,7.63,1030448
+nm0255562,Alain Eloy,2,"en, fr",2,7.6,103637
+nm0361570,Jaromír Hanzlík,2,"en, ja",2,7.6,3143
+nm0890651,Alberto Vazquez,2,"en, tr",2,7.6,260264
+nm3665668,Sarp Akkaya,2,"en, fr",2,7.6,68564
+nm0058246,Yves Barsacq,2,"en, fr",2,7.6,88047
+nm0439202,Emil Karewicz,2,"bs, en",2,7.6,10505
+nm0899517,Dorel Visan,2,"en, tr",2,7.6,7336
+nm5224876,Tissa Biani Azzahra,2,"bn, en",2,7.6,5547
+nm0224496,Rick Dial,2,"en, fr",2,7.6,205028
+nm0690592,María Luisa Ponte,2,"fr, ja",2,7.6,10226
+nm0713106,Martha Raye,2,"en, fr",2,7.6,24937
+nm0723590,Allan Rich,2,"en, qbn",2,7.6,228160
+nm0867391,Eijirō Tōno,2,"en, fr",2,7.6,45762
+nm11203267,Meenaakshi Chaudhary,2,"en, fr",2,7.6,56460
+nm1293644,Ivan Massagué,2,"en, es",2,7.6,1088105
+nm1551630,Ahmed Rubel,2,"en, fr",2,7.6,3870
+nm3048472,Sayed Ragab,2,"ar, en",2,7.6,11561
+nm7609215,Bene Dion Rajagukguk,2,"bn, en",2,7.6,5547
+nm0346270,Álvaro Guerrero,2,"en, sv",2,7.6,275487
+nm0553361,Jean Martinelli,2,"en, fr",2,7.6,131600
+nm0613354,Luděk Munzar,2,"en, fr",2,7.6,2703
+nm0756964,Osamu Saka,2,"en, fr",2,7.6,146170
+nm0854924,Graciela Tenenbaum,2,"es, ja",2,7.6,68085
+nm0949097,Kazuko Yoshiyuki,2,"en, fr",2,7.6,246896
+nm10192843,Kamila Urzędowska,2,"en, ja",2,7.6,11135
+nm1269047,Hanno Koffler,2,"de, en",2,7.6,53516
+nm9904064,Yurina Amami,2,"en, fr",2,7.6,43563
+nm0881782,Naďa Urbánková,2,"fr, ja",2,7.6,17043
+nm1244128,Indra Birowo,2,"en, id",2,7.6,3005
+nm2155679,Mani Haghighi,2,"en, fa",2,7.6,70543
+nm3889122,Mohammed Ehteshamuddin,2,"en, hi",2,7.6,5013
+nm8904117,Jérémy Gillet,2,"en, fr",2,7.6,5199
+nm0436835,Felix Kammerer,2,"de, en",2,7.6,693306
+nm0462658,Jiří Kodet,2,"en, ja",2,7.6,9175
+nm0511695,Cec Linder,2,"en, fr",2,7.6,338522
+nm0879556,Mari Törőcsik,2,"en, ja",2,7.6,12369
+nm1045684,Jeong Jae-yeong,2,"en, tr",2,7.6,47765
+nm10995273,Busstop Koteshwara Rao,2,"en, hi",2,7.6,3548
+nm1416903,Surya Saputra,2,"en, id",2,7.6,3005
+nm2341206,Fabiula Nascimento,2,"ja, tr",2,7.6,16724
+nm0154167,Subrata Chatterjee,2,"bn, en",2,7.6,6105
+nm0410751,María Isbert,2,"fr, ja",2,7.6,10226
+nm12151043,Oki Rengga,2,"bn, en",2,7.6,5547
+nm0001242,Matt Frewer,2,"bg, en",2,7.6,975716
+nm0029962,Álex Angulo,2,"es, ja",2,7.6,759483
+nm0151401,Joan Chandler,2,"en, fr",2,7.6,172690
+nm0545378,Corinne Marchand,2,"en, fr",2,7.6,41195
+nm0609635,Jaroslav Moučka,2,"en, fr",2,7.6,9569
+nm0906965,George Walcott,2,"en, fr",2,7.6,22167
+nm2976492,Aoi Yûki,2,"en, fr",2,7.6,158969
+nm1896873,João Miguel,2,"en, tr",2,7.57,23156
+nm5135200,Ken Aoki,2,"en, fr",2,7.57,8225
+nm0910947,Faye Wong,2,"bg, fr",2,7.57,245129
+nm0001163,Roy Dupuis,2,"en, fr",2,7.55,9645
+nm0297956,Mitsuru Fukikoshi,2,"en, fr",2,7.55,32871
+nm0441537,Andreas Katsulas,2,"en, fr",2,7.55,355809
+nm0816297,Filip Sovagovic,2,"bs, en",2,7.55,52122
+nm1468516,William Shimell,2,"en, fr",2,7.55,141030
+nm2792064,Kerem Bürsin,2,"en, ja",2,7.55,25675
+nm3105058,Dogukan Polat,2,"en, tr",2,7.55,10525
+nm0322977,Nebojsa Glogovac,2,"en, ja",2,7.55,7273
+nm0594856,Mathias Mlekuz,2,"en, fr",2,7.55,111308
+nm0694900,Savita Prabhune,2,"en, hi",2,7.55,26417
+nm0758656,İlyas Salman,2,"en, tr",2,7.55,12497
+nm0767038,Sylvia Saurel,2,"en, fr",2,7.55,20897
+nm1233222,Naiwen Li,2,"cmn, yue",2,7.55,16987
+nm4837333,Iñigo Gastesi,2,"es, fr",2,7.55,225362
+nm9311743,Erdem Senocak,2,"fr, tr",2,7.55,35662
+nm0216169,Florian Delain,2,"en, fr",2,7.55,26555
+nm0476814,Yuriy Kuznetsov,2,"en, fr",2,7.55,17107
+nm0823714,Simona Stašová,2,"fr, ja",2,7.55,12179
+nm3287449,Shiori Izawa,2,"en, fr",2,7.55,11917
+nm3780600,Choi Gwi-hwa,2,"fr, tr",2,7.55,56804
+nm5398167,Jérémie Laheurte,2,"fr, ja",2,7.55,9173
+nm0060931,Jeanne Bates,2,"en, hi",2,7.55,583012
+nm0082211,Haluk Bilginer,2,"hi, tr",2,7.55,30350
+nm0307638,Olatz López Garmendia,2,"en, fr",2,7.55,140895
+nm0689990,Bolek Polívka,2,"fr, ja",2,7.55,12179
+nm0756990,Yoshisada Sakaguchi,2,"en, fr",2,7.55,23716
+nm0960037,Hochu Otsuka,2,"fr, ja",2,7.55,15220
+nm6412112,Véronique Wüthrich,2,"en, tr",2,7.55,9619
+nm0153205,John Charlesworth,2,"en, fr",2,7.55,31027
+nm0699510,Paul Préboist,2,"en, fr",2,7.55,11384
+nm4480120,Yukiyo Fujii,2,"fr, ja",2,7.55,40585
+nm4858403,Nobunaga Shimazaki,2,"en, ja",2,7.55,11901
+nm0742953,Djoko Rosic,2,"fr, tr",2,7.55,24327
+nm0951309,Uğur Yücel,2,"en, th",2,7.55,85794
+nm1466457,Timofey Tribuntsev,2,"en, fr",2,7.55,17107
+nm0061639,Vanessa Bauche,2,"ca, sv",2,7.55,275133
+nm0576495,Vinod Mehra,2,"en, fr",2,7.55,4282
+nm8195186,Alexander Prasanth,2,"en, fr",2,7.55,7833
+nm0053607,Christian Barbier,2,"en, fr",2,7.55,32247
+nm0080346,Bijon Bhattacharya,2,"en, fr",2,7.55,5272
+nm0212542,Gita Dey,2,"en, fr",2,7.55,5272
+nm0276840,Leonid Filatov,2,"en, ja",2,7.55,5189
+nm0509583,Jan Josef Liefers,2,"de, en",2,7.55,79675
+nm0669813,Franciszek Pieczka,2,"bg, hi",2,7.53,5908
+nm0046424,Veerle Baetens,2,"en, fr",2,7.53,117550
+nm0233336,Humberto Dorado,2,"es, ja",2,7.5,53449
+nm0266658,Louis Fan,2,"en, fr",2,7.5,262716
+nm0293981,Alisa Freyndlikh,2,"en, ru",2,7.5,160668
+nm0339669,Nora Gregor,2,"en, fr",2,7.5,36094
+nm0619178,Masami Nagasawa,2,"en, fr",2,7.5,80228
+nm0908914,Dee Wallace,2,"bn, en",2,7.5,582639
+nm1654982,Teo Yoo,2,"de, en",2,7.5,188234
+nm3493635,Onkar Das Manikpuri,2,"en, hi",2,7.5,36015
+nm0462201,Waldemar Kobus,2,"en, yue",2,7.5,88227
+nm0903867,Andréas Voutsinas,2,"en, fr",2,7.5,124324
+nm0002161,Hans Albers,2,"en, fr",2,7.5,19810
+nm0147767,Jakob Cedergren,2,"en, fr",2,7.5,82956
+nm0241694,Sky du Mont,2,"en, fr",2,7.5,506081
+nm0543924,Héléna Manson,2,"en, fr",2,7.5,18833
+nm1214151,Kai-Man Tin,2,"en, es",2,7.5,266382
+nm5030347,Ashish Kakkad,2,"en, fr",2,7.5,42014
+nm6124994,Park Seo-joon,2,"en, tr",2,7.5,20826
+nm0717085,Peter Reichhardt,2,"da, en",2,7.5,63562
+nm2612640,Liam Thomas,2,"en, ja",2,7.5,45226
+nm3723229,Andrea Heick Gadeberg,2,"en, sv",2,7.5,84221
+nm4908429,Christiane Gjellerup Koch,2,"en, sv",2,7.5,8923
+nm6077587,Anton von Lucke,2,"en, tr",2,7.5,27983
+nm0007746,Diego Abatantuono,2,"en, ja",2,7.5,19940
+nm0247642,George Eastman,2,"fr, ja",2,7.5,7887
+nm0295429,Georg Friedrich,2,"fr, tr",2,7.5,92534
+nm0475602,Yasuaki Kurata,2,"cmn, fr",2,7.5,30296
+nm0865757,Fujio Tokita,2,"fr, ja",2,7.5,202818
+nm1081573,Philippe Katerine,2,"en, fr",2,7.5,10686
+nm3319116,Münir Can Cindoruk,2,"en, tr",2,7.5,24722
+nm3915784,John Boyega,2,"en, hi",2,7.5,1097710
+nm0050482,Vincent Ball,2,"en, es",2,7.5,17785
+nm0155607,Pei-Pei Cheng,2,"cmn, en",2,7.5,305396
+nm0436345,Miki Kam,2,"en, he",2,7.5,5061
+nm0557859,Chiara Mastroianni,2,"en, fr",2,7.5,117881
+nm0960022,Hiroshi Otake,2,"en, fr",2,7.5,238590
+nm0026130,Elga Andersen,2,"en, fr",2,7.5,51083
+nm0075655,Peter Berling,2,"en, fr",2,7.5,47350
+nm0077944,Anders W. Berthelsen,2,"en, sv",2,7.5,8923
+nm0535295,Roman Madyanov,2,"en, fr",2,7.5,67703
+nm0645402,Eiji Okada,2,"en, fr",2,7.5,51948
+nm11528324,Boah Sartika,2,"bn, en",2,7.5,3329
+nm7796669,Disha Patani,2,"en, es",2,7.5,156005
+nm0000003,Brigitte Bardot,2,"en, fr",2,7.5,45556
+nm0003540,Nikolay Cherkasov,2,"en, fr",2,7.5,25375
+nm0016703,Michel Albertini,2,"en, fr",2,7.5,10759
+nm0041957,Otávio Augusto,2,"fr, hi",2,7.5,53223
+nm0295393,Vladimir Friedman,2,"en, he",2,7.5,4000
+nm0456077,Güven Kıraç,2,"hi, th",2,7.5,33087
+nm0778016,Hanna Schygulla,2,"fr, sv",2,7.5,23331
+nm1493135,Liya Kebede,2,"en, fr",2,7.5,154833
+nm2700522,Rachel Amanda,2,"en, hi",2,7.5,6126
+nm5334135,Ester Kuntu,2,"en, tr",2,7.5,20921
+nm0009372,Andrei Abrikosov,2,"en, fr",2,7.5,25375
+nm0921276,Jan Werich,2,"cs, fr",2,7.47,6403
+nm0104966,Matthias Brandt,2,"de, fr",2,7.47,32289
+nm0009892,Achyuth,2,"en, hi",2,7.45,5007
+nm0105984,Elsie de Brauw,2,"en, fr",2,7.45,11874
+nm0148974,Gino Cervi,2,"en, fr",2,7.45,20249
+nm0257826,Köksal Engür,2,"ja, tr",2,7.45,22959
+nm0423524,Alejandro Jodorowsky,2,"en, fr",2,7.45,87240
+nm0479516,Lotfy Labib,2,"en, tr",2,7.45,7716
+nm0493347,Wilfrid Lawson,2,"en, fr",2,7.45,15465
+nm0948012,Serra Yılmaz,2,"en, hi",2,7.45,13299
+nm1985974,Michael Chernus,2,"de, en",2,7.45,526580
+nm5310508,Davika Hoorne,2,"th, yue",2,7.45,10818
+nm0163250,Cyrielle Clair,2,"en, fr",2,7.45,38600
+nm0293739,Sami Frey,2,"en, fr",2,7.45,9977
+nm0310586,Emilio Gavira,2,"en, sv",2,7.45,17858
+nm0350351,Robert Gwisdek,2,"de, en",2,7.45,5887
+nm0513190,Derek de Lint,2,"en, yue",2,7.45,125801
+nm0527555,Catherine Lutz,2,"en, fr",2,7.45,25440
+nm0563414,Wieslawa Mazurkiewicz,2,"bg, fr",2,7.45,6517
+nm0732877,Madeleine Robinson,2,"en, fr",2,7.45,35525
+nm13462298,Henrikke Lund-Olsen,2,"en, fr",2,7.45,10409
+nm1735322,Isil Yücesoy,2,"ja, tr",2,7.45,22959
+nm0143743,Stefania Casini,2,"en, es",2,7.45,145563
+nm0582889,Nina Meurisse,2,"fr, ja",2,7.45,29492
+nm0712947,Nicholas Ray,2,"en, fr",2,7.45,66567
+nm0819330,Andrea Spolarics,2,"en, tr",2,7.45,4107
+nm0894636,Anne Vernon,2,"en, fr",2,7.45,36973
+nm0927092,Johan Widerberg,2,"en, sv",2,7.45,121466
+nm0953168,Zbigniew Zapasiewicz,2,"en, ja",2,7.45,7633
+nm1311741,Hichem Yacoubi,2,"en, fr",2,7.45,127774
+nm1703541,Tejasree,2,"en, hi",2,7.45,3331
+nm5137121,Natsuki Hanae,2,"en, fr",2,7.45,4014
+nm8997517,Lee Do-yeop,2,"en, ja",2,7.45,3599
+nm0001393,Irène Jacob,2,"en, fr",2,7.45,211754
+nm0147978,Abraham Celektar,2,"en, he",2,7.45,9893
+nm0347218,Fernando Guillén,2,"es, fr",2,7.45,126700
+nm0671426,Angelina Peláez,2,"en, fr",2,7.45,22301
+nm0794242,Hassan Pourshirazi,2,"fr, ja",2,7.45,14051
+nm1366568,Radivoje Bukvic,2,"fr, ja",2,7.45,13122
+nm3779182,Chino Darín,2,"fr, ja",2,7.45,85280
+nm0420065,Kalina Jędrusik,2,"fr, ja",2,7.45,59296
+nm0953423,Merila Zare'i,2,"en, fa",2,7.45,64159
+nm1232546,Aditi Govitrikar,2,"en, hi",2,7.45,5431
+nm1593609,Suliane Brahim,2,"fr, ja",2,7.45,18242
+nm0307995,Ivo Garrani,2,"en, fr",2,7.45,16953
+nm0336380,Fernand Gravey,2,"en, fr",2,7.45,39374
+nm0764257,Rubens Santos,2,"en, ja",2,7.45,38408
+nm0890330,Magda Vášáryová,2,"en, ja",2,7.45,8046
+nm0920992,David Wenham,2,"bg, en",2,7.45,1189947
+nm1328775,Daisuke Ono,2,"en, fr",2,7.45,32333
+nm3640854,Koo Kyo-hwan,2,"en, tr",2,7.45,30179
+nm6601752,Naga Shaurya,2,"en, fr",2,7.45,5658
+nm0050983,Jean-François Balmer,2,"fr, ja",2,7.45,38618
+nm0299661,María Félix,2,"en, fr",2,7.45,6083
+nm0530244,Marga López,2,"en, ja",2,7.45,9612
+nm5013772,Vitaliy Saliy,2,"en, fr",2,7.45,3301
+nm5418809,Thierry Jahn,2,"en, fr",2,7.45,52527
+nm0142972,Amira Casar,2,"en, fr",2,7.45,367878
+nm0639782,Richard O'Brien,2,"en, fr",2,7.45,418984
+nm0737938,María Rojo,2,"en, fr",2,7.45,22301
+nm0945734,Tsutomu Yamazaki,2,"en, ja",2,7.45,42849
+nm2181267,Serge Faliu,2,"en, fr",2,7.45,52527
+nm5759964,Maiken Pius,2,"en, tr",2,7.45,12548
+nm0021691,Catherine Allégret,2,"en, fr",2,7.43,99092
+nm0252473,Gösta Ekman,2,"fr, sv",2,7.43,129782
+nm0001560,Ornella Muti,2,"fr, ja",2,7.4,13361
+nm0174600,Zhijun Cong,2,"en, fr",2,7.4,14536
+nm0252832,Nicholas Kadi,2,"en, fr",2,7.4,28579
+nm0544982,Bernard Marbaix,2,"en, fr",2,7.4,37698
+nm0598857,Thibault de Montalembert,2,"de, en",2,7.4,357989
+nm0646568,Karla Souza,2,"fr, ja",2,7.4,46533
+nm0717603,Halina Reijn,2,"en, yue",2,7.4,85805
+nm0871674,David Tree,2,"en, fr",2,7.4,80473
+nm0904093,Dolf de Vries,2,"fr, yue",2,7.4,97555
+nm2103508,Paulina Gaitan,2,"en, fr",2,7.4,54265
+nm2859853,Mario Maurer,2,"ja, th",2,7.4,14363
+nm0675919,Milan Peschel,2,"en, ja",2,7.4,4060
+nm1253039,Vicente Romero,2,"en, hi",2,7.4,80236
+nm2416509,Shaz Khan,2,"en, hi",2,7.4,3150
+nm0144875,Nino Castelnuovo,2,"en, fr",2,7.4,40014
+nm0300388,Gabriel Gabrio,2,"en, fr",2,7.4,11547
+nm0304644,Peter Gantzler,2,"en, ja",2,7.4,28002
+nm0457953,Nijiko Kiyokawa,2,"en, fr",2,7.4,47979
+nm0532700,Liza Machulska,2,"en, ja",2,7.4,5482
+nm0586651,Krystyna Mikolajewska,2,"fr, ja",2,7.4,7184
+nm0679150,Candela Peña,2,"en, es",2,7.4,117075
+nm3063648,Alireza Bayram,2,"de, en",2,7.4,17352
+nm6601314,Igor van Dessel,2,"en, fr",2,7.4,51430
+nm0046256,Livio Badurina,2,"en, id",2,7.4,31985
+nm0080362,Satindra Bhattacharya,2,"en, fr",2,7.4,5714
+nm0301887,Craig Stevens,2,"en, fr",2,7.4,16845
+nm0581536,Thorsten Merten,2,"en, ja",2,7.4,4060
+nm0600673,Moon Sung-keun,2,"en, fr",2,7.4,153284
+nm0937000,Michael Wittenborn,2,"de, en",2,7.4,57453
+nm1166638,Tomasz Neuman,2,"fr, sv",2,7.4,58731
+nm0128130,Jean Cadell,2,"en, fr",2,7.4,18159
+nm0503443,Chete Lera,2,"en, es",2,7.4,80233
+nm0531763,James MacDonald,2,"en, fr",2,7.4,683005
+nm0554929,Roberto Sosa,2,"ca, en",2,7.4,429136
+nm0873131,Jan Tříska,2,"en, ja",2,7.4,212692
+nm1249562,Imad Jabarin,2,"en, he",2,7.4,21996
+nm1360441,Sayaka Ôhara,2,"en, ja",2,7.4,2971
+nm1778096,Engin Akyürek,2,"en, ja",2,7.4,33081
+nm3011132,Kai Inowaki,2,"en, tr",2,7.4,17693
+nm8397196,Devaa Malishetty,2,"en, te",2,7.4,2583
+nm0297083,Ewa Fröling,2,"en, sv",2,7.4,233819
+nm0406592,Masatô Ibu,2,"en, fr",2,7.4,146710
+nm0837811,Zuzana Šulajová,2,"fr, ja",2,7.4,4206
+nm1218629,Ahmed Helmy,2,"ar, en",2,7.4,19361
+nm1588928,Navnindra Behl,2,"en, hi",2,7.4,5269
+nm0555290,Pedro Miguel Martínez,2,"en, es",2,7.4,80233
+nm0709204,Arcelia Ramírez,2,"en, tr",2,7.4,4764
+nm0760665,Antonia San Juan,2,"en, es",2,7.4,443031
+nm0945085,Yuriy Yakovlev,2,"en, tr",2,7.4,16883
+nm1145433,Tibor Gáspár,2,"en, tr",2,7.4,3497
+nm1234414,So Ji-sub,2,"fr, tr",2,7.4,18351
+nm1504980,Sönke Möhring,2,"en, fr",2,7.4,274422
+nm0088860,Peter Blok,2,"en, yue",2,7.4,94271
+nm0156444,Cecilia Cheung,2,"en, es",2,7.4,105846
+nm0240638,Jacques Dufilho,2,"en, fr",2,7.4,5542
+nm0349611,Zaide Silvia Gutiérrez,2,"ca, en",2,7.4,7348
+nm0368689,Leila Hatami,2,"en, ja",2,7.4,8522
+nm0537392,Rita Maiden,2,"en, fr",2,7.4,31882
+nm4198135,Farah Zeynep Abdullah,2,"en, ja",2,7.37,50785
+nm2387806,Emily Beecham,2,"bs, en",2,7.37,825310
+nm0000908,David Bennent,2,"en, ja",2,7.35,31600
+nm0031708,Georgette Anys,2,"en, fr",2,7.35,92783
+nm0112548,Gudrun Brost,2,"en, sv",2,7.35,9671
+nm0258905,Halil Ergün,2,"en, tr",2,7.35,3112
+nm0264692,Saturnin Fabre,2,"en, fr",2,7.35,10314
+nm0406157,Hümeyra,2,"en, ja",2,7.35,20650
+nm0557908,Oliver Masucci,2,"de, fr",2,7.35,32600
+nm0677899,Nina Petri,2,"de, en",2,7.35,221071
+nm0885937,José van Dam,2,"en, fr",2,7.35,2569
+nm0903110,Friedrich von Thun,2,"de, en",2,7.35,17537
+nm1075976,Bart the Bear,2,"en, fr",2,7.35,106888
+nm1228586,Borko Peric,2,"bs, id",2,7.35,6943
+nm1559446,Jeong In-gi,2,"fr, ja",2,7.35,18838
+nm5011084,Amir El-Masry,2,"en, sv",2,7.35,11723
+nm9161984,Viktor Zhdanov,2,"fr, ja",2,7.35,4456
+nm9712999,Laura Rauseo,2,"en, fr",2,7.35,4411
+nm0001352,Terence Hill,2,"es, fr",2,7.35,60504
+nm0005512,Mike Tyson,2,"en, fr",2,7.35,1014805
+nm0028903,Andrex,2,"en, fr",2,7.35,6062
+nm0218553,Erol Demiröz,2,"en, ja",2,7.35,9110
+nm0319142,Lawrence Gilliard Jr.,2,"en, hi",2,7.35,484530
+nm0686506,Roger Planchon,2,"en, fr",2,7.35,13422
+nm0761172,Hervé Sand,2,"en, fr",2,7.35,10781
+nm0796606,Evgeniy Sidikhin,2,"de, fr",2,7.35,30241
+nm0873396,Ivan Trojan,2,"en, ja",2,7.35,5763
+nm3376756,Pimchanok Luevisadpaibul,2,"en, ja",2,7.35,9275
+nm5427601,Carolyn Bracken,2,"en, fr",2,7.35,32801
+nm0238379,Jean-Claude Drouot,2,"fr, ja",2,7.35,14573
+nm0453452,Kang Ha-neul,2,"en, fr",2,7.35,77404
+nm0626158,Jacky Nercessian,2,"en, fr",2,7.35,6502
+nm0674695,Jean-François Perrier,2,"en, ja",2,7.35,17054
+nm0793784,Shin Ha-kyun,2,"en, es",2,7.35,84344
+nm0844845,Susi Sánchez,2,"en, es",2,7.35,218781
+nm1281415,Karine Teles,2,"en, ja",2,7.35,41782
+nm1336790,Aleksandr Yatsenko,2,"en, fr",2,7.35,10533
+nm1417182,Cut Mini Theo,2,"hi, id",2,7.35,4158
+nm2105464,Carlos Francisco,2,"en, fr",2,7.35,38308
+nm3618794,Mina Sadati,2,"fa, fr",2,7.35,16292
+nm9712998,Gabriel Moreira,2,"en, fr",2,7.35,4411
+nm0157785,Siu-Ho Chin,2,"fr, yue",2,7.35,32631
+nm0587791,Patrick Mille,2,"fr, ja",2,7.35,73250
+nm0765844,Takashi Sasano,2,"de, en",2,7.35,3952
+nm0777951,Ellen Schwiers,2,"es, fr",2,7.35,30093
+nm0908378,Robert Wall,2,"en, fr",2,7.35,166594
+nm1717222,Ion Sapdaru,2,"en, fr",2,7.35,10323
+nm0079312,Dominique Bettenfeld,2,"fr, ja",2,7.35,100404
+nm0098395,Miguel Bosé,2,"en, fr",2,7.35,138029
+nm0487650,Boby Lapointe,2,"en, fr",2,7.35,10008
+nm0622145,Agathe Natanson,2,"en, fr",2,7.35,38077
+nm0785919,Hilde Sessak,2,"de, en",2,7.35,10065
+nm15562794,Gautam Kapur,2,"en, fr",2,7.35,16823
+nm1919164,Yûko Kaida,2,"en, fr",2,7.35,58282
+nm0011948,Georges Adet,2,"en, fr",2,7.35,45551
+nm0021734,Gila Almagor,2,"en, he",2,7.35,258087
+nm0220016,Guillaume Depardieu,2,"en, fr",2,7.35,10278
+nm0244019,Marc Duret,2,"en, fr",2,7.35,142250
+nm0291214,Maria Gabriella Maione,2,"en, fr",2,7.35,65083
+nm0701798,Jean Pélégri,2,"en, fr",2,7.35,29099
+nm0755009,Fabrizia Sacchi,2,"es, nl",2,7.35,6093
+nm0778204,Ingeborg Schöner,2,"fr, tr",2,7.35,5108
+nm0926723,Anne Wiazemsky,2,"fr, qbn",2,7.35,42532
+nm0943956,Ed Wynn,2,"en, qbn",2,7.35,184165
+nm1213700,Richa Pallod,2,"en, hi",2,7.35,4853
+nm1759076,Mahir Ipek,2,"en, ja",2,7.35,44383
+nm1798449,Juhan Ulfsak,2,"en, fr",2,7.35,716395
+nm3517807,Kamel El Basha,2,"en, fr",2,7.35,20875
+nm7979939,Kevin Vechiatto,2,"en, fr",2,7.35,4411
+nm0351710,Ha Ji-Won,2,"en, ja",2,7.35,4805
+nm0745625,Jean Rougerie,2,"en, fr",2,7.35,15847
+nm0817241,Monique Spaziani,2,"en, fr",2,7.35,34710
+nm1034172,Zsolt Nagy,2,"en, hi",2,7.35,30140
+nm1249052,Riccardo Scamarcio,2,"en, fr",2,7.35,597939
+nm2089791,Cesar Ramos,2,"en, ja",2,7.35,24337
+nm2586977,Ashwath Bhatt,2,"en, fr",2,7.35,39488
+nm3604518,Mika Seidel,2,"en, ja",2,7.35,18423
+nm3612526,Diamand Abou Abboud,2,"en, fr",2,7.35,22443
+nm6122124,Ekin Koç,2,"en, fr",2,7.35,19584
+nm0154299,Emmanuelle Chaulet,2,"en, fr",2,7.35,11749
+nm0241663,José Dumont,2,"en, fr",2,7.35,31781
+nm0379464,Karel Heřmánek,2,"en, ja",2,7.35,41672
+nm0405716,Jenny Hélia,2,"en, fr",2,7.35,11508
+nm0645634,Tamio Ôki,2,"en, fr",2,7.35,64837
+nm1662046,Þorsteinn Gunnarsson,2,"en, fr",2,7.35,20414
+nm2040571,Mehmet Özgür,2,"fr, tr",2,7.35,42326
+nm4670777,Nishant Dahiya,2,"en, fr",2,7.35,66687
+nm8649220,Thaneth Warakulnukroh,2,"en, fr",2,7.35,27628
+nm9712997,Giulia Benite,2,"en, fr",2,7.35,4411
+nm0992986,Kruttika Desai,2,"en, he",2,7.33,24515
+nm4251180,Geneviève Doang,2,"en, tr",2,7.33,43941
+nm0362896,Corinna Harfouch,2,"de, en",2,7.3,19016
+nm0452817,Kirin Kiki,2,"en, he",2,7.3,15692
+nm0582614,Barnaby Metschurat,2,"fr, hi",2,7.3,50240
+nm0716490,Vincent Regan,2,"bg, en",2,7.3,1037076
+nm0762240,Didier Sandre,2,"en, fr",2,7.3,30780
+nm0903750,Behrouz Vossoughi,2,"en, ja",2,7.3,5681
+nm1126340,Ryûnosuke Kamiki,2,"en, fr",2,7.3,64863
+nm1148534,Maxime Dumontier,2,"en, fr",2,7.3,2345
+nm3605549,Mala Emde,2,"de, en",2,7.3,12260
+nm9486622,Dogu Demirkol,2,"fr, ja",2,7.3,39425
+nm0404806,Fedja van Huêt,2,"fr, tr",2,7.3,16591
+nm0578577,Eligio Meléndez,2,"en, hi",2,7.3,6327
+nm0699545,Daniel Prévost,2,"en, fr",2,7.3,48755
+nm0840660,Ryohei Suzuki,2,"en, ja",2,7.3,20482
+nm0891502,Nataliya Vdovina,2,"en, ja",2,7.3,7418
+nm1229839,Anne Benoît,2,"fr, ja",2,7.3,7389
+nm4275268,Erkan Avci,2,"en, tr",2,7.3,9586
+nm0468651,Władysław Kowalski,2,"en, fr",2,7.3,76313
+nm0494527,Paul Le Person,2,"en, fr",2,7.3,18308
+nm0566478,Patty McCormack,2,"en, fr",2,7.3,19898
+nm0649041,Kazimierz Opalinski,2,"en, fr",2,7.3,4220
+nm0860627,Rex Thompson,2,"en, fr",2,7.3,31699
+nm1160311,Shahrzad,2,"en, ja",2,7.3,5681
+nm1593670,Lilia Maraviglia,2,"bg, en",2,7.3,5552
+nm2312391,John McCrea,2,"bs, en",2,7.3,312427
+nm2885219,Gabriel Maillé,2,"en, fr",2,7.3,4806
+nm3569306,Lee Na-ra,2,"en, fr",2,7.3,72828
+nm3720868,Nina Janković,2,"en, tr",2,7.3,3269
+nm0092362,Julien Boisselier,2,"en, fr",2,7.3,18203
+nm0147794,Giuseppe Cederna,2,"en, ja",2,7.3,19526
+nm0148393,Petr Čepek,2,"en, ja",2,7.3,3868
+nm0252191,Felix Eitner,2,"en, sv",2,7.3,17100
+nm0398703,Rudolf Hrušínský,2,"cs, ja",2,7.3,3589
+nm0433577,Margrét Helga Jóhannsdóttir,2,"fr, ja",2,7.3,12097
+nm0444602,Malcolm Keen,2,"en, hi",2,7.3,17637
+nm0623899,Claire Nebout,2,"en, fr",2,7.3,9158
+nm0890131,Roland Varno,2,"en, fr",2,7.3,22172
+nm1285144,Jean-Pierre Martins,2,"en, fr",2,7.3,105874
+nm2261371,Tinah Mnumzana,2,"en, fr",2,7.3,4172
+nm3029144,Joe Taslim,2,"en, fr",2,7.3,506712
+nm3661978,Diego Anido,2,"es, fr",2,7.3,33465
+nm8028014,Aima Sebastian,2,"en, hi",2,7.3,9741
+nm0002105,Judith Godrèche,2,"en, fr",2,7.3,52925
+nm0006939,Richard Berry,2,"en, fr",2,7.3,36704
+nm0037060,Eduardo Arozamena,2,"en, fr",2,7.3,6882
+nm0129564,Sergio Calderón,2,"en, fr",2,7.3,687028
+nm0354490,Takaya Hashi,2,"en, fr",2,7.3,3538
+nm0678238,Sonia Petrovna,2,"en, ja",2,7.3,10445
+nm1242935,Midoriko Kimura,2,"en, fr",2,7.3,21118
+nm1687861,Alban Ivanov,2,"en, fr",2,7.3,15257
+nm2023483,César Domboy,2,"en, fr",2,7.3,292531
+nm2975962,Alberto Ammann,2,"en, hi",2,7.3,79870
+nm3210743,Magalie Lépine-Blondeau,2,"en, fr",2,7.3,54684
+nm0051822,Cristina Banegas,2,"de, en",2,7.3,151353
+nm0059974,Marianne Basler,2,"en, ja",2,7.3,6261
+nm0096965,Attila Borlan,2,"en, fr",2,7.3,31134
+nm0125588,Agata Buzek,2,"en, fr",2,7.3,15250
+nm0180987,Lloyd Corrigan,2,"en, es",2,7.3,9160
+nm0246947,Annemarie Düringer,2,"fr, ja",2,7.3,5025
+nm0385062,June Tripp,2,"en, hi",2,7.3,22940
+nm0499218,Claude Legault,2,"en, fr",2,7.3,2345
+nm0619440,Bill Nagy,2,"en, ja",2,7.3,3740
+nm1059148,Park Chul-min,2,"en, fr",2,7.3,10521
+nm1458725,Valeriy Grishko,2,"en, fr",2,7.3,76510
+nm1967013,Concha Galán,2,"en, fr",2,7.3,15048
+nm4127167,Yannik Landrein,2,"en, fr",2,7.3,45613
+nm8437705,Dali Benssalah,2,"fr, ja",2,7.3,6625
+nm0001866,Bolo Yeung,2,"en, fr",2,7.3,124513
+nm0047623,Pierre Baillot,2,"en, fr",2,7.3,2866
+nm0104935,Janet Brandt,2,"en, fr",2,7.3,21960
+nm0579201,Maria Luísa Mendonça,2,"en, fr",2,7.3,33505
+nm0595672,Bahman Mofid,2,"en, ja",2,7.3,5681
+nm0737465,Armin Rohde,2,"de, en",2,7.3,223166
+nm1003035,Harriet Lenabe,2,"en, fr",2,7.3,4172
+nm1160050,Jalal Pishvaian,2,"en, ja",2,7.3,5681
+nm3117177,Léo Caron,2,"en, fr",2,7.3,4806
+nm3341495,Anna Bederke,2,"de, en",2,7.3,45845
+nm3362705,Nikita Efremov,2,"de, en",2,7.3,120641
+nm5769873,Lalit Behl,2,"en, hi",2,7.3,8578
+nm0025745,Elena Anaya,2,"en, es",2,7.3,223996
+nm0089944,John Bluthal,2,"en, fr",2,7.3,251029
+nm0340284,Macha Grenon,2,"en, fr",2,7.3,36730
+nm0510857,Brigitte Lin,2,"fr, yue",2,7.3,121633
+nm0514059,Virna Lisi,2,"en, fr",2,7.3,25216
+nm0535329,Aki Maeda,2,"en, fr",2,7.3,80766
+nm1459779,Mirella Pascual,2,"en, ja",2,7.3,19769
+nm1521154,Thierry Godard,2,"en, fr",2,7.3,18297
+nm2285844,Inma Cuesta,2,"en, sv",2,7.3,47994
+nm2665929,Taiga Nakano,2,"he, tr",2,7.3,18075
+nm3673844,Kim Mu-yeol,2,"es, fr",2,7.27,166296
+nm0053903,Marc Barbé,2,"en, fr",2,7.25,96825
+nm0230068,Claire Dodd,2,"en, fr",2,7.25,10803
+nm0540038,Søren Malling,2,"en, fr",2,7.25,5934
+nm1320600,César Bordón,2,"en, ja",2,7.25,72149
+nm1784717,Pepe Ocio,2,"en, es",2,7.25,12238
+nm0044642,Karin Baal,2,"en, sv",2,7.25,12342
+nm0048121,Miroslaw Baka,2,"en, ja",2,7.25,15397
+nm0272224,Heino Ferch,2,"de, en",2,7.25,43967
+nm1531116,Antoine Bertrand,2,"en, fr",2,7.25,48237
+nm2142096,Negar Javaherian,2,"fa, fr",2,7.25,11191
+nm0220650,Chantal Deruaz,2,"en, fr",2,7.25,20866
+nm0347541,Henri Guisol,2,"en, fr",2,7.25,8932
+nm0508888,Alain Libolt,2,"en, fr",2,7.25,11449
+nm0592109,Isa Miranda,2,"en, fr",2,7.25,18300
+nm0917837,Paul Weigel,2,"en, qbn",2,7.25,3530
+nm1246047,Adriana Ugarte,2,"en, fr",2,7.25,109165
+nm1315378,Kayvan Novak,2,"bs, en",2,7.25,395463
+nm1748275,Lale Basar,2,"fr, ja",2,7.25,28878
+nm0064607,Kathryn Beaumont,2,"en, qbn",2,7.25,337719
+nm0067521,Baya Belal,2,"en, fr",2,7.25,76925
+nm0423381,Marlène Jobert,2,"en, fr",2,7.25,21857
+nm0477868,Cornelia Köndgen,2,"fr, sv",2,7.25,94253
+nm0742760,Harry Rosenthal,2,"en, fr",2,7.25,9776
+nm1251565,Lun-Mei Gwei,2,"cmn, en",2,7.25,5173
+nm1553080,Bjarne Mädel,2,"de, en",2,7.25,11734
+nm2650819,Adèle Exarchopoulos,2,"fr, ja",2,7.25,14884
+nm3177935,Friedrich Mücke,2,"en, he",2,7.25,19401
+nm3240720,Pierre-Yves Cardinal,2,"en, fr",2,7.25,23893
+nm0042848,Serge Avedikian,2,"en, fr",2,7.25,14283
+nm0078696,Melchior Derouet,2,"en, fr",2,7.25,79686
+nm0100280,Nathalie Boutefeu,2,"en, fr",2,7.25,12521
+nm0173354,Coluche,2,"en, fr",2,7.25,17665
+nm0432425,Jun Hu,2,"en, yue",2,7.25,11119
+nm0542146,Silvana Mangano,2,"en, qbn",2,7.25,23981
+nm0552483,Jean Martin,2,"es, fr",2,7.25,45446
+nm0662002,MacDonald Parke,2,"en, ja",2,7.25,14129
+nm0711883,Anne Ratte-Polle,2,"de, ja",2,7.25,2750
+nm0874559,Guy Tréjan,2,"en, fr",2,7.25,6102
+nm1015531,Rubi,2,"en, tr",2,7.25,3618
+nm1621762,Ahmad Rizq,2,"en, tr",2,7.25,3618
+nm1798233,Yousef 'Joe' Sweid,2,"en, he",2,7.25,13098
+nm2337476,Zsolt Páll,2,"en, tr",2,7.25,4482
+nm3056937,Nerea Camacho,2,"en, qbp",2,7.25,6610
+nm0047644,Mireille Bailly,2,"en, fr",2,7.25,26935
+nm0392913,Lluís Homar,2,"en, qbp",2,7.25,67551
+nm0527278,Andreas Lust,2,"de, en",2,7.25,18989
+nm0750930,Jorge Russek,2,"ca, en",2,7.25,24926
+nm0871827,Jerzy Trela,2,"en, es",2,7.25,70442
+nm0959964,Eszter Ónodi,2,"en, tr",2,7.25,5428
+nm10769385,Juan Daniel García Treviño,2,"en, es",2,7.25,12234
+nm1193573,Fathy Abdel Wahab,2,"ar, tr",2,7.25,5209
+nm2701325,Maeve Jinkings,2,"en, fr",2,7.25,32257
+nm2757579,Shunsuke Daitô,2,"de, en",2,7.25,5977
+nm5601350,Tawfeek Barhom,2,"en, fr",2,7.25,11576
+nm0060705,Beatriz Batarda,2,"en, ja",2,7.25,23610
+nm0156955,David Chiang,2,"en, ja",2,7.25,8999
+nm0433495,Ernst-Hugo Järegård,2,"en, sv",2,7.25,26058
+nm0463674,Vincent Kok,2,"es, fr",2,7.25,110191
+nm0760890,Alicia Sánchez,2,"en, ja",2,7.25,4549
+nm1022214,Snježana Sinovčić,2,"en, fr",2,7.25,6717
+nm1145232,Ragaa Al-Gidawy,2,"ar, tr",2,7.25,5209
+nm12105979,Arawinda Kirana,2,"en, fr",2,7.25,3229
+nm3389615,Preeti Nigam,2,"en, qbn",2,7.25,5287
+nm9311474,Jeon Jong-seo,2,"en, ja",2,7.25,143409
+nm0006737,Hark Bohm,2,"en, sv",2,7.25,12342
+nm0136509,Julieta Cardinali,2,"ca, en",2,7.25,7175
+nm0267808,Virginia Farmer,2,"en, es",2,7.25,10781
+nm0348276,Þröstur Leó Gunnarsson,2,"en, ja",2,7.25,11483
+nm0677840,Aleksey Petrenko,2,"bg, ru",2,7.25,17962
+nm0892299,Manuela Velasco,2,"en, fr",2,7.25,237368
+nm0939209,Kwong-Leung Wong,2,"ja, yue",2,7.25,5400
+nm1531547,Gopal Datt,2,"en, hi",2,7.25,26785
+nm6222008,Ivo Pietzcker,2,"en, ja",2,7.25,4846
+nm0902397,Karl-Heinz von Hassel,2,"en, sv",2,7.25,12342
+nm0167515,Philippe Clévenot,2,"en, fr",2,7.2,19338
+nm0338425,Simon Greenall,2,"bn, en",2,7.2,50232
+nm0434191,Nadia Kaci,2,"fr, ja",2,7.2,4465
+nm0645302,Berta Ojea,2,"en, fr",2,7.2,87592
+nm0703138,Emiliano Queiroz,2,"en, ja",2,7.2,9633
+nm0721209,Patricia Reyes Spíndola,2,"en, es",2,7.2,104854
+nm2983193,Ákos Orosz,2,"en, hi",2,7.2,3717
+nm3696993,Sarah Bauerett,2,"de, en",2,7.2,36186
+nm5077687,Lee El,2,"en, ja",2,7.2,81057
+nm5166444,Ellie Bamber,2,"en, nl",2,7.2,415587
+nm0088285,Billy Bletcher,2,"en, fr",2,7.2,477922
+nm0107165,Alex Brendemühl,2,"en, qbp",2,7.2,15934
+nm0156654,Louise Chevalier,2,"en, ja",2,7.2,7769
+nm0356625,Annika Hallin,2,"en, sv",2,7.2,181441
+nm0822278,Tihomir Stanic,2,"en, tr",2,7.2,5273
+nm0916432,Richard Webber,2,"bn, en",2,7.2,50232
+nm1273697,Quim Gutiérrez,2,"en, es",2,7.2,59193
+nm1812991,Tori Kelly,2,"de, en",2,7.2,322616
+nm2181128,Joel Fry,2,"bs, en",2,7.2,320510
+nm0014620,Liya Ai,2,"cmn, en",2,7.2,52906
+nm0072896,Serge Bento,2,"en, ja",2,7.2,7769
+nm0577841,Gilbert Melki,2,"en, fr",2,7.2,49835
+nm0631516,Filippo Nigro,2,"en, hi",2,7.2,29102
+nm0955782,Xun Zhou,2,"en, fr",2,7.2,9080
+nm1715145,Alexia Barlier,2,"en, fr",2,7.2,187392
+nm2821488,Kanae Itô,2,"en, fr",2,7.2,14766
+nm0001092,Mark Dacascos,2,"en, fr",2,7.2,568596
+nm0056763,Marie-Christine Barrault,2,"en, fr",2,7.2,27942
+nm0221527,Ivan Desny,2,"en, fr",2,7.2,17986
+nm0297149,Jun Fubuki,2,"fr, hi",2,7.2,61967
+nm0408284,Michael Imperioli,2,"en, hi",2,7.2,70433
+nm0427378,Johannes Joner,2,"en, ja",2,7.2,21729
+nm0679959,Gérard Philipe,2,"en, fr",2,7.2,5938
+nm0943138,Wu Ma,2,"fr, yue",2,7.2,27226
+nm1017994,Justin Fletcher,2,"bn, en",2,7.2,100464
+nm1091782,Ye Liu,2,"en, fr",2,7.2,8215
+nm1754427,Tülin Özen,2,"en, ja",2,7.2,45912
+nm1948682,Hiroki Yasumoto,2,"en, fr",2,7.2,17111
+nm0015961,Bernard Alane,2,"en, fr",2,7.2,19132
+nm0252770,Hanan Turk,2,"ar, en",2,7.2,7177
+nm0361957,Kate Harbour,2,"bn, en",2,7.2,100464
+nm1469295,Emma Tate,2,"bn, en",2,7.2,50232
+nm17468974,Advin,2,"en, fr",2,7.2,19071
+nm1891185,Camille Cottin,2,"en, fr",2,7.2,184228
+nm5946818,Josh Wiggins,2,"en, hi",2,7.2,24970
+nm7646570,Brandon Salim,2,"en, ja",2,7.2,7976
+nm0168783,Anne Coesens,2,"en, fr",2,7.2,12958
+nm0225789,Evelyne Didi,2,"en, fr",2,7.2,31985
+nm0259132,Jacob Ericksson,2,"en, sv",2,7.2,181441
+nm0550204,Sylvia Marriott,2,"en, fr",2,7.2,16579
+nm0603090,Laura Morante,2,"en, fr",2,7.2,10911
+nm0807033,Andrey Smirnov,2,"en, ja",2,7.2,20950
+nm0897493,Vania Vilers,2,"en, fr",2,7.2,39065
+nm1161994,Martin Compston,2,"en, fr",2,7.2,22964
+nm1176651,Christos Stergioglou,2,"en, ja",2,7.2,128273
+nm11991236,Lee Soon-won,2,"en, fr",2,7.2,67408
+nm1924042,Sofia Papadimitriou Ledarp,2,"en, sv",2,7.2,181441
+nm2202409,Shôta Sometani,2,"en, fr",2,7.2,8575
+nm2584860,Yoo Ah-in,2,"en, hi",2,7.2,97543
+nm2791225,Arthur Berning,2,"en, sv",2,7.2,36035
+nm3852833,Lee Ah-In,2,"en, fr",2,7.2,21849
+nm0094958,Franck-Olivier Bonnet,2,"en, fr",2,7.2,64647
+nm0671793,Vladimir Penev,2,"en, tr",2,7.2,9850
+nm1379813,Filipe Duarte,2,"en, ja",2,7.2,5711
+nm2730580,Sam Reid,2,"bg, en",2,7.2,67456
+nm2838364,Mario Knezovic,2,"en, fr",2,7.2,4699
+nm4391872,Malonn Lévana,2,"en, fr",2,7.2,25368
+nm5056301,Kristine Kujath Thorp,2,"en, fr",2,7.2,29572
+nm5619822,Marie Iitoyo,2,"fr, ja",2,7.2,12322
+nm0008346,Hiroshi Abe,2,"en, fr",2,7.2,12302
+nm0012438,George Adrian,2,"en, fr",2,7.2,90335
+nm0317650,Marie Gignac,2,"en, fr",2,7.2,3440
+nm0782565,Mathilde Seigner,2,"en, fr",2,7.2,15448
+nm0876312,Patricia Tulasne,2,"en, fr",2,7.2,156477
+nm1071413,Nao Ōmori,2,"en, fr",2,7.2,73602
+nm2182458,Yoo Seung-mok,2,"es, fr",2,7.2,45157
+nm3333611,Oh Dae-hwan,2,"fr, hi",2,7.2,18846
+nm7126592,Kayhan Açikgöz,2,"fr, ja",2,7.2,9423
+nm0091074,Sergey Bodrov,2,"en, fr",2,7.2,10246
+nm0659162,Sitaram Panchal,2,"en, hi",2,7.2,14794
+nm0003579,Magda Schneider,2,"en, fr",2,7.17,24312
+nm1134029,Garth Jennings,2,"de, en",2,7.17,540743
+nm2861211,Leonardo Alonso,2,"en, fr",2,7.17,40186
+nm0099134,Jacques Boudet,2,"en, fr",2,7.15,91222
+nm0108333,Nicolau Breyner,2,"en, ja",2,7.15,2893
+nm0214766,Piera Degli Esposti,2,"fr, it",2,7.15,22108
+nm0230649,Justus von Dohnányi,2,"en, fr",2,7.15,22393
+nm0382195,Louis Jean Heydt,2,"en, fr",2,7.15,8754
+nm0576888,Eva Maria Meineke,2,"en, fr",2,7.15,5592
+nm0716755,Jean Pierre Reguerraz,2,"en, tr",2,7.15,20019
+nm0797897,Orly Silbersatz,2,"en, he",2,7.15,6034
+nm0845270,Marianne Sägebrecht,2,"de, en",2,7.15,4619
+nm0873385,Massimo Troisi,2,"en, ja",2,7.15,2717
+nm0935487,George Winslow,2,"en, fr",2,7.15,50784
+nm12805230,Subash Selvam,2,"en, hi",2,7.15,4275
+nm1778495,Shizuka Itô,2,"en, fr",2,7.15,2429
+nm2793591,Astrid Bergès-Frisbey,2,"en, fr",2,7.15,147497
+nm4552893,Thomas Solivérès,2,"en, fr",2,7.15,12427
+nm8662914,Bayu Skak,2,"en, id",2,7.15,5446
+nm0034823,Jale Arikan,2,"de, en",2,7.15,5581
+nm0042083,Marie Ault,2,"en, hi",2,7.15,24969
+nm0482695,Suet Lam,2,"en, yue",2,7.15,13047
+nm0773308,Sebastian Urzendowsky,2,"en, ja",2,7.15,129734
+nm0927094,Nina Widerberg,2,"en, sv",2,7.15,5746
+nm2169779,Vimala Pons,2,"en, fr",2,7.15,77651
+nm2995197,Óscar de la Fuente,2,"en, fr",2,7.15,22441
+nm3071342,Kwok Wing Ha,2,"fr, ja",2,7.15,5050
+nm0134618,Marilyne Canto,2,"en, fr",2,7.15,6470
+nm0380304,Marcel Herrand,2,"en, fr",2,7.15,6548
+nm0525599,Jorge Luke,2,"en, fr",2,7.15,19552
+nm0668023,Edward Pawley,2,"en, fr",2,7.15,8999
+nm0759992,Rogério Samora,2,"en, ja",2,7.15,2893
+nm11040236,Eslam Al-Awadi,2,"en, ja",2,7.15,3221
+nm1522852,Ireneusz Czop,2,"en, ja",2,7.15,10224
+nm2570429,Jamie Campbell Bower,2,"en, nl",2,7.15,424931
+nm3092471,Marwan Kenzari,2,"en, fr",2,7.15,8582
+nm0230058,Ali Afshar,2,"en, es",2,7.15,5683
+nm0282505,Patrick Floersheim,2,"en, fr",2,7.15,18215
+nm0404021,Olivier Hussenot,2,"en, fr",2,7.15,20106
+nm0651807,Per Oscarsson,2,"en, sv",2,7.15,8297
+nm0653669,Kati Outinen,2,"en, fr",2,7.15,29499
+nm0662972,Larry Parks,2,"ca, en",2,7.15,5773
+nm5003477,Vincenzo Nemolato,2,"en, fr",2,7.15,32402
+nm0383022,Noriko Hidaka,2,"en, fr",2,7.15,2429
+nm0393109,Takako Honda,2,"en, fr",2,7.15,2429
+nm0766212,Hitomi Satô,2,"en, fr",2,7.15,162008
+nm0939315,Ruby Wong,2,"en, yue",2,7.15,13047
+nm1154749,Sofia Boutella,2,"en, fr",2,7.15,277120
+nm1450080,Nikos Hatzopoulos,2,"en, fr",2,7.15,21841
+nm3657567,Guillaume Marquet,2,"en, fr",2,7.15,24269
+nm0369115,Minas Hatzisavvas,2,"en, fr",2,7.15,21841
+nm0693493,Josep Maria Pou,2,"es, ja",2,7.15,15623
+nm0714876,Jemma Redgrave,2,"en, nl",2,7.15,107433
+nm0766370,Stefano Satta Flores,2,"en, ja",2,7.15,3320
+nm1196219,Vincent Rottiers,2,"en, fr",2,7.15,20916
+nm1494072,Michele Riondino,2,"en, nl",2,7.15,3309
+nm9652105,Devina Aureel,2,"en, id",2,7.15,5139
+nm0228686,Nina Divíšková,2,"en, ja",2,7.15,3889
+nm0275002,Rafael Ferro,2,"en, fr",2,7.15,14024
+nm1199153,Dipannita Sharma,2,"en, fr",2,7.15,2920
+nm1310709,Scott Mechlowicz,2,"bg, en",2,7.15,67034
+nm1328075,Hanan Savyon,2,"en, he",2,7.15,10627
+nm1397708,Wine Dierickx,2,"en, fr",2,7.15,27435
+nm1758682,Tansu Biçer,2,"de, en",2,7.15,10138
+nm3041056,Christian Friedel,2,"en, sv",2,7.15,204765
+nm5180933,Jo Min-soo,2,"en, fr",2,7.15,40436
+nm7224655,Lucie Gallo,2,"fr, yue",2,7.15,10644
+nm0074547,Thommy Berggren,2,"en, sv",2,7.15,5746
+nm0289317,Earle Foxe,2,"en, fr",2,7.15,2369
+nm0710810,José Raposo,2,"en, ja",2,7.15,5198
+nm3018580,Zoe Boyle,2,"en, fr",2,7.15,45125
+nm4216969,Marissa Anita,2,"en, id",2,7.15,3693
+nm0939255,Michael Wong,2,"fr, yue",2,7.15,3861
+nm0957482,István Znamenák,2,"en, ja",2,7.13,12216
+nm0001248,Zsa Zsa Gabor,2,"en, fr",2,7.1,11983
+nm0311655,Ina Geerts,2,"en, fr",2,7.1,12292
+nm0397034,Andrea Bræin Hovig,2,"en, fr",2,7.1,26309
+nm0838944,Honglei Sun,2,"en, fr",2,7.1,63529
+nm0859740,Florence Thomassin,2,"en, fr",2,7.1,2856
+nm4289479,Mao Ichimichi,2,"en, fr",2,7.1,19699
+nm0198705,Katelijne Damen,2,"en, ja",2,7.1,29417
+nm0445102,Claire Keim,2,"en, fr",2,7.1,12635
+nm0690303,Eusebio Poncela,2,"en, fr",2,7.1,16966
+nm0756651,Hubert Saint-Macary,2,"en, fr",2,7.1,15592
+nm1935952,Jördis Triebel,2,"de, en",2,7.1,4435
+nm2930714,Björn Gustafsson,2,"en, fr",2,7.1,20550
+nm8731846,Jess Darrow,2,"bs, en",2,7.1,308381
+nm0138987,Martine Carol,2,"en, fr",2,7.1,8383
+nm0706220,Cyril Raffaelli,2,"en, fr",2,7.1,517044
+nm1414931,Shondrella Avery,2,"bg, en",2,7.1,290479
+nm1666855,Raúl Arévalo,2,"en, ja",2,7.1,17527
+nm1738443,Marie-Julie Baup,2,"en, fr",2,7.1,12391
+nm2944424,Kazuyuki Okitsu,2,"en, ja",2,7.1,2555
+nm7904438,Tijmen Govaerts,2,"en, fr",2,7.1,22076
+nm9503879,Aurora Ribero,2,"fr, id",2,7.1,3342
+nm0322275,Aleksey Glazyrin,2,"en, ja",2,7.1,13716
+nm0497630,Lee Jung-hyun,2,"en, fr",2,7.1,24003
+nm0553648,Olivier Martinez,2,"en, fr",2,7.1,52808
+nm0719125,Tito Renaldo,2,"en, fr",2,7.1,9836
+nm1939580,Jakob Oftebro,2,"en, sv",2,7.1,86326
+nm0453623,Kim Myung-gon,2,"en, fr",2,7.1,21619
+nm0661118,Mario Pardo,2,"en, es",2,7.1,337114
+nm0738305,Henri Rollan,2,"en, fr",2,7.1,6033
+nm0812223,Hervé Sogne,2,"en, fr",2,7.1,45999
+nm0840772,Emma Suárez,2,"en, qbp",2,7.1,36746
+nm0843792,József Szarvas,2,"en, hi",2,7.1,6073
+nm0919616,Michael Welch,2,"en, fr",2,7.1,8323
+nm1203798,Jean-Phillipe Pearson,2,"en, fr",2,7.1,3363
+nm2345856,Eli Goree,2,"en, hi",2,7.1,80782
+nm5503172,Rodolfo Amorim,2,"en, fr",2,7.1,13421
+nm0007811,Gassan Abbas,2,"en, fr",2,7.1,6235
+nm0362815,Lumsden Hare,2,"en, fr",2,7.1,18164
+nm0539482,Annet Malherbe,2,"fr, ja",2,7.1,8159
+nm4983186,Jo Jung-suk,2,"en, fr",2,7.1,14078
+nm0004887,Nora Dunn,2,"en, fr",2,7.1,190692
+nm0283029,Giovani Florido,2,"en, es",2,7.1,30037
+nm0388732,Stig Henrik Hoff,2,"en, sv",2,7.1,54918
+nm0760664,Alberto San Juan,2,"ca, en",2,7.1,6250
+nm0071680,Clé Bennett,2,"en, ja",2,7.1,8200
+nm0196541,Jacques Dacqmine,2,"en, fr",2,7.1,8253
+nm0267188,Bernard Farcy,2,"en, fr",2,7.1,105080
+nm0397486,Mary Howard,2,"en, fr",2,7.1,4770
+nm0473602,Augustín Kubán,2,"cs, ja",2,7.1,2990
+nm0770449,Alexander Scheer,2,"de, en",2,7.1,3967
+nm0803840,Shelly Skandrani,2,"fr, he",2,7.1,10978
+nm0819825,Ove Sprogøe,2,"fr, ja",2,7.1,5800
+nm6543093,Geraldine Viswanathan,2,"bn, en",2,7.1,357883
+nm0022764,Ernesto Alterio,2,"de, en",2,7.05,15891
+nm0119100,Claus Bue,2,"en, fr",2,7.05,210635
+nm0518666,Alexandra London,2,"en, fr",2,7.05,6907
+nm0719914,Robin Renucci,2,"en, fr",2,7.05,145321
+nm0751518,Wyatt Russell,2,"bn, en",2,7.05,759155
+nm0821177,Robert Stadlober,2,"de, fr",2,7.05,7780
+nm0875364,Masane Tsukayama,2,"en, fr",2,7.05,23184
+nm0961121,Gabriella Hámori,2,"en, hi",2,7.05,2781
+nm1812637,Virginie Efira,2,"en, fr",2,7.05,78409
+nm0308299,Joaquín Garrido,2,"en, es",2,7.05,158791
+nm0377882,Judith Henry,2,"en, fr",2,7.05,7396
+nm0464170,Reinhard Kolldehoff,2,"en, fr",2,7.05,3774
+nm0482708,Wai Lam,2,"fr, ja",2,7.05,3913
+nm0502813,Marco Leonardi,2,"en, es",2,7.05,29561
+nm0532235,Seth MacFarlane,2,"de, en",2,7.05,519228
+nm1058565,Hwang Jung-min,2,"fr, hi",2,7.05,19188
+nm1331316,Soko,2,"en, fr",2,7.05,12505
+nm2666724,Shane Casey,2,"en, tr",2,7.05,15604
+nm6771561,Lee Dong-hwi,2,"en, ja",2,7.05,64636
+nm0018909,Konstantin Aleksandrov,2,"en, fr",2,7.05,57421
+nm0411683,Ayumi Ito,2,"en, fr",2,7.05,72844
+nm0481447,Michel Lagueyrie,2,"en, fr",2,7.05,6748
+nm0519839,Tanya Lopert,2,"en, fr",2,7.05,141094
+nm3698796,Pepa Gracia,2,"ja, tr",2,7.05,4579
+nm0105450,Marie Brassard,2,"en, fr",2,7.05,14303
+nm0459823,Rüdiger Klink,2,"de, sv",2,7.05,17200
+nm0471601,Anders Baasmo,2,"en, fr",2,7.05,56349
+nm0524399,Angela Luce,2,"en, fr",2,7.05,17767
+nm1410326,Liraz Charhi,2,"en, he",2,7.05,17377
+nm2917980,Antony Hickling,2,"en, fr",2,7.05,2676
+nm5338034,Giselle Eisenberg,2,"en, fr",2,7.05,45067
+nm0081457,Iwona Bielska,2,"es, fr",2,7.05,11145
+nm0722657,Serge Riaboukine,2,"en, fr",2,7.05,38896
+nm0441251,Katherine Kath,2,"en, fr",2,7.05,8946
+nm0473314,Ku Feng,2,"cmn, ja",2,7.05,10796
+nm0845393,Gérard Séty,2,"en, fr",2,7.05,45427
+nm0927907,Aurélien Wiik,2,"en, fr",2,7.05,4443
+nm1303233,Takayuki Yamada,2,"fr, hi",2,7.05,75280
+nm4808932,Lucas Prisor,2,"de, fr",2,7.05,13416
+nm7832704,Terrance Lau,2,"en, yue",2,7.05,2540
+nm0080966,Bruno Bichir,2,"ca, en",2,7.05,8489
+nm0157741,Frankie Chi-Leung Chan,2,"fr, yue",2,7.05,22386
+nm0161607,Andrzej Chyra,2,"en, yue",2,7.05,20856
+nm0669681,Josh Peck,2,"bg, en",2,7.05,70384
+nm1377449,Agnieszka Grochowska,2,"ja, yue",2,7.05,3897
+nm4264236,Bruna Cusí,2,"ca, en",2,7.05,14509
+nm6222172,Urko Olazabal,2,"en, es",2,7.05,5852
+nm0682495,Wendell Pierce,2,"bn, en",2,7.05,500005
+nm0332267,Guillaume Gouix,2,"en, fr",2,7.03,20707
+nm0096737,Hilda Borgström,2,"sr, sv",2,7.0,2962
+nm0436315,Salih Kalyon,2,"en, tr",2,7.0,105666
+nm0440661,Harold Kasket,2,"en, fr",2,7.0,24203
+nm0846052,Raffi Tavor,2,"en, he",2,7.0,5789
+nm1688399,Anton Noori,2,"de, en",2,7.0,6029
+nm2143950,Luca Marinelli,2,"en, fr",2,7.0,26671
+nm0148142,Caroline Cellier,2,"en, fr",2,7.0,5539
+nm0277916,Levana Finkelstein,2,"en, he",2,7.0,3528
+nm4365906,Olivier Lemaire,2,"fr, ja",2,7.0,5397
+nm0256628,Akira Emoto,2,"hi, ja",2,7.0,2221
+nm1560630,Han Yeo-reum,2,"en, hi",2,7.0,26870
+nm2115236,Melis Birkan,2,"en, ja",2,7.0,21501
+nm3141662,Frederikke Dahl Hansen,2,"en, fr",2,7.0,31871
+nm7557188,Anthony Bajon,2,"fr, ja",2,7.0,6581
+nm0465503,Louis Koo,2,"en, fr",2,7.0,13029
+nm0874684,Kenneth Tsang,2,"fr, yue",2,7.0,29926
+nm1711792,Christopher Schärf,2,"de, en",2,7.0,6029
+nm2939186,Liv Lisa Fries,2,"de, en",2,7.0,5364
+nm0205793,Ninetto Davoli,2,"en, qbn",2,7.0,31218
+nm0220908,Gérard Desarthe,2,"en, fr",2,7.0,3677
+nm0889511,Victor Varconi,2,"en, fr",2,7.0,5816
+nm0054007,Artur Barcis,2,"en, fr",2,7.0,5485
+nm0826611,Danuta Stenka,2,"en, fr",2,7.0,22898
+nm0088845,Anneke Blok,2,"fr, nl",2,7.0,22622
+nm0769791,Natalie Schafer,2,"en, fr",2,7.0,15293
+nm0840624,Kyôka Suzuki,2,"en, fr",2,7.0,5934
+nm11362072,Sara Montpetit,2,"en, fr",2,7.0,17231
+nm1142921,Evgeniy Tsyganov,2,"en, fr",2,7.0,20055
+nm1319395,Hoi-Pang Lo,2,"fr, yue",2,7.0,17584
+nm0618651,Samy Naceri,2,"en, fr",2,7.0,112483
