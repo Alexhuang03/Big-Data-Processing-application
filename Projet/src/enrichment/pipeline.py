@@ -1,668 +1,348 @@
-"""Data Enrichment Pipeline — IMDb Big Data Processing Project.
+"""Data enrichment: Wikipedia synopses and biographies for the top films.
 
-Enriches the top 10 feature films per genre per year (1980-2025) with:
-  - A Wikipedia synopsis for each film
-  - Wikipedia biographies for at least 3 principals (actors / directors)
+Scope (defaults): for every (genre, year) between 1980 and 2025, the 10 most
+voted feature films; for each film, the first 3 principals (IMDb billing
+order, archive footage excluded). Every limit is a parameter: the same code runs on the full dataset.
 
-All scraping uses the public MediaWiki REST API and respects rate limits.
-Cleaning, schema enforcement and final storage are handled by PySpark.
+Stages (all run by default, each can be run alone with --stage):
+    select   Spark: choose films and principals from the silver layer
+    gather   Python: download raw records (enrichment.wiki), resumable
+    build    Spark: parse, clean, enforce schema, join, write, summarise
 
-Outputs:
-    /home/jovyan/data/enrichment/raw_scrape/        raw JSON files (lineage)
-    /home/jovyan/data/enrichment/enriched_films/    Parquet — film synopses
-    /home/jovyan/data/enrichment/enriched_people/   Parquet — people bios
-    /home/jovyan/output/enrichment/                 CSV + Markdown summaries
+Storage (Docker volume, /home/jovyan/data/enrichment/):
+    selection/films, selection/principals      Parquet
+    raw/*.jsonl                                raw downloaded records
+    enriched_films, enriched_principals        final Parquet tables
+Reports: output/enrichment/*.csv / *.md
 
 Usage:
-    python -m enrichment.pipeline [--dry-run] [--min-votes N] [--top-n N]
+    python -m enrichment.pipeline [--stage select|gather|build|all]
+                                  [--top-n 10] [--principals 3]
+                                  [--first-year 1980] [--last-year 2025]
+                                  [--limit-films N]
 """
 import argparse
-import json
 import logging
-import os
-import time
-import urllib.parse
-from datetime import datetime, timezone
-from pathlib import Path
 
-import requests
-from pyspark.sql import DataFrame, Window
+from pyspark.sql import Window
 from pyspark.sql import functions as F
-from pyspark.sql.types import (
-    IntegerType,
-    StringType,
-    StructField,
-    StructType,
-)
+from pyspark.sql.types import LongType, StringType, StructField, StructType
 
-from common.datasets import feature_films, load_silver
-from common.paths import DATA_DIR, output_dir
+from common.datasets import explode_genres, feature_films, load_silver
+from common.paths import DATA_DIR
 from common.report import save_table
 from common.spark import get_spark
-
-# ---------------------------------------------------------------------------
-# Constants
-# ---------------------------------------------------------------------------
+from enrichment import wiki
 
 SECTION = "enrichment"
-
-# Year range scoped to the project specification
-YEAR_MIN = 1980
-YEAR_MAX = 2025
-
-# Top-N films selected per (genre, year) window
-TOP_N_PER_GENRE_YEAR = 10
-
-# Minimum principals kept per film (actors + directors, priority: directors first)
-MIN_PRINCIPALS = 3
-
-# Wikipedia endpoints
-WIKI_SUMMARY_URL = "https://en.wikipedia.org/api/rest_v1/page/summary/{title}"
-WIKI_SEARCH_URL = (
-    "https://en.wikipedia.org/w/api.php"
-    "?action=query&list=search&srsearch={query}&srlimit=1&format=json"
-)
-
-# Polite rate-limit pause between Wikipedia requests (seconds)
-RATE_LIMIT_SLEEP = 0.5
-
-# Output paths (inside the Docker container / DATA_DIR)
 ENRICHMENT_DIR = DATA_DIR / "enrichment"
-RAW_SCRAPE_DIR = ENRICHMENT_DIR / "raw_scrape"
-ENRICHED_FILMS_DIR = ENRICHMENT_DIR / "enriched_films"
-ENRICHED_PEOPLE_DIR = ENRICHMENT_DIR / "enriched_people"
+RAW_DIR = ENRICHMENT_DIR / "raw"
+SELECTED_FILMS = str(ENRICHMENT_DIR / "selection" / "films")
+SELECTED_PRINCIPALS = str(ENRICHMENT_DIR / "selection" / "principals")
+ENRICHED_FILMS = str(ENRICHMENT_DIR / "enriched_films")
+ENRICHED_PRINCIPALS = str(ENRICHMENT_DIR / "enriched_principals")
 
-# Request headers (Wikipedia policy: identify yourself)
-HTTP_HEADERS = {
-    "User-Agent": "IMDb-BigData-Project/1.0 (academic; contact: student@university.edu)"
+RAW_FILES = {
+    "wikidata_films": RAW_DIR / "wikidata_films.jsonl",
+    "wikidata_people": RAW_DIR / "wikidata_people.jsonl",
+    "wikipedia_films": RAW_DIR / "wikipedia_films.jsonl",
+    "wikipedia_people": RAW_DIR / "wikipedia_people.jsonl",
 }
 
-logger = logging.getLogger(__name__)
+# Section names used for the plot of a film on English Wikipedia.
+PLOT_HEADINGS = "Plot|Plot summary|Synopsis|Summary|Premise|Story|Storyline"
 
-# ---------------------------------------------------------------------------
-# Step 1 — Silver-layer selection
-# ---------------------------------------------------------------------------
+HTML_ENTITIES = {"&nbsp;": " ", "&ndash;": "–", "&mdash;": "—",
+                 "&amp;": "&", "&quot;": '"', "&minus;": "-", "&[a-z]+;": ""}
 
+# Explicit schemas: raw files are never read with schema inference.
+_STR = StringType()
+WIKIDATA_SCHEMA = StructType([StructField(n, _STR) for n in (
+    "imdb_id", "status", "wikidata_uri", "wikipedia_url", "birth_date",
+    "death_date", "birth_place", "retrieved_at")])
+WIKIPEDIA_FILM_SCHEMA = StructType(
+    [StructField(n, _STR) for n in ("imdb_id", "page_title")]
+    + [StructField("revision_id", LongType())]
+    + [StructField(n, _STR) for n in ("source_url", "wikitext", "status",
+                                      "retrieved_at")])
+WIKIPEDIA_PERSON_SCHEMA = StructType(
+    [StructField(n, _STR) for n in ("imdb_id", "page_title")]
+    + [StructField("revision_id", LongType())]
+    + [StructField(n, _STR) for n in ("source_url", "extract", "status",
+                                      "retrieved_at")])
 
-def select_top_films(spark) -> DataFrame:
-    """Return the top *TOP_N_PER_GENRE_YEAR* films per (genre, year) window.
-
-    Criteria:
-      - titleType == 'movie', runtimeMinutes > 40 (feature films)
-      - startYear between YEAR_MIN and YEAR_MAX (inclusive)
-      - averageRating is not null, numVotes > 0
-      - Ranked descending by averageRating within each (genre, year) window
-      - Top N per window retained; ties broken by numVotes desc
-
-    Returns a DataFrame with columns:
-        tconst, primaryTitle, startYear, genre, averageRating, numVotes, rank
-    """
-    movies = (
-        feature_films(spark, with_ratings=True)
-        .filter(F.col("averageRating").isNotNull())
-        .filter(F.col("numVotes") > 0)
-        .filter(F.col("startYear").between(YEAR_MIN, YEAR_MAX))
-        # Explode genres array so we have one row per (film, genre)
-        .withColumn("genre", F.explode("genres"))
-        .filter(F.col("genre").isNotNull())
-        .select("tconst", "primaryTitle", "startYear", "genre", "averageRating", "numVotes")
-    )
-
-    window = Window.partitionBy("genre", "startYear").orderBy(
-        F.desc("averageRating"), F.desc("numVotes")
-    )
-
-    top_films = (
-        movies.withColumn("rank", F.row_number().over(window))
-        .filter(F.col("rank") <= TOP_N_PER_GENRE_YEAR)
-    )
-
-    return top_films
+log = logging.getLogger(__name__)
 
 
 # ---------------------------------------------------------------------------
-# Step 2 — Principal selection
+# Stage 1: selection (Spark)
 # ---------------------------------------------------------------------------
 
+def select_films(spark, first_year, last_year, top_n, limit_films=None):
+    """Top N most voted feature films per (genre, year)."""
+    movies = (feature_films(spark)
+              .filter(F.col("startYear").between(first_year, last_year))
+              .filter(F.col("numVotes").isNotNull()))
+    ranking = Window.partitionBy("genre", "startYear").orderBy(
+        F.desc("numVotes"), F.desc("averageRating"), F.asc("tconst"))
+    selected = (explode_genres(movies)
+                .withColumn("rank_in_genre_year", F.row_number().over(ranking))
+                .filter(F.col("rank_in_genre_year") <= top_n)
+                .select("tconst", "primaryTitle", "startYear", "genre",
+                        "rank_in_genre_year", "averageRating", "numVotes"))
+    if limit_films:
+        keep = (selected.select("tconst").distinct()
+                .orderBy("tconst").limit(limit_films))
+        selected = selected.join(keep, "tconst", "left_semi")
+    return selected
 
-def select_principals(spark, top_films_df: DataFrame) -> DataFrame:
-    """Select at least MIN_PRINCIPALS principals per film (directors first, then actors).
 
-    Uses title_crew for directors and title_principals for actors/actresses.
+# Archive footage / sound credits are not real participation in the film.
+EXCLUDED_CATEGORIES = ["archive_footage", "archive_sound"]
 
-    Returns a DataFrame with columns:
-        tconst, nconst, primaryName, category   (category: 'director'|'actor'|'actress')
-    """
-    film_ids = top_films_df.select("tconst").distinct()
 
-    # Directors from title_crew
-    crew = (
-        load_silver(spark, "title_crew")
-        .filter(F.col("directors").isNotNull())
-        .select("tconst", F.explode("directors").alias("nconst"))
-        .filter(F.col("nconst").isNotNull())
-        .withColumn("category", F.lit("director"))
-    )
-
-    directors = crew.join(film_ids, "tconst", "inner")
-
-    # Actors / actresses from title_principals (ordering <= 3 gives top-billed cast)
-    principals = (
-        load_silver(spark, "title_principals")
-        .filter(F.col("category").isin("actor", "actress"))
-        .filter(F.col("ordering") <= 3)
-        .select("tconst", "nconst", "category")
-        .join(film_ids, "tconst", "inner")
-    )
-
-    # Union and deduplicate
-    all_principals = directors.unionByName(principals).distinct()
-
-    # Attach real names
+def select_principals(spark, films, per_film):
+    """First principals of each film in IMDb billing order."""
+    film_ids = films.select("tconst").distinct()
     names = load_silver(spark, "name_basics").select("nconst", "primaryName")
-    with_names = all_principals.join(names, "nconst", "left").withColumn(
-        "primaryName", F.coalesce(F.col("primaryName"), F.col("nconst"))
+    billing = Window.partitionBy("tconst").orderBy("ordering")
+    return (load_silver(spark, "title_principals")
+            .join(film_ids, "tconst", "left_semi")
+            .filter(~F.col("category").isin(EXCLUDED_CATEGORIES))
+            .withColumn("principal_rank", F.row_number().over(billing))
+            .filter(F.col("principal_rank") <= per_film)
+            .join(names, "nconst", "left")
+            .select("tconst", "principal_rank", "nconst", "primaryName", "category"))
+
+
+def run_select(spark, args):
+    films = select_films(spark, args.first_year, args.last_year, args.top_n,
+                         args.limit_films)
+    films.write.mode("overwrite").parquet(SELECTED_FILMS)
+    films = spark.read.parquet(SELECTED_FILMS)
+    principals = select_principals(spark, films, args.principals)
+    principals.write.mode("overwrite").parquet(SELECTED_PRINCIPALS)
+    principals = spark.read.parquet(SELECTED_PRINCIPALS)
+    print(f"Selected {films.select('tconst').distinct().count():,} films "
+          f"({films.count():,} film-genre-year rows) and "
+          f"{principals.select('nconst').distinct().count():,} people "
+          f"({principals.count():,} film-person rows)")
+
+
+# ---------------------------------------------------------------------------
+# Stage 2: gathering (plain Python, outside Spark)
+# ---------------------------------------------------------------------------
+
+def _distinct_ids(spark, path, column):
+    df = spark.read.parquet(path).select(column).distinct()
+    return [row[column] for row in df.toLocalIterator()]
+
+
+def run_gather(spark):
+    client = wiki.PoliteClient()
+    film_ids = _distinct_ids(spark, SELECTED_FILMS, "tconst")
+    person_ids = _distinct_ids(spark, SELECTED_PRINCIPALS, "nconst")
+    wiki.fetch_wikidata(client, film_ids, "films", RAW_FILES["wikidata_films"])
+    wiki.fetch_wikidata(client, person_ids, "people", RAW_FILES["wikidata_people"])
+    wiki.fetch_film_wikitext(client, RAW_FILES["wikidata_films"],
+                             RAW_FILES["wikipedia_films"])
+    wiki.fetch_person_extracts(client, RAW_FILES["wikidata_people"],
+                               RAW_FILES["wikipedia_people"])
+    print(f"Gathering done: {client.requests_sent:,} HTTP requests sent")
+
+
+# ---------------------------------------------------------------------------
+# Stage 3: cleaning and enrichment (Spark)
+# ---------------------------------------------------------------------------
+
+def clean_wikitext(column):
+    """Turn MediaWiki markup into plain text with Spark regular expressions."""
+    c = F.regexp_replace(column, r"(?s)<!--.*?-->", "")
+    c = F.regexp_replace(c, r"(?is)<ref[^>]*/>", "")
+    c = F.regexp_replace(c, r"(?is)<ref[^>]*>.*?</ref>", "")
+    for _ in range(4):  # nested templates {{...{{...}}...}}
+        c = F.regexp_replace(c, r"\{\{[^{}]*\}\}", "")
+    c = F.regexp_replace(c, r"(?s)\{\|.*?\|\}", "")  # tables
+    for _ in range(3):  # files may contain links in their caption
+        c = F.regexp_replace(c, r"(?i)\[\[(?:File|Image):[^\[\]]*\]\]", "")
+        c = F.regexp_replace(c, r"\[\[(?:[^\[\]|]*\|)?([^\[\]|]*)\]\]", "$1")
+    c = F.regexp_replace(c, r"\[https?://[^\s\]]+\s*([^\]]*)\]", "$1")
+    c = F.regexp_replace(c, r"'{2,}", "")
+    c = F.regexp_replace(c, r"(?s)<[^>]+>", "")
+    for entity, char in HTML_ENTITIES.items():
+        c = F.regexp_replace(c, entity, char)
+    c = F.regexp_replace(c, r"(?m)^=+[^=\n]*=+\s*$", "")   # sub-headings
+    c = F.regexp_replace(c, r"(?m)^[*#:;]+\s*", "")         # list markers
+    return clean_text(c)
+
+
+def clean_text(column):
+    c = F.regexp_replace(column, r"\(\s*[;,]?\s*\)", "")   # emptied parentheses
+    c = F.trim(F.regexp_replace(c, r"\s+", " "))
+    return F.when(F.length(c) > 0, c)
+
+
+def build_films(spark, principals_per_film):
+    films = spark.read.parquet(SELECTED_FILMS)
+    principal_counts = (spark.read.parquet(SELECTED_PRINCIPALS)
+                        .groupBy("tconst").agg(F.count("*").alias("principals_found")))
+    wikidata = spark.read.schema(WIKIDATA_SCHEMA).json(str(RAW_FILES["wikidata_films"]))
+    pages = spark.read.schema(WIKIPEDIA_FILM_SCHEMA).json(str(RAW_FILES["wikipedia_films"]))
+
+    plot_regex = rf"(?msi)^==\s*(?:{PLOT_HEADINGS})\s*==[ \t]*$(.*?)(?=^==[^=]|\z)"
+    lead_regex = r"(?ms)\A(.*?)(?=^==|\z)"
+    pages = (pages.dropDuplicates(["imdb_id"])
+             .withColumn("plot", clean_wikitext(F.regexp_extract("wikitext", plot_regex, 1)))
+             .withColumn("lead", clean_wikitext(F.regexp_extract("wikitext", lead_regex, 1)))
+             .select(F.col("imdb_id").alias("tconst"), "page_title", "revision_id",
+                     "source_url", "plot", "lead",
+                     F.col("status").alias("page_status"),
+                     F.col("retrieved_at").alias("page_retrieved_at")))
+    wikidata = (wikidata.dropDuplicates(["imdb_id"])
+                .select(F.col("imdb_id").alias("tconst"),
+                        F.col("status").alias("wikidata_status"),
+                        "wikidata_uri", "wikipedia_url"))
+
+    df = (films.join(wikidata, "tconst", "left").join(pages, "tconst", "left")
+          .join(principal_counts, "tconst", "left")
+          .fillna(0, ["principals_found"]))
+    synopsis = F.coalesce("plot", "lead")
+    note = (F.when(F.col("wikidata_status").isNull(), "not gathered yet")
+            .when(F.col("wikidata_status") == "no_wikidata_item",
+                  "no Wikidata item linked to this IMDb id")
+            .when(F.col("wikipedia_url").isNull(), "no English Wikipedia article")
+            .when(F.col("page_status") != "ok", "Wikipedia page could not be read")
+            .when(F.col("plot").isNotNull(), None)
+            .when(F.col("lead").isNotNull(), "no plot section, lead section used")
+            .otherwise("article has no usable text"))
+    return df.select(
+        "tconst", "primaryTitle", "startYear", "genre", "rank_in_genre_year",
+        "averageRating", "numVotes",
+        synopsis.alias("synopsis"),
+        F.when(F.col("plot").isNotNull(), "plot")
+         .when(F.col("lead").isNotNull(), "lead").alias("synopsis_type"),
+        "page_title", "revision_id", "wikidata_uri",
+        # Lineage: exact Wikipedia revision, else the Wikidata item, else the query service.
+        F.coalesce("source_url", "wikidata_uri", F.lit(wiki.SPARQL_URL)).alias("lineage"),
+        F.col("page_retrieved_at").cast("timestamp").alias("retrieved_at"),
+        note.alias("enrichment_note"),
+        "principals_found",
+        F.when(F.col("principals_found") < principals_per_film,
+               F.concat(F.lit("only "), F.col("principals_found").cast("string"),
+                        F.lit(" principal(s) listed on IMDb"))).alias("principals_note"),
     )
 
-    # Guarantee at least MIN_PRINCIPALS per film: rank directors first (1), then cast (2)
-    priority = Window.partitionBy("tconst").orderBy(
-        F.when(F.col("category") == "director", 1).otherwise(2),
-        "nconst",
+
+def _to_date(column):
+    return F.substring(column, 1, 10).try_cast("date")
+
+
+def build_principals(spark):
+    principals = spark.read.parquet(SELECTED_PRINCIPALS)
+    wikidata = spark.read.schema(WIKIDATA_SCHEMA).json(str(RAW_FILES["wikidata_people"]))
+    pages = spark.read.schema(WIKIPEDIA_PERSON_SCHEMA).json(str(RAW_FILES["wikipedia_people"]))
+
+    wikidata = (wikidata.dropDuplicates(["imdb_id"])
+                .select(F.col("imdb_id").alias("nconst"),
+                        F.col("status").alias("wikidata_status"),
+                        "wikidata_uri", "wikipedia_url",
+                        _to_date("birth_date").alias("birth_date"),
+                        _to_date("death_date").alias("death_date"),
+                        F.trim("birth_place").alias("birth_place")))
+    pages = (pages.dropDuplicates(["imdb_id"])
+             .select(F.col("imdb_id").alias("nconst"), "page_title", "revision_id",
+                     "source_url", clean_text(F.col("extract")).alias("biography"),
+                     F.col("status").alias("page_status"),
+                     F.col("retrieved_at").cast("timestamp").alias("retrieved_at")))
+
+    df = principals.join(wikidata, "nconst", "left").join(pages, "nconst", "left")
+    note = (F.when(F.col("wikidata_status").isNull(), "not gathered yet")
+            .when(F.col("wikidata_status") == "no_wikidata_item",
+                  "no Wikidata item linked to this IMDb id")
+            .when(F.col("wikipedia_url").isNull(),
+                  "no English Wikipedia article (Wikidata facts only)")
+            .when(F.col("page_status") != "ok", "Wikipedia page could not be read")
+            .when(F.col("biography").isNull(), "article has no usable text"))
+    return df.select(
+        "tconst", "principal_rank", "nconst", "primaryName", "category",
+        "biography", "birth_date", "death_date", "birth_place",
+        "page_title", "revision_id", "wikidata_uri",
+        F.coalesce("source_url", "wikidata_uri", F.lit(wiki.SPARQL_URL)).alias("lineage"),
+        "retrieved_at",
+        note.alias("enrichment_note"),
     )
-    result = (
-        with_names.withColumn("_pri", F.row_number().over(priority))
-        .filter(F.col("_pri") <= MIN_PRINCIPALS)
-        .drop("_pri")
-    )
-
-    return result
 
 
-# ---------------------------------------------------------------------------
-# Step 3 — Wikipedia scraping helpers
-# ---------------------------------------------------------------------------
+def coverage(df, key):
+    """Share of distinct films / people per enrichment result."""
+    distinct = df.dropDuplicates([key])
+    total = distinct.count()
+    return (distinct
+            .groupBy(F.coalesce("enrichment_note", F.lit("enriched")).alias("result"))
+            .agg(F.count("*").alias("count"))
+            .withColumn("pct", 100 * F.col("count") / total)
+            .orderBy(F.desc("count")))
 
 
-def _wiki_summary_by_title(title: str) -> dict | None:
-    """Hit the REST summary endpoint for an exact page title."""
-    encoded = urllib.parse.quote(title.replace(" ", "_"), safe="")
-    url = WIKI_SUMMARY_URL.format(title=encoded)
-    try:
-        resp = requests.get(url, headers=HTTP_HEADERS, timeout=10)
-        if resp.status_code == 200:
-            data = resp.json()
-            return {
-                "extract": data.get("extract"),
-                "source_url": data.get("content_urls", {}).get("desktop", {}).get("page", url),
-            }
-    except requests.RequestException as exc:
-        logger.warning("REST summary request failed for %r: %s", title, exc)
-    return None
+def run_build(spark, principals_per_film):
+    films = build_films(spark, principals_per_film)
+    films.write.mode("overwrite").parquet(ENRICHED_FILMS)
+    films = spark.read.parquet(ENRICHED_FILMS)
+    principals = build_principals(spark)
+    principals.write.mode("overwrite").parquet(ENRICHED_PRINCIPALS)
+    principals = spark.read.parquet(ENRICHED_PRINCIPALS)
 
+    save_table(coverage(films, "tconst").toPandas(), SECTION, "film_coverage")
+    save_table(coverage(principals, "nconst").toPandas(), SECTION, "principal_coverage")
 
-def _wiki_search(query: str) -> dict | None:
-    """Full-text search fallback using the MediaWiki action API."""
-    url = WIKI_SEARCH_URL.format(query=urllib.parse.quote(query))
-    try:
-        resp = requests.get(url, headers=HTTP_HEADERS, timeout=10)
-        if resp.status_code != 200:
-            return None
-        pages = resp.json().get("query", {}).get("search", [])
-        if not pages:
-            return None
-        best_title = pages[0]["title"]
-        return _wiki_summary_by_title(best_title)
-    except requests.RequestException as exc:
-        logger.warning("MediaWiki search failed for %r: %s", query, exc)
-    return None
+    by_decade = (films.dropDuplicates(["tconst"])
+                 .withColumn("decade", (F.floor(F.col("startYear") / 10) * 10).cast("int"))
+                 .groupBy("decade").agg(
+                     F.count("*").alias("films"),
+                     (100 * F.avg(F.col("synopsis").isNotNull().cast("int"))).alias("with_synopsis_pct"),
+                     (100 * F.avg(F.coalesce((F.col("synopsis_type") == "plot").cast("int"), F.lit(0)))).alias("with_plot_pct"))
+                 .orderBy("decade"))
+    save_table(by_decade.toPandas(), SECTION, "film_coverage_by_decade")
 
-
-def fetch_wikipedia_synopsis(title: str, year: int | None = None) -> dict:
-    """Fetch a film synopsis from Wikipedia.
-
-    Strategy:
-      1. Try exact title match via the REST summary endpoint.
-      2. If that fails and a year is known, try "Title (year film)".
-      3. Fall back to a full-text search query.
-      4. If nothing found, return a structured not-found record.
-
-    Returns a dict with keys:
-        title, year, synopsis, synopsis_source, source_url, scraped_at
-    """
-    scraped_at = datetime.now(timezone.utc).isoformat()
-    attempts = [title]
-    if year:
-        attempts.append(f"{title} ({year} film)")
-
-    for attempt in attempts:
-        result = _wiki_summary_by_title(attempt)
-        time.sleep(RATE_LIMIT_SLEEP)
-        if result and result.get("extract"):
-            return {
-                "title": title,
-                "year": year,
-                "synopsis": result["extract"],
-                "synopsis_source": "wikipedia",
-                "source_url": result["source_url"],
-                "scraped_at": scraped_at,
-            }
-
-    # Full-text search fallback
-    query = f"{title} film" + (f" {year}" if year else "")
-    result = _wiki_search(query)
-    time.sleep(RATE_LIMIT_SLEEP)
-    if result and result.get("extract"):
-        return {
-            "title": title,
-            "year": year,
-            "synopsis": result["extract"],
-            "synopsis_source": "wikipedia_search",
-            "source_url": result["source_url"],
-            "scraped_at": scraped_at,
-        }
-
-    return {
-        "title": title,
-        "year": year,
-        "synopsis": None,
-        "synopsis_source": "not_found",
-        "source_url": None,
-        "scraped_at": scraped_at,
-    }
-
-
-def fetch_wikipedia_bio(name: str) -> dict:
-    """Fetch a person's biography extract from Wikipedia.
-
-    Strategy: exact name, then full-text search.
-
-    Returns a dict with keys:
-        name, bio, bio_source, source_url, scraped_at
-    """
-    scraped_at = datetime.now(timezone.utc).isoformat()
-
-    result = _wiki_summary_by_title(name)
-    time.sleep(RATE_LIMIT_SLEEP)
-    if result and result.get("extract"):
-        return {
-            "name": name,
-            "bio": result["extract"],
-            "bio_source": "wikipedia",
-            "source_url": result["source_url"],
-            "scraped_at": scraped_at,
-        }
-
-    result = _wiki_search(name)
-    time.sleep(RATE_LIMIT_SLEEP)
-    if result and result.get("extract"):
-        return {
-            "name": name,
-            "bio": result["extract"],
-            "bio_source": "wikipedia_search",
-            "source_url": result["source_url"],
-            "scraped_at": scraped_at,
-        }
-
-    return {
-        "name": name,
-        "bio": None,
-        "bio_source": "not_found",
-        "source_url": None,
-        "scraped_at": scraped_at,
-    }
+    film_sample = (films.filter(F.col("synopsis").isNotNull())
+                   .dropDuplicates(["tconst"]).orderBy(F.desc("numVotes")).limit(10)
+                   .select("tconst", "primaryTitle", "startYear", "synopsis_type",
+                           F.concat(F.substring("synopsis", 1, 200), F.lit("...")).alias("synopsis"),
+                           "lineage"))
+    save_table(film_sample.toPandas(), SECTION, "film_sample")
+    person_sample = (principals.filter(F.col("biography").isNotNull())
+                     .dropDuplicates(["nconst"]).orderBy("nconst").limit(10)
+                     .select("nconst", "primaryName", "category", "birth_date", "birth_place",
+                             F.concat(F.substring("biography", 1, 160), F.lit("...")).alias("biography"),
+                             "lineage"))
+    save_table(person_sample.toPandas(), SECTION, "principal_sample")
 
 
 # ---------------------------------------------------------------------------
-# Step 4 — Raw JSON persistence
+# Entry point
 # ---------------------------------------------------------------------------
 
-
-def _ensure_dirs() -> None:
-    """Create all output directories if they don't exist."""
-    for d in (RAW_SCRAPE_DIR, ENRICHED_FILMS_DIR, ENRICHED_PEOPLE_DIR):
-        d.mkdir(parents=True, exist_ok=True)
-
-
-def _save_raw(records: list[dict], filename: str) -> Path:
-    """Append-write a list of dicts to a newline-delimited JSON file."""
-    path = RAW_SCRAPE_DIR / filename
-    with path.open("w", encoding="utf-8") as fh:
-        for rec in records:
-            fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
-    logger.info("Saved %d raw records → %s", len(records), path)
-    return path
-
-
-# ---------------------------------------------------------------------------
-# Step 5 — Spark schema enforcement and enrichment
-# ---------------------------------------------------------------------------
-
-FILM_SCHEMA = StructType(
-    [
-        StructField("tconst", StringType(), True),
-        StructField("title", StringType(), True),
-        StructField("year", IntegerType(), True),
-        StructField("genre", StringType(), True),
-        StructField("averageRating", StringType(), True),   # read as string, cast later
-        StructField("rank", StringType(), True),
-        StructField("synopsis", StringType(), True),
-        StructField("synopsis_source", StringType(), True),
-        StructField("source_url", StringType(), True),
-        StructField("scraped_at", StringType(), True),
-    ]
-)
-
-PEOPLE_SCHEMA = StructType(
-    [
-        StructField("tconst", StringType(), True),
-        StructField("nconst", StringType(), True),
-        StructField("name", StringType(), True),
-        StructField("category", StringType(), True),
-        StructField("bio", StringType(), True),
-        StructField("bio_source", StringType(), True),
-        StructField("source_url", StringType(), True),
-        StructField("scraped_at", StringType(), True),
-    ]
-)
-
-
-def enrich_with_spark(spark, raw_records_path: str, record_type: str = "films") -> DataFrame:
-    """Read raw JSON records and return a typed, cleaned Spark DataFrame.
-
-    Args:
-        spark:            Active SparkSession.
-        raw_records_path: Path to the newline-delimited JSON file.
-        record_type:      'films' or 'people'.
-
-    Returns:
-        A strongly-typed Spark DataFrame conforming to the enrichment schema,
-        with null-safe casts and deduplicated rows.
-    """
-    schema = FILM_SCHEMA if record_type == "films" else PEOPLE_SCHEMA
-
-    df = spark.read.schema(schema).json(raw_records_path)
-
-    # Cast numeric columns that were read as strings
-    if record_type == "films":
-        df = (
-            df.withColumn("year", F.col("year").cast(IntegerType()))
-            .withColumn("averageRating", F.col("averageRating").cast("double"))
-            .withColumn("rank", F.col("rank").cast(IntegerType()))
-            # Normalise synopsis: strip leading/trailing whitespace
-            .withColumn("synopsis", F.trim(F.col("synopsis")))
-            # Flag empty synopses as null
-            .withColumn(
-                "synopsis",
-                F.when(F.length(F.col("synopsis")) == 0, F.lit(None)).otherwise(F.col("synopsis")),
-            )
-            .withColumn(
-                "synopsis_source",
-                F.when(F.col("synopsis").isNull(), F.lit("not_found")).otherwise(
-                    F.col("synopsis_source")
-                ),
-            )
-        )
-    else:
-        df = (
-            df.withColumn("bio", F.trim(F.col("bio")))
-            .withColumn(
-                "bio",
-                F.when(F.length(F.col("bio")) == 0, F.lit(None)).otherwise(F.col("bio")),
-            )
-            .withColumn(
-                "bio_source",
-                F.when(F.col("bio").isNull(), F.lit("not_found")).otherwise(F.col("bio_source")),
-            )
-        )
-
-    # Drop duplicates on the natural key
-    key_cols = ["tconst", "title", "genre"] if record_type == "films" else ["tconst", "nconst"]
-    df = df.dropDuplicates(key_cols)
-
-    return df
-
-
-# ---------------------------------------------------------------------------
-# Step 6 — Summary helpers
-# ---------------------------------------------------------------------------
-
-
-def _build_film_summary(enriched_df: DataFrame) -> "pandas.DataFrame":
-    """Return a small pandas summary suitable for save_table."""
-    summary = (
-        enriched_df.groupBy("synopsis_source")
-        .agg(
-            F.count("*").alias("film_records"),
-            F.countDistinct("tconst").alias("unique_films"),
-        )
-        .orderBy(F.desc("film_records"))
-        .toPandas()
-    )
-    return summary
-
-
-def _build_people_summary(enriched_df: DataFrame) -> "pandas.DataFrame":
-    summary = (
-        enriched_df.groupBy("bio_source", "category")
-        .agg(
-            F.count("*").alias("people_records"),
-            F.countDistinct("nconst").alias("unique_people"),
-        )
-        .orderBy(F.desc("people_records"))
-        .toPandas()
-    )
-    return summary
-
-
-# ---------------------------------------------------------------------------
-# Main orchestration
-# ---------------------------------------------------------------------------
-
-
-def main() -> None:
-    """End-to-end enrichment pipeline.
-
-    Phases:
-      1. Select top films from the silver layer.
-      2. Select principals for those films.
-      3. Scrape Wikipedia for synopses and biographies.
-      4. Save raw JSON files for lineage / reproducibility.
-      5. Build typed Spark DataFrames with schema enforcement.
-      6. Write Parquet outputs.
-      7. Write CSV + Markdown summaries.
-    """
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="Process only the first 20 films (for testing without hitting Wikipedia at scale).",
-    )
-    parser.add_argument(
-        "--min-votes",
-        type=int,
-        default=100,
-        help="Minimum numVotes for a film to be considered (default: 100).",
-    )
-    parser.add_argument(
-        "--top-n",
-        type=int,
-        default=25,
-        help="Top-N rows in the summary tables (default: 25).",
-    )
+def main():
+    parser = argparse.ArgumentParser(description=__doc__,
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--stage", choices=["select", "gather", "build", "all"], default="all")
+    parser.add_argument("--first-year", type=int, default=1980)
+    parser.add_argument("--last-year", type=int, default=2025)
+    parser.add_argument("--top-n", type=int, default=10, help="films per genre and year")
+    parser.add_argument("--principals", type=int, default=3, help="principals per film")
+    parser.add_argument("--limit-films", type=int, default=None,
+                        help="keep only N films (quick test run)")
     args = parser.parse_args()
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s [%(levelname)s] %(name)s — %(message)s",
-    )
-
-    _ensure_dirs()
-
-    spark = get_spark("imdb-enrichment-pipeline")
-
-    # ------------------------------------------------------------------
-    # Phase 1 — Select top films
-    # ------------------------------------------------------------------
-    print("=== Phase 1: Selecting top films from silver layer ===")
-    top_films_df = (
-        select_top_films(spark)
-        .filter(F.col("numVotes") >= args.min_votes)
-        .cache()
-    )
-
-    if args.dry_run:
-        top_films_df = top_films_df.limit(20).cache()
-        print("  [DRY RUN] Limited to 20 films.")
-
-    total_films = top_films_df.count()
-    print(f"  → {total_films:,} (film, genre) pairs selected.")
-
-    # ------------------------------------------------------------------
-    # Phase 2 — Select principals
-    # ------------------------------------------------------------------
-    print("=== Phase 2: Selecting principals ===")
-    principals_df = select_principals(spark, top_films_df).cache()
-    total_principals = principals_df.count()
-    print(f"  → {total_principals:,} principal records selected.")
-
-    # ------------------------------------------------------------------
-    # Phase 3 — Scrape Wikipedia (Python, respecting rate limits)
-    # ------------------------------------------------------------------
-    print("=== Phase 3a: Scraping film synopses from Wikipedia ===")
-
-    # Collect unique (tconst, primaryTitle, startYear) pairs to avoid duplicate requests
-    films_to_scrape = (
-        top_films_df.select("tconst", "primaryTitle", "startYear", "genre", "averageRating", "rank")
-        .dropDuplicates(["tconst"])          # one synopsis per film, not per genre
-        .toPandas()
-    )
-
-    # Also keep genre/rank info to embed in raw records
-    genre_rank_pd = top_films_df.select("tconst", "genre", "rank", "averageRating").toPandas()
-
-    synopsis_records: list[dict] = []
-    for _, row in films_to_scrape.iterrows():
-        title = str(row["primaryTitle"])
-        year = int(row["startYear"]) if row["startYear"] is not None else None
-        tconst = str(row["tconst"])
-
-        rec = fetch_wikipedia_synopsis(title, year)
-        rec["tconst"] = tconst
-        synopsis_records.append(rec)
-
-    # Merge genre / rank information back
-    genre_map: dict[str, list] = {}
-    for _, row in genre_rank_pd.iterrows():
-        genre_map.setdefault(str(row["tconst"]), []).append(
-            {"genre": row["genre"], "rank": int(row["rank"]), "averageRating": float(row["averageRating"])}
-        )
-
-    # Flatten: one record per (tconst, genre)
-    flat_synopsis_records: list[dict] = []
-    for rec in synopsis_records:
-        tconst = rec["tconst"]
-        for gentry in genre_map.get(tconst, [{"genre": None, "rank": None, "averageRating": None}]):
-            flat_rec = dict(rec)
-            flat_rec["genre"] = gentry["genre"]
-            flat_rec["rank"] = gentry["rank"]
-            flat_rec["averageRating"] = gentry["averageRating"]
-            flat_synopsis_records.append(flat_rec)
-
-    synopsis_path = _save_raw(flat_synopsis_records, "film_synopses.jsonl")
-    print(f"  → {len(flat_synopsis_records):,} synopsis records saved to {synopsis_path}")
-
-    print("=== Phase 3b: Scraping people biographies from Wikipedia ===")
-    people_to_scrape = (
-        principals_df.select("tconst", "nconst", "primaryName", "category")
-        .toPandas()
-    )
-
-    bio_records: list[dict] = []
-    seen_nconst: set[str] = set()
-
-    for _, row in people_to_scrape.iterrows():
-        nconst = str(row["nconst"])
-        tconst = str(row["tconst"])
-        name = str(row["primaryName"])
-        category = str(row["category"])
-
-        # Scrape bio only once per person; reuse across films
-        if nconst not in seen_nconst:
-            bio_rec = fetch_wikipedia_bio(name)
-            seen_nconst.add(nconst)
-        else:
-            # Reuse cached result (not re-fetched; we re-emit the stub with this tconst)
-            bio_rec = {
-                "name": name,
-                "bio": None,
-                "bio_source": "cached",
-                "source_url": None,
-                "scraped_at": datetime.now(timezone.utc).isoformat(),
-            }
-
-        bio_rec["tconst"] = tconst
-        bio_rec["nconst"] = nconst
-        bio_rec["category"] = category
-        bio_records.append(bio_rec)
-
-    bio_path = _save_raw(bio_records, "people_bios.jsonl")
-    print(f"  → {len(bio_records):,} bio records saved to {bio_path}")
-
-    # ------------------------------------------------------------------
-    # Phase 4 — Spark schema enforcement
-    # ------------------------------------------------------------------
-    print("=== Phase 4: Building typed Spark DataFrames ===")
-    enriched_films = enrich_with_spark(spark, str(synopsis_path), record_type="films")
-    enriched_people = enrich_with_spark(spark, str(bio_path), record_type="people")
-
-    print(f"  Films schema:  {', '.join(enriched_films.columns)}")
-    print(f"  People schema: {', '.join(enriched_people.columns)}")
-
-    # ------------------------------------------------------------------
-    # Phase 5 — Write Parquet outputs
-    # ------------------------------------------------------------------
-    print("=== Phase 5: Writing Parquet outputs ===")
-    (enriched_films
-        .write
-        .mode("overwrite")
-        .partitionBy("genre", "year")
-        .parquet(str(ENRICHED_FILMS_DIR)))
-    print(f"  → Enriched films written to {ENRICHED_FILMS_DIR}")
-
-    (enriched_people
-        .write
-        .mode("overwrite")
-        .parquet(str(ENRICHED_PEOPLE_DIR)))
-    print(f"  → Enriched people written to {ENRICHED_PEOPLE_DIR}")
-
-    # ------------------------------------------------------------------
-    # Phase 6 — Summary CSV + Markdown
-    # ------------------------------------------------------------------
-    print("=== Phase 6: Writing summary reports ===")
-
-    film_summary = _build_film_summary(enriched_films)
-    save_table(film_summary, SECTION, "enrichment_film_synopsis_summary")
-
-    people_summary = _build_people_summary(enriched_people)
-    save_table(people_summary, SECTION, "enrichment_people_bio_summary")
-
-    # Sample of enriched films (top N by rating)
-    top_films_sample = (
-        enriched_films
-        .filter(F.col("synopsis_source") != "not_found")
-        .orderBy(F.desc("averageRating"))
-        .limit(args.top_n)
-        .select("tconst", "title", "year", "genre", "averageRating", "rank", "synopsis_source", "source_url")
-        .toPandas()
-    )
-    save_table(top_films_sample, SECTION, "enrichment_top_films_sample")
-
+    spark = get_spark("imdb-enrichment")
+    if args.stage in ("select", "all"):
+        run_select(spark, args)
+    if args.stage in ("gather", "all"):
+        run_gather(spark)
+    if args.stage in ("build", "all"):
+        run_build(spark, args.principals)
     spark.stop()
-
-    print("=== Enrichment pipeline complete. ===")
-    print(f"  Parquet films  → {ENRICHED_FILMS_DIR}")
-    print(f"  Parquet people → {ENRICHED_PEOPLE_DIR}")
-    print(f"  Reports        → {output_dir(SECTION)}")
 
 
 if __name__ == "__main__":

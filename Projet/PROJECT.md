@@ -126,21 +126,42 @@ bash scripts/run_exploration.sh
 
 ### 3. Data enrichment
 
-Enrich the top 10 feature films per genre per year (1980–2025) with Wikipedia synopses and
-biographies of at least 3 principals per film:
+Enriches the 10 most voted feature films per genre and year (1980 to 2025)
+with a Wikipedia plot synopsis, and the first 3 principals of each film with a
+Wikipedia biography and Wikidata facts (birth date, birth place, death date).
+Films and people are matched to their exact Wikipedia article through their
+IMDb id on Wikidata (property P345). Requires the silver layer (step 1) and
+an internet connection. The full run sends about 1,000 HTTP requests, one per
+second (about 20 to 30 minutes).
 
 ```bash
-bash scripts/run_enrichment.sh
+bash scripts/run_enrichment.sh                      # full run
+bash scripts/run_enrichment.sh --limit-films 30     # quick test
 ```
 
-Or step by step:
+The pipeline has three stages that can be run alone with `--stage`:
 
 ```bash
-docker exec imdb_spark python -m enrichment.pipeline
+docker exec imdb_spark python -m enrichment.pipeline --stage select   # Spark: films and principals
+docker exec imdb_spark python -m enrichment.pipeline --stage gather   # download, resumable
+docker exec imdb_spark python -m enrichment.pipeline --stage build    # Spark: clean, join, write
 ```
 
-Results are written to `output/enrichment/` and enriched Parquet tables to the
-`imdb_data` volume under `enrichment/`.
+If the download stops (network error, rate limit), run the command again:
+records already downloaded are kept and not requested again. To start from
+scratch, delete the folder: `docker exec imdb_spark rm -rf /home/jovyan/data/enrichment`.
+
+Every scope limit is a parameter (`--top-n`, `--principals`, `--first-year`,
+`--last-year`), so the same code runs on the whole dataset.
+
+Outputs:
+
+- `output/enrichment/`: coverage tables and samples (CSV and Markdown)
+- Docker volume, `enrichment/raw/*.jsonl`: raw downloaded records
+- Docker volume, `enrichment/enriched_films` and `enrichment/enriched_principals`:
+  final Parquet tables. Every row has a `lineage` column (exact Wikipedia
+  revision URL, or Wikidata item URI) and an `enrichment_note` column when
+  information is missing.
 
 ### 4. Streaming
 
