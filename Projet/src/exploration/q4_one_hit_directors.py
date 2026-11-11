@@ -2,7 +2,7 @@
 but multiple other movies with an average rating <= 6.0.
 
 Outputs (in output/exploration/):
-    q4_one_hit_directors.csv / .md         all matching directors
+    q4_one_hit_directors.csv               all matching directors
     q4_one_hit_directors_top.csv / .md     top directors with the largest filmographies
 
 Usage:
@@ -10,7 +10,6 @@ Usage:
 """
 import argparse
 
-from pyspark.sql import Window
 from pyspark.sql import functions as F
 
 from common.datasets import feature_films, load_silver
