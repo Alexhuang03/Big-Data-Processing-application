@@ -5,8 +5,8 @@
 | Name | Email | Main parts |
 | --- | --- | --- |
 | Alex Huang | <alexhuang392@gmail.com> | Environment, data preparation, exploration Q1 to Q3 |
-| _TODO_ | _TODO_ | Exploration Q4 to Q8, open question |
-| _TODO_ | _TODO_ | Data enrichment, streaming |
+| Bryan Tachi | <jessy.tachi@edu.ece.fr> | Exploration Q4 to Q6, open question |
+| _Third Contributor_ | _TODO_ | Exploration Q7 & Q8, data enrichment, streaming |
 
 ## Requirements
 
@@ -22,9 +22,10 @@ compose.yaml          Kafka + Spark (Jupyter PySpark image)
 scripts/              Helper scripts run from the host
 src/common/           Shared code: Spark session, schemas, paths, report helpers
 src/preparation/      Download, ingestion, null analysis, quality checks, cleaning
-src/exploration/      Exploration questions
+src/exploration/      Exploration questions (Q1 to Q8)
 src/enrichment/       Data enrichment pipeline
 src/streaming/        Kafka producer and Spark Structured Streaming job
+src/open_question/    Open research question (creative duo synergy)
 notebooks/            Notebooks (mounted as ~/work in Jupyter)
 output/               Result tables (CSV and Markdown) used in REPORT.md
 ```
@@ -94,12 +95,24 @@ Results are written to `output/preparation/`.
 Requires the silver layer (step 1). Results are written to `output/exploration/`.
 
 ```bash
-docker exec imdb_spark python -m exploration.q1_runtime_outliers           # Q1 (z-score, threshold 2)
+# Q1: Runtime outliers (z-score and IQR)
+docker exec imdb_spark python -m exploration.q1_runtime_outliers
 docker exec imdb_spark python -m exploration.q1_runtime_outliers --method iqr
-docker exec imdb_spark python -m exploration.q2_q3_genre_popularity        # Q2 and Q3
+
+# Q2 & Q3: Genre popularity and comparison
+docker exec imdb_spark python -m exploration.q2_q3_genre_popularity
+
+# Q4: One-hit wonder directors
+docker exec imdb_spark python -m exploration.q4_one_hit_directors
+
+# Q5: TV series declining in final season
+docker exec imdb_spark python -m exploration.q5_declining_tv_series
+
+# Q6: Multilingual successful actors/actresses
+docker exec imdb_spark python -m exploration.q6_multilingual_actors
 ```
 
-_TODO: Q4 to Q8_
+_TODO: Q7 & Q8_
 
 ### 3. Data enrichment
 
@@ -111,7 +124,11 @@ _TODO_
 
 ### 5. Open question
 
-_TODO_
+Requires the silver layer (step 1). Results are written to `output/open_question/`.
+
+```bash
+docker exec imdb_spark python -m open_question.director_actor_synergy
+```
 
 ## Stopping
 
@@ -124,4 +141,5 @@ docker compose down -v     # also deletes the downloaded and processed data
 
 | Tool | Used by | Tasks |
 | --- | --- | --- |
-| Claude Code (Claude Opus 5.5) | Alex Huang | Docker Compose setup, shared code (`src/common`), data preparation code (`src/preparation`), exploration Q1 to Q3 code, this guide |
+| Claude Code (Claude Opus 5.5) | Alex Huang | Docker Compose setup, shared code (`src/common`), data preparation code (`src/preparation`), exploration Q1 to Q3 code, initial guide |
+| Google DeepMind Antigravity (Gemini) | Bryan Tachi | Exploration Q4, Q5, Q6 code (`src/exploration`), Open Question investigation (`src/open_question`), guide updates |
