@@ -19,7 +19,6 @@ Usage:
 """
 import argparse
 
-from pyspark.sql import Window
 from pyspark.sql import functions as F
 
 from common.datasets import feature_films, load_silver
@@ -73,7 +72,7 @@ def find_early_peak_actors(spark, min_votes=50, min_films=MIN_FILMS,
         .agg(
             F.min("startYear").alias("career_start"),
             F.max("startYear").alias("career_end"),
-            F.count("*").alias("total_films"),
+            F.countDistinct("tconst").alias("total_films"),
         )
         .withColumn("career_span", F.col("career_end") - F.col("career_start"))
         # mid-point: exclusive upper bound for the first half

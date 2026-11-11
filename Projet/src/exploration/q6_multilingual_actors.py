@@ -11,6 +11,7 @@ Usage:
 """
 import argparse
 
+from pyspark.sql import Window
 from pyspark.sql import functions as F
 
 from common.datasets import feature_films, load_silver
@@ -21,61 +22,89 @@ from common.spark import get_spark
 SECTION = "exploration"
 
 
-def get_movie_languages(spark):
-    """Extract distinct languages per movie from title_akas.
+def get_movie_original_languages(spark, movies_df):
+    """Extract one original language per movie from title_akas.
 
-    Prioritizes isOriginalTitle == 1 entries, but falls back to valid language
-    entries recorded for the title.
+    Matches title_akas entries where aka title matches the originalTitle,
+    keeping the entry with the lowest ordering (earliest release / primary entry).
     """
-    akas = (load_silver(spark, "title_akas")
-            .filter(
-                F.col("language").isNotNull()
-                & (F.col("language") != "\\N")
-                & (F.col("language") != "")
-            )
-            .select(
-                F.col("titleId").alias("tconst"),
-                F.lower(F.col("language")).alias("language"),
-                F.coalesce(F.col("isOriginalTitle"), F.lit(0)).alias("is_original"),
-            ))
+    akas = (
+        load_silver(spark, "title_akas")
+        .filter(F.col("language").isNotNull())
+        .select(
+            F.col("titleId").alias("tconst"),
+            F.col("ordering"),
+            F.col("title").alias("aka_title"),
+            F.lower(F.col("language")).alias("language"),
+        )
+    )
 
-    # Keep original language if available, else distinct languages for that movie
-    # Keep 1 row per (tconst, language)
-    return akas.select("tconst", "language").distinct()
+    w = Window.partitionBy("tconst").orderBy("ordering")
+    matched = (
+        movies_df.select("tconst", "originalTitle")
+        .join(akas, "tconst", "inner")
+        .filter(F.col("aka_title") == F.col("originalTitle"))
+        .withColumn("r", F.row_number().over(w))
+        .filter("r = 1")
+        .select("tconst", "language")
+    )
+
+    return matched
 
 
 def find_multilingual_actors(spark, min_rating=7.0, min_votes=1000):
     """Find actors/actresses with successful films in multiple languages."""
     # 1. Successful feature films
-    successful_movies = (feature_films(spark, with_ratings=True)
-                         .filter(
-                             (F.col("averageRating") >= min_rating)
-                             & (F.col("numVotes") >= min_votes)
-                         )
-                         .select("tconst", "primaryTitle", "startYear",
-                                 "averageRating", "numVotes"))
+    successful_movies = (
+        feature_films(spark, with_ratings=True)
+        .filter(
+            (F.col("averageRating") >= min_rating)
+            & (F.col("numVotes") >= min_votes)
+        )
+        .select(
+            "tconst",
+            "primaryTitle",
+            "originalTitle",
+            "startYear",
+            "averageRating",
+            "numVotes",
+        )
+    ).cache()
 
-    # 2. Movie languages
-    languages = get_movie_languages(spark)
-    movies_with_lang = successful_movies.join(languages, "tconst", "inner")
+    total_successful = successful_movies.count()
+
+    # 2. Movie original languages
+    movie_languages = get_movie_original_languages(spark, successful_movies).cache()
+    movies_with_lang_count = movie_languages.select("tconst").distinct().count()
+    print(
+        f"Successful films: {total_successful:,} total, "
+        f"{movies_with_lang_count:,} have a known original language "
+        f"({total_successful - movies_with_lang_count:,} excluded due to missing language)."
+    )
+
+    movies_with_lang = successful_movies.join(movie_languages, "tconst", "inner")
 
     # 3. Actors / Actresses from title_principals
-    actors = (load_silver(spark, "title_principals")
-              .filter(F.col("category").isin("actor", "actress"))
-              .select("tconst", "nconst", "category"))
+    actors = (
+        load_silver(spark, "title_principals")
+        .filter(F.col("category").isin("actor", "actress"))
+        .select("tconst", "nconst", "category")
+    )
 
     # 4. Join actor -> movie -> language
     actor_movies = actors.join(movies_with_lang, "tconst", "inner")
 
     # 5. Aggregate per actor
-    actor_stats = (actor_movies.groupBy("nconst")
-                   .agg(
-                       F.countDistinct("language").alias("num_languages"),
-                       F.countDistinct("tconst").alias("successful_films_count"),
-                       F.array_sort(F.collect_set("language")).alias("languages"),
-                       F.round(F.avg("averageRating"), 2).alias("avg_rating"),
-                       F.sum("numVotes").alias("total_votes"),
-                   ))
+    actor_stats = (
+        actor_movies.groupBy("nconst")
+        .agg(
+            F.countDistinct("language").alias("num_languages"),
+            F.countDistinct("tconst").alias("successful_films_count"),
+            F.array_sort(F.collect_set("language")).alias("languages"),
+            F.round(F.avg("averageRating"), 2).alias("avg_rating"),
+            F.sum("numVotes").alias("total_votes"),
+        )
+    )
 
     # 6. Join actor names
     names = (load_silver(spark, "name_basics")
