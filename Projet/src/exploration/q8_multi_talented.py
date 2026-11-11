@@ -76,11 +76,27 @@ def _writer_roles(spark):
     )
 
 
+def build_all_roles(spark):
+    """Combine distinct (tconst, nconst) pairs across actor, director, writer roles."""
+    actors = _actor_roles(spark).withColumn("is_actor", F.lit(1))
+    directors = _director_roles(spark).withColumn("is_director", F.lit(1))
+    writers = _writer_roles(spark).withColumn("is_writer", F.lit(1))
+
+    return (
+        actors
+        .join(directors, ["tconst", "nconst"], "outer")
+        .join(writers, ["tconst", "nconst"], "outer")
+        .withColumn("is_actor",    F.coalesce(F.col("is_actor"),    F.lit(0)))
+        .withColumn("is_director", F.coalesce(F.col("is_director"), F.lit(0)))
+        .withColumn("is_writer",   F.coalesce(F.col("is_writer"),   F.lit(0)))
+    )
+
+
 # ---------------------------------------------------------------------------
 # Main analytical functions
 # ---------------------------------------------------------------------------
 
-def build_multi_talented_profiles(spark, min_votes=50):
+def build_multi_talented_profiles(spark, all_roles, min_votes=50):
     """Build career profiles for multi-talented professionals.
 
     For every person, determine which combination of roles they hold across
@@ -93,20 +109,6 @@ def build_multi_talented_profiles(spark, min_votes=50):
     Returns a DataFrame ordered by multi_role_film_count desc.
     """
     movies = _rated_films(spark, min_votes)
-
-    actors = _actor_roles(spark).withColumn("is_actor", F.lit(1))
-    directors = _director_roles(spark).withColumn("is_director", F.lit(1))
-    writers = _writer_roles(spark).withColumn("is_writer", F.lit(1))
-
-    # Combine all roles per film per person
-    all_roles = (
-        actors
-        .join(directors, ["tconst", "nconst"], "outer")
-        .join(writers, ["tconst", "nconst"], "outer")
-        .withColumn("is_actor",    F.coalesce(F.col("is_actor"),    F.lit(0)))
-        .withColumn("is_director", F.coalesce(F.col("is_director"), F.lit(0)))
-        .withColumn("is_writer",   F.coalesce(F.col("is_writer"),   F.lit(0)))
-    )
 
     # Restrict to rated feature films only
     film_roles = all_roles.join(movies, "tconst", "inner")
@@ -154,7 +156,7 @@ def build_multi_talented_profiles(spark, min_votes=50):
         ).otherwise(F.lit("other")),
     )
 
-    # Join actor names
+    # Join person names
     names = (
         load_silver(spark, "name_basics")
         .select("nconst", F.col("primaryName").alias("person_name"))
@@ -179,7 +181,7 @@ def build_multi_talented_profiles(spark, min_votes=50):
     return result
 
 
-def compare_single_vs_multi_role(spark, min_votes=50):
+def compare_single_vs_multi_role(spark, all_roles, min_votes=50):
     """Compare average rating/votes when a professional works solo vs multi-role
     on the SAME film.
 
@@ -194,20 +196,6 @@ def compare_single_vs_multi_role(spark, min_votes=50):
     Returns a small summary DataFrame (one row per role_type).
     """
     movies = _rated_films(spark, min_votes)
-
-    actors = _actor_roles(spark).withColumn("is_actor", F.lit(1))
-    directors = _director_roles(spark).withColumn("is_director", F.lit(1))
-    writers = _writer_roles(spark).withColumn("is_writer", F.lit(1))
-
-    all_roles = (
-        actors
-        .join(directors, ["tconst", "nconst"], "outer")
-        .join(writers, ["tconst", "nconst"], "outer")
-        .withColumn("is_actor",    F.coalesce(F.col("is_actor"),    F.lit(0)))
-        .withColumn("is_director", F.coalesce(F.col("is_director"), F.lit(0)))
-        .withColumn("is_writer",   F.coalesce(F.col("is_writer"),   F.lit(0)))
-    )
-
     film_roles = all_roles.join(movies, "tconst", "inner")
 
     # Total roles per person per film
@@ -269,8 +257,11 @@ def main():
 
     spark = get_spark("imdb-q8-multi-talented")
 
+    # Build all_roles once and cache it
+    all_roles = build_all_roles(spark).cache()
+
     # --- Q8-A: career profiles ---
-    profiles_df = build_multi_talented_profiles(spark, args.min_votes).cache()
+    profiles_df = build_multi_talented_profiles(spark, all_roles, args.min_votes).cache()
     total = profiles_df.count()
     print(f"Found {total:,} multi-talented professionals (min_votes={args.min_votes}).")
 
@@ -278,16 +269,13 @@ def main():
     profiles_df.toPandas().to_csv(profiles_full_path, index=False)
     print(f"Saved profiles to {profiles_full_path} ({total} rows)")
 
-    # Top N
+    # Top N markdown/csv report
     save_table(profiles_df.limit(args.top_n).toPandas(), SECTION, "q8_multi_talented_top")
-    print(f"Saved top {args.top_n} report.")
 
     # --- Q8-B: single-role vs multi-role comparison on same film ---
-    comparison_df = compare_single_vs_multi_role(spark, args.min_votes)
-    comp_full_path = output_dir(SECTION) / "q8_same_film_performance.csv"
-    comparison_df.toPandas().to_csv(comp_full_path, index=False)
+    comparison_df = compare_single_vs_multi_role(spark, all_roles, args.min_votes)
+    # save_table automatically writes both CSV and Markdown
     save_table(comparison_df.toPandas(), SECTION, "q8_same_film_performance")
-    print(f"Saved single-vs-multi-role comparison to {comp_full_path}")
 
     spark.stop()
 
