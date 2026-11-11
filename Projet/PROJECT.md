@@ -6,7 +6,7 @@
 | --- | --- | --- |
 | Alex Huang | <alexhuang392@gmail.com> | Environment, data preparation, exploration Q1 to Q3 |
 | Bryan Tachi | <jessy.tachi@edu.ece.fr> | Exploration Q4 to Q6, open question |
-| _Third Contributor_ | _TODO_ | Exploration Q7 & Q8, data enrichment, streaming |
+| Bryan Tachi | jessy.tachi@edu.ece.fr | Exploration Q7 & Q8, data enrichment, streaming |
 
 ## Requirements
 
@@ -110,17 +110,58 @@ docker exec imdb_spark python -m exploration.q5_declining_tv_series
 
 # Q6: Multilingual successful actors/actresses
 docker exec imdb_spark python -m exploration.q6_multilingual_actors
+
+# Q7: Actors whose popularity peaked early in their career
+docker exec imdb_spark python -m exploration.q7_career_arc
+
+# Q8: Multi-talented film professionals
+docker exec imdb_spark python -m exploration.q8_multi_talented
 ```
 
-_TODO: Q7 & Q8_
+Or run all at once:
+
+```bash
+bash scripts/run_exploration.sh
+```
 
 ### 3. Data enrichment
 
-_TODO_
+Enrich the top 10 feature films per genre per year (1980–2025) with Wikipedia synopses and
+biographies of at least 3 principals per film:
+
+```bash
+bash scripts/run_enrichment.sh
+```
+
+Or step by step:
+
+```bash
+docker exec imdb_spark python -m enrichment.pipeline
+```
+
+Results are written to `output/enrichment/` and enriched Parquet tables to the
+`imdb_data` volume under `enrichment/`.
 
 ### 4. Streaming
 
-_TODO_
+Start the Wikipedia SSE producer and the Spark Structured Streaming job:
+
+```bash
+bash scripts/run_streaming.sh           # runs for 30 minutes by default
+bash scripts/run_streaming.sh 900       # run for 15 minutes
+```
+
+Or manually:
+
+```bash
+# Start producer in background
+docker exec -d imdb_spark python -m streaming.producer
+# Start Spark Structured Streaming job (Ctrl-C to stop)
+docker exec imdb_spark python -m streaming.streaming_job
+```
+
+Streaming output (CSV micro-batches) is written to `output/streaming/`.
+Checkpoints are stored in the `imdb_data` volume under `streaming/checkpoints/`.
 
 ### 5. Open question
 
@@ -142,4 +183,4 @@ docker compose down -v     # also deletes the downloaded and processed data
 | Tool | Used by | Tasks |
 | --- | --- | --- |
 | Claude Code (Claude Opus 5.5) | Alex Huang | Docker Compose setup, shared code (`src/common`), data preparation code (`src/preparation`), exploration Q1 to Q3 code, initial guide |
-| Google DeepMind Antigravity (Gemini) | Bryan Tachi | Exploration Q4, Q5, Q6 code (`src/exploration`), Open Question investigation (`src/open_question`), guide updates |
+| Google DeepMind Antigravity (Gemini / Claude Sonnet 4.6) | Bryan Tachi | Exploration Q4, Q5, Q6, Q7, Q8 code (`src/exploration`), Open Question investigation (`src/open_question`), Data Enrichment pipeline (`src/enrichment`), Streaming producer and job (`src/streaming`), helper scripts, guide updates |
