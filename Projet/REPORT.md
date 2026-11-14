@@ -726,7 +726,7 @@ Despite these safeguards, matching on exact titles introduces known limitations 
 
 Our open research question investigates: **Does a recurring creative collaboration between a film director and a lead actor produce a measurable lift in critical reception and audience engagement compared to when each artist works independently?**
 
-In cinematic history, recurring partnerships—such as Martin Scorsese and Robert De Niro, Christopher Nolan and Christian Bale, or Akira Kurosawa and Toshiro Mifune—are celebrated as legendary creative synergies. However, it remains an open question whether recurring collaboration systematically produces superior art across cinema as a whole, or whether it often leads to formula exhaustion and artistic complacency. By establishing an uncontaminated individual baseline for each artist, our analysis tests whether the collaborative whole is truly greater than the sum of its parts.
+In cinematic history, recurring partnerships such as Martin Scorsese and Robert De Niro, Christopher Nolan and Christian Bale, or Akira Kurosawa and Toshiro Mifune are celebrated as legendary creative synergies. However, it remains an open question whether recurring collaboration systematically produces superior art across cinema as a whole, or whether it often leads to formula exhaustion and artistic complacency. By establishing an uncontaminated individual baseline for each artist, our analysis tests whether the collaborative whole is truly greater than the sum of its parts.
 
 This analysis relies entirely on the IMDb silver tables without requiring external scraping: `title_basics`, `title_ratings`, `title_crew`, `title_principals`, and `name_basics`.
 
