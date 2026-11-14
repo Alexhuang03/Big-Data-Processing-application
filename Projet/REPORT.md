@@ -72,90 +72,52 @@ Missing values for every column of every table (`output/preparation/null_report.
 
 ### 1.2 Other data quality issues
 
-Quality checks on the typed data, before cleaning (`output/preparation/quality_issues_typed.md`):
+Quality checks before cleaning (typed data) and after cleaning (silver layer) (`output/preparation/quality_issues_comparison.md`). `after` is empty for the checks that only apply to the raw text (malformed rows, untrimmed values):
 
-| check | table | rule | issue_count | table_rows | issue_pct | handling |
-| --- | --- | --- | --- | --- | --- | --- |
-| malformed_rows_title_basics | title_basics | rows without the expected number of tab-separated fields | 0 | 12907853 | 0.0000 | row dropped |
-| malformed_rows_title_akas | title_akas | rows without the expected number of tab-separated fields | 0 | 60003988 | 0.0000 | row dropped |
-| malformed_rows_title_crew | title_crew | rows without the expected number of tab-separated fields | 0 | 12910620 | 0.0000 | row dropped |
-| malformed_rows_title_episode | title_episode | rows without the expected number of tab-separated fields | 0 | 9985716 | 0.0000 | row dropped |
-| malformed_rows_title_principals | title_principals | rows without the expected number of tab-separated fields | 0 | 102574272 | 0.0000 | row dropped |
-| malformed_rows_title_ratings | title_ratings | rows without the expected number of tab-separated fields | 0 | 1726786 | 0.0000 | row dropped |
-| malformed_rows_name_basics | name_basics | rows without the expected number of tab-separated fields | 0 | 15774367 | 0.0000 | row dropped |
-| untrimmed_primary_title | title_basics | primaryTitle with leading/trailing spaces | 0 | 12907853 | 0.0000 | value trimmed |
-| untrimmed_primary_name | name_basics | primaryName with leading/trailing spaces | 0 | 15774367 | 0.0000 | value trimmed |
-| duplicate_key_title_basics | title_basics | duplicate primary key (tconst) | 0 | 12907853 | 0.0000 | first row kept |
-| duplicate_key_title_akas | title_akas | duplicate primary key (titleId, ordering) | 0 | 60003988 | 0.0000 | first row kept |
-| duplicate_key_title_crew | title_crew | duplicate primary key (tconst) | 0 | 12910620 | 0.0000 | first row kept |
-| duplicate_key_title_episode | title_episode | duplicate primary key (tconst) | 0 | 9985716 | 0.0000 | first row kept |
-| duplicate_key_title_principals | title_principals | duplicate primary key (tconst, ordering) | 0 | 102574272 | 0.0000 | first row kept |
-| duplicate_key_title_ratings | title_ratings | duplicate primary key (tconst) | 0 | 1726786 | 0.0000 | first row kept |
-| duplicate_key_name_basics | name_basics | duplicate primary key (nconst) | 0 | 15774367 | 0.0000 | first row kept |
-| death_before_birth | name_basics | deathYear < birthYear | 27 | 15774367 | 0.0002 | birthYear and deathYear set to null, row flagged |
-| implausible_lifespan | name_basics | deathYear - birthYear > 120 | 2 | 15774367 | 0.0000 | kept, row flagged |
-| alive_older_than_max_lifespan | name_basics | no deathYear but born before 1906 | 2793 | 15774367 | 0.0177 | kept, row flagged (death year probably missing) |
-| future_birth_or_death | name_basics | birthYear or deathYear after 2026 | 0 | 15774367 | 0.0000 | value set to null, row flagged |
-| end_before_start | title_basics | endYear < startYear | 0 | 12907853 | 0.0000 | endYear set to null, row flagged |
-| start_year_too_early | title_basics | startYear < 1874 | 0 | 12907853 | 0.0000 | startYear set to null, row flagged |
-| runtime_not_positive | title_basics | runtimeMinutes <= 0 | 4 | 12907853 | 0.0000 | runtimeMinutes set to null, row flagged |
-| runtime_outlier | title_basics | runtimeMinutes > 1440 | 210 | 12907853 | 0.0016 | kept, row flagged |
-| is_adult_invalid | title_basics | isAdult not in (0, 1) | 0 | 12907853 | 0.0000 | isAdult set to null, row flagged |
-| rating_out_of_range | title_ratings | averageRating outside [1, 10] or numVotes <= 0 | 0 | 1726786 | 0.0000 | row dropped |
-| episode_is_own_parent | title_episode | tconst = parentTconst | 0 | 9985716 | 0.0000 | row dropped |
-| season_or_episode_not_positive | title_episode | seasonNumber <= 0 or episodeNumber <= 0 | 7113 | 9985716 | 0.0712 | value set to null, row flagged |
-| episode_parent_not_series | title_episode | parent title is not a tvSeries / tvMiniSeries | 0 | 9985716 | 0.0000 | kept, row flagged |
-| episode_before_series_start | title_episode | episode startYear < series startYear | 3507 | 9985716 | 0.0351 | kept, row flagged |
-| principal_born_after_release | title_principals | title startYear < person birthYear | 3104 | 102574272 | 0.0030 | kept, row flagged |
-| principal_long_after_death | title_principals | title released > 10 years after death (not archive footage/sound) | 165250 | 102574272 | 0.1611 | kept, row flagged |
-| orphan_akas_title | title_akas | titleId not in title_basics | 0 | 60003988 | 0.0000 | row dropped |
-| orphan_crew_title | title_crew | tconst not in title_basics | 2774 | 12910620 | 0.0215 | row dropped |
-| orphan_crew_director | title_crew | director nconst not in name_basics | 420 | 12910620 | 0.0033 | id removed from the array |
-| orphan_crew_writer | title_crew | writer nconst not in name_basics | 1147 | 12910620 | 0.0089 | id removed from the array |
-| orphan_episode_title | title_episode | tconst not in title_basics | 0 | 9985716 | 0.0000 | row dropped |
-| orphan_episode_parent | title_episode | parentTconst not in title_basics | 5 | 9985716 | 0.0001 | row dropped |
-| orphan_principal_title | title_principals | tconst not in title_basics | 0 | 102574272 | 0.0000 | row dropped |
-| orphan_principal_name | title_principals | nconst not in name_basics | 7192 | 102574272 | 0.0070 | row dropped |
-| orphan_rating_title | title_ratings | tconst not in title_basics | 0 | 1726786 | 0.0000 | row dropped |
-| orphan_known_for_title | name_basics | knownForTitles id not in title_basics | 725 | 15774367 | 0.0046 | id removed from the array |
-
-The same checks on the silver layer, after cleaning (`output/preparation/quality_issues_silver.md`):
-
-| check | table | rule | issue_count | table_rows | issue_pct | handling |
-| --- | --- | --- | --- | --- | --- | --- |
-| duplicate_key_title_basics | title_basics | duplicate primary key (tconst) | 0 | 12907853 | 0.0000 | first row kept |
-| duplicate_key_title_akas | title_akas | duplicate primary key (titleId, ordering) | 0 | 60003988 | 0.0000 | first row kept |
-| duplicate_key_title_crew | title_crew | duplicate primary key (tconst) | 0 | 12907846 | 0.0000 | first row kept |
-| duplicate_key_title_episode | title_episode | duplicate primary key (tconst) | 0 | 9985711 | 0.0000 | first row kept |
-| duplicate_key_title_principals | title_principals | duplicate primary key (tconst, ordering) | 0 | 102567080 | 0.0000 | first row kept |
-| duplicate_key_title_ratings | title_ratings | duplicate primary key (tconst) | 0 | 1726786 | 0.0000 | first row kept |
-| duplicate_key_name_basics | name_basics | duplicate primary key (nconst) | 0 | 15774367 | 0.0000 | first row kept |
-| death_before_birth | name_basics | deathYear < birthYear | 0 | 15774367 | 0.0000 | birthYear and deathYear set to null, row flagged |
-| implausible_lifespan | name_basics | deathYear - birthYear > 120 | 2 | 15774367 | 0.0000 | kept, row flagged |
-| alive_older_than_max_lifespan | name_basics | no deathYear but born before 1906 | 2793 | 15774367 | 0.0177 | kept, row flagged (death year probably missing) |
-| future_birth_or_death | name_basics | birthYear or deathYear after 2026 | 0 | 15774367 | 0.0000 | value set to null, row flagged |
-| end_before_start | title_basics | endYear < startYear | 0 | 12907853 | 0.0000 | endYear set to null, row flagged |
-| start_year_too_early | title_basics | startYear < 1874 | 0 | 12907853 | 0.0000 | startYear set to null, row flagged |
-| runtime_not_positive | title_basics | runtimeMinutes <= 0 | 0 | 12907853 | 0.0000 | runtimeMinutes set to null, row flagged |
-| runtime_outlier | title_basics | runtimeMinutes > 1440 | 210 | 12907853 | 0.0016 | kept, row flagged |
-| is_adult_invalid | title_basics | isAdult not in (0, 1) | 0 | 12907853 | 0.0000 | isAdult set to null, row flagged |
-| rating_out_of_range | title_ratings | averageRating outside [1, 10] or numVotes <= 0 | 0 | 1726786 | 0.0000 | row dropped |
-| episode_is_own_parent | title_episode | tconst = parentTconst | 0 | 9985711 | 0.0000 | row dropped |
-| season_or_episode_not_positive | title_episode | seasonNumber <= 0 or episodeNumber <= 0 | 0 | 9985711 | 0.0000 | value set to null, row flagged |
-| episode_parent_not_series | title_episode | parent title is not a tvSeries / tvMiniSeries | 0 | 9985711 | 0.0000 | kept, row flagged |
-| episode_before_series_start | title_episode | episode startYear < series startYear | 3507 | 9985711 | 0.0351 | kept, row flagged |
-| principal_born_after_release | title_principals | title startYear < person birthYear | 3102 | 102567080 | 0.0030 | kept, row flagged |
-| principal_long_after_death | title_principals | title released > 10 years after death (not archive footage/sound) | 165250 | 102567080 | 0.1611 | kept, row flagged |
-| orphan_akas_title | title_akas | titleId not in title_basics | 0 | 60003988 | 0.0000 | row dropped |
-| orphan_crew_title | title_crew | tconst not in title_basics | 0 | 12907846 | 0.0000 | row dropped |
-| orphan_crew_director | title_crew | director nconst not in name_basics | 0 | 12907846 | 0.0000 | id removed from the array |
-| orphan_crew_writer | title_crew | writer nconst not in name_basics | 0 | 12907846 | 0.0000 | id removed from the array |
-| orphan_episode_title | title_episode | tconst not in title_basics | 0 | 9985711 | 0.0000 | row dropped |
-| orphan_episode_parent | title_episode | parentTconst not in title_basics | 0 | 9985711 | 0.0000 | row dropped |
-| orphan_principal_title | title_principals | tconst not in title_basics | 0 | 102567080 | 0.0000 | row dropped |
-| orphan_principal_name | title_principals | nconst not in name_basics | 0 | 102567080 | 0.0000 | row dropped |
-| orphan_rating_title | title_ratings | tconst not in title_basics | 0 | 1726786 | 0.0000 | row dropped |
-| orphan_known_for_title | name_basics | knownForTitles id not in title_basics | 0 | 15774367 | 0.0000 | id removed from the array |
+| check | table | rule | before | before_pct | after | after_pct | handling |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| malformed_rows_title_basics | title_basics | rows without the expected number of tab-separated fields | 0 | 0.0000 |  |  | row dropped |
+| malformed_rows_title_akas | title_akas | rows without the expected number of tab-separated fields | 0 | 0.0000 |  |  | row dropped |
+| malformed_rows_title_crew | title_crew | rows without the expected number of tab-separated fields | 0 | 0.0000 |  |  | row dropped |
+| malformed_rows_title_episode | title_episode | rows without the expected number of tab-separated fields | 0 | 0.0000 |  |  | row dropped |
+| malformed_rows_title_principals | title_principals | rows without the expected number of tab-separated fields | 0 | 0.0000 |  |  | row dropped |
+| malformed_rows_title_ratings | title_ratings | rows without the expected number of tab-separated fields | 0 | 0.0000 |  |  | row dropped |
+| malformed_rows_name_basics | name_basics | rows without the expected number of tab-separated fields | 0 | 0.0000 |  |  | row dropped |
+| untrimmed_primary_title | title_basics | primaryTitle with leading/trailing spaces | 0 | 0.0000 |  |  | value trimmed |
+| untrimmed_primary_name | name_basics | primaryName with leading/trailing spaces | 0 | 0.0000 |  |  | value trimmed |
+| duplicate_key_title_basics | title_basics | duplicate primary key (tconst) | 0 | 0.0000 | 0 | 0.0000 | first row kept |
+| duplicate_key_title_akas | title_akas | duplicate primary key (titleId, ordering) | 0 | 0.0000 | 0 | 0.0000 | first row kept |
+| duplicate_key_title_crew | title_crew | duplicate primary key (tconst) | 0 | 0.0000 | 0 | 0.0000 | first row kept |
+| duplicate_key_title_episode | title_episode | duplicate primary key (tconst) | 0 | 0.0000 | 0 | 0.0000 | first row kept |
+| duplicate_key_title_principals | title_principals | duplicate primary key (tconst, ordering) | 0 | 0.0000 | 0 | 0.0000 | first row kept |
+| duplicate_key_title_ratings | title_ratings | duplicate primary key (tconst) | 0 | 0.0000 | 0 | 0.0000 | first row kept |
+| duplicate_key_name_basics | name_basics | duplicate primary key (nconst) | 0 | 0.0000 | 0 | 0.0000 | first row kept |
+| death_before_birth | name_basics | deathYear < birthYear | 27 | 0.0002 | 0 | 0.0000 | birthYear and deathYear set to null, row flagged |
+| implausible_lifespan | name_basics | deathYear - birthYear > 120 | 2 | 0.0000 | 2 | 0.0000 | kept, row flagged |
+| alive_older_than_max_lifespan | name_basics | no deathYear but born before 1906 | 2793 | 0.0177 | 2793 | 0.0177 | kept, row flagged (death year probably missing) |
+| future_birth_or_death | name_basics | birthYear or deathYear after 2026 | 0 | 0.0000 | 0 | 0.0000 | value set to null, row flagged |
+| end_before_start | title_basics | endYear < startYear | 0 | 0.0000 | 0 | 0.0000 | endYear set to null, row flagged |
+| start_year_too_early | title_basics | startYear < 1874 | 0 | 0.0000 | 0 | 0.0000 | startYear set to null, row flagged |
+| runtime_not_positive | title_basics | runtimeMinutes <= 0 | 4 | 0.0000 | 0 | 0.0000 | runtimeMinutes set to null, row flagged |
+| runtime_outlier | title_basics | runtimeMinutes > 1440 | 210 | 0.0016 | 210 | 0.0016 | kept, row flagged |
+| is_adult_invalid | title_basics | isAdult not in (0, 1) | 0 | 0.0000 | 0 | 0.0000 | isAdult set to null, row flagged |
+| rating_out_of_range | title_ratings | averageRating outside [1, 10] or numVotes <= 0 | 0 | 0.0000 | 0 | 0.0000 | row dropped |
+| episode_is_own_parent | title_episode | tconst = parentTconst | 0 | 0.0000 | 0 | 0.0000 | row dropped |
+| season_or_episode_not_positive | title_episode | seasonNumber <= 0 or episodeNumber <= 0 | 7113 | 0.0712 | 0 | 0.0000 | value set to null, row flagged |
+| episode_parent_not_series | title_episode | parent title is not a tvSeries / tvMiniSeries | 0 | 0.0000 | 0 | 0.0000 | kept, row flagged |
+| episode_before_series_start | title_episode | episode startYear < series startYear | 3507 | 0.0351 | 3507 | 0.0351 | kept, row flagged |
+| principal_born_after_release | title_principals | title startYear < person birthYear | 3104 | 0.0030 | 3102 | 0.0030 | kept, row flagged |
+| principal_long_after_death | title_principals | title released > 10 years after death (not archive footage/sound) | 165250 | 0.1611 | 165250 | 0.1611 | kept, row flagged |
+| orphan_akas_title | title_akas | titleId not in title_basics | 0 | 0.0000 | 0 | 0.0000 | row dropped |
+| orphan_crew_title | title_crew | tconst not in title_basics | 2774 | 0.0215 | 0 | 0.0000 | row dropped |
+| orphan_crew_director | title_crew | director nconst not in name_basics | 420 | 0.0033 | 0 | 0.0000 | id removed from the array |
+| orphan_crew_writer | title_crew | writer nconst not in name_basics | 1147 | 0.0089 | 0 | 0.0000 | id removed from the array |
+| orphan_episode_title | title_episode | tconst not in title_basics | 0 | 0.0000 | 0 | 0.0000 | row dropped |
+| orphan_episode_parent | title_episode | parentTconst not in title_basics | 5 | 0.0001 | 0 | 0.0000 | row dropped |
+| orphan_principal_title | title_principals | tconst not in title_basics | 0 | 0.0000 | 0 | 0.0000 | row dropped |
+| orphan_principal_name | title_principals | nconst not in name_basics | 7192 | 0.0070 | 0 | 0.0000 | row dropped |
+| orphan_rating_title | title_ratings | tconst not in title_basics | 0 | 0.0000 | 0 | 0.0000 | row dropped |
+| orphan_known_for_title | name_basics | knownForTitles id not in title_basics | 725 | 0.0046 | 0 | 0.0000 | id removed from the array |
 
 Example rows for each issue:
 
@@ -164,19 +126,35 @@ Example rows for each issue:
 
 ### 1.3 Handling of the issues
 
-> *To be written by the team (no AI tools allowed in this part).*
+To handle data quality issues across the IMDb tables, our pipeline applies a clear decision rule based on one central question: is the recorded value definitely impossible, or is it only suspicious? Depending on the answer to this question, our cleaning pipeline implements four distinct handling strategies: dropping the row, setting the invalid value to null while flagging the row, keeping the value while flagging the row, or pruning invalid identifiers directly inside array columns.
+
+First, we drop an entire row only when the record is structurally broken or when its foreign key reference is missing. This occurs when a row points to a movie or a person that does not exist in the parent tables, rendering the entry un-joinable and completely unusable. For example, we dropped 2,774 orphan crew rows from `title_crew` because their referenced movie did not exist in `title_basics` (`orphan_crew_title = 2,774`). In `title_principals`, while all records pointed to a valid movie (`orphan_principal_title = 0`), we dropped 7,192 orphan principal rows because their referenced person identifier did not exist in `name_basics` (`orphan_principal_name = 7,192`). In the same way, we drop any episode row where the episode ID is identical to its parent series ID.
+
+Second, when a specific value is clearly impossible but the remainder of the record contains valid information, we set that specific field to null and flag the row. Discarding the entire record in such cases would unnecessarily throw away valuable data. For instance, we found 27 individuals in `name_basics` whose death year occurred before their birth year. Because this is biologically impossible, we set both `birthYear` and `deathYear` to null and flagged the row, keeping the person's name and profession. Similarly, we set to null 4 movie runtimes that were zero or negative, as well as 7,113 season or episode numbers that were less than or equal to zero.
+
+Third, when a value is extreme or suspicious but could physically be genuine, we never delete or nullify it. Instead, we keep the original value untouched and tag the row with a warning flag. For example, 210 movies in `title_basics` have runtimes exceeding 1,440 minutes (24 hours). While commercial theatrical releases rarely exceed three hours, experimental art films and cinematic marathons do exist, so deleting them would erase real cultural works. In the same manner, we identified 2 people whose recorded lifespan exceeded 120 years and 2,793 individuals born before 1906 with no recorded death year. Rather than inventing arbitrary death dates or deleting these historical figures, we kept the records and flagged them as potential outliers or missing death years. Another widespread case involves 165,250 cast and crew credits appearing more than 10 years after an artist's death. Because our rule already excludes explicit archive footage and sound credits (`archive_footage` and `archive_sound`), these rows represent regular roles such as actors, writers, or directors. We kept and flagged them because they often reflect genuine posthumous releases (such as uncompleted projects finalized decades later or adapted estate works) or archival appearances that IMDb contributors cataloged under regular credits rather than using the archive tag.
+
+Fourth, for array columns containing lists of foreign keys, such as directors, writers, and known-for titles, we apply array pruning. Instead of dropping an entire movie because one credited director ID is unknown, our pipeline cleans the array in place by removing only the unrecognized identifier while preserving all valid IDs and the movie itself. In total, 420 unknown director IDs, 1,147 unknown writer IDs, and 725 unknown known-for titles were pruned from their respective arrays.
+
+Every flag generated during these checks is stored in a dedicated array column named `quality_flags`. For any analyst working on the silver layer downstream, this column acts like an explicit set of warning labels attached to each row. Analysts can easily choose their own level of strictness without losing access to the underlying data. For instance, a data scientist calculating precise statistical averages can simply filter for rows where `size(quality_flags) == 0`. Conversely, an analyst who simply wants to count all historical film productions can keep the flagged rows without restriction. Comparing the quality tables before and after cleaning clearly proves that this strategy succeeded. All impossible logical contradictions and broken foreign keys dropped to exactly zero in the silver layer. In contrast, all checks classified as suspicious were deliberately preserved, including the 210 runtime outliers, 2 lifespans over 120 years, 2,793 individuals born before 1906 without a death date, and 3,507 episodes starting before their parent series. Interestingly, the count for `principal_born_after_release` decreased slightly from 3,104 to 3,102 in the silver layer; this happened because 2 credits in `title_principals` involved individuals whose invalid dates were set to null by the earlier `death_before_birth` rule and therefore no longer triggered the date comparison, representing an expected and logically consistent cascading effect across our cleaning steps.
 
 ### 1.4 Methodological explanation
 
-> *To be written by the team (no AI tools allowed in this part).*
+#### Key takeaways
 
-Points to cover:
+Examining the missing value reports across all IMDb tables reveals that the highest missing rates appear in columns where an empty value is completely normal in real life. For example, `title_akas.attributes` is 99.47% missing because special release attributes are only needed for rare regional editions. In `title_basics`, `endYear` is 98.73% missing because standalone feature films and shorts do not have an end year; only ongoing television series do. In `name_basics`, `deathYear` is 98.32% missing because the vast majority of individuals listed in the database are either still alive or their passing was never officially registered. In the same way, `title_principals.job` is 80.69% missing because standard roles such as actors or directors are already described by the general category field and do not require a specific job title.
 
-- Method used and why it was chosen
-- Alternatives considered and trade-offs made
-- How missing values were measured (`\N`, empty strings, empty arrays)
-- Why the raw / bronze / silver layers
-- Why some bad rows were fixed, flagged (`quality_flags`) or dropped
+Overall, the IMDb dataset is remarkably clean for a real-world collection containing over 100 million records. Primary keys are completely unique across all raw tables, with zero duplicate identifiers detected. Furthermore, none of the tables contained malformed tab-separated rows. Outright physical impossibilities are virtually absent: death before birth affects only 0.0002% of individuals (27 rows), and non-positive movie runtimes represent just 0.00003% (4 rows). Other suspicious anomalies remain very rare, such as principals born after a title release at 0.003% (3,104 rows) and non-positive episode numbers at 0.07% (7,113 rows), with the largest flagged anomaly being posthumous credits over 10 years at only 0.16% (165,250 rows). By far, the most frequent issue across all tables is the presence of missing values marked by the standard IMDb indicator, rather than data corruption or invalid formatting.
+
+#### Methodological explanation
+
+To evaluate missing data accurately, our pipeline checks for three distinct conditions on the raw data: true database nulls, the explicit IMDb missing marker `\N`, and empty or whitespace-only text strings. In the IMDb dataset, empty lists and arrays (such as missing genres, directors, writers, or known-for titles) are represented as `\N`, meaning they are naturally captured within our marker count. We deliberately measure these indicators on the raw string data before performing any type casting. If we converted columns to integers or dates first, any parsing error or unexpected text would automatically turn into a null, making it impossible to separate genuine missing information from malformed data. For this reason, invalid values are tracked in their own separate metric rather than being counted as missing. An invalid value (such as letters in a numeric year column) means the contributor actually provided information, but the format failed type casting; grouping it with missing values would falsely imply the field was left blank and would obscure data corruption or schema mismatch issues.
+
+Our architecture follows a raw, bronze, and silver progression. The raw layer holds the original compressed TSV files downloaded directly from IMDb. The bronze layer converts these files into Parquet format while preserving every column as raw text, keeping the original `\N` markers and isolating any malformed rows in a dedicated corrupt record column. The silver layer then applies strict typing, de-duplicates primary keys, verifies cross-table relationships, and enriches each table with the `quality_flags` column. If we had cleaned the data directly from the raw files, any bug in our cleaning logic would require repeatedly decompressing and re-parsing the 1.9 GB of compressed raw TSV files from scratch. Because the raw files are preserved on disk in the Docker volume, there is no need to re-download them, but re-parsing raw tab-separated text across 100 million lines is computationally slow compared to querying the structured, columnar bronze Parquet layer (5.1 GB). The multi-layer setup guarantees full auditability and allows us to inspect the raw text whenever unexpected values arise.
+
+During our pipeline design, we considered and rejected three simpler alternatives. The first option was deleting every row containing a missing or suspicious value. We discarded this because it would lead to massive data loss, throwing away over 98% of people or 80% of principal credits. The second option was imputing missing numerical values using means or medians. We rejected this approach because in an encyclopedia dataset, inventing a release year or a movie runtime creates false historical facts that mislead users. The third option was keeping all data untouched. This would cause downstream analytical queries to fail on broken data types, skew calculations with negative runtimes, and distort relational joins- where orphan foreign keys would silently drop valid records during inner joins or introduce unintended nulls during outer joins. Our balanced approach preserves maximum data volume, corrects only unambiguous errors, and gives downstream users full transparency through quality flags.
+
+Our cleaning rules rely on a few specific thresholds. We chose 1874 as the earliest valid movie release year because historical records trace the very first motion picture experiments to the mid-1870s, such as the photographic sequences of Janssen and Muybridge. We set the maximum plausible human lifespan to 120 years because the oldest verified person in history lived to 122. We defined 1,440 minutes (24 hours) as the upper bound for normal runtimes because standard movies last under three hours, and films exceeding a full day represent rare artistic marathons. Finally, we used a 10-year margin for posthumous credits because completing and releasing a film after an artist passes away can take several years, but releases after a decade without archive footage are unusual. We recognize that these thresholds are pragmatic human choices rather than mathematical certainties, which is why records exceeding them are only flagged and never erased.
 
 ## 2. Data exploration
 
@@ -615,20 +593,29 @@ Samples of enriched records:
 
 #### Key takeaways
 
-> *To be written by the team (no AI tools allowed in this part).*
+Our enrichment pipeline achieved high coverage across both films and film industry professionals. For movies, 83.10% (5,970 films) were successfully enriched with a dedicated plot section retrieved from English Wikipedia, and an additional 5.48% (394 films) used the article's lead introductory section as a synopsis. In total, 88.58% (6,364 out of 7,184 films) received an informative plot synopsis. For people, 71.25% (7,783 individuals) were enriched with both a Wikipedia biography extract and structured facts from Wikidata, while another 10.35% (1,130 individuals) received Wikidata facts alone. Combined, 81.60% of all sampled film professionals were successfully enriched with verified biographical facts.
+
+When records could not be enriched, the missing information was caused by clear structural gaps rather than pipeline errors. Among unenriched films, 6.95% (499 movies) had no Wikidata item linked to their IMDb identifier, and 4.45% (320 movies) had a Wikidata item but lacked a corresponding article on English Wikipedia. For film professionals, 18.39% (2,009 people) had no linked Wikidata entry, and 10.35% had Wikidata entries without an English Wikipedia biography.
+
+Looking at coverage across time, the proportion of movies with a synopsis remains remarkably stable over every decade. Coverage stays between 85% and 92% across all five decades, starting at 87.77% in the 1980s, climbing to 89.08% in the 1990s, peaking at 91.69% in the 2000s, and remaining strong at 87.79% in the 2010s and 85.64% in the 2020s. The slight decrease observed in the 2020s (85.64%) is likely due to recent films having newer articles where volunteer editors have not yet expanded detailed plot summaries.
+
+People have noticeably lower coverage than films. This difference occurs because our movie sample was selected from the top 10 most voted titles per genre and year, meaning nearly every film in the sample is a well-known release that easily meets Wikipedia's strict notability criteria. On the other hand, the first three billing credits of every film are mostly actors, actresses, and directors. The primary reason for their lower coverage is structural: 18.39% of these individuals (2,009 people) have no Wikidata item linked to their IMDb identifier at all, and another 10.35% (1,130 people) have a Wikidata item but lack an English Wikipedia article. This occurs frequently with international, regional, or indie productions where prominent local actors or directors are well-credited on IMDb but lack an English Wikipedia biography and Wikidata cross-references.
 
 #### Methodological explanation
 
-> *To be written by the team (no AI tools allowed in this part).*
+We chose Wikipedia and Wikidata as our external sources because they are community-curated, open to the public, non-commercial, and released under free Creative Commons licenses (CC-BY-SA), fulfilling the core project requirement to use open human data. To connect IMDb entries to Wikipedia, we matched entities using their unique IMDb identifier via Wikidata property P345 rather than searching by title or name. Searching by title text creates severe ambiguity; for instance, searching for the title "Heat" could easily match the famous 1995 Michael Mann crime drama, an unrelated 1986 action film, the Miami basketball team, or a scientific physics article. Using the IMDb identifier operates like a passport number, ensuring an exact, unambiguous link without manual guesswork.
 
-Points to cover:
+To respect the public infrastructure of Wikimedia, our data collection client strictly follows official Wikimedia etiquette guidelines. We enforce a polite rate limit of at least 1.0 second between consecutive requests to prevent server strain. We include the `maxlag=5` parameter on Wikipedia API requests. The server does not pause requests on its own; instead, if Wikimedia database replication lag exceeds 5 seconds, the API immediately responds with a maxlag error payload. Our client detects this response (as well as HTTP 429 rate limits and 5xx errors) and actively waits before retrying, honoring the duration specified in the `Retry-After` response header or applying exponential backoff. In addition, we send a clear `User-Agent` header containing our project name and repository link so Wikimedia system administrators can identify our student workload.
 
-- Method used and why it was chosen
-- Alternatives considered and trade-offs made
-- Choice of source (Wikipedia, Wikidata) and how films and people were matched
-- Respect of rate limits and API policies, lineage field
-- What runs outside Spark and what runs in Spark
-- How the code scales to the full dataset
+For full scientific reproducibility, our pipeline records comprehensive data provenance in a dedicated `lineage` field, alongside the retrieval timestamp. The `lineage` column uses a clear hierarchical fallback: if an English Wikipedia article exists, it stores the exact Wikipedia revision URL (`https://en.wikipedia.org/w/index.php?title=...&oldid=...`). If there is no Wikipedia article, it falls back to the Wikidata entity URI (`wikidata_uri`). If the entity is not linked to Wikidata either, it records the Wikidata SPARQL endpoint URL. For a film without a Wikipedia article, the lineage is therefore not a revision link, but an explicit pointer to the Wikidata knowledge graph. Because Wikipedia articles change continuously, capturing the exact revision URL ensures that anyone can inspect the precise historical snapshot of the text used by our pipeline.
+
+The workflow is divided into two distinct environments: collection outside Spark, and transformation inside Spark. We deliberately run the data gathering phase in plain Python outside of Spark. If multiple parallel Spark executor tasks attempted to fetch web pages simultaneously, they would rapidly trigger IP blocks from Wikipedia for exceeding request limits, while tying up heavy Spark worker threads waiting on slow network I/O. Our Python client downloads records sequentially and appends them to a persistent, resumable JSON Lines file, ensuring that an interrupted job can simply restart without re-fetching existing records. Spark is reserved for the tasks where it excels: filtering the silver tables to select the target sample, parsing the raw JSON files with strict schemas, joining enriched data with IMDb tables, and calculating summary metrics.
+
+When external information is unavailable, our pipeline documents the exact reason in the `enrichment_note` column (and `principals_note` for principal counts per film), such as noting that an IMDb ID had no Wikidata link or that an article lacked a dedicated plot section. We chose not to query secondary commercial APIs, such as TMDb or OMDb, because Wikidata and Wikipedia already provided an 88% success rate, and mixing third-party platforms would introduce commercial API key limits, restrictive terms of service, and conflicting data schemas.
+
+Our codebase is designed to scale flexibly without any changes to its underlying code structure. All sample boundaries are configured as command-line arguments, meaning that expanding coverage to more films or people simply requires increasing the `--top-n` and `--principals` parameters or widening the year boundaries. However, scaling to the entire IMDb catalog of over 10 million titles highlights an inherent limitation of the online HTTP API approach: respecting the polite 1 request per second rate limit over millions of entities would take months of continuous execution. Overcoming this throughput bottleneck at full scale would require changing the collection method to use official Wikimedia and Wikidata offline database dumps (bulk XML and JSON archives), which can be parsed in parallel across a distributed Spark cluster.
+
+We evaluated and discarded three alternative approaches. We rejected raw HTML web scraping because it is notoriously brittle, breaks whenever website design templates change, and is strongly discouraged by Wikimedia guidelines, which urge automated tools to use the structured Action API instead. We rejected title-based text matching due to the unacceptable error rate caused by homonyms. Finally, we ruled out commercial APIs because their proprietary licenses and daily call quotas conflict with open-data principles.
 
 ## 4. Streaming data processing
 
@@ -710,19 +697,37 @@ All edits per time window (`output/streaming/all_windows.md`):
 
 #### Key takeaways
 
-> *To be written by the team (no AI tools allowed in this part).*
+During our 20-minute live test window, the streaming pipeline received a total of 1,486 English Wikipedia edit events across 41 micro-batches, of which 40 contained incoming data. Out of these events, 52 edits successfully matched an IMDb movie or film professional in our reference lookup table, representing 32 distinct entities and yielding an overall match rate of approximately 3.5% (52 out of 1,486 events).
+
+The matched events were heavily dominated by direct title and name matches. Specifically, `exact_title` accounted for 26 events across 11 movies, while `exact_name` accounted for 20 events across 16 individuals, together making up 88.5% of all successful matches. The remaining 6 events matched through structured disambiguation patterns, including 3 generic film title matches, 2 film title with release year matches, and 1 disambiguated actor match.
+
+The pipeline demonstrated exceptionally low latency throughout the run. The median delay between the moment an editor clicked save on Wikipedia and the moment the edit reached Kafka (measured by the difference between Wikipedia's event timestamp and Kafka's ingestion timestamp) was only 5.22 seconds for matched events. The 99th percentile delay was 15.89 seconds, with a maximum observed delay of 17.61 seconds for matched events.
+
+Crucially, the streaming metrics report shows that exactly zero rows were dropped by the watermark across all three concurrent streaming queries. This result simply proves that no event arrived with more than 2 minutes of delay relative to the watermark; every event arrived well within the allowable time threshold.
 
 #### Methodological explanation
 
-> *To be written by the team (no AI tools allowed in this part).*
+The Wikimedia recent changes feed broadcasts hundreds of edits every second from all Wikimedia projects globally. To isolate relevant data, our Python producer connects to the live Server-Sent Events stream and filters incoming messages to keep only English Wikipedia (`enwiki`), main encyclopedia articles (`namespace = 0`), and edit or page creation actions.
 
-Points to cover:
+Within Spark, we match incoming Wikipedia page titles against a pre-computed lookup table built from our silver IMDb layer. This static lookup contains all feature films with at least 1,000 votes, as well as the directors, writers, and actors credited on those films. Filtering for movies with at least 1,000 votes ensures that the lookup table remains small enough to broadcast efficiently to all Spark workers in memory, while maintaining a broad enough catalog to guarantee multiple live matches within the required 15- to 30-minute test window (our test ran for an exact 20-minute window and produced 52 matches).
 
-- Method used and why it was chosen
-- Alternatives considered and trade-offs made
-- Filtering strategy and how events are matched to IMDb
-- **Handling of late data** (required): event time, watermark, window size, deduplication
-- Known limits (false positives of exact title matches)
+To connect Wikipedia article titles to IMDb entities, our streaming job tests five distinct matching rules in priority order. First, `film_title_year` captures articles with a year suffix, such as *"Breath (2016 film)"*, matching both the title and release year. Second, `film_title` handles general suffixes like *"Attention Please (film)"* for movie titles. Third, `person_disambiguated` catches biographical suffixes like *"Junaid Khan (Indian actor)"*. Fourth, `exact_title` handles direct matches on the movie primary title, such as *"The Get Out"*. Finally, `exact_name` handles direct matches on a person's primary name, such as *"Tom Hanks"*. All matching logic is strictly case-sensitive because Wikipedia titles are case-sensitive by design. In situations where multiple films or people share the exact same title or name, the lookup table automatically resolves the conflict by keeping the entity with the highest total IMDb votes, prioritizing the most culturally prominent subject.
+
+##### Late data
+
+In stream processing, there is a fundamental difference between event time and ingestion time. Event time is the exact moment an edit was committed on Wikipedia as recorded by Wikimedia servers, whereas ingestion time is the moment the message was received by Kafka (the Kafka message timestamp). Our pipeline strictly groups and windows data using event time. This guarantees that temporary network latency, message buffering, or producer reconnections never shift an edit into an incorrect historical time window.
+
+To manage late-arriving records, Spark uses a watermark mechanism that defines how long the system will wait for delayed events before closing a time window and evicting its state from memory. We configured our watermark to 2 minutes (120 seconds). Comparing this threshold to our observed metrics shows that it provides an ideal operating balance: while the maximum delay on matched events was 17.61 seconds, the maximum delay observed across all incoming events was 62.88 seconds (in the 12:30–12:35 window). A 2-minute watermark (120 seconds) therefore provides a safe margin of approximately 2 times the worst-case overall delay, while keeping memory retention bounded.
+
+We aggregate incoming events using 5-minute tumbling windows. Edits to film-related pages occur in sporadic bursts rather than a steady stream. A 5-minute window is wide enough to capture multiple edits per window and reveal meaningful editing trends, while remaining short enough to provide near-real-time operational metrics.
+
+A clear practical illustration of the watermark in action is visible in our tumbling window tables (`matched_windows` and `all_windows`). Even though our streaming test ran until 12:53 and processed incoming events up to 12:52:34, no window starting after 12:45:00 (which ended at 12:50:00) was ever written to disk. In Spark Structured Streaming append mode, a 5-minute window such as 12:50:00 to 12:55:00 cannot be finalized or output until the watermark has advanced past its end time of 12:55:00. Because our last recorded watermark reached 12:50:25 when the query stopped, Spark kept that final window in internal memory, waiting to ensure no late-arriving events would be missed before committing it to storage. This concrete behavior highlights the core trade-off between latency and completeness: Spark accepts a delayed output to guarantee that windowed aggregations are 100% complete.
+
+The length of the watermark represents an essential trade-off between data completeness and memory consumption. If the watermark were configured too short, such as 5 or 10 seconds, brief network fluctuations would cause Spark to reject and drop valid edits arriving slightly late. Conversely, if the watermark were set to an hour or more, Spark would be forced to keep intermediate aggregation state and deduplication buffers in memory for an extended period, creating high RAM pressure and delaying window output.
+
+Our pipeline also enforces deduplication using Spark's `dropDuplicatesWithinWatermark` on the unique event identifier. Because Kafka guarantees at-least-once message delivery, network reconnections or consumer rebalancing could deliver the same Wikipedia event multiple times. Pairing deduplication with the watermark ensures that duplicate edits are eliminated without allowing the memory cache of processed IDs to grow indefinitely, as IDs older than the watermark threshold are automatically evicted from memory.
+
+Despite these safeguards, matching on exact titles introduces known limitations with false positives. When a movie shares its name with a common noun or a historical figure, general encyclopedia edits can be mistakenly attributed to the film. For instance, in our test run, edits to the articles for Saint *"Francis of Assisi"* and the animal *"Wolf"* were matched to the films of the same name. To mitigate these false positives in a future release, we could inspect the categories of incoming Wikipedia articles, requiring that an exact title match also belong to a category such as "Films" or "Living people" before accepting it into the movie stream.
 
 ## 5. Open question
 
