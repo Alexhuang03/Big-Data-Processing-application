@@ -1,0 +1,7 @@
+| match_type | entity_type | events | distinct_entities |
+| --- | --- | --- | --- |
+| exact_title | film | 26 | 11 |
+| exact_name | person | 20 | 16 |
+| film_title | film | 3 | 2 |
+| film_title_year | film | 2 | 2 |
+| person_disambiguated | person | 1 | 1 |

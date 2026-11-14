@@ -1,0 +1,3 @@
+| matched_events | first_event | last_event | median_delay_s | p99_delay_s | max_delay_s |
+| --- | --- | --- | --- | --- | --- |
+| 52 | 2026-11-11 12:33:12 | 2026-11-11 12:52:34 | 5.22 | 15.89 | 17.61 |

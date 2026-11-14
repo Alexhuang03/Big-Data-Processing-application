@@ -1,0 +1,3 @@
+# Installed in the Spark image (see Dockerfile). pyspark, pandas and requests
+# are already provided by the base image.
+confluent-kafka>=2.6,<3
