@@ -216,4 +216,4 @@ docker compose down -v     # also deletes the downloaded and processed data
 | --- | --- | --- |
 | Claude Code (Claude Opus 5.5) | Alex Huang | Docker Compose setup, shared code (`src/common`), data preparation code (`src/preparation`), exploration Q1 to Q3 code, enrichment, streaming, initial guide |
 | Google DeepMind Antigravity (Gemini) | Bryan Tachi | Exploration Q4 to Q8 code (`src/exploration`), Open Question investigation (`src/open_question`), helper scripts, guide updates |
-| ChatGPT | Hicham RKAIBI | Exploration Q7 to Q8 code (`src/exploration`), Open Question investigation (`src/open_question`), helper scripts, guide updates |
+| ChatGPT (GPT-6) | Hicham RKAIBI |  methodological explanations, critical discussion of findings, and report writing for both sections 7 and 8 |
