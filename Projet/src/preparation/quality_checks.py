@@ -7,6 +7,8 @@ Each check returns the rows that break a rule. The same checks are run:
 Outputs (in output/preparation/):
     quality_issues_<stage>.csv / .md        one row per check with counts
     quality_samples_<stage>.md              a few example rows per check
+    quality_issues_comparison.csv / .md     before / after cleaning, side by side
+                                            (written by the silver stage)
 
 Usage:
     python -m preparation.quality_checks --stage typed
@@ -261,6 +263,24 @@ def save_samples(samples, stage):
     print(f"Saved {path}")
 
 
+def compare_stages():
+    """Merge the typed and silver reports into one before / after table.
+
+    Checks that only make sense on the typed data (malformed rows,
+    untrimmed values) have no "after" value.
+    """
+    folder = output_dir(SECTION)
+    before = pd.read_csv(folder / "quality_issues_typed.csv")
+    after = pd.read_csv(folder / "quality_issues_silver.csv")
+    merged = before.merge(after[["check", "issue_count", "issue_pct"]], on="check",
+                          how="left", suffixes=("_before", "_after"))
+    merged = merged[["check", "table", "rule", "issue_count_before", "issue_pct_before",
+                     "issue_count_after", "issue_pct_after", "handling"]]
+    merged.columns = ["check", "table", "rule", "before", "before_pct",
+                      "after", "after_pct", "handling"]
+    return save_table(merged, SECTION, "quality_issues_comparison", float_digits=4)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--stage", choices=["typed", "silver"], default="typed")
@@ -270,6 +290,8 @@ def main():
     report, samples = run_checks(spark, args.stage)
     print(save_table(report, SECTION, f"quality_issues_{args.stage}", float_digits=4))
     save_samples(samples, args.stage)
+    if args.stage == "silver":
+        print(compare_stages())
     spark.stop()
 
 
