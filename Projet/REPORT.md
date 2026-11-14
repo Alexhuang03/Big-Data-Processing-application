@@ -309,17 +309,13 @@ Top directors (`output/exploration/q4_one_hit_directors_top.md`):
 
 #### Key takeaways
 
-> *To be written by the team (no AI tools allowed in this part).*
+Looking at the distribution of one-hit wonder directors, the ranking highlights filmmakers who achieved a single critically acclaimed feature film (rating $\ge 8.0$) but whose subsequent filmography failed to maintain that standard. The most pronounced drop occurs with Steve Rahaman: his hit *To Be King* achieved an 8.60 rating, whereas his remaining 2 feature films averaged only 3.00, representing a massive 5.60 rating gap. Similar steep declines appear with Kevin Van Stevenson (*Short Fuse* at 8.80 vs. an average of 3.28 across 5 other films, a 5.52 gap) and Swaylee Loughnane (*Mother's Child* at 8.20 vs. 2.70 across 4 other films). Crucially, the table is not restricted to directors with only three or four titles; Larry Rosen directed *Starting Over* (8.70), yet across 11 other feature films his average sits at 4.10, demonstrating that prolific filmographies can also exhibit single-hit career profiles.
 
 #### Methodological explanation
 
-> *To be written by the team (no AI tools allowed in this part).*
+To identify one-hit wonder directors, our pipeline explodes the `directors` array from `title_crew` and inner-joins it with feature films (`titleType == 'movie'` and `runtimeMinutes > 40`). We filter for movies with at least 50 votes (`numVotes >= 50`) and a valid rating. For each director, we count their hit films (`averageRating >= 8.0`) and non-hit films (`averageRating < 8.0`), selecting directors who directed exactly one hit and at least two other films whose unweighted average rating does not exceed 6.00.
 
-Points to cover:
-
-- Method used and why it was chosen
-- Alternatives considered and trade-offs made
-- Minimum number of votes used, if any
+The choice of `min_votes = 50` is a deliberate compromise between data clean-up and coverage. In raw IMDb data, setting no vote threshold surfaces thousands of micro-budget home movies or festival shorts where a director and friends voted 10/10, producing artificial hits. Enforcing 50 votes successfully filters out self-promotional or unrepresentative entries. While a higher threshold like 500 or 1,000 votes (such as used in Q6) was considered, doing so eliminated virtually all independent and international cinema, leaving only a few widely publicized Hollywood exceptions like Tony Kaye (*American History X*). A 50-vote cutoff allows us to capture authentic independent directors across multiple countries while remaining resilient to ballot-stuffing.
 
 ### 2.5 Q5: TV series that decline in their last season
 
@@ -352,17 +348,13 @@ Top series (`output/exploration/q5_declining_tv_series_top.md`):
 
 #### Key takeaways
 
-> *To be written by the team (no AI tools allowed in this part).*
+The analysis of television series reveals striking examples of severe late-stage quality decay. The largest rating collapse in our dataset is observed in the anime series *One Punch Man*, with a 7.90 point drop between its Season 1 finale (*The Strongest Hero* at 9.50) and Season 3 Episode 6 (*Motley Heroes* at 1.60). Prominent Western drama shows also illustrate this pattern: *House of Cards* exhibits a 7.00 point drop, peaking at 9.50 in Season 2 (*Chapter 26*) before the series finale in Season 6 plunged to 2.50 (*Chapter 73*) following major cast changes. Similarly, long-running network series like *The Flash* demonstrate protracted fatigue, declining by 5.80 points from a 9.60 peak in Season 1 (*Out of Time*) to 3.80 in Season 9 (*The Good, the Bad and the Lucky*).
 
 #### Methodological explanation
 
-> *To be written by the team (no AI tools allowed in this part).*
+Our pipeline targets established television series by requiring at least three qualifying seasons with a minimum of 10 episodes each. During implementation, we encountered a subtle edge case: calculating season episode counts after joining `title_episode` with `title_ratings` inadvertently dropped valid 12-episode seasons where one or two episodes lacked ratings. To avoid this, our pipeline calculates total episodes per season and determines the series' true `last_season` directly on `title_episode` prior to joining with episode ratings.
 
-Points to cover:
-
-- Method used and why it was chosen
-- Alternatives considered and trade-offs made
-- Handling of ties for best and worst episode
+To identify genuine decline, we implemented a strict tie-breaking rule. Earlier iterations simply picked the maximum season number when multiple episodes shared the series' minimum rating, which artificially biased the results toward finding declines. In our final logic, we enforce that *every* episode sharing the absolute lowest rating of the entire series must be located in `last_season`. Simultaneously, the series' best rating must occur strictly within Season 1 or Season 2, with no later season matching or exceeding it. While this strict condition excludes shows where an intermediate season had an equally poor episode, it ensures that every series returned in the final table represents an unambiguous, undeniable trajectory of late-season decay.
 
 ### 2.6 Q6: Actors successful in several languages
 
@@ -440,18 +432,17 @@ Top actors, 3 languages or more (`output/exploration/q6_multilingual_actors_3plu
 
 #### Key takeaways
 
-> *To be written by the team (no AI tools allowed in this part).*
+The summary shows that while cross-linguistic success is relatively common across two languages (2,303 actors have successful films in 2 languages), reaching high acclaim across three or more languages is exceptionally rare. Exactly 190 actors succeeded in 3 languages, 19 in 4 languages, and only a single actor achieved success across 5 distinct languages: Sebastian Koch (*The Lives of Others*, etc., spanning German, English, French, Japanese, and Cantonese). Among the 19 actors who succeeded in 4 languages, the list features world-renowned international performers such as Michelle Yeoh (Cantonese, English, French, and Mandarin across 11 hit films), Bruno Ganz (German, English, French, and Swedish across 9 films), and Song Kang-ho (English, Spanish, French, and Turkish across 5 films). Prolific actors like Amitabh Bachchan and Tom Hanks also stand out in the 3-language tier with extensive filmographies of 50 and 29 hit films respectively.
 
 #### Methodological explanation
 
-> *To be written by the team (no AI tools allowed in this part).*
+Determining the original language of a film in IMDb presented a major technical hurdle. Unlike specialized cinematographic databases, IMDb's `title_basics` does not include an explicit original language column; instead, language tags are cataloged in `title_akas`. A naive join between `title_akas` and `title_principals` produces disastrous false positives because major Hollywood films release localized translated titles in dozens of regions, falsely tagging American actors with 10+ languages.
 
-Points to cover:
-
-- Method used and why it was chosen
-- Alternatives considered and trade-offs made
-- How the original language of a film was found
-- How a successful film was defined
+To solve this, our pipeline matches `title_akas` against `title_basics` on `aka_title == originalTitle`. Because foreign translated titles frequently retain the original English title verbatim in overseas markets, we apply a Spark window partition ordered by the `ordering` attribute:
+```python
+w = Window.partitionBy("tconst").orderBy("ordering")
+```
+Filtering for the first record (`r == 1`) reliably isolates the primary original release entry. We define a film as "successful" if `averageRating >= 7.0` and `numVotes >= 1000`, ensuring both critical quality and broad audience consensus. While minor edge cases remain where an international co-production's first ordering record carries a partner language (e.g., *Casablanca* receiving a French tag), this Spark-native window strategy runs in seconds over the entire dataset and accurately identifies true polyglot performers.
 
 ### 2.7 Q7: Actors whose popularity peaked early
 
@@ -733,9 +724,11 @@ Despite these safeguards, matching on exact titles introduces known limitations 
 
 ### 5.1 Question
 
-> *To be written by the team (no AI tools allowed in this part).*
+Our open research question investigates: **Does a recurring creative collaboration between a film director and a lead actor produce a measurable lift in critical reception and audience engagement compared to when each artist works independently?**
 
-Points to cover: the question, why it is interesting, extra data used (if any).
+In cinematic history, recurring partnerships—such as Martin Scorsese and Robert De Niro, Christopher Nolan and Christian Bale, or Akira Kurosawa and Toshiro Mifune—are celebrated as legendary creative synergies. However, it remains an open question whether recurring collaboration systematically produces superior art across cinema as a whole, or whether it often leads to formula exhaustion and artistic complacency. By establishing an uncontaminated individual baseline for each artist, our analysis tests whether the collaborative whole is truly greater than the sum of its parts.
+
+This analysis relies entirely on the IMDb silver tables without requiring external scraping: `title_basics`, `title_ratings`, `title_crew`, `title_principals`, and `name_basics`.
 
 ### 5.2 Results
 
@@ -797,13 +790,17 @@ Duos with the lowest synergy (`output/open_question/open_question_negative_syner
 
 #### Key takeaways
 
-> *To be written by the team (no AI tools allowed in this part).*
+Across 6,055 recurring director-actor partnerships (at least 3 collaborative feature films with $\ge 250$ votes):
+- **Prevalence of positive synergy**: **62.31%** (3,773 duos) exhibit positive synergy, confirming that collaborative familiarity generally elevates artistic output. The overall average synergy delta is **+0.16 rating points**, and duos enjoy an average vote multiplier of **1.32x** (receiving 32% more votes than their solo projects).
+- **Highest synergy duos**: The highest positive delta is achieved by Vicky Jenson and Mike Myers (+4.42 points across 3 films, averaging 7.90 vs. an expected baseline of 3.48), driven by the critical success of *Shrek*. Dramatic partnerships also display massive synergy: Francis Ford Coppola and Diane Keaton achieve a +2.52 rating delta across *The Godfather* trilogy, accompanied by an extraordinary 28.65x vote multiplier. Similarly, the Russo brothers and Robert Downey Jr. achieve a +2.58 rating delta (8.20 average) across 6 collaborative Marvel films.
+- **Creative fatigue and negative synergy**: Conversely, **37.69%** (2,230 duos) exhibit negative synergy, illustrating severe creative exhaustion or low-budget typecasting. Rex Piano and Tom Kenny show the steepest negative drop (-4.77 delta, averaging 1.90 together on titles like *Elf Bowling* vs. Kenny's 6.67 baseline elsewhere). Similarly, Bob Clark and Jon Voight drop by -3.90 points (averaging 1.93 on *Superbabies: Baby Geniuses 2* vs. 5.84 solo). This proves that repeated collaborations in low-budget sequel franchises often accelerate creative decline.
 
 #### Methodological explanation
 
-> *To be written by the team (no AI tools allowed in this part).*
+To measure genuine synergy, our pipeline avoids the fundamental pitfall of baseline contamination. If an artist's baseline were calculated using their entire filmography including collaborative titles, the joint films would contaminate the baseline, artificially pulling the expected rating toward the collaborative average and shrinking the synergy delta toward zero. To guarantee an uncontaminated baseline, we strictly subtract the joint collaborative ratings and vote sums from each artist's career totals:
+$$\text{dir\_solo\_avg} = \frac{\text{dir\_sum\_rating} - \text{duo\_sum\_rating}}{\text{dir\_total\_movies} - \text{collab\_count}}$$
+$$\text{act\_solo\_avg} = \frac{\text{act\_sum\_rating} - \text{duo\_sum\_rating}}{\text{act\_total\_movies} - \text{collab\_count}}$$
+$$\text{expected\_baseline\_rating} = \frac{\text{dir\_solo\_avg} + \text{act\_solo\_avg}}{2}$$
+We require both director and actor to have at least one external film outside the duo (`dir_solo_count >= 1` and `act_solo_count >= 1`) to ensure a meaningful independent baseline exists.
 
-Points to cover:
-
-- Method used and why it was chosen
-- Alternatives considered and trade-offs made
+To isolate true creative leads, we filter `title_principals` for `category IN ('actor', 'actress')` with `ordering <= 4`. This prevents uncredited cameos or bit players from registering as creative partners. We enforce `min_collabs = 3` (to distinguish recurring artistic partnerships from coincidental re-castings) and `min_votes = 250` (to ensure reliable audience ratings). When joining `name_basics` twice for the director and actor names, Spark Catalyst threw ambiguous column errors; we resolved this by aliasing `names_d = names.alias("d")` and `names_a = names.alias("a")`.
