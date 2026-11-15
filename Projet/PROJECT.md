@@ -4,7 +4,7 @@
 
 | Name | Email | Main parts |
 | --- | --- | --- |
-| Alex Huang | <alexhuang392@gmail.com> | Environment, data preparation, exploration Q1 to Q3, data enrichment, streaming |
+| Alex Huang | <alex.huang@edu.ece.fr> | Environment, data preparation, exploration Q1 to Q3, data enrichment, streaming |
 | Bryan Tachi | <jessy.tachi@edu.ece.fr> | Exploration Q4 to Q8, open question |
 
 ## Requirements
