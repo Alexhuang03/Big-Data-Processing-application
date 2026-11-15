@@ -199,11 +199,23 @@ Outliers per genre (`output/exploration/q1_genre_summary.md`):
 
 #### Key takeaways
 
-> *To be written by the team (no AI tools allowed in this part).*
+The analysis looks at movies whose runtimes are quite different from what is usually expected for their genre. Most of the outliers are longer than the average. This is especially clear for Drama, where all 1,966 detected cases have a runtime above the genre average. Thriller also stands out, with the highest outlier rate among genres with a large number of films (6.13%). Romance is another interesting case, as it includes 229 films that are shorter than the average.
+
+A few examples show just how unusual some runtimes can be. *Logistics* runs for 51,420 minutes, while *The Cure for Insomnia* lasts 5,220 minutes. These films are far from standard movie formats, but their unusual runtimes do not automatically mean that the data is incorrect.
 
 #### Methodological explanation
 
-> *To be written by the team (no AI tools allowed in this part).*
+The analysis focuses on feature-length movies and compares each runtime with the average runtime of its genre. When a movie belongs to more than one genre, it is considered separately for each category.
+
+For each genre, the program calculates the number of movies, the average runtime, the standard deviation and the three quartiles. Outliers are detected using the Z-score method by default. This method measures how far a movie's runtime is from the genre average, based on the standard deviation. A movie is considered an outlier when its absolute Z-score reaches or exceeds 2.
+
+The analysis also shows whether each outlier is longer or shorter than the genre average. The outlier percentage represents the proportion of detected outliers among all movies in the corresponding genre.
+
+### Limitations
+
+The Z-score method can be affected by extreme values because it relies on the mean and standard deviation. Very long productions may influence these measures and, in turn, affect the results. This is also why results for genres with very few movies should be treated with caution. For example, Game-Show contains only eight titles.
+
+It is also important to remember that an outlier is not necessarily an error. Some unusual runtimes may come from experimental films or productions with specific formats. The analysis therefore highlights movies that stand out statistically, but cannot determine whether their runtime data is incorrect.
 
 Points to cover:
 
@@ -230,11 +242,28 @@ How often each genre is in the yearly top three (`output/exploration/q2_top3_fre
 
 #### Key takeaways
 
-> *To be written by the team (no AI tools allowed in this part).*
+Drama clearly stands out as the most consistent genre throughout the period. It appears in the top three every year between 1980 and 2025 and takes first place in 42 out of the 46 years analysed.
+
+Comedy and Action also perform well, appearing in the top three 34 and 29 times respectively. Adventure follows with 16 appearances. The remaining genres are much less frequent: Crime appears in 9 years, Horror in 2, while Thriller and Sci-Fi make the top three only once each.
+
+These results show that the same genres tend to dominate IMDb popularity rankings over time. Drama remains the clear leader, while Comedy and Action regularly take the other top positions.
 
 #### Methodological explanation
 
-> *To be written by the team (no AI tools allowed in this part).*
+The analysis covers feature films released between 1980 and 2025. Each film is linked to its IMDb genres. When a movie belongs to several genres, it is included in the statistics of each one.
+
+For every year and genre, the analysis looks at the number of films, the number of rated films, the total number of IMDb votes and the average rating. It also calculates the vote-weighted average rating.
+
+Genre popularity is based on the total number of IMDb votes received by its films in a given year. This is the default ranking method. The script also offers another option, `--metric movies`, which ranks genres according to the number of films instead.
+
+The genres are ranked separately for each year, and the three highest-ranked ones are selected. If two genres have the same score, the ranking uses a secondary metric, followed by alphabetical order. The analysis then counts how many times each genre appears in the top three and how often it ranks first.
+
+### Limitations
+
+IMDb votes are used as an indicator of popularity, but they do not represent the actual number of viewers. The results may also be affected by a film's visibility, release date and the level of activity of IMDb users. Therefore, the rankings should be understood as a reflection of popularity on IMDb rather than overall audience preferences.
+Another point to consider is that genres can overlap. A film associated with several genres is counted in each of them, so the totals do not represent separate shares of the movie market.
+
+It is also worth keeping in mind that these results are based on IMDb users' voting habits. They may therefore differ from the preferences of the wider audience.
 
 Points to cover:
 
@@ -267,11 +296,31 @@ Summary over 1980 to 2025 (`output/exploration/q3_top3_vs_rest_summary.md`):
 
 #### Key takeaways
 
-> *To be written by the team (no AI tools allowed in this part).*
+On average, the top three genres represent 44.75% of all IMDb votes, compared with 55.25% for the remaining genres. This shows that, although the top three rank highly, they do not account for most of the votes overall.
+
+The top three group includes around 4,677 films per year, while the remaining genres account for approximately 7,571. Despite this difference, the average number of votes per rated film is almost the same in both groups: 8,174 for the top three and 8,148 for the rest. The ratio of 1.09 therefore points to only a slight difference.
+
+Another interesting finding is that the remaining genres have a higher average rating (6.15) than the top three (5.91). The rating gap of -0.24 suggests that the genres receiving the most votes are not necessarily those with the highest-rated films.
+
+Overall, these results show that popularity and audience ratings do not follow exactly the same pattern. The top three genres receive slightly more votes per rated film, while the remaining genres achieve higher average ratings.
 
 #### Methodological explanation
 
-> *To be written by the team (no AI tools allowed in this part).*
+For each year between 1980 and 2025, genres are ranked by their total number of IMDb votes. The three genres with the highest number of votes are placed in the top three group, while all the others are included in the rest group.
+
+The analysis then compares these two groups using several indicators: the number of genres and films, total votes, share of votes, average votes per rated film and average IMDb rating.
+
+Average votes per rated film are calculated by dividing the total number of votes by the number of rated films. Two additional indicators are used to compare the groups: the ratio of average votes per rated film and the difference in average ratings.
+
+To provide an overall view, the results are averaged across the 46 years covered by the analysis.
+
+### Limitations
+
+Using averages across the whole period makes it easier to compare the two groups, but it can hide differences from one year to another. As a result, the analysis does not show how the relationship between the top three and the remaining genres changes over time.
+
+The average rating is calculated from the genre-level average ratings within each group. It is therefore not a single rating weighted by the total number of votes received by all films.
+
+Finally, IMDb votes are used as an indicator of popularity, but they do not directly measure viewership. The results should therefore be understood as reflecting the voting activity of IMDb users rather than the preferences of the entire movie audience.
 
 Points to cover:
 
@@ -484,11 +533,23 @@ Top actors (`output/exploration/q7_early_peak_actors_top.md`):
 
 #### Key takeaways
 
-> *To be written by the team (no AI tools allowed in this part).*
+The results show that some actors received higher IMDb ratings during the first part of their careers. Mahesh Anand has the largest difference, with an average rating of 5.426 in the early period, compared with 1.900 in the later period. Ken Maynard and Mehmood Jr. follow, with differences of 3.470 and 3.400 points respectively.
+
+Other actors are also worth highlighting. Dev Anand has 60 films in the analysis, and his average rating decreases from 7.119 to 4.450. Rekha shows a similar trend, with an average rating of 7.356 in the first period and 4.753 in the second.
+
+These results show how IMDb ratings can vary over the course of an actor's career. However, they should not be interpreted as changes in popularity. Ratings reflect audience appreciation, rather than box-office performance or public visibility.
 
 #### Methodological explanation
 
-> *To be written by the team (no AI tools allowed in this part).*
+The analysis uses rated feature films and links them to actors and actresses through the `title_principals` table. Films with a missing release year or rating are excluded. We also apply a minimum threshold of 50 IMDb votes to avoid relying on ratings based on very few opinions.
+
+For each actor, we identify the first and last release years and count the number of distinct films. To make the comparison more reliable, we keep only actors with at least 15 films and a career spanning 20 years or more.
+
+Each career is then divided into two periods based on its chronological midpoint. Films released before or during this midpoint belong to the early period, while the remaining films are assigned to the late period. We calculate the average rating for each period and subtract the late-period average from the early-period average. A positive result means that the films from the first part of the career received higher ratings.
+
+This approach makes it possible to compare the two parts of an actor's career, but it has some limitations. The number of films is not necessarily the same in both periods. Another approach would have been to split each filmography into two groups with an equal number of films. Ratings could also have been weighted by vote count to take differences in audience participation into account.
+
+Finally, the results depend on the IMDb data available after filtering. They provide an indication of how ratings changed across the selected filmographies, but they do not necessarily reflect the actors' complete careers or their overall popularity.
 
 Points to cover:
 
@@ -539,11 +600,31 @@ Ratings when holding several roles on the same film (`output/exploration/q8_same
 
 #### Key takeaways
 
-> *To be written by the team (no AI tools allowed in this part).*
+This analysis looks at professionals who have worked in more than one area of filmmaking, including acting, directing and writing. Jesús Franco stands out with 149 multi-role films out of 180. Jing Wong follows with 111 out of 197, while Yōji Yamada has 77 multi-role films out of 85.
+
+The results highlight different combinations of creative roles. Some professionals combine writing and directing, while others have credits in all three areas. The ranking also includes well-known filmmakers such as Jean-Luc Godard, Woody Allen and Werner Herzog.
+
+We also compared films in which a person held several roles with those in which they held only one. The average ratings are almost identical: 5.886 for multi-role films and 5.883 for single-role films. This difference is too small to suggest any meaningful gap between the two groups.
+
+However, the average vote count is lower for multi-role films (5,970) than for single-role films (15,723). This does not necessarily mean that multi-role films are less popular. Factors such as release year and genre may also influence the number of votes a film receives.
 
 #### Methodological explanation
 
-> *To be written by the team (no AI tools allowed in this part).*
+The analysis considers three types of professional activities: acting, directing and writing. Acting credits were taken from `title_principals`, while directing and writing credits were extracted from `title_crew`.
+
+We used the `explode()` operation to separate the directors and writers listed for each film. The different sources were then joined using the film identifier (`tconst`) and the person identifier (`nconst`). Duplicate records were removed to avoid counting the same credit more than once, and missing role indicators were set to zero.
+
+Only rated feature films with at least 50 IMDb votes were included. A person was considered multi-talented if they had worked in at least two of the three activities during their career. This definition applies to their overall filmography, so it does not mean they necessarily held several roles in every film.
+
+For each person, we calculated the total number of films and the number of films involving at least two roles. We also looked at their average ratings and vote counts. The different combinations of roles were used to identify which activities each professional had performed.
+
+We then carried out a second comparison at film level, focusing on people who had held at least two different roles during their careers. Each film was classified as `multi_role` if the person had at least two roles in that particular production. Otherwise, it was classified as `single_role`. We compared the two groups based on the number of records, average ratings and average vote counts.
+
+### Limitations
+
+The analysis only covers three professional activities. Other roles, such as producing and editing, are not included. IMDb credits may also be incomplete, which could affect the classification of some professionals and films.
+
+Finally, this is a descriptive comparison. It does not take into account other factors, such as genre or release year, that may influence ratings and vote counts. The results therefore cannot establish a causal link between holding several roles and a film's rating.
 
 Points to cover:
 
