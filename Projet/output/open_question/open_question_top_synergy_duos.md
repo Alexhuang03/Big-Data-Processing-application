@@ -1,22 +1,22 @@
 | director_name | actor_name | collab_count | duo_avg_rating | expected_baseline_rating | synergy_rating_delta | vote_multiplier | sample_titles_str |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Vicky Jenson | Mike Myers | 3 | 7.90 | 3.48 | 4.42 | -1.35 | Shrek |
-| Ali Abdel-Khalek | Mahmoud Abdel Aziz | 7 | 7.83 | 3.95 | 3.88 | -3.09 | Gary el-Wuhoosh; Idam Mayyet; The High |
-| Barry Mahon | Hal Smith | 3 | 6.60 | 3.04 | 3.56 | 1.49 | Santa and the Three Bears |
 | Viktor Shamirov | Gosha Kutsenko | 4 | 6.98 | 3.56 | 3.42 | 0.59 | And Here's What's Happening to Me; Dikari; Game of Truth |
-| Terry Jones | Graham Chapman | 6 | 8.05 | 4.78 | 3.27 | -1.11 | Monty Python and the Holy Grail; Monty Python's Life of Brian |
-| Ashok G. | Nani | 3 | 7.80 | 4.66 | 3.14 | 0.71 | Pilla Zamindar |
-| Jon Watts | Tom Holland | 6 | 7.60 | 4.47 | 3.13 | -0.78 | Spider-Man: Far from Home; Spider-Man: Homecoming; Spider-Man: No Way Home |
-| James Frawley | Jim Henson | 3 | 7.60 | 4.50 | 3.10 | -1.90 | The Muppet Movie |
-| Nina Wels | Dela Dabulamanzi | 3 | 6.20 | 3.15 | 3.05 | 0.48 | Tafiti: Across the Desert |
-| T.K. Rajeev Kumar | Mohanlal | 3 | 6.97 | 3.93 | 3.04 | 0.53 | Oru Naal Varum; Pavithram |
-| Tso Nam Lee | Shan Charng | 3 | 7.00 | 4.10 | 2.90 | 3.59 | Shaolin vs. Lama |
-| Kelly Makin | Dave Foley | 3 | 6.90 | 4.05 | 2.85 | 0.32 | Kids in the Hall: Brain Candy |
-| Josef Rusnak | Craig Bierko | 3 | 7.00 | 4.29 | 2.71 | -33.71 | The Thirteenth Floor |
-| Jeff Wamester | Jeff Bennett | 3 | 7.80 | 5.18 | 2.62 | 1.73 | Batman: Knightfall - Part 1: Knightfall |
 | Kinji Fukasaku | Tatsuo Umemiya | 3 | 7.20 | 4.60 | 2.60 | 0.26 | Cops vs. Thugs; Graveyard of Honor; Police Tactics |
-| Joe Russo | Robert Downey Jr. | 6 | 8.20 | 5.62 | 2.58 | -5.35 | Avengers: Endgame; Avengers: Infinity War; Captain America: Civil War |
-| Anthony Russo | Robert Downey Jr. | 6 | 8.20 | 5.62 | 2.58 | -5.35 | Avengers: Endgame; Avengers: Infinity War; Captain America: Civil War |
-| Francis Ford Coppola | Diane Keaton | 3 | 8.57 | 6.05 | 2.52 | 28.65 | The Godfather; The Godfather Part II; The Godfather Part III |
+| Francis Ford Coppola | Diane Keaton | 3 | 8.57 | 6.05 | 2.52 | 28.64 | The Godfather; The Godfather Part II; The Godfather Part III |
 | Hulki Saner | Çolpan İlhan | 3 | 7.00 | 4.48 | 2.52 | 1.33 | Turist Ömer: Dümenciler Krali; Ömer the Tourist; Ömer the Tourist in Germany |
-| Singeetam Srinivasa Rao | Kamal Haasan | 11 | 7.85 | 5.34 | 2.51 | -0.77 | Apoorva Sagodharargal; Kaathala Kaathala; Michael Madana Kama Rajan |
+| Mehmet Ada Öztekin | Sarp Akkaya | 3 | 8.17 | 5.78 | 2.38 | 0.47 | Ataturk I 1881-1919; Ataturk II: 1881-1919; Love Me Instead |
+| Mahesh Manjrekar | Sunil Barve | 3 | 8.20 | 5.82 | 2.38 | 0.41 | Bhai - Vyakti Ki Valli; Bhai - Vyakti Ki Valli 2; Natsamrat |
+| Houman Seyyedi | Alireza Ghaedi | 3 | 7.00 | 4.63 | 2.37 | 7.28 | Sheeple; Sound and Fury; World War III |
+| Ron Oliver | Sebastian Spence | 3 | 6.50 | 4.18 | 2.32 | 0.82 | Ice Blues; On the Other Hand, Death; Shock to the System |
+| Sachin Pilgaonkar | Ashok Saraf | 3 | 8.17 | 5.86 | 2.31 | 1.06 | Aayatya Gharat Gharoba; Ashi Hi Banwa Banwi; Navra Mazha Navsacha |
+| Veit Harlan | Kristina Söderbaum | 6 | 6.18 | 3.90 | 2.28 | 1.48 | Burning Hearts; Der große König; Immensee |
+| Francis Ford Coppola | Al Pacino | 3 | 8.57 | 6.28 | 2.28 | 14.45 | The Godfather; The Godfather Part II; The Godfather Part III |
+| Michael Polish | Mark Polish | 4 | 6.03 | 3.76 | 2.27 | 0.72 | For Lovers Only; Stay Cool; The Smell of Success |
+| Aditya Chopra | Shah Rukh Khan | 3 | 7.43 | 5.27 | 2.16 | 2.87 | Dilwale Dulhania Le Jayenge; Mohabbatein; Rab Ne Bana Di Jodi |
+| Peter Jackson | Elijah Wood | 3 | 8.90 | 6.74 | 2.16 | 13.08 | The Lord of the Rings: The Fellowship of the Ring; The Lord of the Rings: The Return of the King; The Lord of the Rings: The Two Towers |
+| Vivek Agnihotri | Mithun Chakraborty | 3 | 7.77 | 5.61 | 2.15 | 38.69 | The Bengal Files; The Kashmir Files; The Tashkent Files |
+| K. Selvaraghavan | Sonia Agarwal | 3 | 8.10 | 5.96 | 2.14 | 1.93 | 7/G Rainbow Colony; Kaadhal Konden; Pudhu Pettai |
+| Caner Alper | Tilbe Saran | 3 | 6.97 | 4.85 | 2.12 | 1.64 | Bergen; Drawers; Zenne Dancer |
+| Mehmet Binay | Tilbe Saran | 3 | 6.97 | 4.85 | 2.12 | 1.64 | Bergen; Drawers; Zenne Dancer |
+| Peter Jackson | Orlando Bloom | 3 | 8.90 | 6.82 | 2.08 | 8.88 | The Lord of the Rings: The Fellowship of the Ring; The Lord of the Rings: The Return of the King; The Lord of the Rings: The Two Towers |
+| Neeraj Pandey | Anupam Kher | 3 | 8.03 | 5.99 | 2.04 | 4.29 | A Wednesday; M.S. Dhoni: The Untold Story; Special 26 |

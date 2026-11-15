@@ -48,6 +48,7 @@ def analyze_director_actor_synergy(spark, min_collabs=3, min_votes=250):
         .filter(F.col("directors").isNotNull())
         .select("tconst", F.explode("directors").alias("director_nconst"))
         .filter(F.col("director_nconst").isNotNull())
+        .dropDuplicates(["tconst", "director_nconst"])
     )
 
     # 3. Lead Actors/Actresses (from title_principals, lead roles with ordering <= 4)
@@ -62,6 +63,7 @@ def analyze_director_actor_synergy(spark, min_collabs=3, min_votes=250):
             F.col("nconst").alias("actor_nconst"),
         )
         .filter(F.col("actor_nconst").isNotNull())
+        .dropDuplicates(["tconst", "actor_nconst"])
     )
 
     # 4. Directed movies & Acted movies
@@ -88,6 +90,7 @@ def analyze_director_actor_synergy(spark, min_collabs=3, min_votes=250):
         .join(actors, "tconst", "inner")
         # Avoid self-directing / self-acting duos
         .filter(F.col("director_nconst") != F.col("actor_nconst"))
+        .dropDuplicates(["tconst", "director_nconst", "actor_nconst"])
     )
 
     # Aggregate per (director, actor) pair

@@ -432,17 +432,21 @@ Top actors, 3 languages or more (`output/exploration/q6_multilingual_actors_3plu
 
 #### Key takeaways
 
-The summary shows that while cross-linguistic success is relatively common across two languages (2,303 actors have successful films in 2 languages), reaching high acclaim across three or more languages is exceptionally rare. Exactly 190 actors succeeded in 3 languages, 19 in 4 languages, and only a single actor achieved success across 5 distinct languages: Sebastian Koch (*The Lives of Others*, etc., spanning German, English, French, Japanese, and Cantonese). Among the 19 actors who succeeded in 4 languages, the list features world-renowned international performers such as Michelle Yeoh (Cantonese, English, French, and Mandarin across 11 hit films), Bruno Ganz (German, English, French, and Swedish across 9 films), and Song Kang-ho (English, Spanish, French, and Turkish across 5 films). Prolific actors like Amitabh Bachchan and Tom Hanks also stand out in the 3 language tier with extensive filmographies of 50 and 29 hit films respectively.
+The summary shows that while cross-linguistic success is relatively frequent across two languages (2,303 actors have successful films in 2 languages), reaching high acclaim across three or more languages is exceptionally rare in the dataset. Exactly 190 actors succeeded in 3 languages, 19 in 4 languages, and only one actor is credited across 5 languages: Sebastian Koch (*The Lives of Others*, etc., listed with German, English, French, Japanese, and Cantonese). Among the 19 actors who qualified in 4 languages, the table includes prominent international figures such as Michelle Yeoh (Cantonese, English, French, and Mandarin across 11 hit films), Bruno Ganz (German, English, French, and Swedish across 9 films), and Song Kang-ho (English, Spanish, French, and Turkish across 5 films). Prolific actors like Amitabh Bachchan and Tom Hanks also appear in the 3-language tier with extensive filmographies of 50 and 29 hit films respectively.
+
+However, a closer look at the attributed languages highlights that the data reflects metadata biases rather than true multilingual acting. Well-known performers often lack their actual native language in the output: Song Kang-ho does not have Korean listed, and Amitabh Bachchan is missing Hindi despite 50 qualifying titles. Conversely, actors are assigned foreign languages where they never actually spoke the language on screen, such as Sebastian Koch in Japanese and Cantonese, or Cary Grant and Ajay with the unassigned ISO private-use code `qbn`. These anomalies show that the ranking captures international distribution patterns alongside genuine multilingual careers.
 
 #### Methodological explanation
 
-Determining the original language of a film in IMDb presented a major technical hurdle. Unlike specialized cinematographic databases, IMDb's `title_basics` does not include an explicit original language column; instead, language tags are cataloged in `title_akas`. A naive join between `title_akas` and `title_principals` produces disastrous false positives because major Hollywood films release localized translated titles in dozens of regions, falsely tagging American actors with 10+ languages.
+Determining the original language of a film in IMDb presented a major technical hurdle. Unlike specialized cinema databases, IMDb's `title_basics` table does not contain an explicit `originalLanguage` attribute. Instead, language codes are recorded in `title_akas`. A naive join between `title_akas` and `title_principals` produces massive false positives, because widely distributed films have localized alternative titles across dozens of territories, which would falsely credit Hollywood actors with ten or more languages.
 
-To solve this, our pipeline matches `title_akas` against `title_basics` on `aka_title == originalTitle`. Because foreign translated titles frequently retain the original English title verbatim in overseas markets, we apply a Spark window partition ordered by the `ordering` attribute:
+To address this, our pipeline matches `title_akas` with `title_basics` on `aka_title == originalTitle`. Because international release records often keep the original title unchanged in foreign markets, multiple akas can share the exact original title. We select the earliest registered title by applying a Spark window partitioned by film and ordered by `ordering`:
 ```python
 w = Window.partitionBy("tconst").orderBy("ordering")
 ```
-Filtering for the first record (`r == 1`) reliably isolates the primary original release entry. We define a film as "successful" if `averageRating >= 7.0` and `numVotes >= 1000`, ensuring both critical quality and broad audience consensus. While minor edge cases remain where an international co-production's first ordering record carries a partner language (e.g., *Casablanca* receiving a French tag), this Spark-native window strategy runs in seconds over the entire dataset and accurately identifies true polyglot performers.
+Filtering for the first row (`r == 1`) serves as a fast heuristic to extract the primary release language. We define a film as successful when `averageRating >= 7.0` and `numVotes >= 1000`, ensuring that qualifying films possess both solid critical reception and a reliable audience sample.
+
+While this Spark window operation scales efficiently across the 60 million records of `title_akas`, it comes with clear methodological limitations that explain the misattributions seen in the results. In IMDb, the entry with the lowest `ordering` does not always correspond to the primary production country. For international co-productions or films released abroad first, the first aka record often carries a foreign distribution language or leaves the language field null, causing the film to fall back on another regional title. This is why Song Kang-ho is missing Korean (his Korean titles did not have Korean as the first aka with the original title), Amitabh Bachchan lacks Hindi, and Sebastian Koch receives Japanese and Cantonese tags from international festival releases. Furthermore, ambiguous or non-standard ISO-639 codes present in IMDb (such as `qbn`, a reserved private-use code) are passed through without validation. This approach should therefore be understood as a pragmatic, high-throughput heuristic rather than a definitive linguistic classification.
 
 ### 2.7 Q7: Actors whose popularity peaked early
 
@@ -737,64 +741,64 @@ Summary (`output/open_question/open_question_macro_summary.md`):
 
 | total_creative_duos | positive_synergy_duos | negative_synergy_duos | positive_synergy_pct | average_synergy_delta | average_vote_multiplier |
 | --- | --- | --- | --- | --- | --- |
-| 6055 | 3773 | 2230 | 62.31 | 0.16 | 1.32 |
+| 5306 | 3388 | 1881 | 63.85 | 0.18 | 1.40 |
 
 Duos with the highest synergy (`output/open_question/open_question_top_synergy_duos.md`):
 
 | director_name | actor_name | collab_count | duo_avg_rating | expected_baseline_rating | synergy_rating_delta | vote_multiplier | sample_titles_str |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Vicky Jenson | Mike Myers | 3 | 7.90 | 3.48 | 4.42 | -1.35 | Shrek |
-| Ali Abdel-Khalek | Mahmoud Abdel Aziz | 7 | 7.83 | 3.95 | 3.88 | -3.09 | Gary el-Wuhoosh; Idam Mayyet; The High |
-| Barry Mahon | Hal Smith | 3 | 6.60 | 3.04 | 3.56 | 1.49 | Santa and the Three Bears |
 | Viktor Shamirov | Gosha Kutsenko | 4 | 6.98 | 3.56 | 3.42 | 0.59 | And Here's What's Happening to Me; Dikari; Game of Truth |
-| Terry Jones | Graham Chapman | 6 | 8.05 | 4.78 | 3.27 | -1.11 | Monty Python and the Holy Grail; Monty Python's Life of Brian |
-| Ashok G. | Nani | 3 | 7.80 | 4.66 | 3.14 | 0.71 | Pilla Zamindar |
-| Jon Watts | Tom Holland | 6 | 7.60 | 4.47 | 3.13 | -0.78 | Spider-Man: Far from Home; Spider-Man: Homecoming; Spider-Man: No Way Home |
-| James Frawley | Jim Henson | 3 | 7.60 | 4.50 | 3.10 | -1.90 | The Muppet Movie |
-| Nina Wels | Dela Dabulamanzi | 3 | 6.20 | 3.15 | 3.05 | 0.48 | Tafiti: Across the Desert |
-| T.K. Rajeev Kumar | Mohanlal | 3 | 6.97 | 3.93 | 3.04 | 0.53 | Oru Naal Varum; Pavithram |
-| Tso Nam Lee | Shan Charng | 3 | 7.00 | 4.10 | 2.90 | 3.59 | Shaolin vs. Lama |
-| Kelly Makin | Dave Foley | 3 | 6.90 | 4.05 | 2.85 | 0.32 | Kids in the Hall: Brain Candy |
-| Josef Rusnak | Craig Bierko | 3 | 7.00 | 4.29 | 2.71 | -33.71 | The Thirteenth Floor |
-| Jeff Wamester | Jeff Bennett | 3 | 7.80 | 5.18 | 2.62 | 1.73 | Batman: Knightfall - Part 1: Knightfall |
 | Kinji Fukasaku | Tatsuo Umemiya | 3 | 7.20 | 4.60 | 2.60 | 0.26 | Cops vs. Thugs; Graveyard of Honor; Police Tactics |
-| Joe Russo | Robert Downey Jr. | 6 | 8.20 | 5.62 | 2.58 | -5.35 | Avengers: Endgame; Avengers: Infinity War; Captain America: Civil War |
-| Anthony Russo | Robert Downey Jr. | 6 | 8.20 | 5.62 | 2.58 | -5.35 | Avengers: Endgame; Avengers: Infinity War; Captain America: Civil War |
-| Francis Ford Coppola | Diane Keaton | 3 | 8.57 | 6.05 | 2.52 | 28.65 | The Godfather; The Godfather Part II; The Godfather Part III |
+| Francis Ford Coppola | Diane Keaton | 3 | 8.57 | 6.05 | 2.52 | 28.64 | The Godfather; The Godfather Part II; The Godfather Part III |
 | Hulki Saner | Çolpan İlhan | 3 | 7.00 | 4.48 | 2.52 | 1.33 | Turist Ömer: Dümenciler Krali; Ömer the Tourist; Ömer the Tourist in Germany |
-| Singeetam Srinivasa Rao | Kamal Haasan | 11 | 7.85 | 5.34 | 2.51 | -0.77 | Apoorva Sagodharargal; Kaathala Kaathala; Michael Madana Kama Rajan |
+| Mehmet Ada Öztekin | Sarp Akkaya | 3 | 8.17 | 5.78 | 2.38 | 0.47 | Ataturk I 1881-1919; Ataturk II: 1881-1919; Love Me Instead |
+| Mahesh Manjrekar | Sunil Barve | 3 | 8.20 | 5.82 | 2.38 | 0.41 | Bhai - Vyakti Ki Valli; Bhai - Vyakti Ki Valli 2; Natsamrat |
+| Houman Seyyedi | Alireza Ghaedi | 3 | 7.00 | 4.63 | 2.37 | 7.28 | Sheeple; Sound and Fury; World War III |
+| Ron Oliver | Sebastian Spence | 3 | 6.50 | 4.18 | 2.32 | 0.82 | Ice Blues; On the Other Hand, Death; Shock to the System |
+| Sachin Pilgaonkar | Ashok Saraf | 3 | 8.17 | 5.86 | 2.31 | 1.06 | Aayatya Gharat Gharoba; Ashi Hi Banwa Banwi; Navra Mazha Navsacha |
+| Veit Harlan | Kristina Söderbaum | 6 | 6.18 | 3.90 | 2.28 | 1.48 | Burning Hearts; Der große König; Immensee |
+| Francis Ford Coppola | Al Pacino | 3 | 8.57 | 6.28 | 2.28 | 14.45 | The Godfather; The Godfather Part II; The Godfather Part III |
+| Michael Polish | Mark Polish | 4 | 6.03 | 3.76 | 2.27 | 0.72 | For Lovers Only; Stay Cool; The Smell of Success |
+| Aditya Chopra | Shah Rukh Khan | 3 | 7.43 | 5.27 | 2.16 | 2.87 | Dilwale Dulhania Le Jayenge; Mohabbatein; Rab Ne Bana Di Jodi |
+| Peter Jackson | Elijah Wood | 3 | 8.90 | 6.74 | 2.16 | 13.08 | The Lord of the Rings: The Fellowship of the Ring; The Lord of the Rings: The Return of the King; The Lord of the Rings: The Two Towers |
+| Vivek Agnihotri | Mithun Chakraborty | 3 | 7.77 | 5.61 | 2.15 | 38.69 | The Bengal Files; The Kashmir Files; The Tashkent Files |
+| K. Selvaraghavan | Sonia Agarwal | 3 | 8.10 | 5.96 | 2.14 | 1.93 | 7/G Rainbow Colony; Kaadhal Konden; Pudhu Pettai |
+| Caner Alper | Tilbe Saran | 3 | 6.97 | 4.85 | 2.12 | 1.64 | Bergen; Drawers; Zenne Dancer |
+| Mehmet Binay | Tilbe Saran | 3 | 6.97 | 4.85 | 2.12 | 1.64 | Bergen; Drawers; Zenne Dancer |
+| Peter Jackson | Orlando Bloom | 3 | 8.90 | 6.82 | 2.08 | 8.88 | The Lord of the Rings: The Fellowship of the Ring; The Lord of the Rings: The Return of the King; The Lord of the Rings: The Two Towers |
+| Neeraj Pandey | Anupam Kher | 3 | 8.03 | 5.99 | 2.04 | 4.29 | A Wednesday; M.S. Dhoni: The Untold Story; Special 26 |
 
 Duos with the lowest synergy (`output/open_question/open_question_negative_synergy_duos.md`):
 
 | director_name | actor_name | collab_count | duo_avg_rating | expected_baseline_rating | synergy_rating_delta | vote_multiplier | sample_titles_str |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Rex Piano | Tom Kenny | 3 | 1.90 | 6.67 | -4.77 | 0.03 | Elf Bowling the Movie: The Great North Pole Elf Strike |
-| Ribhu Dasgupta | Parineeti Chopra | 3 | 3.67 | 7.68 | -4.01 | 0.71 | Code Name: Tiranga; The Girl on the Train |
-| Wiktor Grodecki | Cezary Pazura | 3 | 4.40 | 8.38 | -3.98 | 0.12 | Insatiability |
-| Bob Clark | Jon Voight | 3 | 1.93 | 5.84 | -3.90 | 0.52 | Superbabies: Baby Geniuses 2; The Karate Dog |
-| Y.V.S. Chowdary | Simran | 3 | 3.00 | 6.86 | -3.86 | 0.22 | Okka Magadu; Yuvaraju |
-| P. Vasu | Nandamuri Balakrishna | 3 | 2.10 | 5.61 | -3.51 | 0.16 | Maharadhi |
+| Juan Ibáñez | Boris Karloff | 4 | 3.47 | 7.03 | -3.55 | 0.18 | Fear Chamber; House of Evil; Isle of the Snake People |
 | Rodolfo Ledo | Emilio Disi | 3 | 1.67 | 5.09 | -3.43 | 0.74 | Bañeros 4: Los rompeolas; Bañeros III, todopoderosos; Explosive Brigade: Pirate Mission |
-| Ramesh Varma | Ravi Teja | 3 | 4.27 | 7.58 | -3.32 | 0.95 | Khiladi; Veera |
-| Harry L. Fraser | Ray Corrigan | 3 | 2.80 | 6.11 | -3.31 | 0.69 | The White Gorilla |
-| Moacyr Góes | Xuxa | 5 | 2.86 | 6.01 | -3.15 | 0.81 | Bruja and the Lost City of Gold; Xuxa in Abracadabra; Xuxinha and Guto Against the Space Monsters |
-| Doga Can Anafarta | Altan Erkekli | 3 | 2.27 | 5.42 | -3.15 | 0.74 | Enes Batur: Gerçek Kahraman; The Chaos Class Again; The Chaos Class: Summer Games |
-| A.P. Arjun | Dhruva Sarja | 3 | 3.57 | 6.68 | -3.11 | -1.53 | Addhuri; Martin |
-| Kartal Tibet | Mehmet Ali Erbil | 3 | 2.20 | 5.21 | -3.01 | 2.81 | The Chaos Class Welcome; Turks in Space |
+| Doga Can Anafarta | Altan Erkekli | 3 | 2.27 | 5.42 | -3.16 | 0.74 | Enes Batur: Gerçek Kahraman; The Chaos Class Again; The Chaos Class: Summer Games |
 | Jack Hill | Julissa | 3 | 3.53 | 6.48 | -2.94 | 0.25 | Fear Chamber; House of Evil; Isle of the Snake People |
-| Joyce Bernal | Vice Ganda | 3 | 4.00 | 6.87 | -2.87 | 0.37 | Gandarrapiddo: The Revenger Squad; The Super Parental Guardians |
-| Alfonso Brescia | Yanti Somer | 4 | 2.90 | 5.76 | -2.86 | 0.14 | Battle of the Stars; Star Odyssey; The War of the Robots |
-| Sangeeth Sivan | Dharmendra | 3 | 3.50 | 6.21 | -2.71 | 0.72 | Yamla Pagla Deewana 2 |
-| Christophe Gans | Hannah Emily Anderson | 3 | 4.00 | 6.52 | -2.52 | 0.47 | Return to Silent Hill |
+| Alfonso Brescia | Yanti Somer | 4 | 2.90 | 5.75 | -2.85 | 0.14 | Battle of the Stars; Star Odyssey; The War of the Robots |
 | Steven M. Smith | Mark Wingett | 3 | 2.60 | 5.02 | -2.42 | 0.05 | Dead Again; Doll House; I Am Hooligan |
-| Meher Ramesh | Venkatesh Daggubati | 3 | 3.50 | 5.92 | -2.42 | 0.17 | Shadow |
+| Jingming Guo | Amber Kuo | 4 | 3.23 | 5.61 | -2.39 | 0.59 | Tiny Times; Tiny Times 2.0; Tiny Times 3.0 |
+| Jingming Guo | Mi Yang | 4 | 3.23 | 5.59 | -2.36 | 0.55 | Tiny Times; Tiny Times 2.0; Tiny Times 3.0 |
+| Alexandre Boury | Renato Aragão | 3 | 2.93 | 5.23 | -2.30 | 0.89 | Didi Wanna Be a Kid; Didi, the Goofy Cupid; O Trapalhão e a Luz Azul |
+| Frédéric Auburtin | Gérard Depardieu | 3 | 3.97 | 6.22 | -2.26 | 0.09 | San Antonio; The Bridge; United Passions |
+| Jingming Guo | Kai Ko | 3 | 3.27 | 5.52 | -2.25 | 0.65 | Tiny Times; Tiny Times 2.0; Tiny Times 3.0 |
+| Jack Hill | Boris Karloff | 5 | 3.80 | 6.04 | -2.24 | 0.42 | Fear Chamber; House of Evil; Isle of the Snake People |
+| Ketan Mehta | Deepa Sahi | 4 | 5.38 | 7.62 | -2.24 | 0.35 | Aar Ya Paar; Hero Hiralal; Maya |
+| Giannis Papadakos | Meletis Ilias | 3 | 4.33 | 6.55 | -2.22 | 1.65 | The Bachelor 2; The Bachelor 3; The Black Bachelor |
+| Rafael Portillo | Rosita Arenas | 3 | 3.67 | 5.74 | -2.08 | 1.38 | The Aztec Mummy; The Curse of the Aztec Mummy; The Robot vs. The Aztec Mummy |
+| Raj N. Sippy | Akshay Kumar | 5 | 3.88 | 5.95 | -2.07 | 0.09 | Amaanat; Ikke Pe Ikka; Mr. Bond |
+| Raj Kanwar | Amrish Puri | 3 | 3.87 | 5.94 | -2.07 | 0.08 | Dhaai Akshar Prem Ke; Itihaas; Jaan |
+| Zoran Calic | Nikola Simić | 4 | 4.98 | 6.94 | -1.97 | 0.27 | Cao inspektore; Extraterrestrials Are to Be Blamed for Everything; Goodbye in Chicago |
+| Mike Gunther | Jermaine Love | 3 | 3.17 | 5.13 | -1.96 | 0.16 | Rogue Warfare; Rogue Warfare: Death of a Nation; Rogue Warfare: The Hunt |
+| Barbara Bialowas | Michele Morrone | 3 | 3.00 | 4.92 | -1.92 | 4.58 | 365 Days; 365 Days: This Day; The Next 365 Days |
 
 #### Key takeaways
 
-Across 6,055 recurring director-actor partnerships (at least 3 collaborative feature films with $\ge 250$ votes):
-- **Prevalence of positive synergy**: 62.31% (3,773 duos) exhibit positive synergy, confirming that collaborative familiarity generally elevates artistic output. The overall average synergy delta is +0.16 rating points, and duos enjoy an average vote multiplier of 1.32x (receiving 32% more votes than their solo projects).
-- **Highest synergy duos**: The highest positive delta is achieved by Vicky Jenson and Mike Myers (+4.42 points across 3 films, averaging 7.90 vs. an expected baseline of 3.48), driven by the critical success of *Shrek*. Dramatic partnerships also display massive synergy: Francis Ford Coppola and Diane Keaton achieve a +2.52 rating delta across *The Godfather* trilogy, accompanied by an extraordinary 28.65x vote multiplier. Similarly, the Russo brothers and Robert Downey Jr. achieve a +2.58 rating delta (8.20 average) across 6 collaborative Marvel films.
-- **Creative fatigue and negative synergy**: Conversely, 37.69% (2,230 duos) exhibit negative synergy, illustrating severe creative exhaustion or low-budget typecasting. Rex Piano and Tom Kenny show the steepest negative drop (-4.77 delta, averaging 1.90 together on titles like *Elf Bowling* vs. Kenny's 6.67 baseline elsewhere). Similarly, Bob Clark and Jon Voight drop by -3.90 points (averaging 1.93 on *Superbabies: Baby Geniuses 2* vs. 5.84 solo). This proves that repeated collaborations in low-budget sequel franchises often accelerate creative decline.
+Across 5,306 recurring director-actor partnerships (at least 3 collaborative feature films with $\ge 250$ votes, with both artists having outside work):
+- **Prevalence of positive synergy**: 63.85% (3,388 duos) exhibit positive synergy, showing that collaborative familiarity generally correlates with higher critical reception. The overall average synergy delta is +0.18 rating points, and duos draw an average vote multiplier of 1.40x (receiving 40% more votes than expected from their separate baselines).
+- **Highest synergy duos**: The highest positive delta is achieved by Viktor Shamirov and Gosha Kutsenko (+3.42 points across 4 films, averaging 6.98 together vs. an expected baseline of 3.56). Celebrated artistic partnerships also display massive positive lifts: Francis Ford Coppola and Diane Keaton achieve a +2.52 rating delta across *The Godfather* trilogy (8.57 average vs. 6.05 expected baseline), paired with an exceptional 28.64x vote multiplier. Coppola's partnership with Al Pacino similarly reaches +2.28 with a 14.45x vote multiplier. Peter Jackson and Elijah Wood achieve a +2.16 delta on *The Lord of the Rings* trilogy alongside a 13.08x vote multiplier.
+- **Creative fatigue and negative synergy**: Conversely, 35.45% (1,881 duos) exhibit negative synergy, while 37 duos (0.70%) have an exact delta of 0.00. Juan Ibáñez and Boris Karloff show the steepest decline (-3.55 delta, averaging 3.47 together on late horror co-productions vs. an expected combined baseline of 7.03 across their independent works, with a low 0.18 vote multiplier). Rodolfo Ledo and Emilio Disi drop by -3.43 points (averaging 1.67 on the *Bañeros* comedy franchise vs. 5.09 baseline). Director Jingming Guo appears three times in the lowest synergy ranking for the *Tiny Times* franchise (-2.39 with Amber Kuo, -2.36 with Mi Yang, -2.25 with Kai Ko). These results indicate that repeated collaborations in commercial sequel franchises and low-budget genre productions often lead to creative fatigue and diminishing returns.
 
 #### Methodological explanation
 
@@ -802,6 +806,12 @@ To measure genuine synergy, our pipeline avoids the fundamental pitfall of basel
 $$\text{dir\_solo\_avg} = \frac{\text{dir\_sum\_rating} - \text{duo\_sum\_rating}}{\text{dir\_total\_movies} - \text{collab\_count}}$$
 $$\text{act\_solo\_avg} = \frac{\text{act\_sum\_rating} - \text{duo\_sum\_rating}}{\text{act\_total\_movies} - \text{collab\_count}}$$
 $$\text{expected\_baseline\_rating} = \frac{\text{dir\_solo\_avg} + \text{act\_solo\_avg}}{2}$$
-We require both director and actor to have at least one external film outside the duo (`dir_solo_count >= 1` and `act_solo_count >= 1`) to ensure a meaningful independent baseline exists.
+$$\text{expected\_baseline\_votes} = \frac{\text{dir\_solo\_avg\_votes} + \text{act\_solo\_avg\_votes}}{2}$$
+$$\text{synergy\_rating\_delta} = \text{duo\_avg\_rating} - \text{expected\_baseline\_rating}$$
+$$\text{vote\_multiplier} = \frac{\text{duo\_avg\_votes}}{\text{expected\_baseline\_votes}}$$
+
+The expected baseline represents the unweighted arithmetic mean of both artists' independent career averages, capturing what either partner typically achieves when working without the other. We require both director and actor to have at least one external film outside the duo (`dir_solo_count >= 1` and `act_solo_count >= 1`) to ensure a meaningful independent baseline exists.
+
+A crucial data engineering requirement addressed in this analysis is deduplication across principals. In IMDb's `title_principals`, an actor can have multiple rows for the same film (for example, voicing multiple characters or holding distinct credits with `ordering <= 4`). Without deduplication, joint films were counted multiple times for the same duo, inflating joint vote sums past career totals and producing impossible negative vote multipliers. Enforcing deduplication on `(tconst, director_nconst)` and `(tconst, actor_nconst)` prior to joining and aggregation guarantees that every film is counted exactly once per artist and per partnership.
 
 To isolate true creative leads, we filter `title_principals` for `category IN ('actor', 'actress')` with `ordering <= 4`. This prevents uncredited cameos or bit players from registering as creative partners. We enforce `min_collabs = 3` (to distinguish recurring artistic partnerships from coincidental re-castings) and `min_votes = 250` (to ensure reliable audience ratings). When joining `name_basics` twice for the director and actor names, Spark Catalyst threw ambiguous column errors; we resolved this by aliasing `names_d = names.alias("d")` and `names_a = names.alias("a")`.
