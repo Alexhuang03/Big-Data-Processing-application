@@ -211,17 +211,11 @@ For each genre, the program calculates the number of movies, the average runtime
 
 The analysis also shows whether each outlier is longer or shorter than the genre average. The outlier percentage represents the proportion of detected outliers among all movies in the corresponding genre.
 
-### Limitations
+#### Limitations
 
 The Z-score method can be affected by extreme values because it relies on the mean and standard deviation. Very long productions may influence these measures and, in turn, affect the results. This is also why results for genres with very few movies should be treated with caution. For example, Game-Show contains only eight titles.
 
 It is also important to remember that an outlier is not necessarily an error. Some unusual runtimes may come from experimental films or productions with specific formats. The analysis therefore highlights movies that stand out statistically, but cannot determine whether their runtime data is incorrect.
-
-Points to cover:
-
-- Method used and why it was chosen
-- Alternatives considered and trade-offs made
-- Why z-score (and IQR as an option), which threshold
 
 ### 2.2 Q2: Top three genres per year (1980 to 2025)
 
@@ -258,18 +252,13 @@ Genre popularity is based on the total number of IMDb votes received by its film
 
 The genres are ranked separately for each year, and the three highest-ranked ones are selected. If two genres have the same score, the ranking uses a secondary metric, followed by alphabetical order. The analysis then counts how many times each genre appears in the top three and how often it ranks first.
 
-### Limitations
+#### Limitations
 
 IMDb votes are used as an indicator of popularity, but they do not represent the actual number of viewers. The results may also be affected by a film's visibility, release date and the level of activity of IMDb users. Therefore, the rankings should be understood as a reflection of popularity on IMDb rather than overall audience preferences.
+
 Another point to consider is that genres can overlap. A film associated with several genres is counted in each of them, so the totals do not represent separate shares of the movie market.
 
 It is also worth keeping in mind that these results are based on IMDb users' voting habits. They may therefore differ from the preferences of the wider audience.
-
-Points to cover:
-
-- Method used and why it was chosen
-- Alternatives considered and trade-offs made
-- How popularity was defined (number of votes, rating, number of films...)
 
 ### 2.3 Q3: Top three genres compared to the other genres
 
@@ -314,18 +303,13 @@ Average votes per rated film are calculated by dividing the total number of vote
 
 To provide an overall view, the results are averaged across the 46 years covered by the analysis.
 
-### Limitations
+#### Limitations
 
 Using averages across the whole period makes it easier to compare the two groups, but it can hide differences from one year to another. As a result, the analysis does not show how the relationship between the top three and the remaining genres changes over time.
 
 The average rating is calculated from the genre-level average ratings within each group. It is therefore not a single rating weighted by the total number of votes received by all films.
 
 Finally, IMDb votes are used as an indicator of popularity, but they do not directly measure viewership. The results should therefore be understood as reflecting the voting activity of IMDb users rather than the preferences of the entire movie audience.
-
-Points to cover:
-
-- Method used and why it was chosen
-- Alternatives considered and trade-offs made
 
 ### 2.4 Q4: One-hit wonder directors
 
@@ -551,12 +535,6 @@ This approach makes it possible to compare the two parts of an actor's career, b
 
 Finally, the results depend on the IMDb data available after filtering. They provide an indication of how ratings changed across the selected filmographies, but they do not necessarily reflect the actors' complete careers or their overall popularity.
 
-Points to cover:
-
-- Method used and why it was chosen
-- Alternatives considered and trade-offs made
-- How early and late career were split
-
 ### 2.8 Q8: Multi-talented film professionals
 
 Top multi-talented professionals (`output/exploration/q8_multi_talented_top.md`):
@@ -620,16 +598,11 @@ For each person, we calculated the total number of films and the number of films
 
 We then carried out a second comparison at film level, focusing on people who had held at least two different roles during their careers. Each film was classified as `multi_role` if the person had at least two roles in that particular production. Otherwise, it was classified as `single_role`. We compared the two groups based on the number of records, average ratings and average vote counts.
 
-### Limitations
+#### Limitations
 
 The analysis only covers three professional activities. Other roles, such as producing and editing, are not included. IMDb credits may also be incomplete, which could affect the classification of some professionals and films.
 
 Finally, this is a descriptive comparison. It does not take into account other factors, such as genre or release year, that may influence ratings and vote counts. The results therefore cannot establish a causal link between holding several roles and a film's rating.
-
-Points to cover:
-
-- Method used and why it was chosen
-- Alternatives considered and trade-offs made
 
 ## 3. Data enrichment
 
@@ -738,7 +711,7 @@ Most edited IMDb films and people (`output/streaming/top_matched_entities.md`):
 | person | nm0728567 | Jack Ritchie | 1 | 1 | Jack Ritchie |
 | person | nm2595047 | Junaid Khan | 1 | 1 | Junaid Khan (Indian actor) |
 
-Delay between the Wikipedia edit and its processing (`output/streaming/matched_delay_summary.md`):
+Delay between the Wikipedia edit and its arrival in Kafka (`output/streaming/matched_delay_summary.md`):
 
 | matched_events | first_event | last_event | median_delay_s | p99_delay_s | max_delay_s |
 | --- | --- | --- | --- | --- | --- |
