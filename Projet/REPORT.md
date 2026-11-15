@@ -154,7 +154,7 @@ Our architecture follows a raw, bronze, and silver progression. The raw layer ho
 
 During our pipeline design, we considered and rejected three simpler alternatives. The first option was deleting every row containing a missing or suspicious value. We discarded this because it would lead to massive data loss, throwing away over 98% of people or 80% of principal credits. The second option was imputing missing numerical values using means or medians. We rejected this approach because in an encyclopedia dataset, inventing a release year or a movie runtime creates false historical facts that mislead users. The third option was keeping all data untouched. This would cause downstream analytical queries to fail on broken data types, skew calculations with negative runtimes, and distort relational joins- where orphan foreign keys would silently drop valid records during inner joins or introduce unintended nulls during outer joins. Our balanced approach preserves maximum data volume, corrects only unambiguous errors, and gives downstream users full transparency through quality flags.
 
-Our cleaning rules rely on a few specific thresholds. We chose 1874 as the earliest valid movie release year because historical records trace the very first motion picture experiments to the mid-1870s, such as the photographic sequences of Janssen and Muybridge. We set the maximum plausible human lifespan to 120 years because the oldest verified person in history lived to 122. We defined 1,440 minutes (24 hours) as the upper bound for normal runtimes because standard movies last under three hours, and films exceeding a full day represent rare artistic marathons. Finally, we used a 10-year margin for posthumous credits because completing and releasing a film after an artist passes away can take several years, but releases after a decade without archive footage are unusual. We recognize that these thresholds are pragmatic human choices rather than mathematical certainties, which is why records exceeding them are only flagged and never erased.
+Our cleaning rules rely on a few specific thresholds. We chose 1874 as the earliest valid movie release year because historical records trace the very first motion picture experiments to the mid-1870s, such as the photographic sequences of Janssen and Muybridge. We set the maximum plausible human lifespan to 120 years because the oldest verified person in history lived to 122. We defined 1,440 minutes (24 hours) as the upper bound for normal runtimes because standard movies last under three hours, and films exceeding a full day represent rare artistic marathons. Finally, we used a 10 year margin for posthumous credits because completing and releasing a film after an artist passes away can take several years, but releases after a decade without archive footage are unusual. We recognize that these thresholds are pragmatic human choices rather than mathematical certainties, which is why records exceeding them are only flagged and never erased.
 
 ## 2. Data exploration
 
@@ -199,23 +199,23 @@ Outliers per genre (`output/exploration/q1_genre_summary.md`):
 
 #### Key takeaways
 
-The analysis identifies movies with runtimes that differ significantly from the average of their genre. Most detected outliers are longer than the genre average. This is particularly visible in Drama, where all 1,966 detected outliers are longer. Thriller has the highest outlier percentage among the genres with a large number of films, reaching 6.13%. Romance also shows a noticeable number of shorter films, with 229 cases.
+The analysis looks at movies whose runtimes are quite different from what is usually expected for their genre. Most of the outliers are longer than the average. This is especially clear for Drama, where all 1,966 detected cases have a runtime above the genre average. Thriller also stands out, with the highest outlier rate among genres with a large number of films (6.13%). Romance is another interesting case, as it includes 229 films that are shorter than the average.
 
-Some examples illustrate how large these differences can be. Logistics has a runtime of 51,420 minutes, while The Cure for Insomnia lasts 5,220 minutes. These cases show that the dataset includes productions with very unusual formats. However, an extreme runtime does not necessarily indicate incorrect data.
+A few examples show just how unusual some runtimes can be. *Logistics* runs for 51,420 minutes, while *The Cure for Insomnia* lasts 5,220 minutes. These films are far from standard movie formats, but their unusual runtimes do not automatically mean that the data is incorrect.
 
 #### Methodological explanation
 
-The analysis uses feature-length movies and compares each movie's runtime with the average runtime of its genre. When a movie belongs to several genres, it is evaluated separately within each category.
+The analysis focuses on feature-length movies and compares each runtime with the average runtime of its genre. When a movie belongs to more than one genre, it is considered separately for each category.
 
-For each genre, the program calculates the number of movies, the mean runtime, the standard deviation and the first, second and third quartiles. The default detection method is the Z-score. It measures how far a movie's runtime is from the genre mean in terms of standard deviations. A movie is classified as an outlier when the absolute Z-score is greater than or equal to 2.
+For each genre, the program calculates the number of movies, the average runtime, the standard deviation and the three quartiles. Outliers are detected using the Z-score method by default. This method measures how far a movie's runtime is from the genre average, based on the standard deviation. A movie is considered an outlier when its absolute Z-score reaches or exceeds 2.
 
-The results also distinguish between movies that are longer or shorter than the genre average. The outlier percentage is calculated by dividing the number of detected outliers by the total number of movies in the genre.
+The analysis also shows whether each outlier is longer or shorter than the genre average. The outlier percentage represents the proportion of detected outliers among all movies in the corresponding genre.
 
-Limitations
+### Limitations
 
-The Z-score method is sensitive to extreme values because it relies on the mean and standard deviation. Very long productions can influence these statistics and affect the detection process. The results should also be interpreted carefully for genres with very few movies, such as Game-Show, which contains only eight titles.
+The Z-score method can be affected by extreme values because it relies on the mean and standard deviation. Very long productions may influence these measures and, in turn, affect the results. This is also why results for genres with very few movies should be treated with caution. For example, Game-Show contains only eight titles.
 
-Finally, the analysis identifies statistical differences rather than errors. Some unusual runtimes may correspond to experimental films or specific production formats. The results therefore highlight unusual cases in the dataset but do not establish that these runtimes are incorrect.
+It is also important to remember that an outlier is not necessarily an error. Some unusual runtimes may come from experimental films or productions with specific formats. The analysis therefore highlights movies that stand out statistically, but cannot determine whether their runtime data is incorrect.
 
 Points to cover:
 
@@ -242,29 +242,28 @@ How often each genre is in the yearly top three (`output/exploration/q2_top3_fre
 
 #### Key takeaways
 
-Drama is by far the most consistent genre. It appears in the top three every year from 1980 to 2025 and ranks first in 42 out of 46 years. This shows that its popularity has remained strong throughout the period.
+Drama clearly stands out as the most consistent genre throughout the period. It appears in the top three every year between 1980 and 2025 and takes first place in 42 out of the 46 years analysed.
 
-Comedy comes second, with 34 appearances in the top three, followed by Action with 29 and Adventure with 16. The other genres appear much less frequently: Crime ranks in the top three in 9 years, Horror in 2, while Thriller and Sci-Fi appear only once.
+Comedy and Action also perform well, appearing in the top three 34 and 29 times respectively. Adventure follows with 16 appearances. The remaining genres are much less frequent: Crime appears in 9 years, Horror in 2, while Thriller and Sci-Fi make the top three only once each.
 
-Overall, the rankings show a clear dominance of Drama, with Comedy and Action regularly competing for the other positions. Despite some variation over time, the top three are largely dominated by the same genres.
+These results show that the same genres tend to dominate IMDb popularity rankings over time. Drama remains the clear leader, while Comedy and Action regularly take the other top positions.
 
 #### Methodological explanation
 
-The analysis considers feature films released between 1980 and 2025. Each film is associated with its IMDb genres. When a film belongs to several genres, it contributes to the statistics of each one.
+The analysis covers feature films released between 1980 and 2025. Each film is linked to its IMDb genres. When a movie belongs to several genres, it is included in the statistics of each one.
 
-For each year and genre, the analysis calculates the number of films, the number of rated films, the total number of IMDb votes and the average rating. It also calculates a vote-weighted average rating.
+For every year and genre, the analysis looks at the number of films, the number of rated films, the total number of IMDb votes and the average rating. It also calculates the vote-weighted average rating.
 
-Popularity is measured by the total number of IMDb votes received by films belonging to a given genre in a given year. This is the default metric. The script also allows an alternative ranking based on the number of films using --metric movies.
+Genre popularity is based on the total number of IMDb votes received by its films in a given year. This is the default ranking method. The script also offers another option, `--metric movies`, which ranks genres according to the number of films instead.
 
-Genres are ranked separately for each year, and the three highest-ranked genres are selected. Ties are resolved using a secondary metric, followed by alphabetical order. The analysis then counts how often each genre appears in the top three and how many times it ranks first.
+The genres are ranked separately for each year, and the three highest-ranked ones are selected. If two genres have the same score, the ranking uses a secondary metric, followed by alphabetical order. The analysis then counts how many times each genre appears in the top three and how often it ranks first.
 
-Limitations
+### Limitations
 
-The number of IMDb votes provides an indication of popularity, but it does not directly measure the number of viewers. It can also be influenced by a film's visibility, age and audience activity on the platform.
+IMDb votes are used as an indicator of popularity, but they do not represent the actual number of viewers. The results may also be affected by a film's visibility, release date and the level of activity of IMDb users. Therefore, the rankings should be understood as a reflection of popularity on IMDb rather than overall audience preferences.
+Another point to consider is that genres can overlap. A film associated with several genres is counted in each of them, so the totals do not represent separate shares of the movie market.
 
-In addition, genres are not mutually exclusive. A film belonging to several genres contributes to each of them, meaning that genre totals cannot be interpreted as separate shares of the movie market.
-
-Finally, the results reflect the voting behaviour of IMDb users and may not fully represent broader audience preferences.
+It is also worth keeping in mind that these results are based on IMDb users' voting habits. They may therefore differ from the preferences of the wider audience.
 
 Points to cover:
 
@@ -297,30 +296,31 @@ Summary over 1980 to 2025 (`output/exploration/q3_top3_vs_rest_summary.md`):
 
 #### Key takeaways
 
-On average, the top three genres account for 44.75% of total IMDb votes, while the remaining genres account for 55.25%. This shows that popularity is not concentrated entirely in the three leading genres, despite their high rankings.
+On average, the top three genres represent 44.75% of all IMDb votes, compared with 55.25% for the remaining genres. This shows that, although the top three rank highly, they do not account for most of the votes overall.
 
-The top three group contains an average of around 4,677 films per year, compared with 7,571 films for the remaining genres. However, the average number of votes per film is very similar in both groups: approximately 8,174 for the top three and 8,148 for the rest. The ratio of 1.09 indicates only a small difference in votes per film.
+The top three group includes around 4,677 films per year, while the remaining genres account for approximately 7,571. Despite this difference, the average number of votes per rated film is almost the same in both groups: 8,174 for the top three and 8,148 for the rest. The ratio of 1.09 therefore points to only a slight difference.
 
-Interestingly, the average rating is higher for the remaining genres (6.15) than for the top three (5.91). The rating gap of -0.24 suggests that the most popular genres do not necessarily contain the highest-rated films.
+Another interesting finding is that the remaining genres have a higher average rating (6.15) than the top three (5.91). The rating gap of -0.24 suggests that the genres receiving the most votes are not necessarily those with the highest-rated films.
 
-Overall, the results show that popularity and average audience rating do not follow the same pattern. The top three genres attract a slightly higher number of votes per film, but the remaining genres achieve better average ratings.
+Overall, these results show that popularity and audience ratings do not follow exactly the same pattern. The top three genres receive slightly more votes per rated film, while the remaining genres achieve higher average ratings.
+
 #### Methodological explanation
 
-For each year between 1980 and 2025, genres are ranked according to their total number of IMDb votes. The three highest-ranked genres form the top three group, while all other genres are grouped into the rest category.
+For each year between 1980 and 2025, genres are ranked by their total number of IMDb votes. The three genres with the highest number of votes are placed in the top three group, while all the others are included in the rest group.
 
-The analysis compares both groups using the number of genres, number of films, total votes, share of votes, average votes per film and average IMDb rating.
+The analysis then compares these two groups using several indicators: the number of genres and films, total votes, share of votes, average votes per rated film and average IMDb rating.
 
-The average votes per film are calculated by dividing the total number of votes by the number of rated films. The analysis also calculates two comparison indicators: the ratio of votes per film between the top three and the rest, and the difference between their average ratings.
+Average votes per rated film are calculated by dividing the total number of votes by the number of rated films. Two additional indicators are used to compare the groups: the ratio of average votes per rated film and the difference in average ratings.
 
-Finally, the results are averaged across all 46 years to provide an overall comparison between the two groups.
+To provide an overall view, the results are averaged across the 46 years covered by the analysis.
 
-Limitations
+### Limitations
 
-The comparison is based on yearly averages across the 1980–2025 period. It therefore hides some differences between individual years and does not show how the relationship between the two groups changes over time.
+Using averages across the whole period makes it easier to compare the two groups, but it can hide differences from one year to another. As a result, the analysis does not show how the relationship between the top three and the remaining genres changes over time.
 
-The average rating is calculated as the average of genre-level ratings within each group. It is not a single rating weighted by the total number of votes across all films.
+The average rating is calculated from the genre-level average ratings within each group. It is therefore not a single rating weighted by the total number of votes received by all films.
 
-In addition, IMDb votes are only a proxy for audience popularity. The results should therefore be interpreted as patterns in IMDb user activity rather than a direct measure of viewership.
+Finally, IMDb votes are used as an indicator of popularity, but they do not directly measure viewership. The results should therefore be understood as reflecting the voting activity of IMDb users rather than the preferences of the entire movie audience.
 
 Points to cover:
 
@@ -364,7 +364,7 @@ Looking at the distribution of one-hit wonder directors, the ranking highlights 
 
 To identify one-hit wonder directors, our pipeline explodes the `directors` array from `title_crew` and inner-joins it with feature films (`titleType == 'movie'` and `runtimeMinutes > 40`). We filter for movies with at least 50 votes (`numVotes >= 50`) and a valid rating. For each director, we count their hit films (`averageRating >= 8.0`) and non-hit films (`averageRating < 8.0`), selecting directors who directed exactly one hit and at least two other films whose unweighted average rating does not exceed 6.00.
 
-The choice of `min_votes = 50` is a deliberate compromise between data clean-up and coverage. In raw IMDb data, setting no vote threshold surfaces thousands of micro-budget home movies or festival shorts where a director and friends voted 10/10, producing artificial hits. Enforcing 50 votes successfully filters out self-promotional or unrepresentative entries. While a higher threshold like 500 or 1,000 votes (such as used in Q6) was considered, doing so eliminated virtually all independent and international cinema, leaving only a few widely publicized Hollywood exceptions like Tony Kaye (*American History X*). A 50-vote cutoff allows us to capture authentic independent directors across multiple countries while remaining resilient to ballot-stuffing.
+The choice of `min_votes = 50` is a deliberate compromise between data clean-up and coverage. In raw IMDb data, setting no vote threshold surfaces thousands of micro-budget home movies or festival shorts where a director and friends voted 10/10, producing artificial hits. Enforcing 50 votes successfully filters out self-promotional or unrepresentative entries. While a higher threshold like 500 or 1,000 votes (such as used in Q6) was considered, doing so eliminated virtually all independent and international cinema, leaving only a few widely publicized Hollywood exceptions like Tony Kaye (*American History X*). A 50 vote cutoff allows us to capture authentic independent directors across multiple countries while remaining resilient to ballot-stuffing.
 
 ### 2.5 Q5: TV series that decline in their last season
 
@@ -401,7 +401,7 @@ The analysis of television series reveals striking examples of severe late-stage
 
 #### Methodological explanation
 
-Our pipeline targets established television series by requiring at least three qualifying seasons with a minimum of 10 episodes each. During implementation, we encountered a subtle edge case: calculating season episode counts after joining `title_episode` with `title_ratings` inadvertently dropped valid 12-episode seasons where one or two episodes lacked ratings. To avoid this, our pipeline calculates total episodes per season and determines the series' true `last_season` directly on `title_episode` prior to joining with episode ratings.
+Our pipeline targets established television series by requiring at least three qualifying seasons with a minimum of 10 episodes each. During implementation, we encountered a subtle edge case: calculating season episode counts after joining `title_episode` with `title_ratings` inadvertently dropped valid 12 episode seasons where one or two episodes lacked ratings. To avoid this, our pipeline calculates total episodes per season and determines the series' true `last_season` directly on `title_episode` prior to joining with episode ratings.
 
 To identify genuine decline, we implemented a strict tie-breaking rule. Earlier iterations simply picked the maximum season number when multiple episodes shared the series' minimum rating, which artificially biased the results toward finding declines. In our final logic, we enforce that *every* episode sharing the absolute lowest rating of the entire series must be located in `last_season`. Simultaneously, the series' best rating must occur strictly within Season 1 or Season 2, with no later season matching or exceeding it. While this strict condition excludes shows where an intermediate season had an equally poor episode, it ensures that every series returned in the final table represents an unambiguous, undeniable trajectory of late-season decay.
 
@@ -481,17 +481,21 @@ Top actors, 3 languages or more (`output/exploration/q6_multilingual_actors_3plu
 
 #### Key takeaways
 
-The summary shows that while cross-linguistic success is relatively common across two languages (2,303 actors have successful films in 2 languages), reaching high acclaim across three or more languages is exceptionally rare. Exactly 190 actors succeeded in 3 languages, 19 in 4 languages, and only a single actor achieved success across 5 distinct languages: Sebastian Koch (*The Lives of Others*, etc., spanning German, English, French, Japanese, and Cantonese). Among the 19 actors who succeeded in 4 languages, the list features world-renowned international performers such as Michelle Yeoh (Cantonese, English, French, and Mandarin across 11 hit films), Bruno Ganz (German, English, French, and Swedish across 9 films), and Song Kang-ho (English, Spanish, French, and Turkish across 5 films). Prolific actors like Amitabh Bachchan and Tom Hanks also stand out in the 3-language tier with extensive filmographies of 50 and 29 hit films respectively.
+The summary shows that while cross-linguistic success is relatively frequent across two languages (2,303 actors have successful films in 2 languages), reaching high acclaim across three or more languages is exceptionally rare in the dataset. Exactly 190 actors succeeded in 3 languages, 19 in 4 languages, and only one actor is credited across 5 languages: Sebastian Koch (*The Lives of Others*, etc., listed with German, English, French, Japanese, and Cantonese). Among the 19 actors who qualified in 4 languages, the table includes prominent international figures such as Michelle Yeoh (Cantonese, English, French, and Mandarin across 11 hit films), Bruno Ganz (German, English, French, and Swedish across 9 films), and Song Kang-ho (English, Spanish, French, and Turkish across 5 films). Prolific actors like Amitabh Bachchan and Tom Hanks also appear in the 3-language tier with extensive filmographies of 50 and 29 hit films respectively.
+
+However, a closer look at the attributed languages highlights that the data reflects metadata biases rather than true multilingual acting. Well-known performers often lack their actual native language in the output: Song Kang-ho does not have Korean listed, and Amitabh Bachchan is missing Hindi despite 50 qualifying titles. Conversely, actors are assigned foreign languages where they never actually spoke the language on screen, such as Sebastian Koch in Japanese and Cantonese, or Cary Grant and Ajay with the unassigned ISO private-use code `qbn`. These anomalies show that the ranking captures international distribution patterns alongside genuine multilingual careers.
 
 #### Methodological explanation
 
-Determining the original language of a film in IMDb presented a major technical hurdle. Unlike specialized cinematographic databases, IMDb's `title_basics` does not include an explicit original language column; instead, language tags are cataloged in `title_akas`. A naive join between `title_akas` and `title_principals` produces disastrous false positives because major Hollywood films release localized translated titles in dozens of regions, falsely tagging American actors with 10+ languages.
+Determining the original language of a film in IMDb presented a major technical hurdle. Unlike specialized cinema databases, IMDb's `title_basics` table does not contain an explicit `originalLanguage` attribute. Instead, language codes are recorded in `title_akas`. A naive join between `title_akas` and `title_principals` produces massive false positives, because widely distributed films have localized alternative titles across dozens of territories, which would falsely credit Hollywood actors with ten or more languages.
 
-To solve this, our pipeline matches `title_akas` against `title_basics` on `aka_title == originalTitle`. Because foreign translated titles frequently retain the original English title verbatim in overseas markets, we apply a Spark window partition ordered by the `ordering` attribute:
+To address this, our pipeline matches `title_akas` with `title_basics` on `aka_title == originalTitle`. Because international release records often keep the original title unchanged in foreign markets, multiple akas can share the exact original title. We select the earliest registered title by applying a Spark window partitioned by film and ordered by `ordering`:
 ```python
 w = Window.partitionBy("tconst").orderBy("ordering")
 ```
-Filtering for the first record (`r == 1`) reliably isolates the primary original release entry. We define a film as "successful" if `averageRating >= 7.0` and `numVotes >= 1000`, ensuring both critical quality and broad audience consensus. While minor edge cases remain where an international co-production's first ordering record carries a partner language (e.g., *Casablanca* receiving a French tag), this Spark-native window strategy runs in seconds over the entire dataset and accurately identifies true polyglot performers.
+Filtering for the first row (`r == 1`) serves as a fast heuristic to extract the primary release language. We define a film as successful when `averageRating >= 7.0` and `numVotes >= 1000`, ensuring that qualifying films possess both solid critical reception and a reliable audience sample.
+
+While this Spark window operation scales efficiently across the 60 million records of `title_akas`, it comes with clear methodological limitations that explain the misattributions seen in the results. In IMDb, the entry with the lowest `ordering` does not always correspond to the primary production country. For international co-productions or films released abroad first, the first aka record often carries a foreign distribution language or leaves the language field null, causing the film to fall back on another regional title. This is why Song Kang-ho is missing Korean (his Korean titles did not have Korean as the first aka with the original title), Amitabh Bachchan lacks Hindi, and Sebastian Koch receives Japanese and Cantonese tags from international festival releases. Furthermore, ambiguous or non-standard ISO-639 codes present in IMDb (such as `qbn`, a reserved private-use code) are passed through without validation. This approach should therefore be understood as a pragmatic, high-throughput heuristic rather than a definitive linguistic classification.
 
 ### 2.7 Q7: Actors whose popularity peaked early
 
@@ -529,22 +533,24 @@ Top actors (`output/exploration/q7_early_peak_actors_top.md`):
 
 #### Key takeaways
 
-The results show that some actors received higher IMDb ratings during the first part of their careers. Mahesh Anand ranks first with an average of 5.426 in the early period compared with 1.900 in the later one. Ken Maynard and Mehmood Jr. follow with differences of 3.470 and 3.400 points.
+The results show that some actors received higher IMDb ratings during the first part of their careers. Mahesh Anand has the largest difference, with an average rating of 5.426 in the early period, compared with 1.900 in the later period. Ken Maynard and Mehmood Jr. follow, with differences of 3.470 and 3.400 points respectively.
 
-Other profiles are also worth mentioning. Dev Anand has 60 films in the analysis and a rating that drops from 7.119 to 4.450. Rekha shows a similar pattern with an early average of 7.356 compared with 4.753 in the second period.
+Other actors are also worth highlighting. Dev Anand has 60 films in the analysis, and his average rating decreases from 7.119 to 4.450. Rekha shows a similar trend, with an average rating of 7.356 in the first period and 4.753 in the second.
 
-These results reflect changes in film ratings over time. They should not be confused with popularity. IMDb ratings measure audience appreciation rather than box-office success or public visibility.
+These results show how IMDb ratings can vary over the course of an actor's career. However, they should not be interpreted as changes in popularity. Ratings reflect audience appreciation, rather than box-office performance or public visibility.
+
 #### Methodological explanation
 
-We used rated feature films and linked them to actors and actresses through title_principals. Films without a valid year or rating were excluded. We also kept only films with at least 50 votes to avoid relying on ratings based on very few opinions.
+The analysis uses rated feature films and links them to actors and actresses through the `title_principals` table. Films with a missing release year or rating are excluded. We also apply a minimum threshold of 50 IMDb votes to avoid relying on ratings based on very few opinions.
 
-For each actor we calculated the first and last release years along with the number of distinct films. We then applied two conditions: at least 15 films and a career span of 20 years or more.
+For each actor, we identify the first and last release years and count the number of distinct films. To make the comparison more reliable, we keep only actors with at least 15 films and a career spanning 20 years or more.
 
-The career was divided into two periods using its chronological midpoint. Films released before or during this midpoint were assigned to the early period. The remaining films formed the late period. We calculated the average rating for each group and subtracted the late average from the early one. A positive score means that the films from the first period received higher ratings.
+Each career is then divided into two periods based on its chronological midpoint. Films released before or during this midpoint belong to the early period, while the remaining films are assigned to the late period. We calculate the average rating for each period and subtract the late-period average from the early-period average. A positive result means that the films from the first part of the career received higher ratings.
 
-This method makes the comparison relatively simple. However, it does not guarantee that both periods contain the same number of films. Splitting each filmography into two equal groups would have been another option. We could also have weighted ratings by vote count to account for differences in audience participation.
+This approach makes it possible to compare the two parts of an actor's career, but it has some limitations. The number of films is not necessarily the same in both periods. Another approach would have been to split each filmography into two groups with an equal number of films. Ratings could also have been weighted by vote count to take differences in audience participation into account.
 
-Finally, the results depend on the IMDb data available after filtering. They provide an indication of how ratings evolved within the selected filmographies. They do not necessarily represent the full careers or popularity of these actors.
+Finally, the results depend on the IMDb data available after filtering. They provide an indication of how ratings changed across the selected filmographies, but they do not necessarily reflect the actors' complete careers or their overall popularity.
+
 Points to cover:
 
 - Method used and why it was chosen
@@ -594,26 +600,31 @@ Ratings when holding several roles on the same film (`output/exploration/q8_same
 
 #### Key takeaways
 
-This analysis focuses on professionals who have worked in several areas of filmmaking. These include acting, directing and writing. Jesús Franco stands out with 149 multi-role films out of 180. Jing Wong follows with 111 out of 197. Yōji Yamada also has a high proportion with 77 multi-role films out of 85.
+This analysis looks at professionals who have worked in more than one area of filmmaking, including acting, directing and writing. Jesús Franco stands out with 149 multi-role films out of 180. Jing Wong follows with 111 out of 197, while Yōji Yamada has 77 multi-role films out of 85.
 
-The results show different combinations of creative responsibilities. Some professionals combine writing and directing while others have credits in all three activities. The ranking includes well-known names such as Jean-Luc Godard, Woody Allen and Werner Herzog.
+The results highlight different combinations of creative roles. Some professionals combine writing and directing, while others have credits in all three areas. The ranking also includes well-known filmmakers such as Jean-Luc Godard, Woody Allen and Werner Herzog.
 
-We also compared films where a person held several roles with those where they held only one. The average ratings are almost identical: 5.886 for multi-role films and 5.883 for single-role films. The difference is too small to indicate a meaningful gap.
+We also compared films in which a person held several roles with those in which they held only one. The average ratings are almost identical: 5.886 for multi-role films and 5.883 for single-role films. This difference is too small to suggest any meaningful gap between the two groups.
 
-The average vote count is lower for multi-role films (5,970) than for single-role films (15,723). This does not necessarily mean that these films are less popular. Other factors such as release year and genre can influence the number of votes.
+However, the average vote count is lower for multi-role films (5,970) than for single-role films (15,723). This does not necessarily mean that multi-role films are less popular. Factors such as release year and genre may also influence the number of votes a film receives.
+
 #### Methodological explanation
 
-We identified three types of professional credits: acting, directing and writing. Acting credits were extracted from title_principals. Directing and writing credits came from title_crew.
+The analysis considers three types of professional activities: acting, directing and writing. Acting credits were taken from `title_principals`, while directing and writing credits were extracted from `title_crew`.
 
-The explode() operation was used to separate the directors and writers listed in each film. We then combined the different sources using the film identifier (tconst) and person identifier (nconst). Duplicate records were removed to avoid counting the same credit more than once. Missing role indicators were treated as zero.
+We used the `explode()` operation to separate the directors and writers listed for each film. The different sources were then joined using the film identifier (`tconst`) and the person identifier (`nconst`). Duplicate records were removed to avoid counting the same credit more than once, and missing role indicators were set to zero.
 
-Only rated feature films with at least 50 votes were retained. A person was considered multi-talented if they had performed at least two of the three activities during their career. This definition applies to the entire filmography and does not mean that the person held several roles in every film.
+Only rated feature films with at least 50 IMDb votes were included. A person was considered multi-talented if they had worked in at least two of the three activities during their career. This definition applies to their overall filmography, so it does not mean they necessarily held several roles in every film.
 
-For each person we calculated the total number of films and the number involving at least two roles. We also calculated the average rating and vote count. The role combinations were used to identify the activities associated with each professional.
+For each person, we calculated the total number of films and the number of films involving at least two roles. We also looked at their average ratings and vote counts. The different combinations of roles were used to identify which activities each professional had performed.
 
-A second comparison was then carried out at film level. It focused on people who had at least two different roles across their careers. Each film was classified as multi_role if the person held at least two roles in that production. Otherwise it was classified as single_role. We compared the two groups using their number of records and their average ratings and vote counts.
+We then carried out a second comparison at film level, focusing on people who had held at least two different roles during their careers. Each film was classified as `multi_role` if the person had at least two roles in that particular production. Otherwise, it was classified as `single_role`. We compared the two groups based on the number of records, average ratings and average vote counts.
 
-The analysis has some limitations. It only considers three professional activities. Other roles such as producing or editing are not included. IMDb credits may also be incomplete. Finally, this is a descriptive comparison and does not account for factors such as genre or release year. The results therefore do not establish a causal link between holding several roles and a film's rating.
+### Limitations
+
+The analysis only covers three professional activities. Other roles, such as producing and editing, are not included. IMDb credits may also be incomplete, which could affect the classification of some professionals and films.
+
+Finally, this is a descriptive comparison. It does not take into account other factors, such as genre or release year, that may influence ratings and vote counts. The results therefore cannot establish a causal link between holding several roles and a film's rating.
 
 Points to cover:
 
@@ -684,7 +695,7 @@ We evaluated and discarded three alternative approaches. We rejected raw HTML we
 
 ## 4. Streaming data processing
 
-Metrics of each streaming query (20-minute test window) (`output/streaming/streaming_metrics.md`):
+Metrics of each streaming query (20 minute test window) (`output/streaming/streaming_metrics.md`):
 
 | query | micro_batches | non_empty_batches | input_rows | avg_input_rows_per_s | avg_processed_rows_per_s | avg_batch_ms | rows_dropped_by_watermark | last_watermark |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -774,7 +785,7 @@ Crucially, the streaming metrics report shows that exactly zero rows were droppe
 
 The Wikimedia recent changes feed broadcasts hundreds of edits every second from all Wikimedia projects globally. To isolate relevant data, our Python producer connects to the live Server-Sent Events stream and filters incoming messages to keep only English Wikipedia (`enwiki`), main encyclopedia articles (`namespace = 0`), and edit or page creation actions.
 
-Within Spark, we match incoming Wikipedia page titles against a pre-computed lookup table built from our silver IMDb layer. This static lookup contains all feature films with at least 1,000 votes, as well as the directors, writers, and actors credited on those films. Filtering for movies with at least 1,000 votes ensures that the lookup table remains small enough to broadcast efficiently to all Spark workers in memory, while maintaining a broad enough catalog to guarantee multiple live matches within the required 15- to 30-minute test window (our test ran for an exact 20-minute window and produced 52 matches).
+Within Spark, we match incoming Wikipedia page titles against a pre-computed lookup table built from our silver IMDb layer. This static lookup contains all feature films with at least 1,000 votes, as well as the directors, writers, and actors credited on those films. Filtering for movies with at least 1,000 votes ensures that the lookup table remains small enough to broadcast efficiently to all Spark workers in memory, while maintaining a broad enough catalog to guarantee multiple live matches within the required 15 to 30 minute test window (our test ran for an exact 20 minute window and produced 52 matches).
 
 To connect Wikipedia article titles to IMDb entities, our streaming job tests five distinct matching rules in priority order. First, `film_title_year` captures articles with a year suffix, such as *"Breath (2016 film)"*, matching both the title and release year. Second, `film_title` handles general suffixes like *"Attention Please (film)"* for movie titles. Third, `person_disambiguated` catches biographical suffixes like *"Junaid Khan (Indian actor)"*. Fourth, `exact_title` handles direct matches on the movie primary title, such as *"The Get Out"*. Finally, `exact_name` handles direct matches on a person's primary name, such as *"Tom Hanks"*. All matching logic is strictly case-sensitive because Wikipedia titles are case-sensitive by design. In situations where multiple films or people share the exact same title or name, the lookup table automatically resolves the conflict by keeping the entity with the highest total IMDb votes, prioritizing the most culturally prominent subject.
 
@@ -782,11 +793,11 @@ To connect Wikipedia article titles to IMDb entities, our streaming job tests fi
 
 In stream processing, there is a fundamental difference between event time and ingestion time. Event time is the exact moment an edit was committed on Wikipedia as recorded by Wikimedia servers, whereas ingestion time is the moment the message was received by Kafka (the Kafka message timestamp). Our pipeline strictly groups and windows data using event time. This guarantees that temporary network latency, message buffering, or producer reconnections never shift an edit into an incorrect historical time window.
 
-To manage late-arriving records, Spark uses a watermark mechanism that defines how long the system will wait for delayed events before closing a time window and evicting its state from memory. We configured our watermark to 2 minutes (120 seconds). Comparing this threshold to our observed metrics shows that it provides an ideal operating balance: while the maximum delay on matched events was 17.61 seconds, the maximum delay observed across all incoming events was 62.88 seconds (in the 12:30–12:35 window). A 2 minute watermark (120 seconds) therefore provides a safe margin of approximately 2 times the worst-case overall delay, while keeping memory retention bounded.
+To manage late-arriving records, Spark uses a watermark mechanism that defines how long the system will wait for delayed events before closing a time window and evicting its state from memory. We configured our watermark to 2 minutes (120 seconds). Comparing this threshold to our observed metrics shows that it provides an ideal operating balance: while the maximum delay on matched events was 17.61 seconds, the maximum delay observed across all incoming events was 62.88 seconds (in the 12:30 to 12:35 window). A 2 minute watermark (120 seconds) therefore provides a safe margin of approximately 2 times the worst-case overall delay, while keeping memory retention bounded.
 
 We aggregate incoming events using 5 minute tumbling windows. Edits to film-related pages occur in sporadic bursts rather than a steady stream. A 5 minute window is wide enough to capture multiple edits per window and reveal meaningful editing trends, while remaining short enough to provide near-real-time operational metrics.
 
-A clear practical illustration of the watermark in action is visible in our tumbling window tables (`matched_windows` and `all_windows`). Even though our streaming test ran until 12:53 and processed incoming events up to 12:52:34, no window starting after 12:45:00 (which ended at 12:50:00) was ever written to disk. In Spark Structured Streaming append mode, a 5-minute window such as 12:50:00 to 12:55:00 cannot be finalized or output until the watermark has advanced past its end time of 12:55:00. Because our last recorded watermark reached 12:50:25 when the query stopped, Spark kept that final window in internal memory, waiting to ensure no late-arriving events would be missed before committing it to storage. This concrete behavior highlights the core trade-off between latency and completeness: Spark accepts a delayed output to guarantee that windowed aggregations are 100% complete.
+A clear practical illustration of the watermark in action is visible in our tumbling window tables (`matched_windows` and `all_windows`). Even though our streaming test ran until 12:53 and processed incoming events up to 12:52:34, no window starting after 12:45:00 (which ended at 12:50:00) was ever written to disk. In Spark Structured Streaming append mode, a 5 minute window such as 12:50:00 to 12:55:00 cannot be finalized or output until the watermark has advanced past its end time of 12:55:00. Because our last recorded watermark reached 12:50:25 when the query stopped, Spark kept that final window in internal memory, waiting to ensure no late-arriving events would be missed before committing it to storage. This concrete behavior highlights the core trade-off between latency and completeness: Spark accepts a delayed output to guarantee that windowed aggregations are 100% complete.
 
 The length of the watermark represents an essential trade-off between data completeness and memory consumption. If the watermark were configured too short, such as 5 or 10 seconds, brief network fluctuations would cause Spark to reject and drop valid edits arriving slightly late. Conversely, if the watermark were set to an hour or more, Spark would be forced to keep intermediate aggregation state and deduplication buffers in memory for an extended period, creating high RAM pressure and delaying window output.
 
@@ -811,64 +822,64 @@ Summary (`output/open_question/open_question_macro_summary.md`):
 
 | total_creative_duos | positive_synergy_duos | negative_synergy_duos | positive_synergy_pct | average_synergy_delta | average_vote_multiplier |
 | --- | --- | --- | --- | --- | --- |
-| 6055 | 3773 | 2230 | 62.31 | 0.16 | 1.32 |
+| 5306 | 3388 | 1881 | 63.85 | 0.18 | 1.40 |
 
 Duos with the highest synergy (`output/open_question/open_question_top_synergy_duos.md`):
 
 | director_name | actor_name | collab_count | duo_avg_rating | expected_baseline_rating | synergy_rating_delta | vote_multiplier | sample_titles_str |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Vicky Jenson | Mike Myers | 3 | 7.90 | 3.48 | 4.42 | -1.35 | Shrek |
-| Ali Abdel-Khalek | Mahmoud Abdel Aziz | 7 | 7.83 | 3.95 | 3.88 | -3.09 | Gary el-Wuhoosh; Idam Mayyet; The High |
-| Barry Mahon | Hal Smith | 3 | 6.60 | 3.04 | 3.56 | 1.49 | Santa and the Three Bears |
 | Viktor Shamirov | Gosha Kutsenko | 4 | 6.98 | 3.56 | 3.42 | 0.59 | And Here's What's Happening to Me; Dikari; Game of Truth |
-| Terry Jones | Graham Chapman | 6 | 8.05 | 4.78 | 3.27 | -1.11 | Monty Python and the Holy Grail; Monty Python's Life of Brian |
-| Ashok G. | Nani | 3 | 7.80 | 4.66 | 3.14 | 0.71 | Pilla Zamindar |
-| Jon Watts | Tom Holland | 6 | 7.60 | 4.47 | 3.13 | -0.78 | Spider-Man: Far from Home; Spider-Man: Homecoming; Spider-Man: No Way Home |
-| James Frawley | Jim Henson | 3 | 7.60 | 4.50 | 3.10 | -1.90 | The Muppet Movie |
-| Nina Wels | Dela Dabulamanzi | 3 | 6.20 | 3.15 | 3.05 | 0.48 | Tafiti: Across the Desert |
-| T.K. Rajeev Kumar | Mohanlal | 3 | 6.97 | 3.93 | 3.04 | 0.53 | Oru Naal Varum; Pavithram |
-| Tso Nam Lee | Shan Charng | 3 | 7.00 | 4.10 | 2.90 | 3.59 | Shaolin vs. Lama |
-| Kelly Makin | Dave Foley | 3 | 6.90 | 4.05 | 2.85 | 0.32 | Kids in the Hall: Brain Candy |
-| Josef Rusnak | Craig Bierko | 3 | 7.00 | 4.29 | 2.71 | -33.71 | The Thirteenth Floor |
-| Jeff Wamester | Jeff Bennett | 3 | 7.80 | 5.18 | 2.62 | 1.73 | Batman: Knightfall - Part 1: Knightfall |
 | Kinji Fukasaku | Tatsuo Umemiya | 3 | 7.20 | 4.60 | 2.60 | 0.26 | Cops vs. Thugs; Graveyard of Honor; Police Tactics |
-| Joe Russo | Robert Downey Jr. | 6 | 8.20 | 5.62 | 2.58 | -5.35 | Avengers: Endgame; Avengers: Infinity War; Captain America: Civil War |
-| Anthony Russo | Robert Downey Jr. | 6 | 8.20 | 5.62 | 2.58 | -5.35 | Avengers: Endgame; Avengers: Infinity War; Captain America: Civil War |
-| Francis Ford Coppola | Diane Keaton | 3 | 8.57 | 6.05 | 2.52 | 28.65 | The Godfather; The Godfather Part II; The Godfather Part III |
+| Francis Ford Coppola | Diane Keaton | 3 | 8.57 | 6.05 | 2.52 | 28.64 | The Godfather; The Godfather Part II; The Godfather Part III |
 | Hulki Saner | Çolpan İlhan | 3 | 7.00 | 4.48 | 2.52 | 1.33 | Turist Ömer: Dümenciler Krali; Ömer the Tourist; Ömer the Tourist in Germany |
-| Singeetam Srinivasa Rao | Kamal Haasan | 11 | 7.85 | 5.34 | 2.51 | -0.77 | Apoorva Sagodharargal; Kaathala Kaathala; Michael Madana Kama Rajan |
+| Mehmet Ada Öztekin | Sarp Akkaya | 3 | 8.17 | 5.78 | 2.38 | 0.47 | Ataturk I 1881-1919; Ataturk II: 1881-1919; Love Me Instead |
+| Mahesh Manjrekar | Sunil Barve | 3 | 8.20 | 5.82 | 2.38 | 0.41 | Bhai - Vyakti Ki Valli; Bhai - Vyakti Ki Valli 2; Natsamrat |
+| Houman Seyyedi | Alireza Ghaedi | 3 | 7.00 | 4.63 | 2.37 | 7.28 | Sheeple; Sound and Fury; World War III |
+| Ron Oliver | Sebastian Spence | 3 | 6.50 | 4.18 | 2.32 | 0.82 | Ice Blues; On the Other Hand, Death; Shock to the System |
+| Sachin Pilgaonkar | Ashok Saraf | 3 | 8.17 | 5.86 | 2.31 | 1.06 | Aayatya Gharat Gharoba; Ashi Hi Banwa Banwi; Navra Mazha Navsacha |
+| Veit Harlan | Kristina Söderbaum | 6 | 6.18 | 3.90 | 2.28 | 1.48 | Burning Hearts; Der große König; Immensee |
+| Francis Ford Coppola | Al Pacino | 3 | 8.57 | 6.28 | 2.28 | 14.45 | The Godfather; The Godfather Part II; The Godfather Part III |
+| Michael Polish | Mark Polish | 4 | 6.03 | 3.76 | 2.27 | 0.72 | For Lovers Only; Stay Cool; The Smell of Success |
+| Aditya Chopra | Shah Rukh Khan | 3 | 7.43 | 5.27 | 2.16 | 2.87 | Dilwale Dulhania Le Jayenge; Mohabbatein; Rab Ne Bana Di Jodi |
+| Peter Jackson | Elijah Wood | 3 | 8.90 | 6.74 | 2.16 | 13.08 | The Lord of the Rings: The Fellowship of the Ring; The Lord of the Rings: The Return of the King; The Lord of the Rings: The Two Towers |
+| Vivek Agnihotri | Mithun Chakraborty | 3 | 7.77 | 5.61 | 2.15 | 38.69 | The Bengal Files; The Kashmir Files; The Tashkent Files |
+| K. Selvaraghavan | Sonia Agarwal | 3 | 8.10 | 5.96 | 2.14 | 1.93 | 7/G Rainbow Colony; Kaadhal Konden; Pudhu Pettai |
+| Caner Alper | Tilbe Saran | 3 | 6.97 | 4.85 | 2.12 | 1.64 | Bergen; Drawers; Zenne Dancer |
+| Mehmet Binay | Tilbe Saran | 3 | 6.97 | 4.85 | 2.12 | 1.64 | Bergen; Drawers; Zenne Dancer |
+| Peter Jackson | Orlando Bloom | 3 | 8.90 | 6.82 | 2.08 | 8.88 | The Lord of the Rings: The Fellowship of the Ring; The Lord of the Rings: The Return of the King; The Lord of the Rings: The Two Towers |
+| Neeraj Pandey | Anupam Kher | 3 | 8.03 | 5.99 | 2.04 | 4.29 | A Wednesday; M.S. Dhoni: The Untold Story; Special 26 |
 
 Duos with the lowest synergy (`output/open_question/open_question_negative_synergy_duos.md`):
 
 | director_name | actor_name | collab_count | duo_avg_rating | expected_baseline_rating | synergy_rating_delta | vote_multiplier | sample_titles_str |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Rex Piano | Tom Kenny | 3 | 1.90 | 6.67 | -4.77 | 0.03 | Elf Bowling the Movie: The Great North Pole Elf Strike |
-| Ribhu Dasgupta | Parineeti Chopra | 3 | 3.67 | 7.68 | -4.01 | 0.71 | Code Name: Tiranga; The Girl on the Train |
-| Wiktor Grodecki | Cezary Pazura | 3 | 4.40 | 8.38 | -3.98 | 0.12 | Insatiability |
-| Bob Clark | Jon Voight | 3 | 1.93 | 5.84 | -3.90 | 0.52 | Superbabies: Baby Geniuses 2; The Karate Dog |
-| Y.V.S. Chowdary | Simran | 3 | 3.00 | 6.86 | -3.86 | 0.22 | Okka Magadu; Yuvaraju |
-| P. Vasu | Nandamuri Balakrishna | 3 | 2.10 | 5.61 | -3.51 | 0.16 | Maharadhi |
+| Juan Ibáñez | Boris Karloff | 4 | 3.47 | 7.03 | -3.55 | 0.18 | Fear Chamber; House of Evil; Isle of the Snake People |
 | Rodolfo Ledo | Emilio Disi | 3 | 1.67 | 5.09 | -3.43 | 0.74 | Bañeros 4: Los rompeolas; Bañeros III, todopoderosos; Explosive Brigade: Pirate Mission |
-| Ramesh Varma | Ravi Teja | 3 | 4.27 | 7.58 | -3.32 | 0.95 | Khiladi; Veera |
-| Harry L. Fraser | Ray Corrigan | 3 | 2.80 | 6.11 | -3.31 | 0.69 | The White Gorilla |
-| Moacyr Góes | Xuxa | 5 | 2.86 | 6.01 | -3.15 | 0.81 | Bruja and the Lost City of Gold; Xuxa in Abracadabra; Xuxinha and Guto Against the Space Monsters |
-| Doga Can Anafarta | Altan Erkekli | 3 | 2.27 | 5.42 | -3.15 | 0.74 | Enes Batur: Gerçek Kahraman; The Chaos Class Again; The Chaos Class: Summer Games |
-| A.P. Arjun | Dhruva Sarja | 3 | 3.57 | 6.68 | -3.11 | -1.53 | Addhuri; Martin |
-| Kartal Tibet | Mehmet Ali Erbil | 3 | 2.20 | 5.21 | -3.01 | 2.81 | The Chaos Class Welcome; Turks in Space |
+| Doga Can Anafarta | Altan Erkekli | 3 | 2.27 | 5.42 | -3.16 | 0.74 | Enes Batur: Gerçek Kahraman; The Chaos Class Again; The Chaos Class: Summer Games |
 | Jack Hill | Julissa | 3 | 3.53 | 6.48 | -2.94 | 0.25 | Fear Chamber; House of Evil; Isle of the Snake People |
-| Joyce Bernal | Vice Ganda | 3 | 4.00 | 6.87 | -2.87 | 0.37 | Gandarrapiddo: The Revenger Squad; The Super Parental Guardians |
-| Alfonso Brescia | Yanti Somer | 4 | 2.90 | 5.76 | -2.86 | 0.14 | Battle of the Stars; Star Odyssey; The War of the Robots |
-| Sangeeth Sivan | Dharmendra | 3 | 3.50 | 6.21 | -2.71 | 0.72 | Yamla Pagla Deewana 2 |
-| Christophe Gans | Hannah Emily Anderson | 3 | 4.00 | 6.52 | -2.52 | 0.47 | Return to Silent Hill |
+| Alfonso Brescia | Yanti Somer | 4 | 2.90 | 5.75 | -2.85 | 0.14 | Battle of the Stars; Star Odyssey; The War of the Robots |
 | Steven M. Smith | Mark Wingett | 3 | 2.60 | 5.02 | -2.42 | 0.05 | Dead Again; Doll House; I Am Hooligan |
-| Meher Ramesh | Venkatesh Daggubati | 3 | 3.50 | 5.92 | -2.42 | 0.17 | Shadow |
+| Jingming Guo | Amber Kuo | 4 | 3.23 | 5.61 | -2.39 | 0.59 | Tiny Times; Tiny Times 2.0; Tiny Times 3.0 |
+| Jingming Guo | Mi Yang | 4 | 3.23 | 5.59 | -2.36 | 0.55 | Tiny Times; Tiny Times 2.0; Tiny Times 3.0 |
+| Alexandre Boury | Renato Aragão | 3 | 2.93 | 5.23 | -2.30 | 0.89 | Didi Wanna Be a Kid; Didi, the Goofy Cupid; O Trapalhão e a Luz Azul |
+| Frédéric Auburtin | Gérard Depardieu | 3 | 3.97 | 6.22 | -2.26 | 0.09 | San Antonio; The Bridge; United Passions |
+| Jingming Guo | Kai Ko | 3 | 3.27 | 5.52 | -2.25 | 0.65 | Tiny Times; Tiny Times 2.0; Tiny Times 3.0 |
+| Jack Hill | Boris Karloff | 5 | 3.80 | 6.04 | -2.24 | 0.42 | Fear Chamber; House of Evil; Isle of the Snake People |
+| Ketan Mehta | Deepa Sahi | 4 | 5.38 | 7.62 | -2.24 | 0.35 | Aar Ya Paar; Hero Hiralal; Maya |
+| Giannis Papadakos | Meletis Ilias | 3 | 4.33 | 6.55 | -2.22 | 1.65 | The Bachelor 2; The Bachelor 3; The Black Bachelor |
+| Rafael Portillo | Rosita Arenas | 3 | 3.67 | 5.74 | -2.08 | 1.38 | The Aztec Mummy; The Curse of the Aztec Mummy; The Robot vs. The Aztec Mummy |
+| Raj N. Sippy | Akshay Kumar | 5 | 3.88 | 5.95 | -2.07 | 0.09 | Amaanat; Ikke Pe Ikka; Mr. Bond |
+| Raj Kanwar | Amrish Puri | 3 | 3.87 | 5.94 | -2.07 | 0.08 | Dhaai Akshar Prem Ke; Itihaas; Jaan |
+| Zoran Calic | Nikola Simić | 4 | 4.98 | 6.94 | -1.97 | 0.27 | Cao inspektore; Extraterrestrials Are to Be Blamed for Everything; Goodbye in Chicago |
+| Mike Gunther | Jermaine Love | 3 | 3.17 | 5.13 | -1.96 | 0.16 | Rogue Warfare; Rogue Warfare: Death of a Nation; Rogue Warfare: The Hunt |
+| Barbara Bialowas | Michele Morrone | 3 | 3.00 | 4.92 | -1.92 | 4.58 | 365 Days; 365 Days: This Day; The Next 365 Days |
 
 #### Key takeaways
 
-Across 6,055 recurring director-actor partnerships (at least 3 collaborative feature films with $\ge 250$ votes):
-- **Prevalence of positive synergy**: 62.31% (3,773 duos) exhibit positive synergy, confirming that collaborative familiarity generally elevates artistic output. The overall average synergy delta is +0.16 rating points, and duos enjoy an average vote multiplier of 1.32x (receiving 32% more votes than their solo projects).
-- **Highest synergy duos**: The highest positive delta is achieved by Vicky Jenson and Mike Myers (+4.42 points across 3 films, averaging 7.90 vs. an expected baseline of 3.48), driven by the critical success of *Shrek*. Dramatic partnerships also display massive synergy: Francis Ford Coppola and Diane Keaton achieve a +2.52 rating delta across *The Godfather* trilogy, accompanied by an extraordinary 28.65x vote multiplier. Similarly, the Russo brothers and Robert Downey Jr. achieve a +2.58 rating delta (8.20 average) across 6 collaborative Marvel films.
-- **Creative fatigue and negative synergy**: Conversely, 37.69% (2,230 duos) exhibit negative synergy, illustrating severe creative exhaustion or low-budget typecasting. Rex Piano and Tom Kenny show the steepest negative drop (-4.77 delta, averaging 1.90 together on titles like *Elf Bowling* vs. Kenny's 6.67 baseline elsewhere). Similarly, Bob Clark and Jon Voight drop by -3.90 points (averaging 1.93 on *Superbabies: Baby Geniuses 2* vs. 5.84 solo). This proves that repeated collaborations in low-budget sequel franchises often accelerate creative decline.
+Across 5,306 recurring director-actor partnerships (at least 3 collaborative feature films with $\ge 250$ votes, with both artists having outside work):
+- **Prevalence of positive synergy**: 63.85% (3,388 duos) exhibit positive synergy, showing that collaborative familiarity generally correlates with higher critical reception. The overall average synergy delta is +0.18 rating points, and duos draw an average vote multiplier of 1.40x (receiving 40% more votes than expected from their separate baselines).
+- **Highest synergy duos**: The highest positive delta is achieved by Viktor Shamirov and Gosha Kutsenko (+3.42 points across 4 films, averaging 6.98 together vs. an expected baseline of 3.56). Celebrated artistic partnerships also display massive positive lifts: Francis Ford Coppola and Diane Keaton achieve a +2.52 rating delta across *The Godfather* trilogy (8.57 average vs. 6.05 expected baseline), paired with an exceptional 28.64x vote multiplier. Coppola's partnership with Al Pacino similarly reaches +2.28 with a 14.45x vote multiplier. Peter Jackson and Elijah Wood achieve a +2.16 delta on *The Lord of the Rings* trilogy alongside a 13.08x vote multiplier.
+- **Creative fatigue and negative synergy**: Conversely, 35.45% (1,881 duos) exhibit negative synergy, while 37 duos (0.70%) have an exact delta of 0.00. Juan Ibáñez and Boris Karloff show the steepest decline (-3.55 delta, averaging 3.47 together on late horror co-productions vs. an expected combined baseline of 7.03 across their independent works, with a low 0.18 vote multiplier). Rodolfo Ledo and Emilio Disi drop by -3.43 points (averaging 1.67 on the *Bañeros* comedy franchise vs. 5.09 baseline). Director Jingming Guo appears three times in the lowest synergy ranking for the *Tiny Times* franchise (-2.39 with Amber Kuo, -2.36 with Mi Yang, -2.25 with Kai Ko). These results indicate that repeated collaborations in commercial sequel franchises and low-budget genre productions often lead to creative fatigue and diminishing returns.
 
 #### Methodological explanation
 
@@ -876,6 +887,12 @@ To measure genuine synergy, our pipeline avoids the fundamental pitfall of basel
 $$\text{dir\_solo\_avg} = \frac{\text{dir\_sum\_rating} - \text{duo\_sum\_rating}}{\text{dir\_total\_movies} - \text{collab\_count}}$$
 $$\text{act\_solo\_avg} = \frac{\text{act\_sum\_rating} - \text{duo\_sum\_rating}}{\text{act\_total\_movies} - \text{collab\_count}}$$
 $$\text{expected\_baseline\_rating} = \frac{\text{dir\_solo\_avg} + \text{act\_solo\_avg}}{2}$$
-We require both director and actor to have at least one external film outside the duo (`dir_solo_count >= 1` and `act_solo_count >= 1`) to ensure a meaningful independent baseline exists.
+$$\text{expected\_baseline\_votes} = \frac{\text{dir\_solo\_avg\_votes} + \text{act\_solo\_avg\_votes}}{2}$$
+$$\text{synergy\_rating\_delta} = \text{duo\_avg\_rating} - \text{expected\_baseline\_rating}$$
+$$\text{vote\_multiplier} = \frac{\text{duo\_avg\_votes}}{\text{expected\_baseline\_votes}}$$
+
+The expected baseline represents the unweighted arithmetic mean of both artists' independent career averages, capturing what either partner typically achieves when working without the other. We require both director and actor to have at least one external film outside the duo (`dir_solo_count >= 1` and `act_solo_count >= 1`) to ensure a meaningful independent baseline exists.
+
+A crucial data engineering requirement addressed in this analysis is deduplication across principals. In IMDb's `title_principals`, an actor can have multiple rows for the same film (for example, voicing multiple characters or holding distinct credits with `ordering <= 4`). Without deduplication, joint films were counted multiple times for the same duo, inflating joint vote sums past career totals and producing impossible negative vote multipliers. Enforcing deduplication on `(tconst, director_nconst)` and `(tconst, actor_nconst)` prior to joining and aggregation guarantees that every film is counted exactly once per artist and per partnership.
 
 To isolate true creative leads, we filter `title_principals` for `category IN ('actor', 'actress')` with `ordering <= 4`. This prevents uncredited cameos or bit players from registering as creative partners. We enforce `min_collabs = 3` (to distinguish recurring artistic partnerships from coincidental re-castings) and `min_votes = 250` (to ensure reliable audience ratings). When joining `name_basics` twice for the director and actor names, Spark Catalyst threw ambiguous column errors; we resolved this by aliasing `names_d = names.alias("d")` and `names_a = names.alias("a")`.
