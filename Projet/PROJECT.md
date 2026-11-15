@@ -213,5 +213,5 @@ docker compose down -v     # also deletes the downloaded and processed data
 
 | Tool | Used by | Tasks |
 | --- | --- | --- |
-| Claude Code (Claude Opus 5.5) | Alex Huang | Docker Compose setup, shared code (`src/common`), data preparation code (`src/preparation`), exploration Q1 to Q3 code, enrichment, streaming, initial guide |
+| Claude Code (Claude Opus 5.5) | Alex Huang | Docker Compose setup, shared code (`src/common`), data preparation code (`src/preparation`), exploration Q1 to Q3 code, enrichment, streaming, initial guide, `REPORT.md` skeleton (section structure and result tables copied from `output/`, no explanations), check of the figures quoted in `REPORT.md` against the result tables (no text written), Git and GitHub help (merge conflicts, reverts) |
 | Google DeepMind Antigravity (Gemini) | Bryan Tachi | Exploration Q4 to Q8 code (`src/exploration`), Open Question investigation (`src/open_question`), helper scripts, guide updates |
