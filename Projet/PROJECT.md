@@ -6,7 +6,6 @@
 | --- | --- | --- |
 | Alex Huang | <alexhuang392@gmail.com> | Environment, data preparation, exploration Q1 to Q3, data enrichment, streaming |
 | Bryan Tachi | <jessy.tachi@edu.ece.fr> | Exploration Q4 to Q6, open question |
-
 | Hicham RKABI | <hicham.rkaibi@edu.ece.fr> | Help exploration Q1, Q2, Q3, Q7 to Q8,and report writting of Q1, Q2, Q3, Q7 to Q8, open question |
 
 ## Requirements
